@@ -5,77 +5,42 @@
     font-weight: normal;
 }
 
+header {
 
-.contenedorGeneral{
-
-    height: 100vh;
-    margin: 0;
-    padding: 0;
-
-}
-
-header{
-
-    
-font-family: 'Lumina';
-    height: 25%;
-    margin: 0;
-    padding: 0;
-
-}
-
-header:hover {
-
-    background-color: beige;
-    
-    }
-
-.titulo{
-
-height: 70%;
-display: flex;
-align-items: center;
-justify-content: center;
-
-}
-
-
-
-nav{
-
-    height: 30%;
+    height: 100%;
     display: flex;
-    align-items: center;
-    align-content: center;
-    
-}
-
-.titulosNav{
-
-width: 100%;
-display: flex;
-justify-content: space-between;
-margin:10%
-
-}
-
-a:hover{
-
-opacity: 50%;
-
-}
-
-a{
-
-text-decoration: none;
-color: black;
+    justify-content: center;
 
 }
 
 body{
 
-    height: 100%;
-    margin: 0;
-    
-    }
+
+}
+
+main{
+
+
+}
+
+nav{
+
+display: flex;
+justify-content: center;
+
+
+}
+
+a{
+
+    text-decoration: none;
+    color: black;
+
+}
+
+.titulosNav{
+
+  
+
+}
 
