@@ -1,6 +1,6 @@
-<mxfile host="Electron" modified="2024-02-02T09:52:28.519Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/22.1.21 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="JZfiHn7pp29MJhBmHJhR" version="22.1.21" type="device">
+<mxfile host="Electron" modified="2024-02-05T09:41:28.880Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/22.1.21 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="b3MjkIO-0jFNWzR5bWZ9" version="22.1.21" type="device">
   <diagram name="Página-1" id="FnLpG6RsxLzCQ0Sk7589">
-    <mxGraphModel dx="2049" dy="1206" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1434" dy="844" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -69,7 +69,11 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="eyOKBo3x8f5A5R1JNQTg-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="_xn8v39p9PrOof5Yr_gS-39" target="_xn8v39p9PrOof5Yr_gS-41" edge="1">
-          <mxGeometry relative="1" as="geometry" />
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="650" y="250" />
+            </Array>
+          </mxGeometry>
         </mxCell>
         <mxCell id="_xn8v39p9PrOof5Yr_gS-39" value="" style="triangle;whiteSpace=wrap;html=1;direction=south;" parent="1" vertex="1">
           <mxGeometry x="360" y="220" width="80" height="60" as="geometry" />
@@ -153,9 +157,6 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="eyOKBo3x8f5A5R1JNQTg-16" value="Chat" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=1;align=center;" parent="1" vertex="1">
-          <mxGeometry x="480" y="460" width="120" height="60" as="geometry" />
-        </mxCell>
         <mxCell id="eyOKBo3x8f5A5R1JNQTg-17" value="" style="endArrow=none;html=1;rounded=0;" parent="1" source="eyOKBo3x8f5A5R1JNQTg-16" target="_xn8v39p9PrOof5Yr_gS-40" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="220" y="470" as="sourcePoint" />
@@ -174,11 +175,17 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="mUfjlv-433jG-OvDL9ir-2" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="_xn8v39p9PrOof5Yr_gS-14" target="mUfjlv-433jG-OvDL9ir-1">
+        <mxCell id="mUfjlv-433jG-OvDL9ir-2" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="_xn8v39p9PrOof5Yr_gS-14" target="mUfjlv-433jG-OvDL9ir-1" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="mUfjlv-433jG-OvDL9ir-1" value="&lt;span style=&quot;border-bottom: 1px dotted&quot;&gt;Attribute&lt;/span&gt;" style="ellipse;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
+        <mxCell id="mUfjlv-433jG-OvDL9ir-1" value="&lt;span style=&quot;border-bottom: 1px dotted&quot;&gt;ID_Line&lt;/span&gt;" style="ellipse;whiteSpace=wrap;html=1;align=center;" parent="1" vertex="1">
           <mxGeometry x="150" y="810" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="9j5XJjMDd-GS0TJ9D0gf-2" value="" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="455" y="440" width="170" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="eyOKBo3x8f5A5R1JNQTg-16" value="Chat" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="480" y="460" width="120" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

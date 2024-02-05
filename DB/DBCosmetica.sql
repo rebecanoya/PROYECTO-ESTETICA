@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: mariadb:3306
--- Tiempo de generación: 02-02-2024 a las 10:25:50
+-- Tiempo de generación: 05-02-2024 a las 10:22:13
 -- Versión del servidor: 11.2.2-MariaDB-1:11.2.2+maria~ubu2204
 -- Versión de PHP: 8.2.8
 
@@ -24,6 +24,27 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `IES`
+--
+
+CREATE TABLE `IES` (
+  `telf` varchar(9) NOT NULL,
+  `web` varchar(100) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `ID` smallint(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `IES`
+--
+
+INSERT INTO `IES` (`telf`, `web`, `nombre`, `email`, `ID`) VALUES
+('886120464', 'www.edu.xunta.gal/centros/iesteis', 'IES de Teis', 'ies.teis@edu.xunta.es', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `Line`
 --
 
@@ -35,10 +56,10 @@ CREATE TABLE `Line` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Productos`
+-- Estructura de tabla para la tabla `Products`
 --
 
-CREATE TABLE `Productos` (
+CREATE TABLE `Products` (
   `ID` int(11) NOT NULL,
   `Price` double NOT NULL,
   `Stock` int(100) NOT NULL,
@@ -49,25 +70,31 @@ CREATE TABLE `Productos` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Usuarios`
+-- Estructura de tabla para la tabla `Users`
 --
 
-CREATE TABLE `Usuarios` (
+CREATE TABLE `Users` (
   `ID` int(11) NOT NULL,
   `Email` varchar(50) NOT NULL,
   `Password` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
--- Volcado de datos para la tabla `Usuarios`
+-- Volcado de datos para la tabla `Users`
 --
 
-INSERT INTO `Usuarios` (`ID`, `Email`, `Password`) VALUES
+INSERT INTO `Users` (`ID`, `Email`, `Password`) VALUES
 (1, 'admin@gmail.com', 'admin');
 
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `IES`
+--
+ALTER TABLE `IES`
+  ADD PRIMARY KEY (`ID`);
 
 --
 -- Indices de la tabla `Line`
@@ -76,21 +103,27 @@ ALTER TABLE `Line`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indices de la tabla `Productos`
+-- Indices de la tabla `Products`
 --
-ALTER TABLE `Productos`
+ALTER TABLE `Products`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `ProductLine` (`ID_Line`);
 
 --
--- Indices de la tabla `Usuarios`
+-- Indices de la tabla `Users`
 --
-ALTER TABLE `Usuarios`
+ALTER TABLE `Users`
   ADD PRIMARY KEY (`ID`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
+
+--
+-- AUTO_INCREMENT de la tabla `IES`
+--
+ALTER TABLE `IES`
+  MODIFY `ID` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `Line`
@@ -99,15 +132,15 @@ ALTER TABLE `Line`
   MODIFY `ID` smallint(6) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `Productos`
+-- AUTO_INCREMENT de la tabla `Products`
 --
-ALTER TABLE `Productos`
+ALTER TABLE `Products`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `Usuarios`
+-- AUTO_INCREMENT de la tabla `Users`
 --
-ALTER TABLE `Usuarios`
+ALTER TABLE `Users`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
@@ -115,9 +148,9 @@ ALTER TABLE `Usuarios`
 --
 
 --
--- Filtros para la tabla `Productos`
+-- Filtros para la tabla `Products`
 --
-ALTER TABLE `Productos`
+ALTER TABLE `Products`
   ADD CONSTRAINT `ProductLine` FOREIGN KEY (`ID_Line`) REFERENCES `Line` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
