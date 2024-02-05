@@ -5,31 +5,45 @@
     font-weight: normal;
 }
 
-header {
 
-    height: 100%;
+header {
+    font-family: 'Lumina';
+    width: 100%;
+    text-align: center; 
+}
+
+header:hover{
+
+    background-color: #ffdba2;
+
+}
+
+nav {
+    
+    width: 100%;
+    padding: 0.75%;
+}
+
+nav a{
+
+    margin: 0 100px;
+
+}
+
+nav a:hover{
+
+    opacity: 50%;
+    
+
+}
+
+.titulo{
+
     display: flex;
     justify-content: center;
 
 }
 
-body{
-
-
-}
-
-main{
-
-
-}
-
-nav{
-
-display: flex;
-justify-content: center;
-
-
-}
 
 a{
 
@@ -38,9 +52,5 @@ a{
 
 }
 
-.titulosNav{
 
-  
-
-}
 
