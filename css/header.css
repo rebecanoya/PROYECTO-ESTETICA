@@ -1,0 +1,117 @@
+header {
+    font-family: 'Lumina';
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    position: absolute;
+    width: 100%;
+    z-index: 10;
+
+    &:hover{
+
+        background-color: #ffffff;
+       
+
+        & *{
+
+             color: black;
+
+        }
+
+        
+    
+    }
+
+    & .titulo{
+
+        display: flex;
+        justify-content: center;
+        margin: 1em;
+    
+      
+    
+    }
+
+    & .icons{
+
+        display: flex;
+        flex-direction: row;
+        justify-content: end;
+        position: absolute;
+        top: 0;
+        right: 0;
+        font-size: 1.25em;
+        padding: 0.5em;
+        overflow: hidden;
+        gap: 0.25em;
+
+    }
+}
+
+nav {
+    
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    text-align: center;
+
+    & *{
+
+        padding: 1em;
+    
+        }
+
+        & a:hover,p:hover {
+
+            opacity: 50%;
+
+        }
+
+    & div{
+
+        color: white;
+
+        &:hover{
+
+            cursor: pointer;
+
+        }
+
+
+    }
+
+    & .desplegable{
+        
+        position: relative;
+        padding: 0;
+
+        & .desplegados{
+
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            width: 90%;
+            background-color: white;
+            bottom: 0;
+            border-radius: 0.5em;
+    
+            
+        }
+
+        &:hover .desplegados{
+
+            display: flex;
+            top: 2em;
+            bottom: unset;
+
+
+        }
+
+    }
+
+   
+    
+    
+}
+
+
+

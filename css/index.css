@@ -1,102 +1,3 @@
-*{margin: 0;
-    transition: 250ms ease;
-    scroll-behavior: smooth;
-}
-
-
-@font-face {
-    font-family: 'Lumina';
-    src: url('../fuentes/LUMINA.otf');
-    font-style: normal;
-    font-weight: normal;
-}
-
-
-header {
-    font-family: 'Lumina';
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-    position: absolute;
-    width: 100%;
-    z-index: 10;
-
-    &:hover{
-
-        background-color: #ffffff;
-       
-
-        & a{
-
-             color: black;
-
-        }
-    
-    }
-}
-
-
-
-nav {
-    
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    text-align: center;
-
-    & a{
-
-        padding: 1em;
-    
-        &:hover{
-
-            opacity: 50%;
-            
-        
-        }
-    }
-}
-
-.titulo{
-
-    display: flex;
-    justify-content: center;
-    margin: 1em;
-
-  
-
-}
-
-.icons{
-
-        display: flex;
-        flex-direction: row;
-        justify-content: end;
-        position: absolute;
-        top: 0;
-        right: 0;
-        font-size: 1.25em;
-        padding: 0.5em;
-        overflow: hidden;
-        gap: 0.25em;
-
-        & a{
-
-            padding: 0.5em;
-            cursor: pointer;
-            border-radius: 50%;
-
-            &:hover{
-
-                scale: 1.1;
-                background: black;
-                color: white;
-
-            }
-
-        }
-
-    }
-
 a{
 
     text-decoration: none;
@@ -109,20 +10,15 @@ a{
 width: 100%;
 animation: zoom-in 1s ease-out;
 
-&:after{
-
-content: "";
-position: absolute;
-width: 100%;
-box-shadow: inset 0 0 2em 2em black;
-
-}
-
 }
 
 main {
 
-overflow: hidden;
+& .containerBanner {
+
+    overflow: hidden;
+
+    }
 
 }
 

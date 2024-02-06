@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/general.css">
+    <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/index.css">
     <script src="https://kit.fontawesome.com/dc2d3ea46f.js" crossorigin="anonymous"></script>
     <title>Pagina inicial</title>
@@ -24,14 +26,21 @@
         </div>
 
         <div class="icons">
-            <a class="fa-solid fa-magnifying-glass"></a>
-            <a class="fa-regular fa-user"></a>
-            <a class="fa-solid fa-cart-shopping"></a>
+            <a class="fa-solid fa-magnifying-glass iconButton"></a>
+            <a class="fa-regular fa-user iconButton"></a>
+            <a class="fa-solid fa-cart-shopping iconButton"></a>
+
         </div>
         <nav>
 
             <a href="QuienesSomos.html">¿QUIÉNES SOMOS?</a>
-            <a href="NuestrosProductos.html">NUESTROS PRODUCTOS</a>
+            <div class="desplegable">
+                <p>NUESTROS PRODUCTOS</p>
+                <div class="desplegados">
+                    <a href="">LINEAS</a>
+                    <a href="">TODOS LOS PRODUCTOS</a>
+                </div>
+            </div>
             <a href="Pedidos.html">PEDIDOS</a>
             <a href="Blog.html">BLOG</a>
             <a href="Contacto.html">CONTACTO</a>
@@ -43,14 +52,18 @@
 
 
     <main>
-
-        <img src="../img/banner.jpg" class="banner">
-
+        <div class="containerBanner">
+            <img src="../img/banner.jpg" class="banner">
+        </div>
     </main>
 
 
     <footer>
 
+        <div class="chat">
+            <a class="fa-solid fa-headset iconButton">
+            </a>
+        </div>
 
     </footer>
 </body>

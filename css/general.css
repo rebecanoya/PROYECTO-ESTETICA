@@ -1,0 +1,51 @@
+*{margin: 0;
+    transition: 250ms ease;
+    scroll-behavior: smooth;
+}
+
+
+@font-face {
+    font-family: 'Lumina';
+    src: url('../fuentes/LUMINA.otf');
+    font-style: normal;
+    font-weight: normal;
+}
+
+
+footer{
+
+    
+    & .chat{
+
+        display: flex;
+        flex-direction: row;
+        justify-content: end;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        font-size: 1.25em;
+        padding: 0.5em;
+        overflow: hidden;
+        gap: 0.25em;
+
+       
+
+    }
+
+}
+
+.iconButton{
+
+    padding: 0.5em;
+    cursor: pointer;
+    border-radius: 50%;
+
+    &:hover{
+
+        scale: 1.1;
+        background: black;
+        color: white;
+
+    }
+
+}
