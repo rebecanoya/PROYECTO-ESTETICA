@@ -62,8 +62,40 @@ nav {
     justify-content: center;
     margin: 1em;
 
+  
+
 }
 
+.icons{
+
+        display: flex;
+        flex-direction: row;
+        justify-content: end;
+        position: absolute;
+        top: 0;
+        right: 0;
+        font-size: 1.25em;
+        padding: 0.5em;
+        overflow: hidden;
+        gap: 0.25em;
+
+        & a{
+
+            padding: 0.5em;
+            cursor: pointer;
+            border-radius: 50%;
+
+            &:hover{
+
+                scale: 1.1;
+                background: black;
+                color: white;
+
+            }
+
+        }
+
+    }
 
 a{
 
