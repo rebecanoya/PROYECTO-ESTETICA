@@ -1,4 +1,4 @@
-a{
+a {
 
     text-decoration: none;
     color: rgb(255, 255, 255);
@@ -7,16 +7,16 @@ a{
 
 .banner {
 
-width: 100%;
-animation: zoom-in 1s ease-out;
+    width: 100%;
+    animation: zoom-in 1s ease-out;
 
 }
 
 main {
 
-& .containerBanner {
+    & .containerBanner {
 
-    overflow: hidden;
+        overflow: hidden;
 
     }
 
@@ -24,16 +24,15 @@ main {
 
 @keyframes zoom-in {
 
-    0%{
+    0% {
 
         transform: scale(1.1);
     }
 
-    100%{
+    100% {
 
         transform: scale(1);
 
 
     }
 }
-

@@ -1,11 +1,11 @@
-main{
+main {
 
     height: 100%;
     padding: 5%;
 
 }
 
-.container{
+.container {
 
     display: flex;
     flex-direction: row;
@@ -13,14 +13,14 @@ main{
 
 }
 
-.linea1{
+.linea1 {
     text-align: center;
-background-color: rgba(255, 0, 0, 0.093);
-border: 2px black solid;
+    background-color: rgba(255, 0, 0, 0.093);
+    border: 2px black solid;
 
 }
 
-.linea2{
+.linea2 {
 
     text-align: center;
     background-color: rgba(38, 255, 0, 0.093);
@@ -28,7 +28,7 @@ border: 2px black solid;
 
 }
 
-.linea3{
+.linea3 {
 
     text-align: center;
     background-color: rgba(255, 153, 0, 0.093);
@@ -36,7 +36,7 @@ border: 2px black solid;
 
 }
 
-.linea4{
+.linea4 {
 
     text-align: center;
     background-color: rgba(0, 8, 255, 0.093);
@@ -44,7 +44,7 @@ border: 2px black solid;
 
 }
 
-.linea5{
+.linea5 {
 
     text-align: center;
     background-color: rgba(136, 0, 255, 0.093);
@@ -53,6 +53,6 @@ border: 2px black solid;
 }
 
 .lineas img {
-    max-width: 80%; 
-    height: auto; 
+    max-width: 80%;
+    height: auto;
 }

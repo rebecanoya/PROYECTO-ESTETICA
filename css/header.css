@@ -7,32 +7,32 @@ header {
     width: 100%;
     z-index: 10;
 
-    &:hover{
+    &:hover {
 
         background-color: #ffffff;
-       
 
-        & *{
 
-             color: black;
+        & * {
+
+            color: black;
 
         }
 
-        
-    
+
+
     }
 
-    & .titulo{
+    & .titulo {
 
         display: flex;
         justify-content: center;
         margin: 1em;
-    
-      
-    
+
+
+
     }
 
-    & .icons{
+    & .icons {
 
         display: flex;
         flex-direction: row;
@@ -49,28 +49,29 @@ header {
 }
 
 nav {
-    
+
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     text-align: center;
 
-    & *{
+    & * {
 
         padding: 1em;
-    
-        }
 
-        & a:hover,p:hover {
+    }
 
-            opacity: 50%;
+    & a:hover,
+    p:hover {
 
-        }
+        opacity: 50%;
 
-    & div{
+    }
+
+    & div {
 
         color: white;
 
-        &:hover{
+        &:hover {
 
             cursor: pointer;
 
@@ -79,12 +80,12 @@ nav {
 
     }
 
-    & .desplegable{
-        
+    & .desplegable {
+
         position: relative;
         padding: 0;
 
-        & .desplegados{
+        & .desplegados {
 
             display: none;
             flex-direction: column;
@@ -93,11 +94,11 @@ nav {
             background-color: white;
             bottom: 0;
             border-radius: 0.5em;
-    
-            
+
+
         }
 
-        &:hover .desplegados{
+        &:hover .desplegados {
 
             display: flex;
             top: 2em;
@@ -108,10 +109,7 @@ nav {
 
     }
 
-   
-    
-    
+
+
+
 }
-
-
-

@@ -1,4 +1,5 @@
-*{margin: 0;
+* {
+    margin: 0;
     transition: 250ms ease;
     scroll-behavior: smooth;
 }
@@ -12,10 +13,10 @@
 }
 
 
-footer{
+footer {
 
-    
-    & .chat{
+
+    & .chat {
 
         display: flex;
         flex-direction: row;
@@ -28,19 +29,19 @@ footer{
         overflow: hidden;
         gap: 0.25em;
 
-       
+
 
     }
 
 }
 
-.iconButton{
+.iconButton {
 
     padding: 0.5em;
     cursor: pointer;
     border-radius: 50%;
 
-    &:hover{
+    &:hover {
 
         scale: 1.1;
         background: black;
