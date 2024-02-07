@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: mariadb:3306
--- Tiempo de generación: 05-02-2024 a las 10:22:13
+-- Tiempo de generación: 07-02-2024 a las 09:14:49
 -- Versión del servidor: 11.2.2-MariaDB-1:11.2.2+maria~ubu2204
 -- Versión de PHP: 8.2.8
 
@@ -45,10 +45,10 @@ INSERT INTO `IES` (`telf`, `web`, `nombre`, `email`, `ID`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Line`
+-- Estructura de tabla para la tabla `Lineas`
 --
 
-CREATE TABLE `Line` (
+CREATE TABLE `Lineas` (
   `ID` smallint(6) NOT NULL,
   `ID_Music` smallint(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
@@ -56,10 +56,10 @@ CREATE TABLE `Line` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Products`
+-- Estructura de tabla para la tabla `Productos`
 --
 
-CREATE TABLE `Products` (
+CREATE TABLE `Productos` (
   `ID` int(11) NOT NULL,
   `Price` double NOT NULL,
   `Stock` int(100) NOT NULL,
@@ -70,21 +70,42 @@ CREATE TABLE `Products` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Users`
+-- Estructura de tabla para la tabla `Roles`
 --
 
-CREATE TABLE `Users` (
-  `ID` int(11) NOT NULL,
-  `Email` varchar(50) NOT NULL,
-  `Password` varchar(50) NOT NULL
+CREATE TABLE `Roles` (
+  `id_rol` int(11) NOT NULL,
+  `rol` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
--- Volcado de datos para la tabla `Users`
+-- Volcado de datos para la tabla `Roles`
 --
 
-INSERT INTO `Users` (`ID`, `Email`, `Password`) VALUES
-(1, 'admin@gmail.com', 'admin');
+INSERT INTO `Roles` (`id_rol`, `rol`) VALUES
+(1, 'admin'),
+(2, 'alumno'),
+(3, 'cliente');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `Usuarios`
+--
+
+CREATE TABLE `Usuarios` (
+  `ID` int(11) NOT NULL,
+  `Email` varchar(50) NOT NULL,
+  `Password` varchar(50) NOT NULL,
+  `rol` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `Usuarios`
+--
+
+INSERT INTO `Usuarios` (`ID`, `Email`, `Password`, `rol`) VALUES
+(1, 'admin@gmail.com', 'admin', 1);
 
 --
 -- Índices para tablas volcadas
@@ -97,23 +118,31 @@ ALTER TABLE `IES`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indices de la tabla `Line`
+-- Indices de la tabla `Lineas`
 --
-ALTER TABLE `Line`
+ALTER TABLE `Lineas`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indices de la tabla `Products`
+-- Indices de la tabla `Productos`
 --
-ALTER TABLE `Products`
+ALTER TABLE `Productos`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `ProductLine` (`ID_Line`);
 
 --
--- Indices de la tabla `Users`
+-- Indices de la tabla `Roles`
 --
-ALTER TABLE `Users`
-  ADD PRIMARY KEY (`ID`);
+ALTER TABLE `Roles`
+  ADD PRIMARY KEY (`id_rol`);
+
+--
+-- Indices de la tabla `Usuarios`
+--
+ALTER TABLE `Usuarios`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `Email` (`Email`),
+  ADD KEY `fk_rol` (`rol`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -126,32 +155,38 @@ ALTER TABLE `IES`
   MODIFY `ID` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT de la tabla `Line`
+-- AUTO_INCREMENT de la tabla `Lineas`
 --
-ALTER TABLE `Line`
+ALTER TABLE `Lineas`
   MODIFY `ID` smallint(6) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `Products`
+-- AUTO_INCREMENT de la tabla `Productos`
 --
-ALTER TABLE `Products`
+ALTER TABLE `Productos`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `Users`
+-- AUTO_INCREMENT de la tabla `Usuarios`
 --
-ALTER TABLE `Users`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+ALTER TABLE `Usuarios`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restricciones para tablas volcadas
 --
 
 --
--- Filtros para la tabla `Products`
+-- Filtros para la tabla `Productos`
 --
-ALTER TABLE `Products`
+ALTER TABLE `Productos`
   ADD CONSTRAINT `ProductLine` FOREIGN KEY (`ID_Line`) REFERENCES `Line` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `Usuarios`
+--
+ALTER TABLE `Usuarios`
+  ADD CONSTRAINT `fk_rol` FOREIGN KEY (`rol`) REFERENCES `Roles` (`id_rol`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
