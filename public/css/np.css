@@ -1,6 +1,9 @@
 main {
     padding: 2.5em;
     padding-top: 5em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
 
 }
 
@@ -14,7 +17,7 @@ main {
 
     & section {
 
-
+        filter: grayscale(0.35);
         border-radius: 1em;
         padding: 1em;
         overflow: hidden;
@@ -24,7 +27,7 @@ main {
 
         & img {
 
-            width: 256px;
+            width: 300px;
 
 
         }
@@ -44,11 +47,25 @@ main {
         &:hover {
 
             transform: scale(1.05);
+            box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, .1);
+            filter: grayscale(0);
+
+            & img {
+
+                transform: translateY(-10px);
+
+            }
         }
     }
 
 
 
 
+
+}
+
+.desplegableLineas {
+
+    background-color: rebeccapurple;
 
 }
