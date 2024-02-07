@@ -68,12 +68,18 @@ nav {
     }
 
     & div {
+        transition: 250ms ease;
 
-        color: white;
+        & * {
+
+            color: white;
+        }
+
 
         &:hover {
 
             cursor: pointer;
+
 
         }
 
