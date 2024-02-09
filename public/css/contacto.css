@@ -22,15 +22,18 @@ main {
     width: 20em;
     height: 2em;
     max-height: 2em;
-    margin-bottom: 5em;
+    margin-bottom: 2em;
     position: relative;
     border-radius: 5px;
+    font-size: 2em;
 }
 
 .info {
     
     display: flex;
     gap: 15em;
+    justify-content: center;
+    margin-right: 13em;
 
     & .mapa{
 
@@ -62,9 +65,26 @@ main {
         position: relative;
         border-radius: 5px;
         height: 30em;
-        width: 50em;
-        & .direccion{
-            margin-bottom: 50em;
+        width: 30em;
+        & div{
+            align-items: center;
+            display: flex;
+            justify-content: center;
+            margin: auto;
+            height: 5em;
+            width: 20em;
+            & i {
+                place-items: left;
+                margin-right: 1em;
+                font-size: 2em;
+            }
+            & p{
+             font-size:2em;
+            }
+            & a{
+                color: black;
+                font-size:2em;
+            }
         }
     
 
