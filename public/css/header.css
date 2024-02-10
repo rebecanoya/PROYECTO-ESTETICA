@@ -79,55 +79,6 @@ nav {
 
     }
 
-    & div {
-        transition: 250ms ease;
-
-        & * {
-
-            color: white;
-        }
-
-
-        &:hover {
-
-            cursor: pointer;
-
-
-        }
-
-
-    }
-
-    & .desplegable {
-
-        position: relative;
-        padding: 0;
-
-        & .desplegados {
-
-            display: none;
-            flex-direction: column;
-            position: absolute;
-            width: 90%;
-            background-color: white;
-            bottom: 0;
-            border-radius: 0.5em;
-
-
-        }
-
-        &:hover .desplegados {
-
-            display: flex;
-            top: 2em;
-            bottom: unset;
-
-
-        }
-
-    }
-
-
 
 
 }

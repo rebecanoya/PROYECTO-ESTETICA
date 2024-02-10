@@ -73,38 +73,7 @@ main {
 
 }
 
-.desplegadoLineas {
 
-
-    border-radius: 1em;
-    padding: 1em;
-    background-color: var(--fondoLineas, white);
-
-    & section {
-
-        display: flex;
-        flex-direction: column;
-        gap: 1em;
-
-        & .cuadroCompleto {
-
-            display: grid;
-            grid-template-columns: 3fr 1fr;
-            gap: 1.5em;
-
-        }
-
-        & .productos {
-
-            background-color: rgba(101, 159, 98, 0.082);
-            border: 2px rgba(49, 77, 47, 0.082) solid;
-
-        }
-
-
-    }
-
-}
 
 
 .productos {
