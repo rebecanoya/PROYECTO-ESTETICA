@@ -1,0 +1,107 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+main {
+    flex: 1;
+    padding: 2.5em;
+    gap: 1em;
+    flex-direction: column;
+
+}
+
+.nombreIes {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    background-color: rgb(226, 226, 226);
+    width: 20em;
+    height: 2em;
+    max-height: 2em;
+    margin-bottom: 2em;
+    position: relative;
+    border-radius: 5px;
+    font-size: 2em;
+}
+
+.info {
+    
+    display: flex;
+    gap: 15em;
+    justify-content: center;
+    margin-right: 13em;
+
+
+
+    & .descripcion{
+
+        display: grid;
+        place-items: center;
+        position: relative;
+        border-radius: 5px;
+        width: 50em;
+        margin-left: 6em;
+    
+        & h2{
+            background-color: #dddddd;
+            width: 30em;
+            justify-content: center;
+            display: flex;
+        }
+        & .quienes{
+            margin-bottom: 2em;
+            background-color: #dddddd;
+            height: 10em;
+            width: 45em;
+            & h2{
+                margin: auto;
+                justify-content: center;
+            }
+        }
+        & .imagenes{
+            display: flex;
+            justify-content: center;
+            background-color: #dddddd;
+            height: 20em;
+            width: 45em;
+            & .img{
+                max-width: 30em;
+                max-height: 20em;
+                width: auto;
+                height: auto;
+                margin: auto;
+                
+            }
+            & button{
+                background: none;
+                border: none;
+                height: 10em;
+                margin: auto;
+            }
+        }
+    }
+    & .datos{
+        background-color: rgb(204, 204, 204);
+        & .container {
+            margin: 20px;
+            & .button-container {
+                & .custom-button {
+                    width: 10em;
+                    background-color: #f0f0f0;
+                    border: none;
+                    outline: none;
+                }
+            }
+            & .text-container {
+                background-color: #f0f0f0;
+                padding: 10px;
+                height: 30em; 
+            }
+        }
+        
+}
+}
