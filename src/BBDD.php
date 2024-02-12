@@ -7,10 +7,28 @@ class BBDD
 
     public function __construct()
     {
-        $host = '';
-        $name = 'BBDD';
+        $host = 'localhost';
+        $name = 'dbcosmetica';
         $user = 'root';
         $password = 'root';
         $this->pdo =  new PDO("mysql:host:=$host:3306;dbname=$name", $user, $password);
+    }
+
+    public function __destruct()
+    {
+
+        unset($this->pdo);
+    }
+
+    public function select($sql, $params = null)
+    {
+        $consulta = $this->pdo->prepare($sql);
+        $consulta->execute($params);
+        $resultado = [];
+        while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
+            $resultado[] = $fila;
+        }
+        unset($consulta);
+        return $resultado;
     }
 }

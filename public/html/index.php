@@ -1,3 +1,14 @@
+<?php
+
+include '../../src/BBDD.php';
+$BBDD = new BBDD();
+$sql = "SELECT * from roles where id_rol=:id";
+$param = ["id" =>  1];
+$resultado = $BBDD->select($sql, $param);
+var_dump($resultado);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
