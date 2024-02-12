@@ -13,36 +13,11 @@
 
 <body>
 
-    <header>
+    <?php
 
-        <div class="titulo">
+    include "../../src/templates/header.php"
 
-            <h1>
-                <a href="index.html"> Nombre Pagina</a>
-            </h1>
-
-
-
-        </div>
-
-        <div class="icons">
-            <a class="fa-solid fa-magnifying-glass iconButton"></a>
-            <a class="fa-regular fa-user iconButton"></a>
-            <a class="fa-solid fa-cart-shopping iconButton"></a>
-
-        </div>
-        <nav>
-
-            <a href="QuienesSomos.html">¿QUIÉNES SOMOS?</a>
-            <a href="NuestrosProductos.html">NUESTROS PRODUCTOS</a>
-
-            <a href="Pedidos.html">PEDIDOS</a>
-            <a href="Blog.html">BLOG</a>
-            <a href="Contacto.html">CONTACTO</a>
-
-        </nav>
-
-    </header>
+    ?>
 
 
 
@@ -79,14 +54,11 @@
     </aside>
 
 
-    <footer>
+    <?php
 
-        <div class="chat">
-            <a class="fa-solid fa-headset iconButton">
-            </a>
-        </div>
+    include "../../src/templates/footer.php"
 
-    </footer>
+    ?>
 </body>
 
 </html>
