@@ -180,7 +180,7 @@ ALTER TABLE `Usuarios`
 -- Filtros para la tabla `Productos`
 --
 ALTER TABLE `Productos`
-  ADD CONSTRAINT `ProductLine` FOREIGN KEY (`ID_Line`) REFERENCES `Line` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `ProductLine` FOREIGN KEY (`ID_Line`) REFERENCES `Lineas` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `Usuarios`
