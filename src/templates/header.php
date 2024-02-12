@@ -18,12 +18,12 @@
     </div>
     <nav>
 
-        <a href="QuienesSomos.html">¿QUIÉNES SOMOS?</a>
-        <a href="NuestrosProductos.html">NUESTROS PRODUCTOS</a>
+        <a href="QuienesSomos.php">¿QUIÉNES SOMOS?</a>
+        <a href="NuestrosProductos.php">NUESTROS PRODUCTOS</a>
 
-        <a href="Pedidos.html">PEDIDOS</a>
-        <a href="Blog.html">BLOG</a>
-        <a href="Contacto.html">CONTACTO</a>
+        <a href="Pedidos.php">PEDIDOS</a>
+        <a href="Blog.php">BLOG</a>
+        <a href="Contacto.php">CONTACTO</a>
 
     </nav>
 
