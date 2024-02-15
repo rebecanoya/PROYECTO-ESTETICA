@@ -3,7 +3,7 @@
     <div class="titulo">
 
         <h1>
-            <a href="index.html"> Nombre Pagina</a>
+            <a href="index.php">Aromaterapia</a>
         </h1>
 
 
