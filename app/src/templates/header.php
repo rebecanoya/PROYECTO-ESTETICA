@@ -3,7 +3,7 @@
     <div class="titulo">
 
         <h1>
-            <a href="index.php">Aromaterapia</a>
+            <a href="index.php">Aromusicoterapia</a>
         </h1>
 
 
