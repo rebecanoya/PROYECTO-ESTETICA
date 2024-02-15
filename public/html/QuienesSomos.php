@@ -44,9 +44,9 @@
             <section class="datos">
                 <div class="container">
                     <div class="button-container">
-                        <button class="custom-button">Botón 1</button>
-                        <button class="custom-button">Botón 2</button>
-                        <button class="custom-button">Botón 3</button>
+                        <button class="custom-button">Mision</button>
+                        <button class="custom-button">Vision</button>
+                        <button class="custom-button">Valores</button>
                     </div>
                     
                     <div class="text-container">
