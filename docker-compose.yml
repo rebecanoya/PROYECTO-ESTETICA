@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  php:
+    image: php:8.2-apache
+    ports:
+      - "8080:80"
+    volumes:
+      - ./app/:/var/www/html
+      - ./config/php.ini:/usr/local/etc/php/php.ini
+      - './config/apache/apache2.conf:/etc/apache2/apache2.conf'
+      - './config/apache/certs/:/etc/apache2/certs/'
+      - './config/apache/sites-available/:/etc/apache2/sites-available/'
+
+  mysql:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: mydatabase
+      MYSQL_USER: myuser
+      MYSQL_PASSWORD: mypassword
+    ports:
+      - "3306:3306"
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8181:80"
+    environment:
+      PMA_HOST: mysql
+      MYSQL_ROOT_PASSWORD: example
