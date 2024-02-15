@@ -36,6 +36,10 @@
         <div class="containerBanner">
             <img src="../img/banner.jpg" class="banner">
         </div>
+        <div class="contenido1">
+            <img src="../img/imagenEjemploBlog.jpg" alt="">
+
+        </div>
     </main>
 
 
