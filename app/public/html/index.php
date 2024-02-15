@@ -37,7 +37,7 @@
             <img src="../img/banner.jpg" class="banner">
         </div>
         <div class="contenido1">
-            <img src="../img/imagenEjemploBlog.jpg" alt="">
+            <img src="../img/imagenEjemploBlog.jpg" class="c1">
 
         </div>
     </main>

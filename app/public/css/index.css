@@ -13,6 +13,11 @@ header {
 
 }
 
+.c1 {
+    width: 100%;
+
+}
+
 main {
 
     & .containerBanner {
@@ -20,6 +25,8 @@ main {
         overflow: hidden;
 
     }
+
+
 
 }
 
