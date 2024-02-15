@@ -20,8 +20,6 @@
 
         <a href="QuienesSomos.php">¿QUIÉNES SOMOS?</a>
         <a href="NuestrosProductos.php">NUESTROS PRODUCTOS</a>
-
-        <a href="Pedidos.php">PEDIDOS</a>
         <a href="Blog.php">BLOG</a>
         <a href="Contacto.php">CONTACTO</a>
 
