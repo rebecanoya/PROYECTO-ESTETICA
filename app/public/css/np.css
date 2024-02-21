@@ -9,10 +9,12 @@ main {
 
 
 .lineas {
-
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 2.5em;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 7em;
+        margin-right: 3em;
+        margin-left: 3em;
+        margin-bottom: 3em;
 
 
     & section {

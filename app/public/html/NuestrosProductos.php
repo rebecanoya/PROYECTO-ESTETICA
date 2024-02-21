@@ -24,10 +24,10 @@
     <main>
 
         <article class="lineas">
-            <section data-seleccionado="false" style="--fondoLineas: rgba(255, 0, 0, 0.150);">
+            <section data-seleccionado="true" style="--fondoLineas: rgba(255, 0, 0, 0.150);">
                 <button href="#desplegableLineas">
 
-                    <h2>Linea 1</h2>
+                    <h2>Linea Revitalizante</h2>
                     <img src="../img/geranio.png">
                 </button>
 
@@ -43,7 +43,7 @@
                 </button>
 
             </section>
-            <section data-seleccionado="false" style="--fondoLineas: rgba(255, 217, 0, 0.15);">
+            <!-- <section data-seleccionado="false" style="--fondoLineas: rgba(255, 217, 0, 0.15);">
                 <button href="#desplegableLineas">
 
                     <h2>Linea 3</h2>
@@ -71,7 +71,7 @@
                 </button>
 
 
-            </section>
+            </section> -->
         </article>
 
         <!-- <article style="--fondoLineas: rgba(13, 255, 0, 0.15);" class="desplegadoLineas" id="#desplegableLineas">
