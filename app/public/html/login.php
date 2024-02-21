@@ -78,7 +78,7 @@
                     </div>
 
                     <div class="grupo-form">
-                        <input type="number" name="telefono" id="telefono" placeholder="Teléfono">
+                        <input type="tel" id="telefono" name="telefono" pattern="[0-9]{9}" placeholder="Telefono">
                         <input type="email" name="correo" id="correo" placeholder="Email">
                         <input type="password" name="password" id="password" placeholder="Contraseña">
                         <input type="password" name="password" id="password" placeholder="Repetir contraseña">
