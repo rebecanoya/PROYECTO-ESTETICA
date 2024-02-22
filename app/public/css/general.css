@@ -4,6 +4,11 @@
     scroll-behavior: smooth;
 }
 
+:root {
+
+    --base: rgba(218, 231, 242, 255);
+
+}
 
 @font-face {
     font-family: 'Lumina';

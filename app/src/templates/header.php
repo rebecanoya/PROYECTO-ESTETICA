@@ -18,10 +18,10 @@
     </div>
     <nav>
 
-        <a href="/html/QuienesSomos.php">¿QUIÉNES SOMOS?</a>
-        <a href="/html/NuestrosProductos.php">NUESTROS PRODUCTOS</a>
-        <a href="/html/Blog.php">BLOG</a>
-        <a href="/html/Contacto.php">CONTACTO</a>
+        <a href="../../public/html/QuienesSomos.php">¿QUIÉNES SOMOS?</a>
+        <a href="../../public/html/NuestrosProductos.php">NUESTROS PRODUCTOS</a>
+        <a href="../../public/html/Blog.php">BLOG</a>
+        <a href="../../public/html/Contacto.php">CONTACTO</a>
 
     </nav>
 

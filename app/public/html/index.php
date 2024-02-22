@@ -34,7 +34,11 @@
 
     <main>
         <div class="containerBanner">
-            <img src="../img/banner.jpg" class="banner">
+            <div class="linea">
+                <h2>Descubre nuestra nueva</h2>
+                <h1>LINEA REVITALIZANTE</h1>
+            </div>
+            <img src="../img/banner.jpeg" class="banner">
         </div>
         <div class="contenido1">
             <img src="../img/imagenEjemploBlog.jpg" class="c1">
