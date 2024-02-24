@@ -24,7 +24,7 @@
     <main>
 
         <article class="lineas">
-            <section data-seleccionado="false" style="--fondoLineas: rgb(215, 142, 255);;">
+            <section data-seleccionado="false" style="--fondoLineas: rgb(215, 142, 255);">
                 <button href="#desplegableLineas">
 
                     <h2>Linea Revitalizante</h2>

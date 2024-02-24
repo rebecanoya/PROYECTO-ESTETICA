@@ -2,11 +2,95 @@
     margin: 0;
     transition: 250ms ease;
     scroll-behavior: smooth;
+    font-family: 'Lumina';
+    letter-spacing: 0.1em
 }
 
 :root {
 
-    --base: rgba(218, 231, 242, 255);
+    --base: #5dc1b9;
+
+}
+
+
+.producto {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 1em;
+    background-color: white;
+    gap: 1.5em;
+    overflow: hidden;
+
+    &:hover {
+
+        transform: scale(1.05);
+        box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, .1);
+
+    }
+
+    & .opciones {
+
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        width: 100%;
+
+
+    }
+
+
+    & img {
+
+        width: 200px;
+        aspect-ratio: 1;
+    }
+
+
+
+    & button {
+
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 0.5em;
+        cursor: pointer;
+        border-radius: 0;
+
+
+
+    }
+
+    & .compra {
+
+        background-color: var(--colorFondo, --base);
+        border: 0;
+
+    }
+
+    & .muestra {
+
+        background-color: black;
+        color: white;
+        border: 0;
+
+    }
+}
+
+button {
+
+    padding: 1em;
+    border: 0;
+    border-radius: 0.25em;
+
+    &:hover {
+
+        transform: scale(1.025);
+        cursor: pointer;
+
+    }
 
 }
 

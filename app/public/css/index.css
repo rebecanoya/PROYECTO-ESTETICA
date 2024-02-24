@@ -2,6 +2,7 @@ header {
 
     position: fixed;
 
+
 }
 
 element.style {
@@ -42,8 +43,60 @@ main {
             padding-bottom: 3em;
             align-items: center;
             background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.44));
+            gap: 1em;
+            color: white;
+
+            & button {
+
+                background-color: var(--base);
+                color: white;
+
+            }
         }
     }
+
+    & .bannerNegro {
+
+
+        background-color: black;
+    }
+
+    & .lineas {
+
+        & article {
+
+            & .banner {
+
+                width: 100%;
+            }
+
+            & .contenido {
+
+                background-color: white;
+                display: grid;
+                grid-template-columns: 1fr 2fr;
+                padding: 1em;
+                gap: 1em;
+
+                & .informacion {
+
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1em;
+                    justify-content: center;
+                }
+
+                & .productos {
+                    display: grid;
+                    grid-template-columns: repeat(5, 1fr);
+                    gap: 1em;
+                }
+
+            }
+        }
+
+    }
+
 
 
 
