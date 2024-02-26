@@ -24,7 +24,7 @@
         <article class="info">
             <section class="mapa">
                 <div class="direccion">
-                    <img src="../img/ejemploMaps.jpg" alt="mapa">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2953.2711920540664!2d-8.692645824074832!3d42.25138087120318!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd2f62e588cfce69%3A0x378485bfa6edd1be!2sIES%20de%20Teis!5e0!3m2!1ses!2ses!4v1708971321653!5m2!1ses!2ses" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </section>
             <section class="datos">
