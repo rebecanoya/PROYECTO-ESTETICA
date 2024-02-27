@@ -1,3 +1,15 @@
+<?php
+
+// include '../../src/BBDD.php';
+// $BBDD = new BBDD();
+// $sql = "SELECT titulo from blog order by fecha desc";
+// $param = ["titulo" =>  1];
+// $resultado = $BBDD->select($sql, $param);
+// var_dump($resultado);
+// no funciona
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,9 +36,15 @@
     <main>
         <article style="--fondoEntrada: rgba(78, 87, 77, 0.15);" class="entradaBlog" id="#entradaBlog">
             <section>
+                <?php
+
+                ?>
                 <h1>Titulo Entrada</h1>
                 <div class="entradaCompleta">
                     <img src="../img/imagenEjemploBlog.jpg">
+                    <?php
+                        
+                    ?>
                     <div class="entrada">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                         Quos alias sequi harum voluptates similique impedit tempore, voluptatem mollitia explicabo,
                         rerum autem ea officiis consequuntur ratione. Accusamus tempora explicabo architecto vitae.

@@ -16,8 +16,8 @@ services:
     image: mysql:latest
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: example
-      MYSQL_DATABASE: mydatabase
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: dbcosmetica
       MYSQL_USER: myuser
       MYSQL_PASSWORD: mypassword
     ports:
@@ -29,4 +29,4 @@ services:
       - "8181:80"
     environment:
       PMA_HOST: mysql
-      MYSQL_ROOT_PASSWORD: example
+      MYSQL_ROOT_PASSWORD: root
