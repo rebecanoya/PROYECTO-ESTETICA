@@ -1,12 +1,6 @@
 <?php
 
-// include '../../src/BBDD.php';
-// $BBDD = new BBDD();
-// $sql = "SELECT titulo from blog order by fecha desc";
-// $param = ["titulo" =>  1];
-// $resultado = $BBDD->select($sql, $param);
-// var_dump($resultado);
-// no funciona
+include '../../src/BBDD.php';
 
 ?>
 
@@ -37,27 +31,25 @@
         <article style="--fondoEntrada: rgba(78, 87, 77, 0.15);" class="entradaBlog" id="#entradaBlog">
             <section>
                 <?php
-
+                    $BBDD = new BBDD();
+                    $sql = "SELECT titulo from blog order by fecha desc limit 1";
+                    // $param = ["titulo" =>  1];
+                    $resultado = $BBDD->select($sql);
+                    $resultado = $resultado[0];
+                    $titulo = $resultado["titulo"];
+                    echo "<div>". $titulo ."</div>";
                 ?>
-                <h1>Titulo Entrada</h1>
                 <div class="entradaCompleta">
                     <img src="../img/imagenEjemploBlog.jpg">
                     <?php
-                        
+                    $BBDD = new BBDD();
+                    $sql = "SELECT entrada from blog order by fecha desc limit 1";
+                    // $param = ["titulo" =>  1];
+                    $resultado = $BBDD->select($sql);
+                    $resultado = $resultado[0];
+                    $entrada = $resultado["entrada"];
+                    echo "<div class=entrada>". $entrada ."</div>";
                     ?>
-                    <div class="entrada">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        Quos alias sequi harum voluptates similique impedit tempore, voluptatem mollitia explicabo,
-                        rerum autem ea officiis consequuntur ratione. Accusamus tempora explicabo architecto vitae.
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        Quos alias sequi harum voluptates similique impedit tempore, voluptatem mollitia explicabo,
-                        rerum autem ea officiis consequuntur ratione. Accusamus tempora explicabo architecto vitae.
-                    </div>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Quos alias sequi harum voluptates similique impedit tempore, voluptatem mollitia explicabo,
-                    rerum autem ea officiis consequuntur ratione. Accusamus tempora explicabo architecto vitae.
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Quos alias sequi harum voluptates similique impedit tempore, voluptatem mollitia explicabo,
-                    rerum autem ea officiis consequuntur ratione. Accusamus tempora explicabo architecto vitae.
                 </div>
             </section>
         </article>
@@ -66,9 +58,16 @@
 
     <aside id="menuLateral">
         <input type="text" placeholder="Buscar...">
-        <div class="enlace-entrada">Entrada 1</div>
-        <div class="enlace-entrada">Entrada 2</div>
-        <!-- Puedes agregar más enlaces según sea necesario -->
+        <?php
+            $BBDD = new BBDD();
+            $sql = "SELECT titulo from blog order by fecha asc";
+            // $param = ["titulo" =>  "Primera Entrada"];
+            $resultado = $BBDD->select($sql);
+            for ($i=0; $i < count($resultado); $i++) { 
+                $fila = $resultado[$i];
+                echo "<div class=enlace-entrada>". $fila["titulo"] . "</div>";
+            }
+        ?>
     </aside>
 
 

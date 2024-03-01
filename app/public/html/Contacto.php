@@ -1,3 +1,9 @@
+<?php
+
+include '../../src/BBDD.php';
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,7 +24,15 @@
 
     ?>
     <main>
-
+            <?php
+                $BBDD = new BBDD();
+                $sql = "SELECT * from ies where id=:id";
+                $param = ["id" =>  1];
+                $resultado = $BBDD->select($sql);
+                // $resultado = $resultado[0];
+                // $titulo = $resultado["titulo"];
+                // echo "<div>". $titulo ."</div>";
+            ?>
         <div class="nombreIes">IES EJEMPLO</div>
 
         <article class="info">

@@ -8,7 +8,7 @@ class BBDD
     public function __construct()
     {
         $host = 'localhost';
-        $name = 'dbcosmetica';
+        $name = 'cosmetica';
         $user = 'root';
         $password = 'root';
         $this->pdo =  new PDO("mysql:host:=$host:3306;dbname=$name", $user, $password);
