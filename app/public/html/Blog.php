@@ -33,7 +33,18 @@ include '../../src/BBDD.php';
                 <?php
                     $BBDD = new BBDD();
                     $sql = "SELECT titulo from blog order by fecha desc limit 1";
-                    // $param = ["titulo" =>  1];
+                    // Verificamos si se ha enviado el formulario
+                    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                        // Verificamos qué botón se ha presionado
+                        if (isset($_POST['btn1'])) {
+                            $sql = 'SELECT titulo from blog where id = 1'; // Actualiza la consulta según tus necesidades
+                        } elseif (isset($_POST['btn2'])) {
+                            $sql = 'SELECT titulo from blog where id = 2'; // Actualiza la consulta según tus necesidades
+                        } elseif (isset($_POST['btn3'])) {
+                            $sql = 'SELECT titulo from blog where id = 3'; // Actualiza la consulta según tus necesidades
+                        }
+                        // Puedes ejecutar la consulta SQL aquí o realizar otras acciones según tu aplicación
+                    }
                     $resultado = $BBDD->select($sql);
                     $resultado = $resultado[0];
                     $titulo = $resultado["titulo"];
@@ -44,7 +55,17 @@ include '../../src/BBDD.php';
                     <?php
                     $BBDD = new BBDD();
                     $sql = "SELECT entrada from blog order by fecha desc limit 1";
-                    // $param = ["titulo" =>  1];
+                    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                        // Verificamos qué botón se ha presionado
+                        if (isset($_POST['btn1'])) {
+                            $sql = 'SELECT entrada from blog where id = 1'; // Actualiza la consulta según tus necesidades
+                        } elseif (isset($_POST['btn2'])) {
+                            $sql = 'SELECT entrada from blog where id = 2'; // Actualiza la consulta según tus necesidades
+                        } elseif (isset($_POST['btn3'])) {
+                            $sql = 'SELECT entrada from blog where id = 3'; // Actualiza la consulta según tus necesidades
+                        }
+                        // Puedes ejecutar la consulta SQL aquí o realizar otras acciones según tu aplicación
+                    }
                     $resultado = $BBDD->select($sql);
                     $resultado = $resultado[0];
                     $entrada = $resultado["entrada"];
@@ -57,17 +78,27 @@ include '../../src/BBDD.php';
 
 
     <aside id="menuLateral">
-        <input type="text" placeholder="Buscar...">
-        <?php
-            $BBDD = new BBDD();
-            $sql = "SELECT titulo from blog order by fecha asc";
-            // $param = ["titulo" =>  "Primera Entrada"];
-            $resultado = $BBDD->select($sql);
-            for ($i=0; $i < count($resultado); $i++) { 
-                $fila = $resultado[$i];
-                echo "<div class=enlace-entrada>". $fila["titulo"] . "</div>";
-            }
-        ?>
+        <div class="container">
+            <div class="container">
+                <div class="sidebar">
+                    <form method="post">
+                        <div class="search-form">
+                            <input class="search-input" type="text" name="search" placeholder="Buscar...">
+                            <button class="serachBtn" type="submit" name="searchBtn">Buscar</button>
+                        </div>
+                        <?php
+                            $BBDD = new BBDD();
+                            $sql = "SELECT titulo from blog order by fecha asc";
+                            // $param = ["titulo" =>  "Primera Entrada"];
+                            $resultado = $BBDD->select($sql);
+                            for ($i=0; $i < count($resultado); $i++) { 
+                                $fila = $resultado[$i];
+                                echo "<button class=btnBlog type=submit name=btn". $i + 1 .">". $fila["titulo"] . "</button>";
+                            }
+                        ?>
+                    </form>
+                </div>
+        </div>
     </aside>
 
 
