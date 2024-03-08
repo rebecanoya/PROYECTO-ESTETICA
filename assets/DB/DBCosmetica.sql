@@ -71,7 +71,10 @@ INSERT INTO `ies` (`telf`, `web`, `nombre`, `email`, `ID`) VALUES
 
 CREATE TABLE `lineas` (
   `ID` smallint(6) NOT NULL,
-  `ID_Music` smallint(6) NOT NULL
+  `ID_Music` smallint(6) NOT NULL,
+  `Nombre` varchar(16) NOT NULL,
+  `Color` varchar(6) NOT NULL,
+  `Descripcion` varchar(300) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 -- --------------------------------------------------------
@@ -84,8 +87,9 @@ CREATE TABLE `productos` (
   `ID` int(11) NOT NULL,
   `Price` double NOT NULL,
   `Stock` int(100) NOT NULL,
-  `Description` varchar(200) NOT NULL,
-  `ID_Line` smallint(6) NOT NULL
+  `Descripcion` varchar(200) NOT NULL,
+  `ID_Line` smallint(6) NOT NULL,
+  `Nombre` varchar(16) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 -- --------------------------------------------------------

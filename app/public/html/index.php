@@ -1,13 +1,9 @@
-<?php
+<!-- <?php
 
-// include '../../src/BBDD.php';
-// $BBDD = new BBDD();
-// $sql = "SELECT * from roles where id_rol=:id";
-// $param = ["id" =>  1];
-// $resultado = $BBDD->select($sql, $param);
-// var_dump($resultado);
+        include '../../src/BBDD.php';
+        $BBDD = new BBDD();
 
-?>
+        ?> -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -46,86 +42,28 @@
             <p>hola</p>
         </section>
         <section class="lineas">
-            <article>
 
-                <img src="../img/banner.jpeg" class="banner">
-                <div class="contenido">
-                    <div class="informacion">
-                        <h2>Linea Revitalizante</h2>
-                        <p>Elaborada con precisión e infundida con los ingredientes revitalizantes más potentes de la naturaleza, esta gama de cuidado de la piel está diseñada para dar nueva vida a tu piel, revelando un cutis radiante y rejuvenecido.</p>
-                    </div>
-                    <div class="productos">
-                        <div class="producto">
+            <?php
 
-                            <img src="../img/lineaRevitalizante/aceite.png" alt="">
-                            <p>Texto descripcion</p>
-                            <div class="opciones">
+            $sql = "SELECT * from lineas";
+            $lineas = $BBDD->select($sql);
+            foreach ($lineas as $linea) {
 
-                                <button class="compra" style="--colorFondo: pink;">Comprar</button>
-                                <button class="muestra">Solicitar muestra</button>
+                $nombreLinea = $linea["Nombre"];
+                $colorLinea = $linea["Color"];
+                $IDLinea = $linea["ID"];
+                $descripcionLinea = $linea["Descripcion"];
+                include("../../src/templates/linea.php");
+            }
 
-                            </div>
-                        </div>
-
-                        <div class="producto">
-
-                            <img src="../img/lineaRevitalizante/ambientador.png" alt="">
-                            <p>Texto descripcion</p>
-                            <div class="opciones">
-
-                                <button class="compra">Comprar</button>
-                                <button class="muestra">Solicitar muestra</button>
-
-                            </div>
-                        </div>
-
-                        <div class="producto">
-
-                            <img src="../img/lineaRevitalizante/colonia.png" alt="">
-                            <p>Texto descripcion</p>
-                            <div class="opciones">
-
-                                <button class="compra">Comprar</button>
-                                <button class="muestra">Solicitar muestra</button>
-
-                            </div>
-                        </div>
-
-                        <div class="producto">
-
-                            <img src="../img/lineaRevitalizante/exfoliante.png" alt="">
-                            <p>Texto descripcion</p>
-                            <div class="opciones">
-
-                                <button class="compra">Comprar</button>
-                                <button class="muestra">Solicitar muestra</button>
-
-                            </div>
-                        </div>
-
-                        <div class="producto">
-
-                            <img src="../img/lineaRevitalizante/sales.png" alt="">
-                            <p>Texto descripcion</p>
-                            <div class="opciones">
-
-                                <button class="compra">Comprar</button>
-                                <button class="muestra">Solicitar muestra</button>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </article>
-            <article></article>
+            ?>
         </section>
     </main>
 
 
     <?php
 
-    include "../../src/templates/footer.php"
+    include "../../src/templates/footer.php";
 
     ?>
 </body>
