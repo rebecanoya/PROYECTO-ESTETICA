@@ -105,7 +105,7 @@
 
                         <div class="producto">
 
-                            <img src="../img/lineaRevitalizante/sales.jpg" alt="">
+                            <img src="../img/lineaRevitalizante/sales.png" alt="">
                             <p>Texto descripcion</p>
                             <div class="opciones">
 
