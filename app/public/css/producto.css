@@ -1,0 +1,78 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: rgba(249, 181, 236, 0.626);
+
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    height: 100vh;
+    /* Ajustar la altura del contenedor al 100% de la altura visible del viewport */
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* Divide el contenedor en dos columnas iguales */
+    grid-gap: 20px;
+    /* Espacio entre las dos columnas */
+    height: 100%;
+    /* Ocupa todo el alto del contenedor */
+}
+
+.product-image {
+    overflow: hidden;
+    gap: 10em;
+    /* Para que el borde no afecte el tamaño de la imagen */
+}
+
+.product-image img {
+    max-width: 100%;
+    /* La imagen ocupa todo el ancho disponible de su contenedor */
+    max-height: 100%;
+    /* La imagen ocupa todo el alto disponible de su contenedor */
+    object-fit: contain;
+    /* Ajusta la imagen manteniendo su relación de aspecto y quepa completamente dentro del contenedor */
+    border: 1px solid #000;
+    background-color: white;
+    padding-left: 10em;
+}
+
+
+.product-details {
+    display: flex;
+    flex-direction: column;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 10px;
+}
+
+input {
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
