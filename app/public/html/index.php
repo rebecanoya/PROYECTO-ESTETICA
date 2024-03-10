@@ -1,9 +1,9 @@
-<!-- <?php
+<?php
 
-        include '../../src/BBDD.php';
-        $BBDD = new BBDD();
+include '../../src/BBDD.php';
+$BBDD = new BBDD();
 
-        ?> -->
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -33,7 +33,7 @@
             <div class="linea">
                 <h2>Descubre nuestra nueva</h2>
                 <h1>LINEA REVITALIZANTE</h1>
-                <a class="button">¡DESCUBRELO!</a>
+                <a class="button" href="#lineas">¡DESCUBRELO!</a>
             </div>
 
             <img src="../img/banner.jpg" class="banner">
@@ -52,7 +52,7 @@
 
 
         </section>
-        <section class="lineas">
+        <section class="lineas" id="lineas">
 
             <?php
 
@@ -78,5 +78,18 @@
 
     ?>
 </body>
+
+<script>
+    const PRODUCTOS = document.getElementsByClassName("producto");
+    for (const producto of PRODUCTOS) {
+        producto.addEventListener("click", () => {
+
+            location.href = `ProductoVista.php?id=${producto.dataset.idproducto}`;
+
+        });
+
+    }
+</script>
+
 
 </html>

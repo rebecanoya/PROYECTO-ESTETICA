@@ -1,4 +1,4 @@
-<div class="producto">
+<div class="producto" data-idProducto="<?php echo $IDProducto ?>">
 
     <img src="../img/productos/<?php echo $IDProducto ?>.png" alt="">
     <p><?php echo $nombreProducto ?></p>

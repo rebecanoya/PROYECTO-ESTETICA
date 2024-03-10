@@ -21,6 +21,7 @@
     border-radius: 1em;
     gap: 1.5em;
     overflow: hidden;
+    cursor: pointer;
 
     &:hover {
 

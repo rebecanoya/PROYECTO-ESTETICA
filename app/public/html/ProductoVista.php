@@ -1,3 +1,33 @@
+<?php
+
+include '../../src/BBDD.php';
+$BBDD = new BBDD();
+$pedirBBDD = false;
+$cargar = false;
+$producto;
+
+
+if (isset($_GET) && isset($_GET["id"])) {
+    $id = $_GET["id"];
+    if (is_numeric($id)) {
+        $pedirBBDD = true;
+    }
+}
+
+if ($pedirBBDD) {
+    $sql = "SELECT * from productos where id = :id";
+    $param = ["id" =>  $id];
+    $producto = $BBDD->select($sql, $param);
+
+    if ($producto) {
+        $cargar = true;
+        $producto = $producto[0];
+    }
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,28 +44,44 @@
 <body>
     <?php
 
-    include "../../src/templates/header.php"
+    include "../../src/templates/header.php";
+    if ($cargar) {
+
+
 
     ?>
 
-    <div class="container">
-        <div class="product-grid">
-            <div class="product-image">
-                <img src="../img/productos/1.png" alt="Producto">
-            </div>
-            <div class="product-details">
-                <h2>Nombre del Producto</h2>
-                <p>Descripción del producto...</p>
-                <form>
-                    <label for="quantity">Cantidad:</label>
-                    <input type="number" id="quantity" name="quantity" min="1" value="1">
-                    <button type="submit">Añadir al carrito</button>
-                    <button type="submit">Solicitar muestra</button>
+        <div class="container">
+            <div class="product-grid">
+                <div class="product-image">
+                    <img src="../img/productos/<?php echo $producto["ID"] ?>.png" alt="Producto">
+                </div>
+                <div class="product-details">
+                    <h2><?php echo $producto["Nombre"] ?></h2>
+                    <p><?php echo $producto["Descripcion"] ?></p>
+                    <form>
+                        <label for="quantity">Cantidad:</label>
+                        <input type="number" id="quantity" name="quantity" min="1" value="1">
+                        <button type="submit">Añadir al carrito</button>
+                        <button type="submit">Solicitar muestra</button>
 
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
+
+    <?php
+    } else {
+
+
+
+
+
+    ?>
+        <div>No se encontró</div>
+    <?php
+    }
+    ?>
 
 
 
