@@ -33,13 +33,24 @@
             <div class="linea">
                 <h2>Descubre nuestra nueva</h2>
                 <h1>LINEA REVITALIZANTE</h1>
-                <button>¡DESCUBRELO!</button>
+                <a class="button">¡DESCUBRELO!</a>
             </div>
 
-            <img src="../img/banner.jpeg" class="banner">
+            <img src="../img/banner.jpg" class="banner">
         </div>
         <section class="bannerNegro">
-            <p>hola</p>
+            <div class="container">
+                <div class="textos">
+
+                    <h2>¿Necesitas que te asesoremos?</h2>
+                    <p>Nuestro equipo de expertos en belleza está aquí para asesorarte y ayudarte a encontrar los productos adecuados para tus necesidades específicas</p>
+
+                </div>
+                <a class="button">Contactanos</a>
+            </div>
+            <img src="../img/llamada.jpg" alt="" width="500px">
+
+
         </section>
         <section class="lineas">
 

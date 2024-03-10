@@ -46,7 +46,7 @@ main {
             gap: 1em;
             color: white;
 
-            & button {
+            & .button {
 
                 background-color: var(--base);
                 color: white;
@@ -57,8 +57,54 @@ main {
 
     & .bannerNegro {
 
-
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        justify-items: center;
+        gap: 1em;
+        padding: 2em;
         background-color: black;
+
+
+        & img {
+
+
+            outline: 10px solid white;
+            border-radius: 0.5em;
+        }
+
+        & .button {
+
+            width: min-content;
+
+        }
+
+        & .container {
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+
+            & .textos {
+
+                display: flex;
+                flex-direction: column;
+                gap: 1em;
+                justify-content: center;
+
+                & h2 {
+                    color: white;
+
+                }
+
+                & p {
+
+                    color: white;
+                }
+
+
+            }
+        }
+
     }
 
     & .lineas {
@@ -94,6 +140,7 @@ main {
 
                     & :hover {
                         background-color: white;
+                        color: black;
 
                     }
                 }
