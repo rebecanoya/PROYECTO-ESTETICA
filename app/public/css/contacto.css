@@ -3,6 +3,7 @@ body {
     padding: 0;
     display: flex;
     flex-wrap: wrap;
+    background-color: #b3e0db;
 }
 
 main {
@@ -18,7 +19,7 @@ main {
     display: flex;
     justify-content: center;
     margin: auto;
-    background-color: rgb(226, 226, 226);
+    background-color: rgb(245, 245, 245);
     width: 20em;
     height: 2em;
     max-height: 2em;
@@ -26,6 +27,12 @@ main {
     position: relative;
     border-radius: 5px;
     font-size: 2em;
+    outline: 0.1em solid black;
+    border: 0.15em solid #5dc1b9;
+}
+
+.general {
+    padding-top: 3em;
 }
 
 .info {
@@ -39,33 +46,40 @@ main {
 
         display: grid;
         place-items: center;
-        background-color: rgba(172, 172, 172, 0.367);
+        background-color: rgb(245, 245, 245);
         position: relative;
         border-radius: 5px;
-        height: 30em;
-        max-width: 60em;
+        height: 28.1em;
+        width: 37.5em;
+        max-width: 40em;
         margin-left: 12em;
+        margin-top: 1em;
+        outline: 0.15em solid black;
+        border: 0.3em solid #5dc1b9;
     
         & .direccion{
             & img {
             height: 8em;
-            margin: auto;
             height: 28em;
             max-height: 30em;
             max-width: 100em;
             margin-left: 2em;
             margin-right: 2em;
+            margin-bottom: 5em;
             }
         }
     }
     & .datos{
         display: grid;
         place-items: center;
-        background-color: rgba(172, 172, 172, 0.367);
+        background-color: rgb(245, 245, 245);
         position: relative;
         border-radius: 5px;
-        height: 30em;
+        height: 28.3em;
         width: 30em;
+        margin-top: 1em;
+        outline: 0.15em solid black;
+        border: 0.3em solid #5dc1b9;
         & div{
             align-items: center;
             display: flex;

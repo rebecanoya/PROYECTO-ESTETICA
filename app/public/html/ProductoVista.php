@@ -58,7 +58,7 @@ if ($pedirBBDD) {
                 </div>
                 <div class="product-details">
                     <h2><?php echo $producto["Nombre"] ?></h2>
-                    <p><?php echo $producto["Descripcion"] ?></p>
+                    <p class="descripcion"><?php echo $producto["Descripcion"] ?></p>
                     <form>
                         <div class="container">
                             <div class="form-container">
@@ -70,7 +70,6 @@ if ($pedirBBDD) {
                         </div>
                         <button type="submit"class="comprar">Añadir al carrito</button>
                         <button type="submit" class="muestra">Solicitar muestra</button>
-
                     </form>
                 </div>
             </div>

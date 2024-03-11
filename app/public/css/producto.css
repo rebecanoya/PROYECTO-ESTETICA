@@ -42,6 +42,10 @@ body {
     padding: 5em;
 }
 
+.descripcion {
+    max-width: 40em; /* Ajusta el valor según tus necesidades */
+    word-wrap: break-word;
+}
 
 .product-details {
     display: flex;
@@ -75,7 +79,6 @@ button {
     border-radius: 5px;
     font-size: 16px;
 }
-
 
 .masmenos {
     padding: 0.5em 1em;

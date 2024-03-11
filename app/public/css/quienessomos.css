@@ -3,6 +3,7 @@ body {
     padding: 0;
     display: flex;
     flex-wrap: wrap;
+    background-color: #7cccc4;
 }
 
 main {
@@ -13,20 +14,6 @@ main {
 
 }
 
-.nombreIes {
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    margin: auto;
-    background-color: rgb(226, 226, 226);
-    width: 20em;
-    height: 2em;
-    max-height: 2em;
-    margin-bottom: 2em;
-    position: relative;
-    border-radius: 5px;
-    font-size: 2em;
-}
 
 .info {
     
