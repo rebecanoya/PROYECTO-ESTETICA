@@ -3,7 +3,7 @@ body {
     padding: 0;
     display: flex;
     flex-wrap: wrap;
-    background-color: #7cccc4;
+    background-color: #48d1cc;
 }
 
 main {
@@ -32,6 +32,7 @@ main {
         border-radius: 5px;
         width: 50em;
         margin-left: 6em;
+        
     
         & h2{
             background-color: #dddddd;
@@ -42,39 +43,46 @@ main {
         & .quienes{
             margin-bottom: 2em;
             background-color: #dddddd;
-            height: 10em;
+            height: 13em;
             width: 45em;
+            outline: 0.15em solid black;
+            border: 0.2em solid #5dc1b9;
             & h2{
                 margin: auto;
                 justify-content: center;
             }
+            & .quien {
+                    margin-left: 1%;
+                }
+            }
         }
+        & .h {
+            outline: 0.15em solid black;
+            border: 0.2em solid #5dc1b9;
+        }
+
         & .imagenes{
-            display: flex;
-            justify-content: center;
-            background-color: #dddddd;
-            height: 20em;
-            width: 45em;
-            & .img{
-                max-width: 30em;
-                max-height: 20em;
-                width: auto;
-                height: auto;
-                margin: auto;
+                display: flex;
+                justify-content: center;
+                background-color: #dddddd;
+                height: 20em;
+                width: 45em;
                 
-            }
-            & button{
-                background: none;
-                border: none;
-                height: 10em;
-                margin: auto;
-            }
+                & .img{
+                    max-width: 30em;
+                    max-height: 20em;
+                    width: auto;
+                    height: auto;
+                    margin: auto;
+                    
+                }
         }
+
     }
     & .datos{
         background-color: rgb(204, 204, 204);
         & .container {
-            margin: 20px;
+            margin: 1em;
             & .button-container {
                 & .custom-button {
                     width: 10em;
@@ -85,7 +93,7 @@ main {
             }
             & .text-container {
                 background-color: #f0f0f0;
-                padding: 10px;
+                padding: 1em;
                 height: 30em; 
             }
         }

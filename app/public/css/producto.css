@@ -43,7 +43,7 @@ body {
 }
 
 .descripcion {
-    max-width: 40em; /* Ajusta el valor según tus necesidades */
+    max-width: 40em;
     word-wrap: break-word;
 }
 

@@ -23,44 +23,36 @@
         
         <article class="info">
             <section class="descripcion">
-                <h2>QUIENES SOMOS?</h6>
-                <div class="quienes">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores obcaecati natus rem id accusantium. 
-                    Aspernatur nulla, earum tempora dolore recusandae accusamus quo aliquam veritatis, 
-                    est quam labore numquam, quasi laudantium.
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores obcaecati natus rem id accusantium. 
-                    Aspernatur nulla, earum tempora dolore recusandae accusamus quo aliquam veritatis, 
-                    est quam labore numquam, quasi laudantium.
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores obcaecati natus rem id accusantium. 
-                    Aspernatur nulla, earum tempora dolore recusandae accusamus quo aliquam veritatis, 
-                    est quam labore numquam, quasi laudantium.
+                <div class="quienes">
+                    <h2>QUIENES SOMOS?</h2>
+                    <p class="quien">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores obcaecati natus rem id accusantium. 
+                        Aspernatur nulla, earum tempora dolore recusandae accusamus quo aliquam veritatis, 
+                        est quam labore numquam, quasi laudantium.
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores obcaecati natus rem id accusantium. 
+                        Aspernatur nulla, earum tempora dolore recusandae accusamus quo aliquam veritatis, 
+                        est quam labore numquam, quasi laudantium.
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores obcaecati natus rem id accusantium. 
+                        Aspernatur nulla, earum tempora dolore recusandae accusamus quo aliquam veritatis, 
+                        est quam labore numquam, quasi laudantium.                      
+                    </p>
                 </div>
-                <h2>IMAGENES</h6>
-                <div class="imagenes">
-                    <button id="prev-btn" onclick=""><i class="fa-solid fa-chevron-left"></i></button>
-                    <img class="img" src="../img/imagenEjemploBlog.jpg" alt="img1">
-                    <button id="next-btn" onclick=""><i class="fa-solid fa-chevron-right"></i></button>
+                <div class="h">
+                    <h2>IMAGEN</h2>
+                    <div class="imagenes">
+                        <img class="img" src="../img/imagenEjemploBlog.jpg" alt="img1">                    
+                    </div>
                 </div>
             </section>
             <section class="datos">
                 <div class="container">
                     <div class="button-container">
-                        <button class="custom-button">Mision</button>
-                        <button class="custom-button">Vision</button>
-                        <button class="custom-button">Valores</button>
-                    </div>
-                    
-                    <div class="text-container">
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores obcaecati natus rem id accusantium. 
-                            Aspernatur nulla, earum tempora dolore recusandae accusamus quo aliquam veritatis, 
-                            est quam labore numquam, quasi laudantium.
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores obcaecati natus rem id accusantium. 
-                            Aspernatur nulla, earum tempora dolore recusandae accusamus quo aliquam veritatis, 
-                            est quam labore numquam, quasi laudantium.
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores obcaecati natus rem id accusantium. 
-                            Aspernatur nulla, earum tempora dolore recusandae accusamus quo aliquam veritatis, 
-                            est quam labore numquam, quasi laudantium.
-                        </p>
+                        <button class="custom-button" onclick="cambiarTexto(Mision)">Mision</button>
+                        <button class="custom-button" onclick="cambiarTexto(Vision)">Vision</button>
+                        <button class="custom-button" onclick="cambiarTexto(Valores)">Valores</button>
+                    </div>                  
+                    <div id="textoCambiante" class="text-container">
+                        Texto ejemplo Inicial
                     </div>
                 </div>
             </section>
@@ -76,3 +68,15 @@
 </body>
  
 </html>
+
+<script>
+
+        const Mision = "Texto de ejemplo mision";
+        const Vision = "Texto de ejemplo vision";
+        const Valores = "Texto de ejemplo valores";
+
+
+        function cambiarTexto(nuevoTexto) {
+            document.getElementById("textoCambiante").innerText = nuevoTexto;
+        }
+</script>
