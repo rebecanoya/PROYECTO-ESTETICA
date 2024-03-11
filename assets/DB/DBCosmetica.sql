@@ -85,7 +85,7 @@ CREATE TABLE `lineas` (
 
 CREATE TABLE `productos` (
   `ID` int(11) NOT NULL,
-  `Price` double NOT NULL,
+  `Precio` double NOT NULL,
   `Stock` int(100) NOT NULL,
   `Descripcion` varchar(200) NOT NULL,
   `ID_Line` smallint(6) NOT NULL,
