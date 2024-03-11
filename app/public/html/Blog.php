@@ -34,6 +34,7 @@ include '../../src/BBDD.php';
                     $BBDD = new BBDD();
                     $sql = "SELECT titulo from blog order by fecha desc limit 1";
                     // Verificamos si se ha enviado el formulario
+                    
                     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         // Verificamos qué botón se ha presionado
                         if (isset($_POST['btn1'])) {
