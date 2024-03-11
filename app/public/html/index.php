@@ -78,18 +78,9 @@ $BBDD = new BBDD();
 
     ?>
 </body>
+<?php
+include "../../src/templates/ScriptEnlaceProductos.php";
 
-<script>
-    const PRODUCTOS = document.getElementsByClassName("producto");
-    for (const producto of PRODUCTOS) {
-        producto.addEventListener("click", () => {
-
-            location.href = `ProductoVista.php?id=${producto.dataset.idproducto}`;
-
-        });
-
-    }
-</script>
-
+?>
 
 </html>

@@ -23,6 +23,12 @@
     overflow: hidden;
     cursor: pointer;
 
+    &[data-activo="false"] {
+
+        display: none;
+
+    }
+
     &:hover {
 
         transform: scale(1.05);

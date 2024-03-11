@@ -1,15 +1,28 @@
+header {
+
+    outline: 0.05em solid black;
+
+    & a {
+
+        color: black;
+
+    }
+
+}
+
 body {
     margin: 0;
     padding: 0;
     display: flex;
     flex-wrap: wrap;
-    background-color: #9fd5d1;
 }
 
 main {
     flex: 1;
     padding: 2.5em;
     gap: 1em;
+    background-color: #f4f4f4;
+
 }
 
 .entradaBlog {
@@ -18,6 +31,7 @@ main {
     border: 0.3em solid #5dc1b9;
     padding: 1em;
     background-color: white;
+
     section {
         display: flex;
         flex-direction: column;
@@ -68,10 +82,12 @@ aside {
     border-radius: 0.5em;
     cursor: pointer;
 }
+
 .sidebar {
     display: flex;
     flex-direction: column;
 }
+
 .serachBtn {
     margin-bottom: 1em;
     padding: 0.8em;

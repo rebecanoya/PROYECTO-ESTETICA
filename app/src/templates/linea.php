@@ -1,12 +1,3 @@
-<!-- <?php
-
-        $nombreLinea = $linea["Nombre"];
-        $colorLinea = $linea["Color"];
-        $descripcionLinea = $linea["Descripcion"];
-
-        ?> -->
-
-
 <article>
 
     <img src="../img/lineas/<?php echo $IDLinea ?>.png" class="banner">

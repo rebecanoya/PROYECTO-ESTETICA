@@ -1,5 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"><?php
+
+                include '../../src/BBDD.php';
+                $BBDD = new BBDD();
+
+                ?>
 
 <head>
     <meta charset="UTF-8">
@@ -26,27 +31,41 @@
         <h2>Lineas</h2>
 
         <article class="lineas">
-            <section data-seleccionado="false">
-                <img src="../img/lineas/1.png" alt="">
-                <button href="#desplegableLineas">
 
-                    <h2>Linea Revitalizante</h2>
+
+            <?php
+
+            $sql = "SELECT * from lineas";
+            $lineas = $BBDD->select($sql);
+            foreach ($lineas as $linea) {
+
+                $nombreLinea = $linea["Nombre"];
+                $colorLinea = $linea["Color"];
+                $IDLinea = $linea["ID"];
+                $descripcionLinea = $linea["Descripcion"];
+
+            ?>
+
+                <button class="botonLinea" data-seleccionado="false" data-idLinea="<?php echo $IDLinea ?>" style="background: url(../img/lineas/<?php echo $IDLinea ?>.png);">
+
+                    <h2>Linea <?php echo $nombreLinea ?></h2>
+                    <img src="../img/lote/<?php echo $IDLinea ?>.png" alt="">
+
+
+
+
                 </button>
+            <?php
 
 
 
-            </section>
-            <section data-seleccionado="false" style="--fondoLineas: rgba(13, 255, 0, 0.15);">
-                <button href="#desplegableLineas">
+            }
 
-                    <h2>Linea Relajante</h2>
-                    <img src="../img/arboldete.png">
-
-                </button>
-
-            </section>
+            ?>
 
         </article>
+
+
 
         <h2>Todos los productos</h2>
 
@@ -54,104 +73,24 @@
         <article class="productos">
 
 
-
-            <div class="producto">
-
-                <img src="../img/calendula.png" alt="">
-                <p>Texto descripcion</p>
-                <div class="opciones">
-
-                    <button class="compra">Comprar</button>
-                    <button class="muestra">Solicitar muestra</button>
-
-                </div>
-
-            </div>
-            <div class="producto">
-
-                <img src="../img/calendula.png" alt="">
-                <p>Texto descripcion</p>
-                <div class="opciones">
-
-                    <button class="compra">Comprar</button>
-                    <button class="muestra">Solicitar muestra</button>
-
-                </div>
-
-            </div>
-            <div class="producto">
-
-                <img src="../img/calendula.png" alt="">
-                <p>Texto descripcion</p>
-                <div class="opciones">
-
-                    <button class="compra">Comprar</button>
-                    <button class="muestra">Solicitar muestra</button>
-
-                </div>
-
-            </div>
-            <div class="producto">
-
-                <img src="../img/calendula.png" alt="">
-                <p>Texto descripcion</p>
-                <div class="opciones">
-
-                    <button class="compra">Comprar</button>
-                    <button class="muestra">Solicitar muestra</button>
-
-                </div>
-
-            </div>
-            <div class="producto">
-
-                <img src="../img/calendula.png" alt="">
-                <p>Texto descripcion</p>
-                <div class="opciones">
-
-                    <button class="compra">Comprar</button>
-                    <button class="muestra">Solicitar muestra</button>
-
-                </div>
-
-            </div>
-            <div class="producto">
-
-                <img src="../img/calendula.png" alt="">
-                <p>Texto descripcion</p>
-                <div class="opciones">
-
-                    <button class="compra">Comprar</button>
-                    <button class="muestra">Solicitar muestra</button>
-
-                </div>
-
-            </div>
-            <div class="producto">
-
-                <img src="../img/calendula.png" alt="">
-                <p>Texto descripcion</p>
-                <div class="opciones">
-
-                    <button class="compra">Comprar</button>
-                    <button class="muestra">Solicitar muestra</button>
-
-                </div>
-
-            </div>
-            <div class="producto">
-
-                <img src="../img/calendula.png" alt="">
-                <p>Texto descripcion</p>
-                <div class="opciones">
-
-                    <button class="compra">Comprar</button>
-                    <button class="muestra">Solicitar muestra</button>
-
-                </div>
+            <?php
+            $sql = "SELECT ID,Nombre,Descripcion,Precio,ID_Line,(select Color from lineas as l where l.ID=ID_Line) as Color from productos order by Nombre";
+            $productos = $BBDD->select($sql);
+            foreach ($productos as $producto) {
+                $colorLinea = $producto["Color"];
+                $IDProducto = $producto["ID"];
+                $nombreProducto = $producto["Nombre"];
+                $descripcionProducto = $producto["Descripcion"];
+                $precioProducto = $producto["Precio"];
+                $IDLinea = $producto["ID_Line"];
+                include("../../src/templates/producto.php");
+            }
+            ?>
 
 
-            </div>
+
+
+
         </article>
 
     </main>
@@ -162,5 +101,58 @@
 
     ?>
 </body>
+
+<?php
+include "../../src/templates/ScriptEnlaceProductos.php";
+
+?>
+
+<script>
+    const lineas = document.getElementsByClassName("botonLinea");
+
+    for (const linea of lineas) {
+
+        linea.addEventListener("click", () => {
+
+            if (linea.dataset.seleccionado == "true") {
+
+                linea.dataset.seleccionado = false;
+                for (const producto of productos) {
+
+                    producto.dataset.activo = true;
+
+                }
+            } else {
+
+                for (const linea2 of lineas) {
+                    linea2.dataset.seleccionado = false;
+
+                }
+                linea.dataset.seleccionado = true;
+
+                for (const producto of productos) {
+
+                    producto.dataset.activo = false;
+
+                    if (producto.dataset.idlinea == linea.dataset.idlinea) {
+
+                        producto.dataset.activo = true;
+
+
+                    } else {
+
+                        producto.dataset.activo = false;
+
+                    }
+                }
+
+            }
+
+
+
+        });
+
+    }
+</script>
 
 </html>
