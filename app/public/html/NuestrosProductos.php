@@ -23,12 +23,14 @@
 
     <main>
 
+        <h2>Lineas</h2>
+
         <article class="lineas">
-            <section data-seleccionado="false" style="--fondoLineas: rgb(215, 142, 255);">
+            <section data-seleccionado="false">
+                <img src="../img/lineas/1.png" alt="">
                 <button href="#desplegableLineas">
 
                     <h2>Linea Revitalizante</h2>
-                    <img src="../img//lavanda.png">
                 </button>
 
 
@@ -37,62 +39,17 @@
             <section data-seleccionado="false" style="--fondoLineas: rgba(13, 255, 0, 0.15);">
                 <button href="#desplegableLineas">
 
-                    <h2>Arbol de Te</h2>
+                    <h2>Linea Relajante</h2>
                     <img src="../img/arboldete.png">
 
                 </button>
 
             </section>
-            <!-- <section data-seleccionado="false" style="--fondoLineas: rgba(255, 217, 0, 0.15);">
-                <button href="#desplegableLineas">
 
-                    <h2>Linea 3</h2>
-                    <img src="../img/calendula.png">
-
-                </button>
-
-            </section>
-            <section data-seleccionado="false" style="--fondoLineas: rgba(0, 26, 255, 0.15);">
-
-                <button href="#desplegableLineas">
-
-                    <h2>Linea 4</h2>
-                    <img src="../img/juniper.png">
-
-                </button>
-
-            </section>
-            <section data-seleccionado="false" style="--fondoLineas: rgba(204, 0, 255, 0.15);">
-                <button href="#desplegableLineas">
-
-                    <h2>Linea 5</h2>
-                    <img src="../img/lavanda.png">
-
-                </button>
-
-
-            </section> -->
         </article>
 
-        <!-- <article style="--fondoLineas: rgba(13, 255, 0, 0.15);" class="desplegadoLineas" id="#desplegableLineas">
-            <section>
-                <h1>LINEA ARBOL DE TE</h1>
-                <div class="cuadroCompleto">
-                    <div class="productos">
+        <h2>Todos los productos</h2>
 
-                        <img src="../img/calendula.png" alt="">
-
-                    </div>
-                    <div class="descripcion">El aceite esencial de Árbol del Té, conocido por su nombre en inglés tea
-                        tree proviene de
-                        Australia. Este aceite esencial se empezó a conocer a ﬁnales de 1700. Un oﬁcial de la marina
-                        británica, James Cook, se interesó al llegar a Australia por cómo los aborígenes elaboraban toda
-                        una serie de remedios con las hojas de este árbol. Con ella paliaban infecciones y trataban
-                        numerosas enfermedades cutáneas. No fue hasta el siglo XX cuando se empezaron a... Más
-                        información</div>
-                </div>
-            </section>
-        </article> -->
 
         <article class="productos">
 

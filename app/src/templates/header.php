@@ -13,7 +13,7 @@
     <div class="icons">
         <a class="fa-solid fa-magnifying-glass iconButton"></a>
         <a href="../../public/html/login.php" class="fa-regular fa-user iconButton"></a>
-        <a class="fa-solid fa-cart-shopping iconButton"></a>
+        <a href="../../public/html/Cesta.php" class=" fa-solid fa-cart-shopping iconButton"></a>
 
     </div>
     <nav>
