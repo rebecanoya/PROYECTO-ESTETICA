@@ -18,6 +18,15 @@ body {
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+}
+
+.opciones {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
 }
 
 .products {
@@ -50,9 +59,9 @@ body {
 .checkout-btn,
 .continue-shopping-btn {
     display: block;
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
+    width: 75%;
+    padding: 1em;
+    background-color: black;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -63,7 +72,7 @@ body {
 
 .checkout-btn:hover,
 .continue-shopping-btn:hover {
-    background-color: #0056b3;
+    background-color: black;
 }
 
 /* Estilos previos */
@@ -127,15 +136,10 @@ body {
     margin-right: 10px;
 }
 
-.product-actions button {
-    background-color: #dc3545;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-}
 
-.product-actions button:hover {
-    background-color: #c82333;
+.volverCompra {
+
+    text-align: center;
+    color: black;
+    text-decoration: underline;
 }
