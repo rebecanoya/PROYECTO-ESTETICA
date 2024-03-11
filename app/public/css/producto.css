@@ -11,7 +11,6 @@ body {
     justify-content: center;
     align-items: center;
     margin-top: 50px;
-    height: 100vh;
     /* Ajustar la altura del contenedor al 100% de la altura visible del viewport */
 }
 
@@ -40,7 +39,7 @@ body {
     /* Ajusta la imagen manteniendo su relación de aspecto y quepa completamente dentro del contenedor */
     border: 1px solid #000;
     background-color: white;
-    padding-left: 10em;
+    padding: 5em;
 }
 
 
@@ -61,10 +60,14 @@ label {
 input {
     padding: 5px;
     margin-bottom: 10px;
+    background-color: transparent;
+    border: none;
+    width: 2.6em;
+    margin-left: 0.5em;
+    text-align:end;
 }
 
 button {
-    background-color: #4CAF50;
     color: white;
     padding: 10px 20px;
     border: none;
@@ -73,6 +76,25 @@ button {
     font-size: 16px;
 }
 
+
+.masmenos {
+    padding: 0.5em 1em;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1em;
+    background-color: #000;
+    border-radius: 50%;
+}
+
+.comprar {
+    background-color: #FFC0CB;
+}
+
+.muestra {
+    background-color: #000;
+}
 button:hover {
-    background-color: #45a049;
+    background-color: white;
+    color: black;
 }

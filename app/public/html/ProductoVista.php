@@ -60,10 +60,16 @@ if ($pedirBBDD) {
                     <h2><?php echo $producto["Nombre"] ?></h2>
                     <p><?php echo $producto["Descripcion"] ?></p>
                     <form>
-                        <label for="quantity">Cantidad:</label>
-                        <input type="number" id="quantity" name="quantity" min="1" value="1">
-                        <button type="submit">Añadir al carrito</button>
-                        <button type="submit">Solicitar muestra</button>
+                        <div class="container">
+                            <div class="form-container">
+                                <label for="cantidad">Cantidad:</label>
+                                <button class="masmenos" onclick="decrementar(event)">-</button>
+                                <input type="number" id="cantidad" value="0" readonly>
+                                <button class="masmenos" onclick="incrementar(event)">+</button>
+                            </div>
+                        </div>
+                        <button type="submit"class="comprar">Añadir al carrito</button>
+                        <button type="submit" class="muestra">Solicitar muestra</button>
 
                     </form>
                 </div>
@@ -72,9 +78,6 @@ if ($pedirBBDD) {
 
     <?php
     } else {
-
-
-
 
 
     ?>
@@ -89,3 +92,22 @@ if ($pedirBBDD) {
 </body>
 
 </html>
+
+
+<script>
+    function incrementar(event) {
+        event.preventDefault();
+        var cantidadInput = document.getElementById('cantidad');
+        var cantidad = parseInt(cantidadInput.value, 10);
+        cantidadInput.value = cantidad + 1;
+    }
+
+    function decrementar(event) {
+        event.preventDefault();
+        var cantidadInput = document.getElementById('cantidad');
+        var cantidad = parseInt(cantidadInput.value, 10);
+        if (cantidad > 0) {
+        cantidadInput.value = cantidad - 1;
+        }
+    }
+</script>

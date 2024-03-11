@@ -26,14 +26,17 @@ include '../../src/BBDD.php';
     <main>
             <?php
                 $BBDD = new BBDD();
-                $sql = "SELECT * from ies where id=:id";
-                $param = ["id" =>  1];
-                $resultado = $BBDD->select($sql);
-                // $resultado = $resultado[0];
-                // $titulo = $resultado["titulo"];
-                // echo "<div>". $titulo ."</div>";
+                $sql = "SELECT * from ies where id=1";
+                $institutos = $BBDD->select($sql);
+                foreach ($institutos as $instituto) {
+                    $telefonoIES = $instituto["telf"];
+                    $webIES = $instituto["web"];
+                    $nombreIES = $instituto["nombre"];
+                    $emailIES = $instituto["email"];
+                }
+
             ?>
-        <div class="nombreIes">IES EJEMPLO</div>
+        <div class="nombreIes"><?php echo $nombreIES ?></div>
 
         <article class="info">
             <section class="mapa">
@@ -43,12 +46,12 @@ include '../../src/BBDD.php';
             </section>
             <section class="datos">
                 <div class="telf"><i class="fa-solid fa-phone"></i>
-                    <p>935 702 340</p>
+                    <p><?php echo $telefonoIES ?></p>
                 </div>
                 <div class="email"><i class="fa-solid fa-envelope"></i>
-                    <p>correo@ejemplo.com</p>
+                    <p><?php echo $emailIES ?></p>
                 </div>
-                <div class="web"><i class="fa-solid fa-globe"></i><a href="#">webejemplo.es</a></div>
+                <div class="web"><i class="fa-solid fa-globe"></i><a href="https://<?php echo $webIES ?>">Web</a></div>
             </section>
         </article>
     </main>
