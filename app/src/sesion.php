@@ -25,26 +25,36 @@ class Sesion
         }
     }
 
-    public function login($usuario, $password)
+    public function login($email, $password)
     {
 
         try {
             $BBDD = new BBDD();
-            $sql = "SELECT * from usuarios";
-            $param = ["usuario" =>  $usuario, "password" => hash("sha512", $password)];
+            $sql = "SELECT * from usuarios where Email=:email and Password=:password";
+            $param = ["email" =>  $email, "password" => hash("sha512", $password)];
             $usuarioLogin = $BBDD->select($sql, $param);
             if (!$usuarioLogin) {
 
                 return false;
             }
-            if ($usuario == $usuarioLogin[0]["Email"] && hash_equals($usuarioLogin[0]["Password"], hash("sha512", $password))) {
-                $_SESSION["usuario"] = $usuarioLogin[0]["Email"];
-                $_SESSION["token"] = bin2hex(random_bytes(32));
-                setcookie("token", $_SESSION["token"], time() + 900, "/");
-                return true;
-            } else {
-                return false;
+            $sql = "SELECT IDProducto,Cantidad from carrito where IDUsuario=:id";
+            $param = ["id" => $usuarioLogin[0]["ID"]];
+            $carrito = $BBDD->select($sql, $param);
+            $_SESSION["usuario"] = $usuarioLogin[0]["Email"];
+
+            if (isset($_SESSION["Carrito"])) {
+
+                foreach ($carrito as $producto) {
+                    if (!isset($_SESSION["Carrito"][$producto["IDProducto"]])) {
+                        $_SESSION["Carrito"][$producto["IDProducto"]] = 0;
+                    }
+                    $_SESSION["Carrito"][$producto["IDProducto"]] += $producto["Cantidad"];
+                }
             }
+
+            $_SESSION["token"] = bin2hex(random_bytes(32));
+            setcookie("token", $_SESSION["token"], time() + 900, "/");
+            return true;
         } catch (\Throwable $th) {
         }
     }
