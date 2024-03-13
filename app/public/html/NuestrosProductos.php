@@ -5,12 +5,7 @@ include '../../src/iniciarPHP.php';
 ?>
 
 <!DOCTYPE html>
-<html lang="en"><?php
-
-                include '../../src/BBDD.php';
-                $BBDD = new BBDD();
-
-                ?>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -80,15 +75,16 @@ include '../../src/iniciarPHP.php';
 
 
             <?php
-            $sql = "SELECT ID,Nombre,Descripcion,Precio,ID_Line,(select Color from lineas as l where l.ID=ID_Line) as Color from productos order by Nombre";
+            $sql = "SELECT ID,Nombre,Descripcion,Precio,ID_Linea,(select Color from lineas as l where l.ID=ID_Linea) as Color from productos order by Nombre";
             $productos = $BBDD->select($sql);
+
             foreach ($productos as $producto) {
                 $colorLinea = $producto["Color"];
                 $IDProducto = $producto["ID"];
                 $nombreProducto = $producto["Nombre"];
                 $descripcionProducto = $producto["Descripcion"];
                 $precioProducto = $producto["Precio"];
-                $IDLinea = $producto["ID_Line"];
+                $IDLinea = $producto["ID_Linea"];
                 include("../../src/templates/producto.php");
             }
             ?>
