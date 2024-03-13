@@ -22,13 +22,19 @@ class BBDD
 
     public function select($sql, $params = null)
     {
-        $consulta = $this->pdo->prepare($sql);
-        $consulta->execute($params);
-        $resultado = [];
-        while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
-            $resultado[] = $fila;
+
+
+        try {
+
+            $consulta = $this->pdo->prepare($sql);
+            $consulta->execute($params);
+            $resultado = [];
+            while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
+                $resultado[] = $fila;
+            }
+            unset($consulta);
+            return $resultado;
+        } catch (\Throwable $th) {
         }
-        unset($consulta);
-        return $resultado;
     }
 }

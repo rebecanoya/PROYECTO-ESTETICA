@@ -1,6 +1,6 @@
 <?php
 
-include '../../src/BBDD.php';
+include '../../src/iniciarPHP.php';
 
 ?>
 
@@ -31,25 +31,25 @@ include '../../src/BBDD.php';
         <article style="--fondoEntrada: rgba(78, 87, 77, 0.15);" class="entradaBlog" id="#entradaBlog">
             <section>
                 <?php
-                    $BBDD = new BBDD();
-                    $sql = "SELECT titulo from blog order by fecha desc limit 1";
-                    // Verificamos si se ha enviado el formulario
-                    
-                    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                        // Verificamos qué botón se ha presionado
-                        if (isset($_POST['btn1'])) {
-                            $sql = 'SELECT titulo from blog where id = 1'; // Actualiza la consulta según tus necesidades
-                        } elseif (isset($_POST['btn2'])) {
-                            $sql = 'SELECT titulo from blog where id = 2'; // Actualiza la consulta según tus necesidades
-                        } elseif (isset($_POST['btn3'])) {
-                            $sql = 'SELECT titulo from blog where id = 3'; // Actualiza la consulta según tus necesidades
-                        }
-                        // Puedes ejecutar la consulta SQL aquí o realizar otras acciones según tu aplicación
+                $BBDD = new BBDD();
+                $sql = "SELECT titulo from blog order by fecha desc limit 1";
+                // Verificamos si se ha enviado el formulario
+
+                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                    // Verificamos qué botón se ha presionado
+                    if (isset($_POST['btn1'])) {
+                        $sql = 'SELECT titulo from blog where id = 1'; // Actualiza la consulta según tus necesidades
+                    } elseif (isset($_POST['btn2'])) {
+                        $sql = 'SELECT titulo from blog where id = 2'; // Actualiza la consulta según tus necesidades
+                    } elseif (isset($_POST['btn3'])) {
+                        $sql = 'SELECT titulo from blog where id = 3'; // Actualiza la consulta según tus necesidades
                     }
-                    $resultado = $BBDD->select($sql);
-                    $resultado = $resultado[0];
-                    $titulo = $resultado["titulo"];
-                    echo "<div>". $titulo ."</div>";
+                    // Puedes ejecutar la consulta SQL aquí o realizar otras acciones según tu aplicación
+                }
+                $resultado = $BBDD->select($sql);
+                $resultado = $resultado[0];
+                $titulo = $resultado["titulo"];
+                echo "<div>" . $titulo . "</div>";
                 ?>
                 <div class="entradaCompleta">
                     <img src="../img/imagenEjemploBlog.jpg">
@@ -70,7 +70,7 @@ include '../../src/BBDD.php';
                     $resultado = $BBDD->select($sql);
                     $resultado = $resultado[0];
                     $entrada = $resultado["entrada"];
-                    echo "<div class=entrada>". $entrada ."</div>";
+                    echo "<div class=entrada>" . $entrada . "</div>";
                     ?>
                 </div>
             </section>
@@ -88,18 +88,18 @@ include '../../src/BBDD.php';
                             <button class="serachBtn" type="submit" name="searchBtn">Buscar</button>
                         </div>
                         <?php
-                            $BBDD = new BBDD();
-                            $sql = "SELECT titulo from blog order by fecha asc";
-                            // $param = ["titulo" =>  "Primera Entrada"];
-                            $resultado = $BBDD->select($sql);
-                            for ($i=0; $i < count($resultado); $i++) { 
-                                $fila = $resultado[$i];
-                                echo "<button class=btnBlog type=submit name=btn". $i + 1 .">". $fila["titulo"] . "</button>";
-                            }
+                        $BBDD = new BBDD();
+                        $sql = "SELECT titulo from blog order by fecha asc";
+                        // $param = ["titulo" =>  "Primera Entrada"];
+                        $resultado = $BBDD->select($sql);
+                        for ($i = 0; $i < count($resultado); $i++) {
+                            $fila = $resultado[$i];
+                            echo "<button class=btnBlog type=submit name=btn" . $i + 1 . ">" . $fila["titulo"] . "</button>";
+                        }
                         ?>
                     </form>
                 </div>
-        </div>
+            </div>
     </aside>
 
 

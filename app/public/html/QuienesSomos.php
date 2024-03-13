@@ -1,3 +1,8 @@
+<?php
+
+include '../../src/iniciarPHP.php';
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,27 +25,27 @@
 
     <main>
 
-        
+
         <article class="info">
             <section class="descripcion">
                 <div class="quienes">
                     <h2>QUIENES SOMOS?</h2>
                     <p class="quien">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores obcaecati natus rem id accusantium. 
-                        Aspernatur nulla, earum tempora dolore recusandae accusamus quo aliquam veritatis, 
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores obcaecati natus rem id accusantium.
+                        Aspernatur nulla, earum tempora dolore recusandae accusamus quo aliquam veritatis,
                         est quam labore numquam, quasi laudantium.
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores obcaecati natus rem id accusantium. 
-                        Aspernatur nulla, earum tempora dolore recusandae accusamus quo aliquam veritatis, 
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores obcaecati natus rem id accusantium.
+                        Aspernatur nulla, earum tempora dolore recusandae accusamus quo aliquam veritatis,
                         est quam labore numquam, quasi laudantium.
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores obcaecati natus rem id accusantium. 
-                        Aspernatur nulla, earum tempora dolore recusandae accusamus quo aliquam veritatis, 
-                        est quam labore numquam, quasi laudantium.                      
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores obcaecati natus rem id accusantium.
+                        Aspernatur nulla, earum tempora dolore recusandae accusamus quo aliquam veritatis,
+                        est quam labore numquam, quasi laudantium.
                     </p>
                 </div>
                 <div class="h">
                     <h2>IMAGEN</h2>
                     <div class="imagenes">
-                        <img class="img" src="../img/imagenEjemploBlog.jpg" alt="img1">                    
+                        <img class="img" src="../img/imagenEjemploBlog.jpg" alt="img1">
                     </div>
                 </div>
             </section>
@@ -50,7 +55,7 @@
                         <button class="custom-button" onclick="cambiarTexto(Mision)">Mision</button>
                         <button class="custom-button" onclick="cambiarTexto(Vision)">Vision</button>
                         <button class="custom-button" onclick="cambiarTexto(Valores)">Valores</button>
-                    </div>                  
+                    </div>
                     <div id="textoCambiante" class="text-container">
                         Texto ejemplo Inicial
                     </div>
@@ -59,24 +64,23 @@
         </article>
     </main>
 
-        <?php
+    <?php
 
-        include "../../src/templates/footer.php"
+    include "../../src/templates/footer.php"
 
-        ?>
+    ?>
 
 </body>
- 
+
 </html>
 
 <script>
+    const Mision = "Texto de ejemplo mision";
+    const Vision = "Texto de ejemplo vision";
+    const Valores = "Texto de ejemplo valores";
 
-        const Mision = "Texto de ejemplo mision";
-        const Vision = "Texto de ejemplo vision";
-        const Valores = "Texto de ejemplo valores";
 
-
-        function cambiarTexto(nuevoTexto) {
-            document.getElementById("textoCambiante").innerText = nuevoTexto;
-        }
+    function cambiarTexto(nuevoTexto) {
+        document.getElementById("textoCambiante").innerText = nuevoTexto;
+    }
 </script>
