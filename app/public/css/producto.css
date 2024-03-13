@@ -3,43 +3,36 @@ body {
     margin: 0;
     padding: 0;
     background-color: rgba(249, 181, 236, 0.626);
-
 }
 
 .container {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 50px;
+    margin-top: 2em; /* Ajuste en em */
     /* Ajustar la altura del contenedor al 100% de la altura visible del viewport */
+    height: 100vh; /* Utilizar vh en lugar de % */
 }
 
 .product-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    /* Divide el contenedor en dos columnas iguales */
-    grid-gap: 20px;
-    /* Espacio entre las dos columnas */
-    height: 100%;
-    /* Ocupa todo el alto del contenedor */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Ajuste para adaptar automáticamente el número de columnas */
+    grid-gap: 2em; /* Ajuste en em */
+    /* height: 100%; */ /* Eliminar esto */
 }
 
 .product-image {
     overflow: hidden;
-    gap: 10em;
-    /* Para que el borde no afecte el tamaño de la imagen */
+    gap: 1em; /* Ajuste en em */
 }
 
 .product-image img {
     max-width: 100%;
-    /* La imagen ocupa todo el ancho disponible de su contenedor */
     max-height: 100%;
-    /* La imagen ocupa todo el alto disponible de su contenedor */
     object-fit: contain;
-    /* Ajusta la imagen manteniendo su relación de aspecto y quepa completamente dentro del contenedor */
     border: 1px solid #000;
     background-color: white;
-    padding: 5em;
+    padding: 1em; /* Ajuste en em */
 }
 
 .descripcion {
@@ -58,36 +51,35 @@ form {
 }
 
 label {
-    margin-bottom: 10px;
+    margin-bottom: 1em; /* Ajuste en em */
 }
 
 input {
-    padding: 5px;
-    margin-bottom: 10px;
+    padding: 0.5em;
+    margin-bottom: 1em; /* Ajuste en em */
     background-color: transparent;
     border: none;
-    width: 2.6em;
+    width: 8em; /* Ajuste en em */
     margin-left: 0.5em;
-    text-align:end;
+    text-align: end;
 }
 
 button {
     color: white;
-    padding: 10px 20px;
+    padding: 0.625em 1.25em; /* Ajuste en em */
     border: none;
     cursor: pointer;
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 1em; /* Ajuste en em */
 }
 
 .masmenos {
-    padding: 0.5em 1em;
+    padding: 0.5em;
     border: none;
     cursor: pointer;
-    border-radius: 5px;
-    font-size: 1em;
-    background-color: #000;
     border-radius: 50%;
+    font-size: 1em; /* Ajuste en em */
+    background-color: #000;
 }
 
 .comprar {
@@ -97,6 +89,7 @@ button {
 .muestra {
     background-color: #000;
 }
+
 button:hover {
     background-color: white;
     color: black;
