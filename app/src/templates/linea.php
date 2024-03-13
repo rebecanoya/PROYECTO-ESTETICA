@@ -10,7 +10,7 @@
 
             <?php
 
-            $sql = "SELECT ID,Nombre,Descripcion,Precio from productos where ID_Line=:id limit 5";
+            $sql = "SELECT ID,Nombre,Descripcion,Precio from productos where ID_Linea=:id limit 5";
             $param = ["id" =>  $IDLinea];
             $productos = $BBDD->select($sql, $param);
             foreach ($productos as $producto) {

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-03-2024 a las 19:29:04
+-- Tiempo de generación: 13-03-2024 a las 22:05:15
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -34,14 +34,6 @@ CREATE TABLE `blog` (
   `Fecha` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `blog`
---
-
-INSERT INTO `blog` (`ID`, `Titulo`, `Entrada`, `Fecha`) VALUES
-(1, 'Primera Entrada', 'Hola, esta es una entrada de ejemplo', '2024-02-27 10:36:22'),
-(2, 'Segunda Entrada', 'Hola, esta es la segunda entrada', '2024-02-27 10:58:18');
-
 -- --------------------------------------------------------
 
 --
@@ -68,13 +60,6 @@ CREATE TABLE `ies` (
   `ID` smallint(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
---
--- Volcado de datos para la tabla `ies`
---
-
-INSERT INTO `ies` (`telf`, `web`, `nombre`, `email`, `ID`) VALUES
-('886120464', 'www.edu.xunta.gal/centros/iesteis', 'IES de Teis', 'ies.teis@edu.xunta.es', 1);
-
 -- --------------------------------------------------------
 
 --
@@ -86,16 +71,9 @@ CREATE TABLE `lineas` (
   `ID_Musica` smallint(6) NOT NULL,
   `Nombre` varchar(16) NOT NULL,
   `Color` varchar(6) NOT NULL,
-  `Descripcion` varchar(300) NOT NULL
+  `Descripcion` varchar(300) NOT NULL,
+  `Activo` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
-
---
--- Volcado de datos para la tabla `lineas`
---
-
-INSERT INTO `lineas` (`ID`, `ID_Musica`, `Nombre`, `Color`, `Descripcion`) VALUES
-(1, 1, 'Revitalizante', 'FFC0CB', 'Elaborada con precisión e infundida con los ingredientes revitalizantes más potentes de la naturaleza, esta gama de cuidado de la piel está diseñada para dar nueva vida a tu piel, revelando un cutis radiante y rejuvenecido.'),
-(2, 2, 'Relajante', 'AF49FC', 'Con precisión y los ingredientes más potentes, esta gama de cuidado de la piel da vida a tu cutis, revelando una piel radiante y rejuvenecida. Déjate envolver por la frescura y el rejuvenecimiento que esta línea ofrece, y experimenta la sensación de una piel revitalizada y llena de vitalidad.');
 
 -- --------------------------------------------------------
 
@@ -109,26 +87,9 @@ CREATE TABLE `productos` (
   `Stock` int(100) NOT NULL,
   `Descripcion` varchar(200) NOT NULL,
   `ID_Linea` smallint(6) NOT NULL,
-  `Nombre` varchar(16) NOT NULL
+  `Nombre` varchar(16) NOT NULL,
+  `Activo` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
-
---
--- Volcado de datos para la tabla `productos`
---
-
-INSERT INTO `productos` (`ID`, `Precio`, `Stock`, `Descripcion`, `ID_Linea`, `Nombre`) VALUES
-(1, 20, 10, 'demo', 1, 'Aceite'),
-(2, 5, 25, 'demo2', 1, 'Ambientador'),
-(3, 15, 40, 'demo3', 1, 'Colonia'),
-(4, 10, 10, 'demo4', 1, 'Exfoliante'),
-(5, 18, 20, 'demo5', 1, 'Sales'),
-(6, 6, 50, 'demo6', 1, 'Vela'),
-(7, 20, 10, 'demo', 2, 'Aceite'),
-(8, 5, 25, 'demo2', 2, 'Ambientador'),
-(9, 15, 40, 'demo3', 2, 'Colonia'),
-(10, 10, 10, 'demo4', 2, 'Exfoliante'),
-(11, 18, 20, 'demo5', 2, 'Sales'),
-(12, 6, 50, 'demo6', 2, 'Vela');
 
 -- --------------------------------------------------------
 
@@ -141,15 +102,6 @@ CREATE TABLE `roles` (
   `rol` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
---
--- Volcado de datos para la tabla `roles`
---
-
-INSERT INTO `roles` (`id_rol`, `rol`) VALUES
-(1, 'admin'),
-(2, 'alumno'),
-(3, 'cliente');
-
 -- --------------------------------------------------------
 
 --
@@ -160,13 +112,9 @@ CREATE TABLE `usuarios` (
   `ID` int(11) NOT NULL,
   `Email` varchar(50) NOT NULL,
   `Password` varchar(128) NOT NULL,
-  `rol` int(11) NOT NULL
+  `rol` int(11) NOT NULL,
+  `Activo` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
-
---
--- Volcado de datos para la tabla `usuarios`
---
-
 
 --
 -- Índices para tablas volcadas
