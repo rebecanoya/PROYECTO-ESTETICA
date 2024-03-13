@@ -9,9 +9,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 2em; /* Ajuste en em */
+    margin-top: 3em; /* Ajuste en em */
     /* Ajustar la altura del contenedor al 100% de la altura visible del viewport */
-    height: 100vh; /* Utilizar vh en lugar de % */
 }
 
 .product-grid {
@@ -59,7 +58,7 @@ input {
     margin-bottom: 1em; /* Ajuste en em */
     background-color: transparent;
     border: none;
-    width: 8em; /* Ajuste en em */
+    width: 2em; /* Ajuste en em */
     margin-left: 0.5em;
     text-align: end;
 }
