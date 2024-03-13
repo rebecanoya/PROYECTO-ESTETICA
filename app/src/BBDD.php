@@ -10,7 +10,7 @@ class BBDD
         $host = 'localhost';
         $name = 'cosmetica';
         $user = 'root';
-        $password = '';
+        $password = 'root';
         $this->pdo =  new PDO("mysql:host:=$host:3306;dbname=$name", $user, $password);
     }
 
