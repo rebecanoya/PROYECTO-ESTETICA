@@ -1,3 +1,5 @@
+INSERT INTO `cosmetica`.`roles`(`rol`) VALUES('admin'),('alumno'),('cliente');
+
 INSERT INTO `cosmetica`.`lineas` ( `ID_Musica`, `Nombre`, `Color`,`Descripcion`) VALUES 
 ( '1', 'Revitalizante', 'FFC0CB',
 'Elaborada con precisión e infundida con los ingredientes revitalizantes más potentes de la naturaleza, esta gama de cuidado de la piel está diseñada para dar nueva vida a tu piel, revelando un cutis radiante y rejuvenecido.'),
