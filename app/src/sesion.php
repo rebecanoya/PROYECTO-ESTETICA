@@ -15,9 +15,10 @@ class Sesion
 
         if (isset($_SESSION["token"]) && isset($_COOKIE["token"])) {
             if (($_SESSION["token"]) != ($_COOKIE["token"])) {
-
                 $this->logout();
             }
+        } else {
+            $this->logout();
         }
 
         if (!isset($_SESSION["Carrito"])) {
@@ -40,9 +41,8 @@ class Sesion
             $sql = "SELECT IDProducto,Cantidad from carrito where IDUsuario=:id";
             $param = ["id" => $usuarioLogin[0]["ID"]];
             $carrito = $BBDD->select($sql, $param);
-            $_SESSION["usuario"] = $usuarioLogin[0]["Email"];
 
-            if (isset($_SESSION["Carrito"])) {
+            if (!isset($_SESSION["usuario"])) {
 
                 foreach ($carrito as $producto) {
                     if (!isset($_SESSION["Carrito"][$producto["IDProducto"]])) {
@@ -51,6 +51,9 @@ class Sesion
                     $_SESSION["Carrito"][$producto["IDProducto"]] += $producto["Cantidad"];
                 }
             }
+
+            $_SESSION["usuario"] = $usuarioLogin[0]["Email"];
+
 
             $_SESSION["token"] = bin2hex(random_bytes(32));
             setcookie("token", $_SESSION["token"], time() + 900, "/");

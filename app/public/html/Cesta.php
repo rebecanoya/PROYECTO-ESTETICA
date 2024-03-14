@@ -1,10 +1,7 @@
 <?php
 include '../../src/iniciarPHP.php';
-$sesion->login('rebeca@teis.com', 'admin');
-// var_dump($_SESSION);
 
 $sql = "SELECT Nombre,Precio,ID from productos where ID in (" . implode(',', array_keys($_SESSION["Carrito"])) . ")";
-// var_dump($sql);
 
 $productos = $BBDD->select($sql);
 

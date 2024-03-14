@@ -14,6 +14,15 @@
         <a class="fa-solid fa-magnifying-glass iconButton"></a>
         <a href="../../public/html/login.php" class="fa-regular fa-user iconButton"></a>
         <a href="../../public/html/Cesta.php" class=" fa-solid fa-cart-shopping iconButton"></a>
+        <?php
+
+        if ($sesion->estaLoggeado()) {
+
+        ?>
+
+            <a href="../../public/html/logOut.php" class="fa-solid fa-right-to-bracket iconButton"> </a>
+        <?php } ?>
+
 
     </div>
     <nav>
