@@ -1,11 +1,12 @@
 <?php
 
-include '../../src/BBDD.php';
-$BBDD = new BBDD();
+include '../../src/iniciarPHP.php';
 $pedirBBDD = false;
 $cargar = false;
 $producto;
 
+if ($sesion -> estaLoggeado()) {
+}
 
 if (isset($_GET) && isset($_GET["id"])) {
     $id = $_GET["id"];
@@ -59,12 +60,12 @@ if ($pedirBBDD) {
                 <div class="product-details">
                     <h2><?php echo $producto["Nombre"] ?></h2>
                     <p class="descripcion"><?php echo $producto["Descripcion"] ?></p>
-                    <form>
+                    <form method="post">
                         <div class="container">
                             <div class="form-container">
                                 <label for="cantidad">Cantidad:</label>
                                 <button class="masmenos" onclick="decrementar(event)">-</button>
-                                <input type="number" id="cantidad" value="0" readonly>
+                                <input type="number" id="cantidad" name="cantidad" value="0">
                                 <button class="masmenos" onclick="incrementar(event)">+</button>
                             </div>
                         </div>
@@ -85,7 +86,21 @@ if ($pedirBBDD) {
     }
     ?>
 
-
+    <?php
+    $BBDD = new BBDD();
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (isset($_POST["comprar"])) {
+            $cantidad = $_POST["cantidad"];
+            $idproducto = $producto["ID"];
+            $sql = 'SELECT id from usuarios where email =:email';
+            $param = [":email" => $_SESSION["usuario"]];
+            // $idusuario = $BBDD -> execute()
+        } elseif (isset($_POST["muestra"])) {
+            $cantidad = 1;
+        }
+    }
+    
+    ?>
 
 
 </body>
