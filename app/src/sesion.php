@@ -53,6 +53,7 @@ class Sesion
             }
 
             $_SESSION["usuario"] = $usuarioLogin[0]["Email"];
+            $_SESSION["rol"] = $usuarioLogin[0]["rol"];
 
 
             $_SESSION["token"] = bin2hex(random_bytes(32));
@@ -67,6 +68,8 @@ class Sesion
         unset($_SESSION["usuario"]);
         unset($_SESSION["token"]);
         setcookie("token", "", time() - 1);
+        unset($_SESSION["rol"]);
+        unset($_SESSION["Carrito"]);
     }
 
     public function estaLoggeado()
