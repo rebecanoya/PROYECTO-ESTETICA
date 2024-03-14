@@ -10,7 +10,7 @@ class BBDD
         $host = 'localhost';
         $name = 'cosmetica';
         $user = 'root';
-        $password = '';
+        $password = 'root';
         $this->pdo =  new PDO("mysql:host:=$host:3306;dbname=$name", $user, $password);
     }
 
@@ -38,8 +38,7 @@ class BBDD
                 $value = trim($value);
                 $value = stripcslashes($value);
                 $value = htmlspecialchars($value);
-                $consulta -> bindValue($key, $value, $type);
-                
+                $consulta->bindValue($key, $value, $type);
             }
             $consulta->execute();
             $resultado = [];
@@ -53,7 +52,8 @@ class BBDD
         }
     }
 
-    public function execute($sql, $params = []) {
+    public function execute($sql, $params = [])
+    {
         try {
             $consulta = $this->pdo->query($sql);
             foreach ($params as $key => $value) {
@@ -67,13 +67,12 @@ class BBDD
                 }
                 $value = trim($value);
                 $value = stripcslashes($value);
-                $value = htmlspecialchars($values);
-                $consulta -> bindValue($key, $value, $type);
-
+                $value = htmlspecialchars($value);
+                $consulta->bindValue($key, $value, $type);
             }
             $consulta->execute();
             if (!$consulta) {
-                echo "Error al ejecutar la consulta: " . $this->connection->error;
+                echo "Error al ejecutar la consulta: " . $this->$pdo->error;
                 return false;
             }
             unset($consulta);
