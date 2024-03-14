@@ -43,7 +43,7 @@ include '../../src/iniciarPHP.php';
                         <input type="email" name="email" id="email" placeholder="correo electronico o usuario">
                         <input type="password" name="password" id="password" placeholder="contraseña">
                     </div>
-                    <button type="submit" class="login">Iniciar</button>
+                    <button type="submit" name="login" class="login">Iniciar</button>
                 </form>
                 <a href="">¿Olvidaste tu contraseña?</a>
             </div>
@@ -83,12 +83,14 @@ include '../../src/iniciarPHP.php';
                     $param = [":email" =>  $_POST["email"], "password" => $password];
                     $BBDD -> execute($sql, $param);
                 }
-            } elseif (isset($_POST["login"])) {
-                $password = hash("sha512",$_POST["password"]);
                 $sesion -> login($_POST["email"], $password);
+                
+            } elseif (isset($_POST["login"])) {
+                $sesion -> login($_POST["email"], $_POST["password"]);
+                echo "Prueba";
             }
         }    
-    ?>
+    ?> 
 
 </body>
 

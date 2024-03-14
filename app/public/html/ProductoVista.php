@@ -94,7 +94,8 @@ if ($pedirBBDD) {
             $idproducto = $producto["ID"];
             $sql = 'SELECT id from usuarios where email =:email';
             $param = [":email" => $_SESSION["usuario"]];
-            // $idusuario = $BBDD -> execute()
+            $idusuario = $BBDD -> execute();
+            
         } elseif (isset($_POST["muestra"])) {
             $cantidad = 1;
         }
