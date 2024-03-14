@@ -57,11 +57,6 @@ include '../../src/iniciarPHP.php';
             </article>
         </div>
     </main>
-    <?php
-
-    include "../../src/templates/footer.php"
-
-    ?>
 
 </body>
 

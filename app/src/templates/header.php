@@ -1,4 +1,25 @@
 <header>
+    <?php
+
+    if ($sesion->estaLoggeado()) {
+        if ($_SESSION["rol"] == 1) {
+
+
+
+
+    ?>
+            <div class="iconAdmin">
+
+                <a href="../../public/html/admin.php" class="fa-solid fa-screwdriver-wrench iconButton"></a>
+
+
+            </div>
+
+    <?php
+
+        }
+    }
+    ?>
 
     <div class="titulo">
 
@@ -9,6 +30,8 @@
 
 
     </div>
+
+
 
     <div class="icons">
         <a class="fa-solid fa-magnifying-glass iconButton"></a>
@@ -25,6 +48,8 @@
 
 
     </div>
+
+
     <nav>
 
         <a href="../../public/html/QuienesSomos.php">¿QUIÉNES SOMOS?</a>

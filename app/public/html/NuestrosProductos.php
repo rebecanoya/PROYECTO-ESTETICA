@@ -97,11 +97,7 @@ include '../../src/iniciarPHP.php';
 
     </main>
 
-    <?php
 
-    include "../../src/templates/footer.php"
-
-    ?>
 </body>
 
 <?php

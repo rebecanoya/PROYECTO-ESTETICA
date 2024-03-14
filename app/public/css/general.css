@@ -138,6 +138,7 @@ footer {
     padding: 0.5em;
     cursor: pointer;
     border-radius: 50%;
+    font-size: 1.25em;
 
     &:hover {
 

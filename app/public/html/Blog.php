@@ -103,11 +103,6 @@ include '../../src/iniciarPHP.php';
     </aside>
 
 
-    <?php
-
-    include "../../src/templates/footer.php"
-
-    ?>
 </body>
 
 </html>

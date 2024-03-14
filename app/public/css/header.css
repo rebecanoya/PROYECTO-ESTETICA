@@ -46,13 +46,25 @@ header {
         position: absolute;
         top: 0;
         right: 0;
-        font-size: 1.25em;
         padding: 0.5em;
         overflow: hidden;
         gap: 0.25em;
 
     }
 
+    & .iconAdmin {
+
+
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 0.5em;
+        overflow: hidden;
+        gap: 0.25em;
+    }
 
 }
 

@@ -63,9 +63,6 @@ include '../../src/iniciarPHP.php';
         </div>
     </main>
 
-    <?php
-    include "../../src/templates/footer.php"
-    ?>
 
     <script>
         document.getElementById('mostrarFormulario').addEventListener('click', function() {
@@ -74,23 +71,22 @@ include '../../src/iniciarPHP.php';
     </script>
 
     <?php
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if (isset($_POST["register"])) {
-                $password = hash("sha512",$_POST["password"]);
-                $confirmPassword = hash("sha512",$_POST["confirmpassword"]);
-                if (hash_equals($password, $confirmPassword)) {
-                    $sql = "INSERT INTO Usuarios(Email, Password, Rol) VALUES (:email, :password, 2)";
-                    $param = [":email" =>  $_POST["email"], "password" => $password];
-                    $BBDD -> execute($sql, $param);
-                }
-                $sesion -> login($_POST["email"], $password);
-                
-            } elseif (isset($_POST["login"])) {
-                $sesion -> login($_POST["email"], $_POST["password"]);
-                echo "Prueba";
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (isset($_POST["register"])) {
+            $password = hash("sha512", $_POST["password"]);
+            $confirmPassword = hash("sha512", $_POST["confirmpassword"]);
+            if (hash_equals($password, $confirmPassword)) {
+                $sql = "INSERT INTO Usuarios(Email, Password, Rol) VALUES (:email, :password, 2)";
+                $param = [":email" =>  $_POST["email"], "password" => $password];
+                $BBDD->execute($sql, $param);
             }
-        }    
-    ?> 
+            $sesion->login($_POST["email"], $password);
+        } elseif (isset($_POST["login"])) {
+            $sesion->login($_POST["email"], $_POST["password"]);
+            echo "Prueba";
+        }
+    }
+    ?>
 
 </body>
 
