@@ -1,3 +1,15 @@
+header {
+
+    outline: 0.05em solid black;
+
+    & a {
+
+        color: black;
+
+    }
+
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
