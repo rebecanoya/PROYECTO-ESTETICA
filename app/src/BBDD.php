@@ -72,8 +72,7 @@ class BBDD
             }
             $consulta->execute();
             if (!$consulta) {
-                echo "Error al ejecutar la consulta: " . $this->$pdo->error;
-                return false;
+                return [];
             }
             unset($consulta);
             return $this->pdo->lastInsertId();
