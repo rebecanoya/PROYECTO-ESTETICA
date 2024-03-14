@@ -55,7 +55,7 @@ class BBDD
     public function execute($sql, $params = [])
     {
         try {
-            $consulta = $this->pdo->query($sql);
+            $consulta = $this->pdo->prepare($sql);
             foreach ($params as $key => $value) {
                 $type = PDO::PARAM_NULL;
                 if (is_int($value)) {
@@ -72,11 +72,17 @@ class BBDD
             }
             $consulta->execute();
             if (!$consulta) {
-                return [];
+                return [false, "No se pudo crear el usuario"];
             }
             unset($consulta);
-            return $this->pdo->lastInsertId();
-        } catch (\Throwable $th) {
-        }
+            return [true, $this->pdo->lastInsertId()];
+        } catch (\PDOException $e) {
+            if ($e -> getCode() == 23000) {
+                return [false, "Ya existe una cuenta con este Email"];
+            }
+        } 
+        catch (\Throwable $th) {
+            var_dump($th);
+        } 
     }
 }

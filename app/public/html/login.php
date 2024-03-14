@@ -24,9 +24,32 @@ include '../../src/iniciarPHP.php';
 <body>
 
     <?php
-    include "../../src/templates/header.php"
-    ?>
+    include "../../src/templates/header.php";
 
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if (isset($_POST["register"])) {               
+                $password = hash("sha512",$_POST["password"]);
+                $confirmPassword = hash("sha512",$_POST["confirmpassword"]);
+                if (hash_equals($password, $confirmPassword)) {
+                    $sql = "INSERT INTO usuarios(Email, Password, Rol) VALUES (:email, :password, 2)";
+                    $param = ["email" =>  $_POST["email"], "password" => $password];               
+                    $respuesta = $BBDD -> execute($sql, $param);
+                    if ($respuesta[0]) {
+                        $errorR = $respuesta[1];
+                    }
+                }
+                $sesion -> login($_POST["email"], $_POST["password"]);
+                header("Location: index.php");
+                
+            } elseif (isset($_POST["login"])) {
+                if ($sesion -> login($_POST["email"], $_POST["password"])) {
+                    header("Location: index.php");               
+                } else {
+                    $errorL = "No se pudo iniciar sesion";
+                }           
+            }
+        }    
+    ?> 
     <main>
         <div class="container">
 
@@ -45,7 +68,11 @@ include '../../src/iniciarPHP.php';
                     </div>
                     <button type="submit" name="login" class="login">Iniciar</button>
                 </form>
-                <a href="">¿Olvidaste tu contraseña?</a>
+                <?php if (isset($errorL)) {
+                    echo $errorL;
+                }
+                ?>
+                <!-- <a href="">¿Olvidaste tu contraseña?</a> -->
             </div>
 
         </div>
@@ -58,11 +85,19 @@ include '../../src/iniciarPHP.php';
                     <input type="password" name="password" id="password" placeholder="Contraseña">
                     <input type="password" name="confirmpassword" id="password" placeholder="Repetir contraseña">
                 </div>
-                <button type="submit" class="register">Crear cuenta</button>
+                <button type="submit" name="register" class="register">Crear cuenta</button>
             </form>
+            <?php 
+            if (isset($errorR)) {
+                echo $errorR;
+            }
+            ?>
         </div>
     </main>
 
+    <?php
+    include "../../src/templates/footer.php"
+    ?>
 
     <script>
         document.getElementById('mostrarFormulario').addEventListener('click', function() {
@@ -70,23 +105,7 @@ include '../../src/iniciarPHP.php';
         });
     </script>
 
-    <?php
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        if (isset($_POST["register"])) {
-            $password = hash("sha512", $_POST["password"]);
-            $confirmPassword = hash("sha512", $_POST["confirmpassword"]);
-            if (hash_equals($password, $confirmPassword)) {
-                $sql = "INSERT INTO Usuarios(Email, Password, Rol) VALUES (:email, :password, 2)";
-                $param = [":email" =>  $_POST["email"], "password" => $password];
-                $BBDD->execute($sql, $param);
-            }
-            $sesion->login($_POST["email"], $password);
-        } elseif (isset($_POST["login"])) {
-            $sesion->login($_POST["email"], $_POST["password"]);
-            echo "Prueba";
-        }
-    }
-    ?>
+    
 
 </body>
 

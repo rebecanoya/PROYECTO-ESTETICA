@@ -63,7 +63,7 @@ input {
     border: none;
     width: 2em; /* Ajuste en em */
     margin-left: 0.5em;
-    text-align: end;
+    text-align: center;
 }
 
 button {
@@ -95,4 +95,14 @@ button {
 button:hover {
     background-color: white;
     color: black;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield; /* Firefox */
 }

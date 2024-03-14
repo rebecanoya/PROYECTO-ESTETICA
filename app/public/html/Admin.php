@@ -1,3 +1,13 @@
+<?php
+include '../../src/iniciarPHP.php';
+
+if ($_SESSION["rol"] !== 1) {
+    header("Location: index.php"); 
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,9 +37,18 @@
                 </div>
                 <div class="form-group">
                     <label for="musica">Música:</label>
-                    <input type="text" id="musica" name="musica" class="form-control" required>
+                    <input type="number" id="musica" name="musica" class="form-control" required>
                 </div>
-                <button type="submit" id="actionButton" class="btn btn-primary">Agregar</button>
+                <div class="form-group">
+                    <label for="descripcion">Descripción:</label>
+                    <textarea id="descripcion" name="descripcion" class="form-control" required></textarea>
+                </div>
+                <?php 
+                if (isset($errorR)) {
+                        echo $errorR;
+                }
+                ?>
+                <button type="submit" id="actionButton" name="lineas" class="btn btn-primary">Agregar</button>
             </form>
         </section>
 
@@ -139,3 +158,30 @@
 </body>
 
 </html>
+
+<?php
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (isset($_POST["lineas"])) {
+            try {
+                $sql = "INSERT INTO lineas (ID_Musica, Nombre, Color, Descripcion) VALUES
+                 (:musica, :nombre, :color, :descripcion)";
+                $param = ["musica" =>  $_POST["musica"], "nombre" => $_POST["nombre"],
+                "color" => $_POST["color"], "descripcion" => $_POST["descipcion"]];               
+                $respuesta = $BBDD -> execute($sql, $param);
+                if ($respuesta[0]) {
+                    $errorR = $respuesta[1];
+                }       
+            }catch (PDOException $e) {
+                echo "Error en la consulta: " . $e->getMessage();
+            }           
+        } elseif (isset($_POST["login"])) {
+            if ($sesion -> login($_POST["email"], $_POST["password"])) {
+                header("Location: index.php");               
+            } else {
+                $errorL = "No se pudo iniciar sesion";
+            }           
+        }
+    }; 
+
+
+?>
