@@ -23,7 +23,7 @@ services:
       MYSQL_USER: myuser
       MYSQL_PASSWORD: mypassword
     ports:
-      - "3306:3306"
+      - "3307:3306"
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin

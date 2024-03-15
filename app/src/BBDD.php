@@ -7,11 +7,11 @@ class BBDD
 
     public function __construct()
     {
-        $host = 'localhost';
+        $host = 'mysql';
         $name = 'cosmetica';
         $user = 'root';
         $password = 'root';
-        $this->pdo =  new PDO("mysql:host:=$host:3306;dbname=$name", $user, $password);
+        $this->pdo =  new PDO("mysql:host=$host;dbname=$name", $user, $password);
     }
 
     public function __destruct()
@@ -77,12 +77,11 @@ class BBDD
             unset($consulta);
             return [true, $this->pdo->lastInsertId()];
         } catch (\PDOException $e) {
-            if ($e -> getCode() == 23000) {
+            if ($e->getCode() == 23000) {
                 return [false, "Ya existe una cuenta con este Email"];
             }
-        } 
-        catch (\Throwable $th) {
+        } catch (\Throwable $th) {
             var_dump($th);
-        } 
+        }
     }
 }
