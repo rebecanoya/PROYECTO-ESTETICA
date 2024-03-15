@@ -47,6 +47,13 @@ body {
     flex-direction: column;
 }
 
+.cantidadNumber {
+    background-color: whitesmoke;
+    text-align: center;
+    border-radius: 0%;
+    border: none;
+}
+
 form {
     display: flex;
     flex-direction: column;
@@ -55,54 +62,31 @@ form {
 label {
     margin-bottom: 1em; /* Ajuste en em */
 }
-
-input {
-    padding: 0.5em;
-    margin-bottom: 1em; /* Ajuste en em */
-    background-color: transparent;
-    border: none;
-    width: 2em; /* Ajuste en em */
-    margin-left: 0.5em;
+input[type="number"] {
+    background-color: transparent; /* Quitar fondo del input */
+    border: none; /* Quitar borde */
+    width: 80px; /* Ancho del input */
+    font-size: 24px; /* Tamaño de fuente */
     text-align: center;
+    border-radius: 1em; /* Centrar el texto */
 }
-
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
 button {
-    color: white;
-    padding: 0.625em 1.25em; /* Ajuste en em */
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 1em; /* Ajuste en em */
+    background-color: whitesmoke; /* Fondo gris */
+    border: none; /* Quitar borde */
+    color: black; /* Color del texto */
+    font-size: 24px; /* Tamaño de fuente */
+    cursor: pointer;  /* Cursor apuntador */
 }
-
-.masmenos {
-    padding: 0.5em;
-    border: none;
-    cursor: pointer;
-    border-radius: 50%;
-    font-size: 1em; /* Ajuste en em */
-    background-color: #000;
-}
-
 .comprar {
     background-color: #FFC0CB;
 }
 
 .muestra {
     background-color: #000;
-}
-
-button:hover {
-    background-color: white;
-    color: black;
-}
-
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-input[type=number] {
-  -moz-appearance: textfield; /* Firefox */
+    color: white;
 }

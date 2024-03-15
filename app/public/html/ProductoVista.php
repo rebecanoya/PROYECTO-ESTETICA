@@ -63,10 +63,11 @@ if ($pedirBBDD) {
                     <form method="post">
                         <div class="container">
                             <div class="form-container">
-                                <label for="cantidad">Cantidad:</label>
-                                <button class="masmenos" onclick="decrementar(event)">-</button>
-                                <input type="number" id="cantidad" name="cantidad" value="0">
-                                <button class="masmenos" onclick="incrementar(event)">+</button>
+                                <div class="cantidadNumber">
+                                    <button class="menos" onclick="decrementar(event)">-</button>
+                                    <input type="number" id="cantidad" name="cantidad" value="0">
+                                    <button class="mas" onclick="incrementar(event)">+</button>
+                                </div>
                             </div>
                         </div>
                         <button type="submit"class="comprar">Añadir al carrito</button>
