@@ -54,7 +54,7 @@ include '../../src/iniciarPHP.php';
 
             <?php
 
-            $sql = "SELECT * from lineas";
+            $sql = "SELECT * from lineas where Activo = 1";
             $lineas = $BBDD->select($sql);
             foreach ($lineas as $linea) {
 

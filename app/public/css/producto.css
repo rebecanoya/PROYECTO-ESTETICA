@@ -54,6 +54,11 @@ body {
     border: none;
 }
 
+.form-container {
+    display: flex;
+    flex-direction: row;
+}
+
 form {
     display: flex;
     flex-direction: column;
@@ -89,4 +94,6 @@ button {
 .muestra {
     background-color: #000;
     color: white;
+    width: 96%;
+    margin-left: 0.4em;
 }

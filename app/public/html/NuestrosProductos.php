@@ -36,7 +36,7 @@ include '../../src/iniciarPHP.php';
 
             <?php
 
-            $sql = "SELECT * from lineas";
+            $sql = "SELECT * from lineas Where Activo = 1";
             $lineas = $BBDD->select($sql);
             foreach ($lineas as $linea) {
 
@@ -75,7 +75,7 @@ include '../../src/iniciarPHP.php';
 
 
             <?php
-            $sql = "SELECT ID,Nombre,Descripcion,Precio,ID_Linea,(select Color from lineas as l where l.ID=ID_Linea) as Color from productos order by Nombre";
+            $sql = "SELECT ID,Nombre,Descripcion,Precio,ID_Linea,(select Color from lineas as l where l.ID=ID_Linea) as Color from productos where Activo = 1 order by Nombre";
             $productos = $BBDD->select($sql);
 
             foreach ($productos as $producto) {

@@ -33,7 +33,7 @@ if ($_SESSION["rol"] !== 1) {
                 </div>
                 <div class="form-group">
                     <label for="color">Color:</label>
-                    <input type="text" id="color" name="color" class="form-control" required>
+                    <input type="color" id="color" name="color" class="form-control" required>
                 </div>
                 <div class="form-group">
                     <label for="musica">Música:</label>
@@ -59,10 +59,31 @@ if ($_SESSION["rol"] !== 1) {
                         <th>Nombre</th>
                         <th>Color</th>
                         <th>Música</th>
+                        <th>Descripcion</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
+                    <?php
+                    $sql = "SELECT * from lineas";
+                    $lineas = $BBDD->select($sql);
+                    foreach ($lineas as $linea) {
+                        echo "<tr>";
+                        echo "<td>" . $linea["Nombre"] . "</td>";
+                        echo "<td>" . $linea["Color"] . "</td>";
+                        echo "<td>" . $linea["ID_Musica"] . "</td>";
+                        echo "<td>" . $linea["Descripcion"] . "</td>";
+                        echo "<td>
+                                <button @click=handleEdit>
+                                    <i class=fas fa-pencil-alt></i>
+                                </button>
+                                <button @click=handleDelete>
+                                    <i class=fas fa-trash-alt></i>
+                                </button>
+                            </td>";
+                        echo "</tr>";
+                    }                  
+                    ?>
                 </tbody>
             </table>
         </section>
@@ -116,6 +137,28 @@ if ($_SESSION["rol"] !== 1) {
                     </tr>
                 </thead>
                 <tbody>
+                <?php
+                    $sql = "SELECT * from productos";
+                    $productos = $BBDD->select($sql);
+                    foreach ($productos as $producto) {
+                        echo "<tr>";
+                        echo "<td>" . $producto["Nombre"] . "</td>";
+                        echo "<td>" . $producto["Precio"] . "</td>";
+                        echo "<td>" . $producto["Descripcion"] . "</td>";
+                        echo "<td>" . $producto["ID_Linea"] . "</td>";
+                        echo "<td>" . $producto["Stock"] . "</td>";
+                        // echo "<td>" . $producto["Img"] . "</td>";
+                        echo "<td>
+                                <button @click=handleEdit>
+                                    <i class=fas fa-pencil-alt></i>
+                                </button>
+                                <button @click=handleDelete>
+                                    <i class=fas fa-trash-alt></i>
+                                </button>
+                            </td>";
+                        echo "</tr>";
+                    }                  
+                    ?>
                 </tbody>
             </table>
         </section>
@@ -149,11 +192,40 @@ if ($_SESSION["rol"] !== 1) {
                 <thead class="thead-dark">
                     <tr>
                         <th>Correo</th>
-                        <th>Contraseña</th>
+                        <th>Rol</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
+                <?php
+                    $sql = "SELECT * from usuarios";
+                    $usuarios = $BBDD->select($sql);
+                    foreach ($usuarios as $usuario) {
+                        echo "<tr>";
+                        echo "<td>" . $usuario["Email"] . "</td>";
+                        switch ($usuario["rol"]) {
+                            case 1:
+                                echo "<td>Admin</td>";
+                                break;
+                            case 2:
+                                echo "<td>Alumno</td>";
+                                break;
+                            case 3:
+                                echo "<td>Cliente</td>";
+                                break;    
+                        }
+                        echo "<td>" . $usuario["rol"] . "</td>";
+                        echo "<td>
+                                <button @click=handleEdit>
+                                    <i class=fas fa-pencil-alt></i>
+                                </button>
+                                <button @click=handleDelete>
+                                    <i class=fas fa-trash-alt></i>
+                                </button>
+                            </td>";
+                        echo "</tr>";
+                    }                  
+                    ?>
                 </tbody>
             </table>
         </section>
