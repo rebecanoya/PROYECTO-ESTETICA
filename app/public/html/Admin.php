@@ -1,7 +1,7 @@
 <?php
 include '../../src/iniciarPHP.php';
 
-if ($_SESSION["rol"] !== 1) {
+if (!isset($_SESSION["rol"]) || $_SESSION["rol"] !== 1) {
     header("Location: index.php"); 
 }
 
@@ -74,10 +74,10 @@ if ($_SESSION["rol"] !== 1) {
                         echo "<td>" . $linea["ID_Musica"] . "</td>";
                         echo "<td>" . $linea["Descripcion"] . "</td>";
                         echo "<td>
-                                <button @click=handleEdit>
+                                <button onclick=llenarFormularioLineaCosmetica()>
                                     <i class=fas fa-pencil-alt></i>
                                 </button>
-                                <button @click=handleDelete>
+                                <button onclick=updateProducto>
                                     <i class=fas fa-trash-alt></i>
                                 </button>
                             </td>";
@@ -102,7 +102,7 @@ if ($_SESSION["rol"] !== 1) {
                 </div>
                 <div class="form-group">
                     <label for="descripcion">Descripción:</label>
-                    <textarea id="descripcion" name="descripcion" class="form-control" required></textarea>
+                    <textarea id="descripcionP" name="descripcion" class="form-control" required></textarea>
                 </div>
                 <div class="form-group">
                     <label for="linea">Línea:</label>
@@ -124,7 +124,7 @@ if ($_SESSION["rol"] !== 1) {
         </section>
 
         <section class="table-container">
-            <table id="productos" class="table table-bordered table-dark">
+            <table id="tablaProductos" class="table table-bordered table-dark">
                 <thead class="thead-dark">
                     <tr>
                         <th>Nombre</th>
@@ -132,7 +132,6 @@ if ($_SESSION["rol"] !== 1) {
                         <th>Descripción</th>
                         <th>Línea</th>
                         <th>Stock</th>
-                        <th>Imagen</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -149,7 +148,7 @@ if ($_SESSION["rol"] !== 1) {
                         echo "<td>" . $producto["Stock"] . "</td>";
                         // echo "<td>" . $producto["Img"] . "</td>";
                         echo "<td>
-                                <button @click=handleEdit>
+                                <button onclick=llenarFormularioProducto()>
                                     <i class=fas fa-pencil-alt></i>
                                 </button>
                                 <button @click=handleDelete>
@@ -216,7 +215,7 @@ if ($_SESSION["rol"] !== 1) {
                         }
                         echo "<td>" . $usuario["rol"] . "</td>";
                         echo "<td>
-                                <button @click=handleEdit>
+                                <button onclick=llenarFormularioUsuario()>
                                     <i class=fas fa-pencil-alt></i>
                                 </button>
                                 <button @click=handleDelete>
@@ -236,6 +235,73 @@ if ($_SESSION["rol"] !== 1) {
     <script src="../js/usuarios.js"></script>
     <script src="../js/productos.js"></script>
 </body>
+<script>
+    function llenarFormularioLineaCosmetica() {
+        var tablaLineaCosmetica = document.getElementById("lineasCosmeticas");
+        var filaSeleccionada = tablaLineaCosmetica.querySelector("tr.selected");
+
+        if (filaSeleccionada) {
+            var nombre = filaSeleccionada.cells[0].innerText;
+            var color = filaSeleccionada.cells[1].innerText;
+            var musica = filaSeleccionada.cells[2].innerText;
+            var descripcion = filaSeleccionada.cells[3].innerText;
+
+            document.getElementById("nombre").value = nombre;
+            document.getElementById("color").value = color;
+            document.getElementById("musica").value = musica;
+            document.getElementById("descripcion").value = descripcion;
+        }
+    }
+
+    function llenarFormularioProducto() {
+        var tablaProductos = document.getElementById("tablaProductos");
+        var filaSeleccionada = tablaProductos.querySelector("tr.selected");
+
+        if (filaSeleccionada) {
+            var nombreProducto = filaSeleccionada.cells[0].innerText;
+            var precio = filaSeleccionada.cells[1].innerText;
+            var descripcion = filaSeleccionada.cells[2].innerText;
+            var linea = filaSeleccionada.cells[3].innerText;
+            var stock = filaSeleccionada.cells[4].innerText;
+
+            document.getElementById("nombreProducto").value = nombreProducto;
+            document.getElementById("precio").value = precio;
+            document.getElementById("descripcionP").value = descripcion;
+            document.getElementById("linea").value = linea;
+            document.getElementById("stock").value = stock;
+        }
+    }
+
+    function llenarFormularioUsuario() {
+        var tablaUsuarios = document.getElementById("usuarios");
+        var filaSeleccionada = tablaUsuarios.querySelector("tr.selected");
+
+        if (filaSeleccionada) {
+            var correo = filaSeleccionada.cells[0].innerText;
+            var rol = filaSeleccionada.cells[1].innerText;
+
+            document.getElementById("email").value = correo;
+            document.querySelector('input[name="rol"][value="' + rol + '"]').checked = true;
+        }
+    }
+
+    // Agregar evento de clic a las filas de las tablas para marcarlas como seleccionadas
+    document.addEventListener("DOMContentLoaded", function() {
+        var filas = document.querySelectorAll("tbody tr");
+
+        filas.forEach(function(fila) {
+            fila.addEventListener("click", function() {
+                // Eliminar la clase "selected" de todas las filas
+                filas.forEach(function(otraFila) {
+                    otraFila.classList.remove("selected");
+                });
+
+                // Agregar la clase "selected" a la fila seleccionada
+                fila.classList.add("selected");
+            });
+        });
+    });
+</script>
 
 </html>
 
