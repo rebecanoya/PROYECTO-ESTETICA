@@ -31,7 +31,7 @@ include '../../src/iniciarPHP.php';
                 $password = hash("sha512",$_POST["password"]);
                 $confirmPassword = hash("sha512",$_POST["confirmpassword"]);
                 if (hash_equals($password, $confirmPassword)) {
-                    $sql = "INSERT INTO usuarios(Email, Password, Rol) VALUES (:email, :password, 2)";
+                    $sql = "INSERT INTO usuarios(Email, Password, Rol) VALUES (:email, :password, 3)";
                     $param = ["email" =>  $_POST["email"], "password" => $password];               
                     $respuesta = $BBDD -> execute($sql, $param);
                     if ($respuesta[0]) {

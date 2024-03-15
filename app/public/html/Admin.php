@@ -126,11 +126,19 @@ if ($_SESSION["rol"] !== 1) {
             <form id="usuarioForm" method="post">
                 <div class="form-group">
                     <label for="correo">Correo:</label>
-                    <input type="email" id="correo" name="correo" class="form-control" required>
+                    <input type="email" id="email" name="email" class="form-control" required>
                 </div>
                 <div class="form-group">
                     <label for="contrasena">Contraseña:</label>
-                    <input type="password" id="contrasena" name="contrasena" class="form-control" required>
+                    <input type="password" id="password" name="password" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="rol">Rol:</label>
+                        <input type="radio" name="rol" value="1" required>
+                        Administrador
+                        <input type="radio" name="rol" value="2" required>
+                        Alumno
+                    </label>
                 </div>
                 <button type="submit" id="usuarioActionButton" name="usuario" class="btn btn-primary">Agregar</button>
             </form>
@@ -173,17 +181,29 @@ if ($_SESSION["rol"] !== 1) {
                 }       
             }catch (PDOException $e) {
                 echo "Error en la consulta: " . $e->getMessage();
-            }           
+            }         
         } elseif (isset($_POST["producto"])) {
             try {
                 $sql = "INSERT INTO productos (Precio, Stock, Descripcion, ID_Linea, Nombre)
                 VALUES (:precio, :stock, :descripcion, :ID_Linea, :Nombre)";
-                $param = ["musica" =>  $_POST["musica"], "nombre" => $_POST["nombre"],
-                "color" => $_POST["color"], "descripcion" => $_POST["descripcion"]];               
+                $param = ["precio" =>  $_POST["precio"], "stock" => $_POST["stock"],
+                "descripcion" => $_POST["descripcion"], "ID_Linea" => $_POST["linea"], "Nombre" => $_POST["nombreProducto"]];               
                 $respuesta = $BBDD -> execute($sql, $param);
                 if ($respuesta[0]) {
                     $errorR = $respuesta[1];
                 }       
+            }catch (PDOException $e) {
+                echo "Error en la consulta: " . $e->getMessage();
+            } 
+        } elseif (isset($_POST["usuario"])) {
+            try {
+                $password = hash("sha512",$_POST["password"]);
+                $sql = "INSERT INTO usuarios(Email, Password, Rol) VALUES (:email, :password, :rol)";
+                $param = ["email" =>  $_POST["email"], "password" => $password, "rol" => $_POST["rol"]];               
+                $respuesta = $BBDD -> execute($sql, $param);
+                if ($respuesta[0]) {
+                    $errorR = $respuesta[1];
+                }
             }catch (PDOException $e) {
                 echo "Error en la consulta: " . $e->getMessage();
             } 

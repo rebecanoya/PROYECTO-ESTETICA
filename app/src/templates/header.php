@@ -10,7 +10,7 @@
     ?>
             <div class="iconAdmin">
 
-                <a href="../../public/html/admin.php" class="fa-solid fa-screwdriver-wrench iconButton"></a>
+                <a href="../../html/admin.php" class="fa-solid fa-screwdriver-wrench iconButton"></a>
 
 
             </div>
@@ -35,15 +35,15 @@
 
     <div class="icons">
         <a class="fa-solid fa-magnifying-glass iconButton"></a>
-        <a href="../../public/html/login.php" class="fa-regular fa-user iconButton"></a>
-        <a href="../../public/html/Cesta.php" class=" fa-solid fa-cart-shopping iconButton"></a>
+        <a href="../../html/login.php" class="fa-regular fa-user iconButton"></a>
+        <a href="../../html/Cesta.php" class=" fa-solid fa-cart-shopping iconButton"></a>
         <?php
 
         if ($sesion->estaLoggeado()) {
 
         ?>
 
-            <a href="../../public/html/logOut.php" class="fa-solid fa-right-to-bracket iconButton"> </a>
+            <a href="../../html/logOut.php" class="fa-solid fa-right-to-bracket iconButton"> </a>
         <?php } ?>
 
 
@@ -52,10 +52,10 @@
 
     <nav>
 
-        <a href="../../public/html/QuienesSomos.php">¿QUIÉNES SOMOS?</a>
-        <a href="../../public/html/NuestrosProductos.php">NUESTROS PRODUCTOS</a>
-        <a href="../../public/html/Blog.php">BLOG</a>
-        <a href="../../public/html/Contacto.php">CONTACTO</a>
+        <a href="../../html/QuienesSomos.php">¿QUIÉNES SOMOS?</a>
+        <a href="../../html/NuestrosProductos.php">NUESTROS PRODUCTOS</a>
+        <a href="../../html/Blog.php">BLOG</a>
+        <a href="../../html/Contacto.php">CONTACTO</a>
 
     </nav>
 
