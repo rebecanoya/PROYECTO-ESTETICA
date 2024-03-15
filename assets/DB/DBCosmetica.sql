@@ -35,6 +35,16 @@ CREATE TABLE `blog` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
+--
+-- Volcado de datos para la tabla `blog`
+--
+
+INSERT INTO `blog` (`ID`, `Titulo`, `Entrada`, `Fecha`) VALUES
+(1, 'Primera Entrada', 'Hola, esta es la primera entrada', '2024-02-27 10:36:22'),
+(2, 'Segunda Entrada', 'Hola esta es la segunda entrada.\r\nSed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?', '2024-02-27 10:58:18'),
+(3, 'Tercera Entrada', 'sjiphgoebg', '2024-03-01 12:45:03');
+
+-- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `carrito`
@@ -61,7 +71,13 @@ CREATE TABLE `ies` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 -- --------------------------------------------------------
+--
+-- Volcado de datos para la tabla `ies`
+--
 
+INSERT INTO `ies` (`telf`, `web`, `nombre`, `email`, `ID`) VALUES
+('886120464', 'www.edu.xunta.gal/centros/iesteis', 'IES de Teis', 'ies.teis@edu.xunta.es', 1);
+--
 --
 -- Estructura de tabla para la tabla `lineas`
 --
@@ -77,7 +93,6 @@ CREATE TABLE `lineas` (
 
 -- --------------------------------------------------------
 
---
 -- Estructura de tabla para la tabla `productos`
 --
 

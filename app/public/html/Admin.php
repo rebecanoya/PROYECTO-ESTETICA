@@ -26,7 +26,7 @@ if ($_SESSION["rol"] !== 1) {
         <section>
             <h2>Líneas Cosméticas</h2>
             <div id="lineaCosmeticaMessage"></div>
-            <form id="lineaCosmeticaForm">
+            <form id="lineaCosmeticaForm" method="post">
                 <div class="form-group">
                     <label for="nombre">Nombre:</label>
                     <input type="text" id="nombre" name="nombre" class="form-control" required>
@@ -45,7 +45,7 @@ if ($_SESSION["rol"] !== 1) {
                 </div>
                 <?php 
                 if (isset($errorR)) {
-                        echo $errorR;
+                        echo "<div>" . $errorR . "</div>";
                 }
                 ?>
                 <button type="submit" id="actionButton" name="lineas" class="btn btn-primary">Agregar</button>
@@ -70,7 +70,7 @@ if ($_SESSION["rol"] !== 1) {
         <section>
             <h2>Productos</h2>
             <div id="productoMessage"></div>
-            <form id="productoForm">
+            <form id="productoForm" method="post">
                 <div class="form-group">
                     <label for="nombreProducto">Nombre:</label>
                     <input type="text" id="nombreProducto" name="nombreProducto" class="form-control" required>
@@ -98,7 +98,7 @@ if ($_SESSION["rol"] !== 1) {
                     <label for="imagen">Imagen:</label>
                     <input type="file" id="imagen" name="imagen" accept="image/*" class="form-control-file">
                 </div>
-                <button type="submit" id="productoActionButton" class="btn btn-primary">Agregar</button>
+                <button type="submit" id="productoActionButton" name="producto" class="btn btn-primary">Agregar</button>
             </form>
         </section>
 
@@ -123,7 +123,7 @@ if ($_SESSION["rol"] !== 1) {
         <section>
             <h2>Usuarios</h2>
             <div id="usuarioMessage"></div>
-            <form id="usuarioForm">
+            <form id="usuarioForm" method="post">
                 <div class="form-group">
                     <label for="correo">Correo:</label>
                     <input type="email" id="correo" name="correo" class="form-control" required>
@@ -132,7 +132,7 @@ if ($_SESSION["rol"] !== 1) {
                     <label for="contrasena">Contraseña:</label>
                     <input type="password" id="contrasena" name="contrasena" class="form-control" required>
                 </div>
-                <button type="submit" id="usuarioActionButton" class="btn btn-primary">Agregar</button>
+                <button type="submit" id="usuarioActionButton" name="usuario" class="btn btn-primary">Agregar</button>
             </form>
         </section>
 
@@ -163,10 +163,10 @@ if ($_SESSION["rol"] !== 1) {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (isset($_POST["lineas"])) {
             try {
-                $sql = "INSERT INTO lineas (ID_Musica, Nombre, Color, Descripcion) VALUES
-                 (:musica, :nombre, :color, :descripcion)";
-                $param = ["musica" =>  $_POST["musica"], "nombre" => $_POST["nombre"],
-                "color" => $_POST["color"], "descripcion" => $_POST["descipcion"]];               
+                $sql = "INSERT INTO lineas (ID_Musica, Nombre, Color, Descripcion) 
+                VALUES (:musica, :nombre, :color, :descripcion)";
+                $param = ["musica" =>  $_POST["musica"], "nombre" => $_POST["nombre"], 
+                "color" => $_POST["color"], "descripcion" => $_POST["descripcion"]];               
                 $respuesta = $BBDD -> execute($sql, $param);
                 if ($respuesta[0]) {
                     $errorR = $respuesta[1];
@@ -174,12 +174,19 @@ if ($_SESSION["rol"] !== 1) {
             }catch (PDOException $e) {
                 echo "Error en la consulta: " . $e->getMessage();
             }           
-        } elseif (isset($_POST["login"])) {
-            if ($sesion -> login($_POST["email"], $_POST["password"])) {
-                header("Location: index.php");               
-            } else {
-                $errorL = "No se pudo iniciar sesion";
-            }           
+        } elseif (isset($_POST["producto"])) {
+            try {
+                $sql = "INSERT INTO productos (Precio, Stock, Descripcion, ID_Linea, Nombre)
+                VALUES (:precio, :stock, :descripcion, :ID_Linea, :Nombre)";
+                $param = ["musica" =>  $_POST["musica"], "nombre" => $_POST["nombre"],
+                "color" => $_POST["color"], "descripcion" => $_POST["descripcion"]];               
+                $respuesta = $BBDD -> execute($sql, $param);
+                if ($respuesta[0]) {
+                    $errorR = $respuesta[1];
+                }       
+            }catch (PDOException $e) {
+                echo "Error en la consulta: " . $e->getMessage();
+            } 
         }
     }; 
 
