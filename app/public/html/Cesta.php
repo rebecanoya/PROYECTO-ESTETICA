@@ -1,9 +1,12 @@
 <?php
 include '../../src/iniciarPHP.php';
+$productos = [];
+if (count($_SESSION["Carrito"])) {
 
-$sql = "SELECT Nombre,Precio,ID from productos where ID in (" . implode(',', array_keys($_SESSION["Carrito"])) . ")";
+    $sql = "SELECT Nombre,Precio,ID from productos where ID in (" . implode(',', array_keys($_SESSION["Carrito"])) . ")";
+    $productos = $BBDD->select($sql);
+}
 
-$productos = $BBDD->select($sql);
 
 
 ?>
@@ -18,9 +21,9 @@ $productos = $BBDD->select($sql);
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/cesta.css">
     <script src="https://kit.fontawesome.com/dc2d3ea46f.js" crossorigin="anonymous"></script>
-
-
-    <title>Document</title>
+    <link rel="icon" href="../img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon">
+    <title>Cesta | Aromusicoterapia</title>
 </head>
 
 <body>

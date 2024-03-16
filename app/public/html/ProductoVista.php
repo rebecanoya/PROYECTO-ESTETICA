@@ -5,9 +5,6 @@ $pedirBBDD = false;
 $cargar = false;
 $producto;
 
-if ($sesion -> estaLoggeado()) {
-}
-
 if (isset($_GET) && isset($_GET["id"])) {
     $id = $_GET["id"];
     if (is_numeric($id)) {
@@ -39,7 +36,9 @@ if ($pedirBBDD) {
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/producto.css">
     <script src="https://kit.fontawesome.com/dc2d3ea46f.js" crossorigin="anonymous"></script>
-    <title>Document</title>
+    <link rel="icon" href="../img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon">
+    <title><?php echo $producto["Nombre"] ?> | Aromusicoterapia</title>
 </head>
 
 <body>
@@ -60,20 +59,21 @@ if ($pedirBBDD) {
                 <div class="product-details">
                     <h2><?php echo $producto["Nombre"] ?></h2>
                     <p class="descripcion"><?php echo $producto["Descripcion"] ?></p>
-                    <form method="post">
+                    <form method="post" action="controladorCesta.php">
                         <div class="container">
                             <div class="form-container">
                                 <div class="cantidadNumber">
                                     <button class="menos" onclick="decrementar(event)">-</button>
-                                    <input type="number" id="cantidad" name="cantidad" value="0">
+                                    <input type="number" id="cantidad" name="cantidad" value="1">
                                     <button class="mas" onclick="incrementar(event)">+</button>
                                 </div>
                                 <div class="comprarBtn">
-                                    <button type="submit"class="comprar">Añadir al carrito</button>
+                                    <button type="submit" class="comprar">Añadir al carrito</button>
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="muestra">Solicitar muestra</button>
+                        <button type="submit" class="comprar" name="accion" value="add">Añadir al carrito</button>
+                        <button type="submit" class="muestra" name="accion" value="muestra">Solicitar muestra</button>
                     </form>
                 </div>
             </div>
@@ -89,22 +89,6 @@ if ($pedirBBDD) {
     }
     ?>
 
-    <?php
-    $BBDD = new BBDD();
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        if (isset($_POST["comprar"])) {
-            $cantidad = $_POST["cantidad"];
-            $idproducto = $producto["ID"];
-            $sql = 'SELECT id from usuarios where email =:email';
-            $param = [":email" => $_SESSION["usuario"]];
-            $idusuario = $BBDD -> execute();
-            
-        } elseif (isset($_POST["muestra"])) {
-            $cantidad = 1;
-        }
-    }
-    
-    ?>
 
 
 </body>
@@ -124,8 +108,8 @@ if ($pedirBBDD) {
         event.preventDefault();
         var cantidadInput = document.getElementById('cantidad');
         var cantidad = parseInt(cantidadInput.value, 10);
-        if (cantidad > 0) {
-        cantidadInput.value = cantidad - 1;
+        if (cantidad > 1) {
+            cantidadInput.value = cantidad - 1;
         }
     }
 </script>

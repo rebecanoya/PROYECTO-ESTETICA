@@ -4,9 +4,6 @@
     if ($sesion->estaLoggeado()) {
         if ($_SESSION["rol"] == 1) {
 
-
-
-
     ?>
             <div class="iconAdmin">
 
@@ -30,8 +27,6 @@
 
 
     </div>
-
-
 
     <div class="icons">
         <a class="fa-solid fa-magnifying-glass iconButton"></a>

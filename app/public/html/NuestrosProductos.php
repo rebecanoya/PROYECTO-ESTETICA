@@ -14,7 +14,9 @@ include '../../src/iniciarPHP.php';
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/np.css">
     <script src="https://kit.fontawesome.com/dc2d3ea46f.js" crossorigin="anonymous"></script>
-    <title>Pagina inicial</title>
+    <link rel="icon" href="../img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon">
+    <title>Nuestros Productos | Aromusicoterapia</title>
 </head>
 
 <body>

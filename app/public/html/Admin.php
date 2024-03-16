@@ -2,7 +2,7 @@
 include '../../src/iniciarPHP.php';
 
 if (!isset($_SESSION["rol"]) || $_SESSION["rol"] !== 1) {
-    header("Location: index.php"); 
+    header("Location: index.php");
 }
 
 ?>
@@ -19,6 +19,8 @@ if (!isset($_SESSION["rol"]) || $_SESSION["rol"] !== 1) {
     <script src="https://kit.fontawesome.com/dc2d3ea46f.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../css/general.css">
     <link rel="stylesheet" href="../css/admin.css">
+    <link rel="icon" href="../img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon">
 </head>
 
 <body>
@@ -43,9 +45,9 @@ if (!isset($_SESSION["rol"]) || $_SESSION["rol"] !== 1) {
                     <label for="descripcion">Descripción:</label>
                     <textarea id="descripcion" name="descripcion" class="form-control" required></textarea>
                 </div>
-                <?php 
+                <?php
                 if (isset($errorR)) {
-                        echo "<div>" . $errorR . "</div>";
+                    echo "<div>" . $errorR . "</div>";
                 }
                 ?>
                 <button type="submit" id="actionButton" name="lineas" class="btn btn-primary">Agregar</button>
@@ -82,7 +84,7 @@ if (!isset($_SESSION["rol"]) || $_SESSION["rol"] !== 1) {
                                 </button>
                             </td>";
                         echo "</tr>";
-                    }                  
+                    }
                     ?>
                 </tbody>
             </table>
@@ -136,7 +138,7 @@ if (!isset($_SESSION["rol"]) || $_SESSION["rol"] !== 1) {
                     </tr>
                 </thead>
                 <tbody>
-                <?php
+                    <?php
                     $sql = "SELECT * from productos";
                     $productos = $BBDD->select($sql);
                     foreach ($productos as $producto) {
@@ -156,7 +158,7 @@ if (!isset($_SESSION["rol"]) || $_SESSION["rol"] !== 1) {
                                 </button>
                             </td>";
                         echo "</tr>";
-                    }                  
+                    }
                     ?>
                 </tbody>
             </table>
@@ -176,10 +178,10 @@ if (!isset($_SESSION["rol"]) || $_SESSION["rol"] !== 1) {
                 </div>
                 <div class="form-group">
                     <label for="rol">Rol:</label>
-                        <input type="radio" name="rol" value="1" required>
-                        Administrador
-                        <input type="radio" name="rol" value="2" required>
-                        Alumno
+                    <input type="radio" name="rol" value="1" required>
+                    Administrador
+                    <input type="radio" name="rol" value="2" required>
+                    Alumno
                     </label>
                 </div>
                 <button type="submit" id="usuarioActionButton" name="usuario" class="btn btn-primary">Agregar</button>
@@ -196,7 +198,7 @@ if (!isset($_SESSION["rol"]) || $_SESSION["rol"] !== 1) {
                     </tr>
                 </thead>
                 <tbody>
-                <?php
+                    <?php
                     $sql = "SELECT * from usuarios";
                     $usuarios = $BBDD->select($sql);
                     foreach ($usuarios as $usuario) {
@@ -211,7 +213,7 @@ if (!isset($_SESSION["rol"]) || $_SESSION["rol"] !== 1) {
                                 break;
                             case 3:
                                 echo "<td>Cliente</td>";
-                                break;    
+                                break;
                         }
                         echo "<td>" . $usuario["rol"] . "</td>";
                         echo "<td>
@@ -223,7 +225,7 @@ if (!isset($_SESSION["rol"]) || $_SESSION["rol"] !== 1) {
                                 </button>
                             </td>";
                         echo "</tr>";
-                    }                  
+                    }
                     ?>
                 </tbody>
             </table>
@@ -306,47 +308,51 @@ if (!isset($_SESSION["rol"]) || $_SESSION["rol"] !== 1) {
 </html>
 
 <?php
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        if (isset($_POST["lineas"])) {
-            try {
-                $sql = "INSERT INTO lineas (ID_Musica, Nombre, Color, Descripcion) 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST["lineas"])) {
+        try {
+            $sql = "INSERT INTO lineas (ID_Musica, Nombre, Color, Descripcion) 
                 VALUES (:musica, :nombre, :color, :descripcion)";
-                $param = ["musica" =>  $_POST["musica"], "nombre" => $_POST["nombre"], 
-                "color" => $_POST["color"], "descripcion" => $_POST["descripcion"]];               
-                $respuesta = $BBDD -> execute($sql, $param);
-                if ($respuesta[0]) {
-                    $errorR = $respuesta[1];
-                }       
-            }catch (PDOException $e) {
-                echo "Error en la consulta: " . $e->getMessage();
-            }         
-        } elseif (isset($_POST["producto"])) {
-            try {
-                $sql = "INSERT INTO productos (Precio, Stock, Descripcion, ID_Linea, Nombre)
-                VALUES (:precio, :stock, :descripcion, :ID_Linea, :Nombre)";
-                $param = ["precio" =>  $_POST["precio"], "stock" => $_POST["stock"],
-                "descripcion" => $_POST["descripcion"], "ID_Linea" => $_POST["linea"], "Nombre" => $_POST["nombreProducto"]];               
-                $respuesta = $BBDD -> execute($sql, $param);
-                if ($respuesta[0]) {
-                    $errorR = $respuesta[1];
-                }       
-            }catch (PDOException $e) {
-                echo "Error en la consulta: " . $e->getMessage();
-            } 
-        } elseif (isset($_POST["usuario"])) {
-            try {
-                $password = hash("sha512",$_POST["password"]);
-                $sql = "INSERT INTO usuarios(Email, Password, Rol) VALUES (:email, :password, :rol)";
-                $param = ["email" =>  $_POST["email"], "password" => $password, "rol" => $_POST["rol"]];               
-                $respuesta = $BBDD -> execute($sql, $param);
-                if ($respuesta[0]) {
-                    $errorR = $respuesta[1];
-                }
-            }catch (PDOException $e) {
-                echo "Error en la consulta: " . $e->getMessage();
-            } 
+            $param = [
+                "musica" =>  $_POST["musica"], "nombre" => $_POST["nombre"],
+                "color" => $_POST["color"], "descripcion" => $_POST["descripcion"]
+            ];
+            $respuesta = $BBDD->execute($sql, $param);
+            if ($respuesta[0]) {
+                $errorR = $respuesta[1];
+            }
+        } catch (PDOException $e) {
+            echo "Error en la consulta: " . $e->getMessage();
         }
-    }; 
+    } elseif (isset($_POST["producto"])) {
+        try {
+            $sql = "INSERT INTO productos (Precio, Stock, Descripcion, ID_Linea, Nombre)
+                VALUES (:precio, :stock, :descripcion, :ID_Linea, :Nombre)";
+            $param = [
+                "precio" =>  $_POST["precio"], "stock" => $_POST["stock"],
+                "descripcion" => $_POST["descripcion"], "ID_Linea" => $_POST["linea"], "Nombre" => $_POST["nombreProducto"]
+            ];
+            $respuesta = $BBDD->execute($sql, $param);
+            if ($respuesta[0]) {
+                $errorR = $respuesta[1];
+            }
+        } catch (PDOException $e) {
+            echo "Error en la consulta: " . $e->getMessage();
+        }
+    } elseif (isset($_POST["usuario"])) {
+        try {
+            $password = hash("sha512", $_POST["password"]);
+            $sql = "INSERT INTO usuarios(Email, Password, Rol) VALUES (:email, :password, :rol)";
+            $param = ["email" =>  $_POST["email"], "password" => $password, "rol" => $_POST["rol"]];
+            $respuesta = $BBDD->execute($sql, $param);
+            if ($respuesta[0]) {
+                $errorR = $respuesta[1];
+            }
+        } catch (PDOException $e) {
+            echo "Error en la consulta: " . $e->getMessage();
+        }
+    }
+};
 
 
 ?>
