@@ -1,7 +1,6 @@
 <?php
 include '../../src/iniciarPHP.php';
 
-
 ?>
 
 <!DOCTYPE html>
@@ -158,5 +157,7 @@ include "../../src/templates/ScriptEnlaceProductos.php";
 
     }
 </script>
+
+
 
 </html>

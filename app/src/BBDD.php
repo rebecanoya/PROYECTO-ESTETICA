@@ -47,8 +47,8 @@ class BBDD
             }
             unset($consulta);
             return $resultado;
-        } catch (\Throwable $th) {
-            var_dump($th);
+        } catch (Exception $th) {
+            return [false, "Ocurrio un error", $th->getMessage()];
         }
     }
 
@@ -70,6 +70,7 @@ class BBDD
                 $value = htmlspecialchars($value);
                 $consulta->bindValue($key, $value, $type);
             }
+
             $consulta->execute();
             if (!$consulta) {
                 return [false, "No se pudo crear el usuario"];
@@ -80,8 +81,8 @@ class BBDD
             if ($e->getCode() == 23000) {
                 return [false, "Ya existe una cuenta con este Email"];
             }
-        } catch (\Throwable $th) {
-            var_dump($th);
+        } catch (Exception $th) {
+            return [false, "Mecachis, ccurrio un error", $th->getMessage()];
         }
     }
 }

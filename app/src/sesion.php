@@ -12,15 +12,15 @@ class Sesion
         if (session_status() != PHP_SESSION_ACTIVE) {
             session_start();
         }
-
-        if (isset($_SESSION["token"]) && isset($_COOKIE["token"])) {
-            if (($_SESSION["token"]) != ($_COOKIE["token"])) {
+        $issetSesion = isset($_SESSION["token"]);
+        $issetCookie = isset($_COOKIE["token"]);
+        if ($issetSesion && $issetCookie) {
+            if ($issetSesion != $issetCookie) {
                 $this->logout();
             }
-        } else {
+        } elseif (($issetSesion && !$issetCookie) || (!$issetSesion && $issetCookie)) {
             $this->logout();
         }
-
         if (!isset($_SESSION["Carrito"])) {
             $_SESSION["Carrito"] = [];
         }
@@ -61,6 +61,7 @@ class Sesion
             setcookie("token", $_SESSION["token"], time() + 900, "/");
             return true;
         } catch (\Throwable $th) {
+            return false;
         }
     }
 

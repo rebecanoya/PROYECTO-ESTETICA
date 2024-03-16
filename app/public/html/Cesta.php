@@ -89,5 +89,29 @@ if (count($_SESSION["Carrito"])) {
     </main>
 
 </body>
+<script>
+    async function obama() {
+
+        await fetch("controladorCesta.php", {
+
+                method: "POST",
+                mode: "cors",
+                credentials: "same-origin",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                },
+                body: JSON.stringify({
+                    "id": 1,
+                    "cantidad": 1,
+                    "accion": "add"
+                })
+
+            }
+
+        ).then(res => res.text()).then(res => console.log(res))
+    }
+    obama();
+</script>
 
 </html>
