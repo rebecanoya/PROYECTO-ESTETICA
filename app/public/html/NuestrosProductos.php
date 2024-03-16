@@ -12,6 +12,7 @@ include '../../src/iniciarPHP.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/general.css">
     <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../css/np.css">
     <script src="https://kit.fontawesome.com/dc2d3ea46f.js" crossorigin="anonymous"></script>
     <link rel="icon" href="../img/favicon.ico" type="image/x-icon">
@@ -99,6 +100,9 @@ include '../../src/iniciarPHP.php';
 
     </main>
 
+    <?php
+    include "../../src/templates/footer.php"
+    ?>
 
 </body>
 

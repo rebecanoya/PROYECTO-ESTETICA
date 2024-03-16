@@ -1,13 +1,10 @@
 body {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
     background-color: #48d1cc;
 }
 
 main {
-    flex: 1;
+    display: flex;
+    align-items: center;
     padding: 2.5em;
     gap: 1em;
     flex-direction: column;
@@ -16,86 +13,94 @@ main {
 
 
 .info {
-    
-    display: flex;
-    gap: 15em;
+
+    display: grid;
+    gap: 2em;
     justify-content: center;
-    margin-right: 13em;
+    grid-template-columns: 2fr 1fr;
+    width: 80%;
 
 
-
-    & .descripcion{
+    & .descripcion {
 
         display: grid;
-        place-items: center;
         position: relative;
         border-radius: 5px;
-        width: 50em;
-        margin-left: 6em;
-        
-    
-        & h2{
+        gap: 2em;
+
+
+        & h2 {
             background-color: #dddddd;
-            width: 30em;
             justify-content: center;
             display: flex;
         }
-        & .quienes{
-            margin-bottom: 2em;
+
+        & .quienes {
+            display: flex;
+            gap: 0.5em;
+            flex-direction: column;
             background-color: #dddddd;
-            height: 13em;
-            width: 45em;
+            padding: 1em;
             outline: 0.15em solid black;
             border: 0.2em solid #5dc1b9;
-            & h2{
+            border-radius: 1em;
+
+            & h2 {
                 margin: auto;
                 justify-content: center;
             }
+
             & .quien {
-                    margin-left: 1%;
-                }
+                text-align: justify;
             }
         }
-        & .h {
-            outline: 0.15em solid black;
-            border: 0.2em solid #5dc1b9;
-        }
-
-        & .imagenes{
-                display: flex;
-                justify-content: center;
-                background-color: #dddddd;
-                height: 20em;
-                width: 45em;
-                
-                & .img{
-                    max-width: 30em;
-                    max-height: 20em;
-                    width: auto;
-                    height: auto;
-                    margin: auto;
-                    
-                }
-        }
-
     }
-    & .datos{
-        background-color: rgb(204, 204, 204);
-        & .container {
-            margin: 1em;
-            & .button-container {
-                & .custom-button {
-                    width: 10em;
-                    background-color: #f0f0f0;
-                    border: none;
-                    outline: none;
-                }
-            }
-            & .text-container {
-                background-color: #f0f0f0;
-                padding: 1em;
-                height: 30em; 
-            }
+
+
+    & .imagenes {
+        display: flex;
+        justify-content: center;
+        background-color: #dddddd;
+        outline: 0.15em solid black;
+        border: 0.2em solid #5dc1b9;
+        border-radius: 1em;
+
+        & .img {
+            max-width: 30em;
+            max-height: 20em;
+            width: auto;
+            height: auto;
+            margin: auto;
+
         }
-        
+    }
+
+}
+
+& .datos {
+    background-color: rgb(204, 204, 204);
+    outline: 0.15em solid black;
+    border: 0.2em solid #5dc1b9;
+    border-radius: 1em;
+
+    & .container {
+        padding: 1em;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5em;
+
+        & .button-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5em;
+        }
+
+        & .text-container {
+            background-color: #f0f0f0;
+            padding: 1em;
+            height: 30em;
+            border-radius: 0.5em;
+        }
+    }
+
 }

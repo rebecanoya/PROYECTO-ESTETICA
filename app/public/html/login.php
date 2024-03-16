@@ -26,30 +26,29 @@ include '../../src/iniciarPHP.php';
     <?php
     include "../../src/templates/header.php";
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if (isset($_POST["register"])) {               
-                $password = hash("sha512",$_POST["password"]);
-                $confirmPassword = hash("sha512",$_POST["confirmpassword"]);
-                if (hash_equals($password, $confirmPassword)) {
-                    $sql = "INSERT INTO usuarios(Email, Password, Rol) VALUES (:email, :password, 3)";
-                    $param = ["email" =>  $_POST["email"], "password" => $password];               
-                    $respuesta = $BBDD -> execute($sql, $param);
-                    if ($respuesta[0]) {
-                        $errorR = $respuesta[1];
-                    }
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (isset($_POST["register"])) {
+            $password = hash("sha512", $_POST["password"]);
+            $confirmPassword = hash("sha512", $_POST["confirmpassword"]);
+            if (hash_equals($password, $confirmPassword)) {
+                $sql = "INSERT INTO usuarios(Email, Password, Rol) VALUES (:email, :password, 3)";
+                $param = ["email" =>  $_POST["email"], "password" => $password];
+                $respuesta = $BBDD->execute($sql, $param);
+                if ($respuesta[0]) {
+                    $errorR = $respuesta[1];
                 }
-                $sesion -> login($_POST["email"], $_POST["password"]);
-                header("Location: index.php");
-                
-            } elseif (isset($_POST["login"])) {
-                if ($sesion -> login($_POST["email"], $_POST["password"])) {
-                    header("Location: index.php");               
-                } else {
-                    $errorL = "No se pudo iniciar sesion";
-                }           
             }
-        }    
-    ?> 
+            $sesion->login($_POST["email"], $_POST["password"]);
+            header("Location: index.php");
+        } elseif (isset($_POST["login"])) {
+            if ($sesion->login($_POST["email"], $_POST["password"])) {
+                header("Location: index.php");
+            } else {
+                $errorL = "No se pudo iniciar sesion";
+            }
+        }
+    }
+    ?>
     <main>
         <div class="container">
 
@@ -87,7 +86,7 @@ include '../../src/iniciarPHP.php';
                 </div>
                 <button type="submit" name="register" class="register">Crear cuenta</button>
             </form>
-            <?php 
+            <?php
             if (isset($errorR)) {
                 echo $errorR;
             }
@@ -95,17 +94,13 @@ include '../../src/iniciarPHP.php';
         </div>
     </main>
 
-    <?php
-    include "../../src/templates/footer.php"
-    ?>
-
     <script>
         document.getElementById('mostrarFormulario').addEventListener('click', function() {
             document.querySelector('.registrarse').style.display = 'block';
         });
     </script>
 
-    
+
 
 </body>
 

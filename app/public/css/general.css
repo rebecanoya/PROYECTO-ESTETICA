@@ -90,7 +90,7 @@ button,
 
     padding: 1em;
     border: 0;
-    border-radius: 0.25em;
+    border-radius: 0.5em;
     background-color: white;
 
 
@@ -99,6 +99,10 @@ button,
         transform: scale(1.025);
         cursor: pointer;
 
+    }
+
+    &:visited {
+        color: #000000;
     }
 
 }
@@ -139,6 +143,7 @@ footer {
     cursor: pointer;
     border-radius: 50%;
     font-size: 1.25em;
+
 
     &:hover {
 

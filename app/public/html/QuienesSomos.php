@@ -12,6 +12,7 @@ include '../../src/iniciarPHP.php';
     <link rel="stylesheet" href="../css/general.css">
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/quienessomos.css">
+    <link rel="stylesheet" href="../css/footer.css">
     <script src="https://kit.fontawesome.com/dc2d3ea46f.js" crossorigin="anonymous"></script>
     <link rel="icon" href="../img/favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon">
@@ -44,19 +45,16 @@ include '../../src/iniciarPHP.php';
                         est quam labore numquam, quasi laudantium.
                     </p>
                 </div>
-                <div class="h">
-                    <h2>IMAGEN</h2>
-                    <div class="imagenes">
-                        <img class="img" src="../img/imagenEjemploBlog.jpg" alt="img1">
-                    </div>
+                <div class="imagenes">
+                    <img class="img" src="../img/imagenEjemploBlog.jpg" alt="img1">
                 </div>
             </section>
             <section class="datos">
                 <div class="container">
                     <div class="button-container">
-                        <button class="custom-button" onclick="cambiarTexto(Mision)">Mision</button>
-                        <button class="custom-button" onclick="cambiarTexto(Vision)">Vision</button>
-                        <button class="custom-button" onclick="cambiarTexto(Valores)">Valores</button>
+                        <button class="button" onclick="cambiarTexto(Mision)">Mision</button>
+                        <button class="button" onclick="cambiarTexto(Vision)">Vision</button>
+                        <button class="button" onclick="cambiarTexto(Valores)">Valores</button>
                     </div>
                     <div id="textoCambiante" class="text-container">
                         Texto ejemplo Inicial

@@ -8,7 +8,7 @@
         <div class="footer-column">
             <h3>Aromusicoterapia</h3>
             <ul>
-                <li>Tu tienda de productos cosméticos en Vigo</li>
+                <li>Productos cosméticos en Vigo (Por ahora)</li>
             </ul>
         </div>
         <div class="footer-column">
@@ -20,7 +20,7 @@
             </ul>
         </div>
         <div class="footer-column">
-            <h3>Contacto</h3>
+            <h3><a href="Contacto.php">Contacto</a></h3>
             <ul>
                 <li>Teléfono: 886120464</li>
                 <li>ies.teis@edu.xunta.es</li>

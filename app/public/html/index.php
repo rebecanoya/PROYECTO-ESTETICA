@@ -16,7 +16,7 @@ include '../../src/iniciarPHP.php';
     <script src="https://kit.fontawesome.com/dc2d3ea46f.js" crossorigin="anonymous"></script>
     <link rel="icon" href="../img/favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon">
-    <title>Aromusicoterapia | Tienda de productos cosméticos</title>
+    <title>Aromusicoterapia | Productos cosméticos en Vigo</title>
 </head>
 
 <body>
@@ -47,7 +47,7 @@ include '../../src/iniciarPHP.php';
                     <p>Nuestro equipo de expertos en belleza está aquí para asesorarte y ayudarte a encontrar los productos adecuados para tus necesidades específicas</p>
 
                 </div>
-                <a class="button">Contactanos</a>
+                <a class="button" href="Contacto.php">Contáctanos</a>
             </div>
             <div class="imgContacto"><img src="../img/llamada.jpg"></div>
 
