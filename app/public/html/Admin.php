@@ -55,6 +55,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } catch (PDOException $e) {
             echo "Error en la consulta: " . $e->getMessage();
         }
+    } elseif (isset($_POST["productoMod"])) {
+        try {
+            $sql = "UPDATE productos SET Precio = :precio, Stock = :stock, Descripcion = :descripcion,
+            ID_Linea = :linea, Nombre = :nombre, Activo = :activo WHERE productos.ID = :id";
+            $param = ["precio" => $_POST["precio"], "stock" => $_POST["stock"],
+            "descripcion" => $_POST["descripcion"], "linea" => $_POST["linea"], "nombre" => $_POST["nombreProducto"],
+            "activo" => $_POST["activoP"],"id" => $_POST["idP"]];
+            $respuesta = $BBDD->execute($sql, $param);
+            if ($respuesta[0]) {
+                $errorR = $respuesta[1];
+            }
+            if (isset($_FILES)) {
+                $imagen = $_FILES['imagen'];
+                $file = $imagen["name"];
+    
+                $url_temp = $imagen["tmp_name"];
+    
+                $url_insert = "../img/productos";
+    
+                $url_target = str_replace('\\', '/', $url_insert) . '/' . $_POST["idP"] . ".png";
+    
+                if (!file_exists($url_insert)) {
+                    mkdir($url_insert, 0777, true);
+                };
+                move_uploaded_file($url_temp, $url_target);
+            }
+        } catch (PDOException $e) {
+            echo "Error en la consulta: " . $e->getMessage();
+        }   
     } elseif (isset($_POST["usuario"])) {
         try {
             $sql = "SELECT email FROM usuarios";
@@ -86,7 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         try {
             $sql = "UPDATE usuarios SET email = :email, rol = :rol, activo = :activo  WHERE usuarios.id = :id";
             $param = ["email" => $_POST["email"], "rol" => $_POST["rol"],
-            "activo" => $_POST["activoU"], "id" => $_POST["id"]];
+            "activo" => $_POST["activoU"], "id" => $_POST["idU"]];
             $respuesta = $BBDD->execute($sql, $param);
             if ($respuesta[0]) {
                 $errorR = $respuesta[1];
@@ -214,6 +243,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <h2>Productos</h2>
             <div id="productoMessage"></div>
             <form id="productoForm" method="post" enctype="multipart/form-data">
+            <input type="hidden" id="idP" name="idP" value=0 class="form-control">
                 <div class="form-group">
                     <label for="nombreProducto">Nombre:</label>
                     <input type="text" id="nombreProducto" name="nombreProducto" class="form-control" required>
@@ -238,10 +268,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <input type="number" id="stock" name="stock" class="form-control" required>
                 </div>
                 <div class="form-group">
-                    <label for="activo">Activo:</label>
-                    <input id="activo" type="radio" name="activo2" value="1" required>
+                    <label for="activoP">Activo:</label>
+                    <input id="activoP" type="radio" name="activoP" value="1" required>
                     Si
-                    <input id="activo" type="radio" name="activo2" value="2" required>
+                    <input id="activoP" type="radio" name="activoP" value="2" required>
                     No
                     </label>
                 </div>
@@ -250,6 +280,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <input type="file" id="imagen" name="imagen" accept="image/png" class="form-control-file">
                 </div>
                 <button type="submit" id="productoActionButton" name="producto" class="btn btn-primary">Agregar</button>
+                <button type="submit" id="productoModButton" name="productoMod" class="btn btn-primary" disabled>Modificar</button>
+                <button type="submit" id="resetProducto" name="resetProducto" class="btn btn-primary" disabled>Resetear</button>
+                <button type="button" id="limpiar" name="limpiar" class="btn btn-primary" onclick=limpiarFormularioProducto()>Limpiar</button>
             </form>
         </section>
 
@@ -257,6 +290,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <table id="tablaProductos" class="table table-bordered table-dark">
                 <thead class="thead-dark">
                     <tr>
+                        <th>ID</th>
                         <th>Nombre</th>
                         <th>Precio</th>
                         <th>Descripción</th>
@@ -272,6 +306,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $productos = $BBDD->select($sql);
                     foreach ($productos as $producto) {
                         echo "<tr>";
+                        echo "<td>" . $producto["ID"] . "</td>";
                         echo "<td>" . $producto["Nombre"] . "</td>";
                         echo "<td>" . $producto["Precio"] . "</td>";
                         echo "<td>" . $producto["Descripcion"] . "</td>";
@@ -287,10 +322,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         }
                         echo "<td>
                                 <button onclick=llenarFormularioProducto()>
-                                    <i class=fas fa-pencil-alt></i>
-                                </button>
-                                <button @click=handleDelete>
-                                    <i class=fas fa-trash-alt></i>
+                                <i class='fas fa-pencil-alt'></i>
                                 </button>
                             </td>";
                         echo "</tr>";
@@ -304,7 +336,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <h2>Usuarios</h2>
             <div id="usuarioMessage"></div>
             <form id="usuarioForm" method="post">
-            <input type="hidden" id="id" name="id" value=0 class="form-control">
+            <input type="hidden" id="idU" name="idU" value=0 class="form-control">
                 <div class="form-group">
                     <label for="correo">Correo:</label>
                     <input type="email" id="email" name="email" class="form-control" required>
@@ -341,7 +373,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <button type="submit" id="usuarioActionButton" name="usuario" class="btn btn-primary">Agregar</button>
                 <button type="submit" id="usuarioModButton" name="usuarioMod" class="btn btn-primary" disabled>Modificar</button>
                 <button type="submit" id="resetUsuario" name="resetUsuario" class="btn btn-primary" disabled>Resetear</button>
-                <button type="button" id="limpiar" name="limpiar" class="btn btn-primary" onclick=limpiarFormulario()>Limpiar</button>
+                <button type="button" id="limpiar" name="limpiar" class="btn btn-primary" onclick=limpiarFormularioUsuario()>Limpiar</button>
             </form>
         </section>
 
@@ -384,7 +416,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 break;
                         }
                         echo "<td>
-                                <button onclick=llenarFormularioUsuario()>
+                                <button onclick=llenarFormularioProducto()>
                                     <i class='fas fa-pencil-alt'></i>
                                 </button>
                             </td>";

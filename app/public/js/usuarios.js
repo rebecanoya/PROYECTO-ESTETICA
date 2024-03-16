@@ -11,7 +11,7 @@ function llenarFormularioUsuario(filaSeleccionada) {
         var rol = filaSeleccionada.cells[2].innerText;
         var activo = filaSeleccionada.cells[3].innerText;
 
-        document.getElementById("id").value = id;
+        document.getElementById("idU").value = id;
         document.getElementById("email").value = correo;
         switch (rol) {
             case "Admin":
@@ -58,11 +58,7 @@ function activarInputs() {
     });
 }
 
-function obtenerValorCorreo() {
-    return document.getElementById('email').value;
-}
-
-function limpiarFormulario() {
+function limpiarFormularioUsuario() {
     document.getElementById("email").value = "";
     document.getElementById("password").value = "";
     document.getElementById("passwordCheck").value = "";
