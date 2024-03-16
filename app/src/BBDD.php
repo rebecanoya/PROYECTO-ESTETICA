@@ -85,4 +85,8 @@ class BBDD
             return [false, "Mecachis, ccurrio un error", $th->getMessage()];
         }
     }
+    public function lastId(){
+        $lastId = $this->pdo->lastInsertId();
+        return $lastId;
+    }
 }

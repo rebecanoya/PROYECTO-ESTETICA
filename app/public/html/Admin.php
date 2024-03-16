@@ -1,18 +1,18 @@
 <?php
 include '../../src/iniciarPHP.php';
 
-if (!isset($_SESSION["rol"]) || $_SESSION["rol"] !== 1) {
-    header("Location: index.php");
-}
+// if (!isset($_SESSION["rol"]) || $_SESSION["rol"] !== 1) {
+//     header("Location: index.php");
+// }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST["lineas"])) {
         try {
-            $sql = "INSERT INTO lineas (ID_Musica, Nombre, Color, Descripcion) 
-                VALUES (:musica, :nombre, :color, :descripcion)";
+            $sql = "INSERT INTO lineas (ID_Musica, Nombre, Color, Descripcion, Activo) 
+                VALUES (:musica, :nombre, :color, :descripcion, :activo)";
             $param = [
                 "musica" =>  $_POST["musica"], "nombre" => $_POST["nombre"],
-                "color" => $_POST["color"], "descripcion" => $_POST["descripcion"]
+                "color" => $_POST["color"], "descripcion" => $_POST["descripcion"], "activo" => $_POST["activo"]
             ];
             $respuesta = $BBDD->execute($sql, $param);
             if ($respuesta[0]) {
@@ -23,11 +23,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     } elseif (isset($_POST["producto"])) {
         try {
-            $sql = "INSERT INTO productos (Precio, Stock, Descripcion, ID_Linea, Nombre)
-                VALUES (:precio, :stock, :descripcion, :ID_Linea, :Nombre)";
+            $sql = "INSERT INTO productos (Precio, Stock, Descripcion, ID_Linea, Nombre, Activo)
+                VALUES (:precio, :stock, :descripcion, :ID_Linea, :Nombre, :Activo)";
             $param = [
                 "precio" =>  $_POST["precio"], "stock" => $_POST["stock"],
-                "descripcion" => $_POST["descripcion"], "ID_Linea" => $_POST["linea"], "Nombre" => $_POST["nombreProducto"]
+                "descripcion" => $_POST["descripcion"], "ID_Linea" => $_POST["linea"],
+                "Nombre" => $_POST["nombreProducto"], "Activo" => $_POST["activo"]
             ];
             $respuesta = $BBDD->execute($sql, $param);
             $idProducto = $BBDD->lastId();
@@ -67,8 +68,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $password = hash("sha512", $_POST["password"]);
                 $passwordCheck = hash("sha512", $_POST["passwordCheck"]);
                 if ($password == $passwordCheck) {                
-                    $sql = "INSERT INTO usuarios(Email, Password, Rol) VALUES (:email, :password, :rol)";
-                    $param = ["email" =>  $_POST["email"], "password" => $password, "rol" => $_POST["rol"]];
+                    $sql = "INSERT INTO usuarios(Email, Password, Rol, Activo) VALUES (:email, :password, :rol, :activo)";
+                    $param = ["email" =>  $_POST["email"], "password" => $password,
+                    "rol" => $_POST["rol"], "activo" => $_POST["activoU"]];
                     $respuesta = $BBDD->execute($sql, $param);
                     if ($respuesta[0]) {
                         $errorR = $respuesta[1];
@@ -76,6 +78,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 } else {
                     $errorR = "Las contraseñas no coinciden";
                 }                
+            }
+        } catch (PDOException $e) {
+            echo "Error en la consulta: " . $e->getMessage();
+        }
+    } elseif (isset($_POST["usuarioMod"])) {
+        try {
+            $sql = "UPDATE usuarios SET email = :email, rol = :rol, activo = :activo  WHERE usuarios.id = :id";
+            $param = ["email" => $_POST["email"], "rol" => $_POST["rol"],
+            "activo" => $_POST["activoU"], "id" => $_POST["id"]];
+            $respuesta = $BBDD->execute($sql, $param);
+            if ($respuesta[0]) {
+                $errorR = $respuesta[1];
+            }
+        } catch (PDOException $e) {
+            echo "Error en la consulta: " . $e->getMessage();
+        }
+    } elseif (isset($_POST["resetUsuario"])) {
+        try {
+            $sql = "UPDATE usuarios SET password = :password WHERE usuarios.id = :id";
+            $param = ["password" => hash("sha512",""), "id" => $_POST["id"]];
+            $respuesta = $BBDD->execute($sql, $param);
+            if ($respuesta[0]) {
+                $errorR = $respuesta[1];
             }
         } catch (PDOException $e) {
             echo "Error en la consulta: " . $e->getMessage();
@@ -123,6 +148,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <label for="descripcion">Descripción:</label>
                     <textarea id="descripcion" name="descripcion" class="form-control" required></textarea>
                 </div>
+                <div class="form-group">
+                    <label for="rol">Activo:</label>
+                    <input id="activo" type="radio" name="activo1" value="1" required>
+                    Si
+                    <input type="radio" name="activo1" value="2" required>
+                    No
+                    </label>
+                </div>
                 <?php
                 if (isset($errorR)) {
                     echo "<div>" . $errorR . "</div>";
@@ -140,6 +173,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <th>Color</th>
                         <th>Música</th>
                         <th>Descripcion</th>
+                        <th>Activo</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -153,6 +187,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         echo "<td>" . $linea["Color"] . "</td>";
                         echo "<td>" . $linea["ID_Musica"] . "</td>";
                         echo "<td>" . $linea["Descripcion"] . "</td>";
+                        switch ($linea["Activo"]) {
+                            case 1:
+                                echo "<td>Si</td>";
+                                break;
+                            case 2:
+                                echo "<td>No</td>";
+                                break;
+                        }
                         echo "<td>
                                 <button onclick=llenarFormularioLineaCosmetica()>
                                     <i class=fas fa-pencil-alt></i>
@@ -196,6 +238,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <input type="number" id="stock" name="stock" class="form-control" required>
                 </div>
                 <div class="form-group">
+                    <label for="activo">Activo:</label>
+                    <input id="activo" type="radio" name="activo2" value="1" required>
+                    Si
+                    <input id="activo" type="radio" name="activo2" value="2" required>
+                    No
+                    </label>
+                </div>
+                <div class="form-group">
                     <label for="imagen">Imagen:</label>
                     <input type="file" id="imagen" name="imagen" accept="image/png" class="form-control-file">
                 </div>
@@ -212,6 +262,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <th>Descripción</th>
                         <th>Línea</th>
                         <th>Stock</th>
+                        <th>Activo</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -226,7 +277,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         echo "<td>" . $producto["Descripcion"] . "</td>";
                         echo "<td>" . $producto["ID_Linea"] . "</td>";
                         echo "<td>" . $producto["Stock"] . "</td>";
-                        // echo "<td>" . $producto["Img"] . "</td>";
+                        switch ($producto["Activo"]) {
+                            case 1:
+                                echo "<td>Si</td>";
+                                break;
+                            case 2:
+                                echo "<td>No</td>";
+                                break;
+                        }
                         echo "<td>
                                 <button onclick=llenarFormularioProducto()>
                                     <i class=fas fa-pencil-alt></i>
@@ -246,6 +304,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <h2>Usuarios</h2>
             <div id="usuarioMessage"></div>
             <form id="usuarioForm" method="post">
+            <input type="hidden" id="id" name="id" value=0 class="form-control">
                 <div class="form-group">
                     <label for="correo">Correo:</label>
                     <input type="email" id="email" name="email" class="form-control" required>
@@ -260,10 +319,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
                 <div class="form-group">
                     <label for="rol">Rol:</label>
-                    <input type="radio" name="rol" value="1" required>
+                    <input id="rol" type="radio" name="rol" value="1" required>
                     Administrador
                     <input type="radio" name="rol" value="2" required>
                     Alumno
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="activo">Activo:</label>
+                    <input id="activo" type="radio" name="activoU" value="1" required>
+                    Si
+                    <input id="activo" type="radio" name="activoU" value="2" required>
+                    No
                     </label>
                 </div>
                 <?php
@@ -272,6 +339,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     }
                 ?>
                 <button type="submit" id="usuarioActionButton" name="usuario" class="btn btn-primary">Agregar</button>
+                <button type="submit" id="usuarioModButton" name="usuarioMod" class="btn btn-primary" disabled>Modificar</button>
+                <button type="submit" id="resetUsuario" name="resetUsuario" class="btn btn-primary" disabled>Resetear</button>
+                <button type="button" id="limpiar" name="limpiar" class="btn btn-primary" onclick=limpiarFormulario()>Limpiar</button>
             </form>
         </section>
 
@@ -279,8 +349,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <table id="usuarios" class="table table-bordered table-dark">
                 <thead class="thead-dark">
                     <tr>
+                        <th>ID</th>
                         <th>Correo</th>
                         <th>Rol</th>
+                        <th>Activo</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -290,6 +362,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $usuarios = $BBDD->select($sql);
                     foreach ($usuarios as $usuario) {
                         echo "<tr>";
+                        echo "<td>". $usuario["ID"] . "</td>";
                         echo "<td>" . $usuario["Email"] . "</td>";
                         switch ($usuario["rol"]) {
                             case 1:
@@ -302,12 +375,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 echo "<td>Cliente</td>";
                                 break;
                         }
+                        switch ($usuario["Activo"]) {
+                            case 1:
+                                echo "<td>Si</td>";
+                                break;
+                            case 2:
+                                echo "<td>No</td>";
+                                break;
+                        }
                         echo "<td>
                                 <button onclick=llenarFormularioUsuario()>
-                                    <i class=fas fa-pencil-alt></i>
-                                </button>
-                                <button @click=handleDelete>
-                                    <i class=fas fa-trash-alt></i>
+                                    <i class='fas fa-pencil-alt'></i>
                                 </button>
                             </td>";
                         echo "</tr>";
