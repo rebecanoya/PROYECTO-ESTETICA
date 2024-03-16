@@ -5,8 +5,86 @@ if (!isset($_SESSION["rol"]) || $_SESSION["rol"] !== 1) {
     header("Location: index.php");
 }
 
-?>
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST["lineas"])) {
+        try {
+            $sql = "INSERT INTO lineas (ID_Musica, Nombre, Color, Descripcion) 
+                VALUES (:musica, :nombre, :color, :descripcion)";
+            $param = [
+                "musica" =>  $_POST["musica"], "nombre" => $_POST["nombre"],
+                "color" => $_POST["color"], "descripcion" => $_POST["descripcion"]
+            ];
+            $respuesta = $BBDD->execute($sql, $param);
+            if ($respuesta[0]) {
+                $errorR = $respuesta[1];
+            }
+        } catch (PDOException $e) {
+            echo "Error en la consulta: " . $e->getMessage();
+        }
+    } elseif (isset($_POST["producto"])) {
+        try {
+            $sql = "INSERT INTO productos (Precio, Stock, Descripcion, ID_Linea, Nombre)
+                VALUES (:precio, :stock, :descripcion, :ID_Linea, :Nombre)";
+            $param = [
+                "precio" =>  $_POST["precio"], "stock" => $_POST["stock"],
+                "descripcion" => $_POST["descripcion"], "ID_Linea" => $_POST["linea"], "Nombre" => $_POST["nombreProducto"]
+            ];
+            $respuesta = $BBDD->execute($sql, $param);
+            $idProducto = $BBDD->lastId();
+            if ($respuesta[0]) {
+                $errorR = $respuesta[1];
+            }
+            $file = $_FILES["imagen"]["name"];
 
+            $url_temp = $_FILES["imagen"]["tmp_name"];
+
+            $url_insert = "../img/productos";
+
+            $url_target = str_replace('\\', '/', $url_insert) . '/' . $idProducto . ".png";
+
+            if (!file_exists($url_insert)) {
+                mkdir($url_insert, 0777, true);
+            };
+
+            if (move_uploaded_file($url_temp, $url_target)) {
+                echo "El archivo " . htmlspecialchars(basename($file)) . " ha sido cargado con éxito.";
+            } else {
+                echo "Ha habido un error al cargar tu archivo.";
+            }
+        } catch (PDOException $e) {
+            echo "Error en la consulta: " . $e->getMessage();
+        }
+    } elseif (isset($_POST["usuario"])) {
+        try {
+            $sql = "SELECT email FROM usuarios";
+            $checkEmail = $BBDD->select($sql);
+            foreach($checkEmail as $email){
+                if ($email["email"] == $_POST["email"])  {
+                    $errorR = "Ya existe una cuenta con ese email";
+                }
+            }
+            if (!isset($errorR)) {
+                $password = hash("sha512", $_POST["password"]);
+                $passwordCheck = hash("sha512", $_POST["passwordCheck"]);
+                if ($password == $passwordCheck) {                
+                    $sql = "INSERT INTO usuarios(Email, Password, Rol) VALUES (:email, :password, :rol)";
+                    $param = ["email" =>  $_POST["email"], "password" => $password, "rol" => $_POST["rol"]];
+                    $respuesta = $BBDD->execute($sql, $param);
+                    if ($respuesta[0]) {
+                        $errorR = $respuesta[1];
+                    }
+                } else {
+                    $errorR = "Las contraseñas no coinciden";
+                }                
+            }
+        } catch (PDOException $e) {
+            echo "Error en la consulta: " . $e->getMessage();
+        }
+    }
+};
+
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -93,7 +171,7 @@ if (!isset($_SESSION["rol"]) || $_SESSION["rol"] !== 1) {
         <section>
             <h2>Productos</h2>
             <div id="productoMessage"></div>
-            <form id="productoForm" method="post">
+            <form id="productoForm" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="nombreProducto">Nombre:</label>
                     <input type="text" id="nombreProducto" name="nombreProducto" class="form-control" required>
@@ -119,7 +197,7 @@ if (!isset($_SESSION["rol"]) || $_SESSION["rol"] !== 1) {
                 </div>
                 <div class="form-group">
                     <label for="imagen">Imagen:</label>
-                    <input type="file" id="imagen" name="imagen" accept="image/*" class="form-control-file">
+                    <input type="file" id="imagen" name="imagen" accept="image/png" class="form-control-file">
                 </div>
                 <button type="submit" id="productoActionButton" name="producto" class="btn btn-primary">Agregar</button>
             </form>
@@ -177,6 +255,10 @@ if (!isset($_SESSION["rol"]) || $_SESSION["rol"] !== 1) {
                     <input type="password" id="password" name="password" class="form-control" required>
                 </div>
                 <div class="form-group">
+                    <label for="contrasena">Repite la contraseña:</label>
+                    <input type="password" id="passwordCheck" name="passwordCheck" class="form-control" required>
+                </div>
+                <div class="form-group">
                     <label for="rol">Rol:</label>
                     <input type="radio" name="rol" value="1" required>
                     Administrador
@@ -184,6 +266,11 @@ if (!isset($_SESSION["rol"]) || $_SESSION["rol"] !== 1) {
                     Alumno
                     </label>
                 </div>
+                <?php
+                    if (isset($errorR)) {
+                        echo "<div>" . $errorR . "</div>";
+                    }
+                ?>
                 <button type="submit" id="usuarioActionButton" name="usuario" class="btn btn-primary">Agregar</button>
             </form>
         </section>
@@ -215,7 +302,6 @@ if (!isset($_SESSION["rol"]) || $_SESSION["rol"] !== 1) {
                                 echo "<td>Cliente</td>";
                                 break;
                         }
-                        echo "<td>" . $usuario["rol"] . "</td>";
                         echo "<td>
                                 <button onclick=llenarFormularioUsuario()>
                                     <i class=fas fa-pencil-alt></i>
@@ -237,122 +323,5 @@ if (!isset($_SESSION["rol"]) || $_SESSION["rol"] !== 1) {
     <script src="../js/usuarios.js"></script>
     <script src="../js/productos.js"></script>
 </body>
-<script>
-    function llenarFormularioLineaCosmetica() {
-        var tablaLineaCosmetica = document.getElementById("lineasCosmeticas");
-        var filaSeleccionada = tablaLineaCosmetica.querySelector("tr.selected");
-
-        if (filaSeleccionada) {
-            var nombre = filaSeleccionada.cells[0].innerText;
-            var color = filaSeleccionada.cells[1].innerText;
-            var musica = filaSeleccionada.cells[2].innerText;
-            var descripcion = filaSeleccionada.cells[3].innerText;
-
-            document.getElementById("nombre").value = nombre;
-            document.getElementById("color").value = color;
-            document.getElementById("musica").value = musica;
-            document.getElementById("descripcion").value = descripcion;
-        }
-    }
-
-    function llenarFormularioProducto() {
-        var tablaProductos = document.getElementById("tablaProductos");
-        var filaSeleccionada = tablaProductos.querySelector("tr.selected");
-
-        if (filaSeleccionada) {
-            var nombreProducto = filaSeleccionada.cells[0].innerText;
-            var precio = filaSeleccionada.cells[1].innerText;
-            var descripcion = filaSeleccionada.cells[2].innerText;
-            var linea = filaSeleccionada.cells[3].innerText;
-            var stock = filaSeleccionada.cells[4].innerText;
-
-            document.getElementById("nombreProducto").value = nombreProducto;
-            document.getElementById("precio").value = precio;
-            document.getElementById("descripcionP").value = descripcion;
-            document.getElementById("linea").value = linea;
-            document.getElementById("stock").value = stock;
-        }
-    }
-
-    function llenarFormularioUsuario() {
-        var tablaUsuarios = document.getElementById("usuarios");
-        var filaSeleccionada = tablaUsuarios.querySelector("tr.selected");
-
-        if (filaSeleccionada) {
-            var correo = filaSeleccionada.cells[0].innerText;
-            var rol = filaSeleccionada.cells[1].innerText;
-
-            document.getElementById("email").value = correo;
-            document.querySelector('input[name="rol"][value="' + rol + '"]').checked = true;
-        }
-    }
-
-    // Agregar evento de clic a las filas de las tablas para marcarlas como seleccionadas
-    document.addEventListener("DOMContentLoaded", function() {
-        var filas = document.querySelectorAll("tbody tr");
-
-        filas.forEach(function(fila) {
-            fila.addEventListener("click", function() {
-                // Eliminar la clase "selected" de todas las filas
-                filas.forEach(function(otraFila) {
-                    otraFila.classList.remove("selected");
-                });
-
-                // Agregar la clase "selected" a la fila seleccionada
-                fila.classList.add("selected");
-            });
-        });
-    });
-</script>
-
 </html>
 
-<?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST["lineas"])) {
-        try {
-            $sql = "INSERT INTO lineas (ID_Musica, Nombre, Color, Descripcion) 
-                VALUES (:musica, :nombre, :color, :descripcion)";
-            $param = [
-                "musica" =>  $_POST["musica"], "nombre" => $_POST["nombre"],
-                "color" => $_POST["color"], "descripcion" => $_POST["descripcion"]
-            ];
-            $respuesta = $BBDD->execute($sql, $param);
-            if ($respuesta[0]) {
-                $errorR = $respuesta[1];
-            }
-        } catch (PDOException $e) {
-            echo "Error en la consulta: " . $e->getMessage();
-        }
-    } elseif (isset($_POST["producto"])) {
-        try {
-            $sql = "INSERT INTO productos (Precio, Stock, Descripcion, ID_Linea, Nombre)
-                VALUES (:precio, :stock, :descripcion, :ID_Linea, :Nombre)";
-            $param = [
-                "precio" =>  $_POST["precio"], "stock" => $_POST["stock"],
-                "descripcion" => $_POST["descripcion"], "ID_Linea" => $_POST["linea"], "Nombre" => $_POST["nombreProducto"]
-            ];
-            $respuesta = $BBDD->execute($sql, $param);
-            if ($respuesta[0]) {
-                $errorR = $respuesta[1];
-            }
-        } catch (PDOException $e) {
-            echo "Error en la consulta: " . $e->getMessage();
-        }
-    } elseif (isset($_POST["usuario"])) {
-        try {
-            $password = hash("sha512", $_POST["password"]);
-            $sql = "INSERT INTO usuarios(Email, Password, Rol) VALUES (:email, :password, :rol)";
-            $param = ["email" =>  $_POST["email"], "password" => $password, "rol" => $_POST["rol"]];
-            $respuesta = $BBDD->execute($sql, $param);
-            if ($respuesta[0]) {
-                $errorR = $respuesta[1];
-            }
-        } catch (PDOException $e) {
-            echo "Error en la consulta: " . $e->getMessage();
-        }
-    }
-};
-
-
-?>
