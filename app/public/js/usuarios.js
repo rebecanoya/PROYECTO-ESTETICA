@@ -58,8 +58,7 @@ function llenarFormularioUsuario(filaSeleccionada) {
         document.querySelector('input[name="activoU"][value="' + activo + '"]').checked = true;
         /**
          * Con estos dos llamados a funciones presentes también en este archivo
-         * activamos los botones tanto de reset como de modificar y desactivamos el input de contraseña  
-         * @return  {[type]}  [return description]
+         * activamos los botones tanto de reset como de modificar y desactivamos el input de contraseña junto con el boton Agregar
          */
         activarBoton();
         desactivarInputs();

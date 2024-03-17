@@ -146,7 +146,8 @@ ALTER TABLE `blog`
 --
 ALTER TABLE `carrito`
   ADD KEY `fk_idusuario` (`IDUsuario`),
-  ADD KEY `fk_idproducto` (`IDProducto`);
+  ADD KEY `fk_idproducto` (`IDProducto`),
+  ADD KEY `indice_compuesto` (`IDUsuario`,`IDProducto`);
 
 --
 -- Indices de la tabla `ies`
