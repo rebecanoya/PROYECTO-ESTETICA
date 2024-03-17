@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.6"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>My Project: Referencia del Archivo app/public/html/NuestrosProductos.php</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">My Project
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.9.6 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Buscar');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d422163b96683743ed3963d4aac17747.html">app</a></li><li class="navelem"><a class="el" href="dir_3e5d735e5b93935be71e7b570011ad62.html">public</a></li><li class="navelem"><a class="el" href="dir_38c4ad5d76233a63dc5af4166da99df1.html">html</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle"><div class="title">Referencia del Archivo NuestrosProductos.php</div></div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:afbfb067180246fd7758793c60b28b97b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_nuestros_productos_8php.html#afbfb067180246fd7758793c60b28b97b">$lineas</a> = $<a class="el" href="class_b_b_d_d.html">BBDD</a>-&gt;select($sql)</td></tr>
+<tr class="separator:afbfb067180246fd7758793c60b28b97b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4822dcebaa9bb50539cef3a3fa2d223c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_cesta_8php.html#a8dc6f24942980f21852ad24c3c32fcbe">foreach</a>($lineas as $linea)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_nuestros_productos_8php.html#a4822dcebaa9bb50539cef3a3fa2d223c">$sql</a> = &quot;SELECT ID,<a class="el" href="linea_8php.html#a79257de28e0d25f2937e04fec0c154fe">Nombre</a>,<a class="el" href="linea_8php.html#a2e7eb0057e8148e9adb4f51e3b1f8839">Descripcion</a>,Precio,ID_Linea,(select Color from lineas as l where l.ID=ID_Linea) as Color from <a class="el" href="enlace_productos_8js.html#adf2f7581256d42e90495b5206be95955">productos</a> where Activo = 1 order by Nombre&quot;</td></tr>
+<tr class="separator:a4822dcebaa9bb50539cef3a3fa2d223c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa42fa047ff2938134cc69ba5e8a8838"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_nuestros_productos_8php.html#afa42fa047ff2938134cc69ba5e8a8838">$productos</a> = $<a class="el" href="class_b_b_d_d.html">BBDD</a>-&gt;select($sql)</td></tr>
+<tr class="separator:afa42fa047ff2938134cc69ba5e8a8838"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d5fd59f4e3aaac0f0e3cb7dfb3aa977"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_nuestros_productos_8php.html#a9d5fd59f4e3aaac0f0e3cb7dfb3aa977">foreach</a> ( $<a class="el" href="enlace_productos_8js.html#adf2f7581256d42e90495b5206be95955">productos</a> as $producto)</td></tr>
+<tr class="separator:a9d5fd59f4e3aaac0f0e3cb7dfb3aa977"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Documentación de las variables</h2>
+<a id="afbfb067180246fd7758793c60b28b97b" name="afbfb067180246fd7758793c60b28b97b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afbfb067180246fd7758793c60b28b97b">&#9670;&#160;</a></span>$lineas</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$lineas = $<a class="el" href="class_b_b_d_d.html">BBDD</a>-&gt;select($sql)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afa42fa047ff2938134cc69ba5e8a8838" name="afa42fa047ff2938134cc69ba5e8a8838"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa42fa047ff2938134cc69ba5e8a8838">&#9670;&#160;</a></span>$productos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$<a class="el" href="enlace_productos_8js.html#adf2f7581256d42e90495b5206be95955">productos</a> = $<a class="el" href="class_b_b_d_d.html">BBDD</a>-&gt;select($sql)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4822dcebaa9bb50539cef3a3fa2d223c" name="a4822dcebaa9bb50539cef3a3fa2d223c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4822dcebaa9bb50539cef3a3fa2d223c">&#9670;&#160;</a></span>$sql</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="_cesta_8php.html#a8dc6f24942980f21852ad24c3c32fcbe">foreach</a> ( $lineas as $linea) $sql = &quot;SELECT ID,<a class="el" href="linea_8php.html#a79257de28e0d25f2937e04fec0c154fe">Nombre</a>,<a class="el" href="linea_8php.html#a2e7eb0057e8148e9adb4f51e3b1f8839">Descripcion</a>,Precio,ID_Linea,(select Color from lineas as l where l.ID=ID_Linea) as Color from <a class="el" href="enlace_productos_8js.html#adf2f7581256d42e90495b5206be95955">productos</a> where Activo = 1 order by Nombre&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9d5fd59f4e3aaac0f0e3cb7dfb3aa977" name="a9d5fd59f4e3aaac0f0e3cb7dfb3aa977"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d5fd59f4e3aaac0f0e3cb7dfb3aa977">&#9670;&#160;</a></span>foreach</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">foreach($<a class="el" href="enlace_productos_8js.html#adf2f7581256d42e90495b5206be95955">productos</a> as $producto) </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>$productos as</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generado el Domingo, 17 de Marzo de 2024 19:47:52 para My Project por&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6
+</small></address>
+</body>
+</html>

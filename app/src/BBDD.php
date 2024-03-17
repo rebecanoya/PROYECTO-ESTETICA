@@ -1,10 +1,19 @@
 <?php
+/**
+*
+* @brief Clase que contiene todo lo relacionado con la conexion a la Base de Datos, asi como
+* diferentes metodos con los que insertar o consultar en la misma
+*
+* @author Rebeca Noya Fernández
+*/
 
 class BBDD
 {
 
     public $pdo;
-
+    /**
+     * Constructor con el que se crea la conexión a la Base de Datos--
+     */
     public function __construct()
     {
         $host = 'mysql';
@@ -85,6 +94,7 @@ class BBDD
             return [false, "Mecachis, ccurrio un error", $th->getMessage()];
         }
     }
+    
     public function lastId(){
         $lastId = $this->pdo->lastInsertId();
         return $lastId;

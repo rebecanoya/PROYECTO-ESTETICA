@@ -1,0 +1,28 @@
+var searchData=
+[
+  ['_24bbdd_0',['$BBDD',['../_blog_8php.html#a71cb48c88bb00708d24f9941e5d1882d',1,'$BBDD():&#160;Blog.php'],['../_pedidos_8php.html#a71cb48c88bb00708d24f9941e5d1882d',1,'$BBDD():&#160;Pedidos.php'],['../iniciar_p_h_p_8php.html#a71cb48c88bb00708d24f9941e5d1882d',1,'$BBDD():&#160;iniciarPHP.php']]],
+  ['_24cargar_1',['$cargar',['../_producto_vista_8php.html#ad8e76eae6b874e7b4bf6d69c2fec93fc',1,'ProductoVista.php']]],
+  ['_24data_2',['$data',['../controlador_cesta_8php.html#a6efc15b5a2314dd4b5aaa556a375c6d6',1,'controladorCesta.php']]],
+  ['_24entrada_3',['$entrada',['../_blog_8php.html#a213385c502956e380973378865a3635e',1,'Blog.php']]],
+  ['_24host_4',['$host',['../bd_8php.html#a711797613cb863ca0756df789c396bf2',1,'bd.php']]],
+  ['_24input_5',['$input',['../controlador_cesta_8php.html#a69b271260be394b90709736cccb22c76',1,'controladorCesta.php']]],
+  ['_24institutos_6',['$institutos',['../_contacto_8php.html#a167ebfced420adbbad3dcc5180b2ea7b',1,'Contacto.php']]],
+  ['_24lineas_7',['$lineas',['../_admin_8php.html#afbfb067180246fd7758793c60b28b97b',1,'$lineas():&#160;Admin.php'],['../index_8php.html#afbfb067180246fd7758793c60b28b97b',1,'$lineas():&#160;index.php'],['../_nuestros_productos_8php.html#afbfb067180246fd7758793c60b28b97b',1,'$lineas():&#160;NuestrosProductos.php']]],
+  ['_24mysqlversion_8',['$mysqlVersion',['../bd_8php.html#a128402b7008375ada1cec5acba41869e',1,'bd.php']]],
+  ['_24name_9',['$name',['../bd_8php.html#ab2fc40d43824ea3e1ce5d86dee0d763b',1,'bd.php']]],
+  ['_24password_10',['$password',['../bd_8php.html#a607686ef9f99ea7c42f4f3dd3dbb2b0d',1,'bd.php']]],
+  ['_24pdo_11',['$pdo',['../class_b_b_d_d.html#aa9e8c83abf1169292339f4922d1facf1',1,'BBDD']]],
+  ['_24pedirbbdd_12',['$pedirBBDD',['../_producto_vista_8php.html#a0f199ad7ce5b554b3d997b6eef081d55',1,'ProductoVista.php']]],
+  ['_24producto_13',['$producto',['../_producto_vista_8php.html#a4c4aa6206e982b2f5eb7bad73e41a8e2',1,'ProductoVista.php']]],
+  ['_24productos_14',['$productos',['../_admin_8php.html#afa42fa047ff2938134cc69ba5e8a8838',1,'$productos():&#160;Admin.php'],['../_cesta_8php.html#aded4991a9ffa7cd07a2eaa2df57e9120',1,'$productos():&#160;Cesta.php'],['../_nuestros_productos_8php.html#afa42fa047ff2938134cc69ba5e8a8838',1,'$productos():&#160;NuestrosProductos.php']]],
+  ['_24query_15',['$query',['../bd_8php.html#af59a5f7cd609e592c41dc3643efd3c98',1,'bd.php']]],
+  ['_24resultado_16',['$resultado',['../_blog_8php.html#a06face0ef35c41554d8f4fe115363f58',1,'Blog.php']]],
+  ['_24row_17',['$row',['../bd_8php.html#aa1d731aa570613e5bcff831bb10e9b87',1,'bd.php']]],
+  ['_24sesion_18',['$sesion',['../log_out_8php.html#aa484902ef1e4cf7bb18fb4ec260c133a',1,'$sesion():&#160;logOut.php'],['../iniciar_p_h_p_8php.html#aa484902ef1e4cf7bb18fb4ec260c133a',1,'$sesion():&#160;iniciarPHP.php']]],
+  ['_24sql_19',['$sql',['../_admin_8php.html#ad19941ba41a177bfdde57d7919190163',1,'$sql():&#160;Admin.php'],['../_blog_8php.html#a047170d6020a882807665812a27e2525',1,'$sql():&#160;Blog.php'],['../_contacto_8php.html#a047170d6020a882807665812a27e2525',1,'$sql():&#160;Contacto.php'],['../_nuestros_productos_8php.html#a4822dcebaa9bb50539cef3a3fa2d223c',1,'$sql():&#160;NuestrosProductos.php']]],
+  ['_24statement_20',['$statement',['../bd_8php.html#a776dc234d8e2b257550d9444ddf5d399',1,'bd.php']]],
+  ['_24subtotal_21',['$subtotal',['../_cesta_8php.html#afdafafe541e5b005ff876dd3aaafe99f',1,'Cesta.php']]],
+  ['_24titulo_22',['$titulo',['../_blog_8php.html#a894f35d0aa77bfe5d5bee433e34cdd8f',1,'Blog.php']]],
+  ['_24user_23',['$user',['../bd_8php.html#a598ca4e71b15a1313ec95f0df1027ca5',1,'bd.php']]],
+  ['_24usuarios_24',['$usuarios',['../_admin_8php.html#afba4f3b049abbbbcf8229ca2095fef33',1,'Admin.php']]]
+];
