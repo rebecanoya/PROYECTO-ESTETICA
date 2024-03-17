@@ -1,5 +1,18 @@
+header {
+
+    outline: 0.05em solid black;
+
+    & a {
+
+        color: black;
+
+    }
+
+}
+
 body {
-    background-color: #48d1cc;
+    background-color: #f4f4f4;
+
 }
 
 main {
