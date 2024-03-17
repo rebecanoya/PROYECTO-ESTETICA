@@ -37,10 +37,11 @@ class Sesion
 
         try {
             $BBDD = new BBDD();
-            $sql = "SELECT * from usuarios where Email=:email, Password=:password and Activo = 1";
+            $sql = "SELECT * from usuarios where Email=:email and Password=:password and Activo = 1";
             $param = ["email" =>  $email, "password" => hash("sha512", $password)];
             $usuarioLogin = $BBDD->select($sql, $param);
-            if (!$usuarioLogin[0]) {
+            var_dump($usuarioLogin);
+            if (count($usuarioLogin) == 0 || !$usuarioLogin[0]) {
                 return false;
             }
             $sql = "SELECT IDProducto,Cantidad from carrito where IDUsuario=:id and Cantidad>0";
