@@ -1,6 +1,9 @@
 <header>
     <?php
-
+    /**
+     * Comprobamos que esta logueado el usuario con un if y si lo esta y es administrador,
+     * mostramos el icono que permite acceder a la pagina de administracion   
+    */
     if ($sesion->estaLoggeado()) {
         if ($_SESSION["rol"] == 1) {
 
@@ -33,7 +36,9 @@
         <a href="../../html/login.php" class="fa-regular fa-user iconButton"></a>
         <a href="../../html/Cesta.php" class=" fa-solid fa-cart-shopping iconButton"></a>
         <?php
-
+        /**
+         * Si esta el usuario logueado, mostramos el icono que permite cerrar la sesion
+         */
         if ($sesion->estaLoggeado()) {
 
         ?>

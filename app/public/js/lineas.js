@@ -1,3 +1,7 @@
+/**
+ * Aqui obtenemos la fila selecionada con el boton del lapiz de la tabla lineasCosmeticas,
+ * la cual usaremos en la funcion llenarFormularioLineaCosmetica();  
+ */
 document.getElementById("lineasCosmeticas").addEventListener("click", function(event) {
     var filaSeleccionada = event.target.closest("tr");
     if (filaSeleccionada) {
@@ -5,6 +9,9 @@ document.getElementById("lineasCosmeticas").addEventListener("click", function(e
     }
 });
 
+/**
+ * Con esta funcion estableceremos como valores del formulario
+ */
 function llenarFormularioLineaCosmetica(filaSeleccionada) {
     if (filaSeleccionada) {
         var id = filaSeleccionada.cells[0].innerText;
