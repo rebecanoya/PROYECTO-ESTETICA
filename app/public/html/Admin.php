@@ -1,9 +1,9 @@
 <?php
 include '../../src/iniciarPHP.php';
 
-// if (!isset($_SESSION["rol"]) || $_SESSION["rol"] !== 1) {
-//     header("Location: index.php");
-// }
+if (!isset($_SESSION["rol"]) || $_SESSION["rol"] !== 1) {
+     header("Location: index.php");
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST["lineas"])) {
