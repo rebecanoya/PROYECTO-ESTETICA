@@ -16,7 +16,6 @@ main {
     display: grid;
     grid-template-rows: auto 1fr;
     gap: 2em;
-    background-color: #f4f4f4;
 
 
     & h2 {
