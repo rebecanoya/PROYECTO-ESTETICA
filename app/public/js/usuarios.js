@@ -64,13 +64,17 @@ function llenarFormularioUsuario(filaSeleccionada) {
         desactivarInputs();
     }
 }
-
+/**
+ * Con esta funcion activo los botones de Modificar y Reset
+ */
 function activarBoton() {
     document.getElementById('usuarioModButton').removeAttribute('disabled');
     document.getElementById('resetUsuario').removeAttribute('disabled');
 }
 
-// Función para desactivar los inputs y el botón Agregar
+/**
+ * Con esta funcion desactivo los inputs de Contraseña, Repetir Contraseña y el boton Agregar
+ */
 function desactivarInputs() {
     var inputs = document.querySelectorAll('#usuarioForm input:not([name="rol"],[name="activoU"],[name="email"], [name="idU"])');
     inputs.forEach(function(input) {
@@ -78,13 +82,19 @@ function desactivarInputs() {
     });
     document.getElementById('usuarioActionButton').disabled = true;
 }
+/**
+ * Aqui reactivo los inputs de Contraseña, Repetir Contraseña
+ */
 function activarInputs() {
     var inputs = document.querySelectorAll('#usuarioForm input:not([name="rol"],[name="activoU"],[name="email"], [name="idU"])');
     inputs.forEach(function(input) {
         input.disabled = false;
     });
 }
-
+/**
+ * Con esta funcion se resetean los valores del formulario y se
+ * desactiva el boton Modificar, Reset, se activa el boton Agregar y los inputs de Contraseña y Repetir Contraseña
+ */
 function limpiarFormularioUsuario() {
     document.getElementById("usuarioForm").reset();
     document.getElementById('usuarioModButton').disabled = true
