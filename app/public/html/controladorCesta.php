@@ -1,5 +1,4 @@
 <?php
-
 include '../../src/iniciarPHP.php';
 $input = file_get_contents('php://input');
 $data = json_decode($input, true);
@@ -23,9 +22,12 @@ if (isset($data) && isset($data["id"]) && isset($data["cantidad"]) && isset($dat
             $cantidadProducto = 0;
             unset($_SESSION["Carrito"][$id]);
         }
-        if (isset($cantidadProducto) && $cantidadProducto > 0) {
-            $_SESSION["Carrito"][$id] = $cantidadProducto;
+        if (isset($cantidadProducto)) {
+            if ($cantidadProducto > 0) {
+                $_SESSION["Carrito"][$id] = $cantidadProducto;
+            }
             if ($sesion->estaLoggeado()) {
+
                 $sql = "SELECT * from productos where IDProducto=:producto and Activo = 1;";
                 $params = ["producto" => $id];
                 $select = $BBDD->select($sql, $params);
