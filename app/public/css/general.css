@@ -143,6 +143,7 @@ footer {
     cursor: pointer;
     border-radius: 50%;
     font-size: 1.25em;
+    text-decoration: none;
 
 
     &:hover {
@@ -150,6 +151,8 @@ footer {
         scale: 1.1;
         background: black;
         color: white;
+        text-decoration: none;
+
 
     }
 

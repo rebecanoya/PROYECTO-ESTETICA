@@ -59,9 +59,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         try {
             $sql = "UPDATE productos SET Precio = :precio, Stock = :stock, Descripcion = :descripcion,
             ID_Linea = :linea, Nombre = :nombre, Activo = :activo WHERE productos.ID = :id";
-            $param = ["precio" => $_POST["precio"], "stock" => $_POST["stock"],
-            "descripcion" => $_POST["descripcion"], "linea" => $_POST["linea"], "nombre" => $_POST["nombreProducto"],
-            "activo" => $_POST["activoP"],"id" => $_POST["idP"]];
+            $param = [
+                "precio" => $_POST["precio"], "stock" => $_POST["stock"],
+                "descripcion" => $_POST["descripcion"], "linea" => $_POST["linea"], "nombre" => $_POST["nombreProducto"],
+                "activo" => $_POST["activoP"], "id" => $_POST["idP"]
+            ];
             $respuesta = $BBDD->execute($sql, $param);
             if ($respuesta[0]) {
                 $errorR = $respuesta[1];
@@ -69,13 +71,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (isset($_FILES)) {
                 $imagen = $_FILES['imagen'];
                 $file = $imagen["name"];
-    
+
                 $url_temp = $imagen["tmp_name"];
-    
+
                 $url_insert = "../img/productos";
-    
+
                 $url_target = str_replace('\\', '/', $url_insert) . '/' . $_POST["idP"] . ".png";
-    
+
                 if (!file_exists($url_insert)) {
                     mkdir($url_insert, 0777, true);
                 };
@@ -83,30 +85,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         } catch (PDOException $e) {
             echo "Error en la consulta: " . $e->getMessage();
-        }   
+        }
     } elseif (isset($_POST["usuario"])) {
         try {
             $sql = "SELECT email FROM usuarios";
             $checkEmail = $BBDD->select($sql);
-            foreach($checkEmail as $email){
-                if ($email["email"] == $_POST["email"])  {
+            foreach ($checkEmail as $email) {
+                if ($email["email"] == $_POST["email"]) {
                     $errorR = "Ya existe una cuenta con ese email";
                 }
             }
             if (!isset($errorR)) {
                 $password = hash("sha512", $_POST["password"]);
                 $passwordCheck = hash("sha512", $_POST["passwordCheck"]);
-                if ($password == $passwordCheck) {                
+                if ($password == $passwordCheck) {
                     $sql = "INSERT INTO usuarios(Email, Password, Rol, Activo) VALUES (:email, :password, :rol, :activo)";
-                    $param = ["email" =>  $_POST["email"], "password" => $password,
-                    "rol" => $_POST["rol"], "activo" => $_POST["activoU"]];
+                    $param = [
+                        "email" =>  $_POST["email"], "password" => $password,
+                        "rol" => $_POST["rol"], "activo" => $_POST["activoU"]
+                    ];
                     $respuesta = $BBDD->execute($sql, $param);
                     if ($respuesta[0]) {
                         $errorR = $respuesta[1];
                     }
                 } else {
                     $errorR = "Las contraseñas no coinciden";
-                }                
+                }
             }
         } catch (PDOException $e) {
             echo "Error en la consulta: " . $e->getMessage();
@@ -114,8 +118,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif (isset($_POST["usuarioMod"])) {
         try {
             $sql = "UPDATE usuarios SET email = :email, rol = :rol, activo = :activo  WHERE usuarios.id = :id";
-            $param = ["email" => $_POST["email"], "rol" => $_POST["rol"],
-            "activo" => $_POST["activoU"], "id" => $_POST["idU"]];
+            $param = [
+                "email" => $_POST["email"], "rol" => $_POST["rol"],
+                "activo" => $_POST["activoU"], "id" => $_POST["idU"]
+            ];
             $respuesta = $BBDD->execute($sql, $param);
             if ($respuesta[0]) {
                 $errorR = $respuesta[1];
@@ -126,7 +132,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif (isset($_POST["resetUsuario"])) {
         try {
             $sql = "UPDATE usuarios SET password = :password WHERE usuarios.id = :id";
-            $param = ["password" => hash("sha512",""), "id" => $_POST["id"]];
+            $param = ["password" => hash("sha512", ""), "id" => $_POST["id"]];
             $respuesta = $BBDD->execute($sql, $param);
             if ($respuesta[0]) {
                 $errorR = $respuesta[1];
@@ -156,6 +162,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 
 <body>
+
+    <header>
+        <a href="../html/index.php" class="fa-solid fa-arrow-left iconButton"></a>
+    </header>
+
     <main class="container">
         <section>
             <h2>Líneas Cosméticas</h2>
@@ -243,7 +254,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <h2>Productos</h2>
             <div id="productoMessage"></div>
             <form id="productoForm" method="post" enctype="multipart/form-data">
-            <input type="hidden" id="idP" name="idP" value=0 class="form-control">
+                <input type="hidden" id="idP" name="idP" value=0 class="form-control">
                 <div class="form-group">
                     <label for="nombreProducto">Nombre:</label>
                     <input type="text" id="nombreProducto" name="nombreProducto" class="form-control" required>
@@ -336,7 +347,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <h2>Usuarios</h2>
             <div id="usuarioMessage"></div>
             <form id="usuarioForm" method="post">
-            <input type="hidden" id="idU" name="idU" value=0 class="form-control">
+                <input type="hidden" id="idU" name="idU" value=0 class="form-control">
                 <div class="form-group">
                     <label for="correo">Correo:</label>
                     <input type="email" id="email" name="email" class="form-control" required>
@@ -366,9 +377,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </label>
                 </div>
                 <?php
-                    if (isset($errorR)) {
-                        echo "<div>" . $errorR . "</div>";
-                    }
+                if (isset($errorR)) {
+                    echo "<div>" . $errorR . "</div>";
+                }
                 ?>
                 <button type="submit" id="usuarioActionButton" name="usuario" class="btn btn-primary">Agregar</button>
                 <button type="submit" id="usuarioModButton" name="usuarioMod" class="btn btn-primary" disabled>Modificar</button>
@@ -394,7 +405,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $usuarios = $BBDD->select($sql);
                     foreach ($usuarios as $usuario) {
                         echo "<tr>";
-                        echo "<td>". $usuario["ID"] . "</td>";
+                        echo "<td>" . $usuario["ID"] . "</td>";
                         echo "<td>" . $usuario["Email"] . "</td>";
                         switch ($usuario["rol"]) {
                             case 1:
@@ -433,5 +444,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script src="../js/usuarios.js"></script>
     <script src="../js/productos.js"></script>
 </body>
-</html>
 
+</html>
