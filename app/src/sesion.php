@@ -44,10 +44,9 @@ class Sesion
 
                 return false;
             }
-            $sql = "SELECT IDProducto,Cantidad from carrito where IDUsuario=:id";
+            $sql = "SELECT IDProducto,Cantidad from carrito where IDUsuario=:id and Cantidad>0";
             $param = ["id" => $usuarioLogin[0]["ID"]];
             $carrito = $BBDD->select($sql, $param);
-
             if (!isset($_SESSION["usuario"])) {
 
                 foreach ($carrito as $producto) {

@@ -21,10 +21,10 @@ if (isset($data) && isset($data["id"]) && isset($data["cantidad"]) && isset($dat
         }
         if ($accion == "eliminar" || $cantidadProducto < 0) {
             $cantidadProducto = 0;
+            unset($_SESSION["Carrito"][$id]);
         }
-        if (isset($cantidadProducto)) {
+        if (isset($cantidadProducto) && $cantidadProducto > 0) {
             $_SESSION["Carrito"][$id] = $cantidadProducto;
-            var_dump($_SESSION["Carrito"]);
             if ($sesion->estaLoggeado()) {
                 $sql = "SELECT * from productos where IDProducto=:producto and Activo = 1;";
                 $params = ["producto" => $id];

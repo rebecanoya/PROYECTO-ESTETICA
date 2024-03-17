@@ -1,12 +1,40 @@
 <?php
 include '../../src/iniciarPHP.php';
+if ($sesion->estaLoggeado()) {
+
+    $sql = "SELECT IDProducto,Cantidad from carrito where IDUsuario=:id and Cantidad>0";
+    $params = ["id" => $_SESSION["id"]];
+    $productosBBDD = $BBDD->select($sql, $params);
+    foreach ($productosBBDD as $key => $value) {
+
+        $IDProductosBBDD[$value["IDProducto"]] = $value["Cantidad"];
+    }
+
+    foreach ($_SESSION["Carrito"] as $id => $value) {
+
+        if (!isset($IDProductosBBDD[$id])) {
+
+            $sql = "INSERT into carrito (IDUsuario, IDProducto, Cantidad) values (:id, :producto, :cantidad)";
+            $params = ["cantidad" => $value, "id" => $_SESSION["id"], "producto" => $id];
+            $BBDD->execute($sql, $params);
+            echo $id;
+        } elseif ($IDProductosBBDD[$id] == 0) {
+
+            $sql = "UPDATE carrito set Cantidad=:cantidad where IDUsuario=:id and IDProducto=:producto";
+            $params = ["cantidad" => $value, "id" => $_SESSION["id"], "producto" => $id];
+            $BBDD->execute($sql, $params);
+        }
+    }
+}
+
+
 $productos = [];
+
 if (count($_SESSION["Carrito"])) {
 
     $sql = "SELECT Nombre,Precio,ID from productos where ID in (" . implode(',', array_keys($_SESSION["Carrito"])) . ")";
     $productos = $BBDD->select($sql);
 }
-var_dump($_SESSION["Carrito"]);
 
 
 
@@ -68,12 +96,13 @@ var_dump($_SESSION["Carrito"]);
                             <span class="product-price"><?php echo $precioProducto ?>€</span>
                             <div class="form-container">
                                 <div class="cantidadNumber">
-                                    <button class="menos" onclick="decrementar(event)">-</button>
-                                    <input type="number" id="cantidad" name="cantidad" value="<?php echo $cantidadProducto ?>">
-                                    <button class="mas" onclick="incrementar(event)">+</button>
+                                    <button class="menos" onclick="actualizarCarrito(event,-1,<?php echo $idProducto ?>,'reducir')">-</button>
+                                    <input type="number" id="<?php echo $idProducto ?>" name="cantidad" value="<?php echo $cantidadProducto ?>">
+                                    <button class="mas" onclick="actualizarCarrito(event,1,<?php echo $idProducto ?>,'add')">+</button>
                                 </div>
                             </div>
-                            <span class="product-subtotal"><?php echo $subtotalProducto ?>€</span>
+                            <span class="product-subtotal" id="precio<?php echo $idProducto ?>" data-precioBase="<?php echo $precioProducto ?>"><?php echo $subtotalProducto ?>€</span>
+                            <button class="eliminar" onclick=" eliminarProducto(<?php echo $idProducto ?>, 'eliminar'); ">Eliminar</button>
                         </div>
                     </div>
                 <?php } ?>
@@ -81,8 +110,8 @@ var_dump($_SESSION["Carrito"]);
             <div class="summary">
                 <h2>Resumen de Compra</h2>
                 <div class="total">
-                    <p>Subtotal <?php echo $subtotal ?> €</p>
-                    <p>Total incluyendo impuestos <?php echo $subtotal ?> €</p>
+                    <p id="subtotal">Subtotal <?php echo $subtotal ?>€</p>
+                    <p id="subtotalImpuestos">Total incluyendo impuestos <?php echo $subtotal ?>€</p>
 
                 </div>
                 <div class="opciones">
@@ -98,5 +127,54 @@ var_dump($_SESSION["Carrito"]);
 </body>
 <script src="../js/peticionCarrito.js"></script>
 <script src="../js/botonesCantProd.js"></script>
+<script>
+    function actualizarCarrito(event, cantidad, id, accion) {
+
+        if (actualizarCantidad(event, cantidad, id)) {
+
+            peticionCarrito(id, Math.abs(cantidad), accion);
+            actualizarPrecio(id);
+            actualizarSubtotal();
+
+        }
+
+
+
+    }
+
+    const subtotal = document.getElementById("subtotal");
+    const subtotalImpuestos = document.getElementById("subtotalImpuestos");
+
+
+    function actualizarPrecio(id) {
+
+        let elementoPrecio = document.getElementById("precio" + id);
+        let elementoCantidad = document.getElementById(id);
+        elementoPrecio.innerHTML = (elementoPrecio.dataset.preciobase * elementoCantidad.value) + '€';
+    }
+
+
+    function actualizarSubtotal() {
+
+        let elementoPrecioProductos = document.getElementsByClassName("product-subtotal");
+        let suma = 0;
+        for (const elementoPrecioProducto of elementoPrecioProductos) {
+            let innerHTML = elementoPrecioProducto.innerHTML;
+            suma += parseInt(innerHTML.substring(0, innerHTML.length));
+
+        }
+
+        subtotal.innerHTML = `Subtotal ${suma}€`;
+        subtotalImpuestos.innerHTML = `Subtotal ${suma}€`;
+
+    }
+
+    function eliminarProducto(id, accion) {
+
+        peticionCarrito(id, 0, accion);
+        location.reload();
+
+    }
+</script>
 
 </html>

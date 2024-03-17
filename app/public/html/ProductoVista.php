@@ -65,9 +65,9 @@ if ($pedirBBDD) {
                         <div class="container">
                             <div class="form-container">
                                 <div class="cantidadNumber">
-                                    <button class="menos" onclick="decrementar(event)">-</button>
-                                    <input type="number" id="cantidad" name="cantidad" value="1">
-                                    <button class="mas" onclick="incrementar(event)">+</button>
+                                    <button class="menos" onclick="actualizarCantidad(event,-1,<?php echo $id ?>)">-</button>
+                                    <input type="number" id="<?php echo $id ?>" name="cantidad" value="1">
+                                    <button class="mas" onclick="actualizarCantidad(event,1,<?php echo $id ?>)">+</button>
                                 </div>
                             </div>
                         </div>
@@ -106,7 +106,7 @@ if ($pedirBBDD) {
 <script src="../js/botonesCantProd.js"></script>
 
 <script>
-    const cantidad = document.getElementById('cantidad');
+    const cantidad = document.getElementById('<?php echo $id ?>');
     document.getElementById("comprar").addEventListener("click", () => {
         if (!isNaN(cantidad.value) && cantidad.value > 0) {
             peticionCarrito(<?php echo $id; ?>, cantidad.value, "add");

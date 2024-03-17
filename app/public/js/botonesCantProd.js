@@ -1,15 +1,13 @@
-function incrementar(event) {
-    event.preventDefault();
-    var cantidadInput = document.getElementById('cantidad');
-    var cantidad = parseInt(cantidadInput.value, 10);
-    cantidadInput.value = cantidad + 1;
-}
 
-function decrementar(event) {
+function actualizarCantidad(event, cantidad, id) {
     event.preventDefault();
-    var cantidadInput = document.getElementById('cantidad');
-    var cantidad = parseInt(cantidadInput.value, 10);
-    if (cantidad > 1) {
-        cantidadInput.value = cantidad - 1;
-    }
+    let elementoInput = document.getElementById(id);
+    let cantidadInput = parseInt(elementoInput.value);
+
+    if (cantidadInput + cantidad >= 1) {
+        elementoInput.value = cantidadInput + cantidad;
+        return true;
+
+
+    } return false;
 }
