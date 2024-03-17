@@ -1,6 +1,7 @@
 <?php
 
 include '../../src/iniciarPHP.php';
+
 ?>
 
 <!DOCTYPE html>
