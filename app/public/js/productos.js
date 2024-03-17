@@ -31,19 +31,10 @@ function llenarFormularioProducto(filaSeleccionada) {
     document.querySelector('input[name="activoP"][value="' + activoP + '"]').checked = true;
     document.getElementById("productoActionButton").disabled = true;
     document.getElementById("productoModButton").disabled = false;
-    document.getElementById("resetProducto").disabled = false;
 }
 
 function limpiarFormularioProducto() {
-    document.getElementById("nombreProducto").value = "";
-    document.getElementById("precio").value = "";
-    document.getElementById("descripcionP").value = "";
-    document.getElementById("linea").value = "";
-    document.getElementById("stock").value = "";
-    var radiosActivo = document.getElementsByName("activoP");
-    for (var i = 0; i < radiosActivo.length; i++) {
-        radiosActivo[i].checked = false;
-    }
+    document.getElementById("productoForm").reset();
     document.getElementById("productoActionButton").disabled = false;
     document.getElementById("productoModButton").disabled = true;
     document.getElementById("resetProducto").disabled = true;

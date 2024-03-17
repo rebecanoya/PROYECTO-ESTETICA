@@ -8,11 +8,25 @@ include '../../src/iniciarPHP.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST["lineas"])) {
         try {
-            $sql = "INSERT INTO lineas (ID_Musica, Nombre, Color, Descripcion, Activo) 
-                VALUES (:musica, :nombre, :color, :descripcion, :activo)";
+            $sql = "INSERT INTO lineas(ID_Musica, Nombre, Color, Descripcion, Activo) VALUES (:musica, :nombre, :color, :descripcion, :activo)";
             $param = [
                 "musica" =>  $_POST["musica"], "nombre" => $_POST["nombre"],
-                "color" => $_POST["color"], "descripcion" => $_POST["descripcion"], "activo" => $_POST["activo"]
+                "color" => substr($_POST["color"], 1), "descripcion" => $_POST["descripcion"], "activo" => $_POST["activoL"]
+            ];
+            $respuesta = $BBDD->execute($sql, $param);
+            if ($respuesta[0]) {
+                $errorR = $respuesta[1];
+            }
+        } catch (PDOException $e) {
+            echo "Error en la consulta: " . $e->getMessage();
+        }
+    }elseif (isset($_POST["lineasMod"])) {
+        try {
+            $sql = "UPDATE lineas SET ID_musica = :musica, Nombre = :nombre, Color = :color,
+            Descripcion = :descripcion, Activo = :activo WHERE lineas.ID = :id";
+            $param = [
+                "musica" =>  $_POST["musica"], "nombre" => $_POST["nombre"],
+                "color" => substr($_POST["color"], 1), "descripcion" => $_POST["descripcion"], "activo" => $_POST["activoL"], "id" => $_POST["idL"]
             ];
             $respuesta = $BBDD->execute($sql, $param);
             if ($respuesta[0]) {
@@ -28,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $param = [
                 "precio" =>  $_POST["precio"], "stock" => $_POST["stock"],
                 "descripcion" => $_POST["descripcion"], "ID_Linea" => $_POST["linea"],
-                "Nombre" => $_POST["nombreProducto"], "Activo" => $_POST["activo"]
+                "Nombre" => $_POST["nombreProducto"], "Activo" => $_POST["activoP"]
             ];
             $respuesta = $BBDD->execute($sql, $param);
             $idProducto = $BBDD->lastId();
@@ -47,10 +61,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 mkdir($url_insert, 0777, true);
             };
 
-            if (move_uploaded_file($url_temp, $url_target)) {
-                echo "El archivo " . htmlspecialchars(basename($file)) . " ha sido cargado con éxito.";
-            } else {
-                echo "Ha habido un error al cargar tu archivo.";
+            if (!move_uploaded_file($url_temp, $url_target)) {
+                $errorP = "Ha habido un error al cargar tu archivo.";
             }
         } catch (PDOException $e) {
             echo "Error en la consulta: " . $e->getMessage();
@@ -120,7 +132,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $sql = "UPDATE usuarios SET email = :email, rol = :rol, activo = :activo  WHERE usuarios.id = :id";
             $param = [
                 "email" => $_POST["email"], "rol" => $_POST["rol"],
-                "activo" => $_POST["activoU"], "id" => $_POST["idU"]
+                "activo" => $_POST["activoU"], "id" => $_POST["idU"] 
             ];
             $respuesta = $BBDD->execute($sql, $param);
             if ($respuesta[0]) {
@@ -172,6 +184,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <h2>Líneas Cosméticas</h2>
             <div id="lineaCosmeticaMessage"></div>
             <form id="lineaCosmeticaForm" method="post">
+                <input type="hidden" id="idL" name="idL" value=0 class="form-control">
                 <div class="form-group">
                     <label for="nombre">Nombre:</label>
                     <input type="text" id="nombre" name="nombre" class="form-control" required>
@@ -189,10 +202,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <textarea id="descripcion" name="descripcion" class="form-control" required></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="rol">Activo:</label>
-                    <input id="activo" type="radio" name="activo1" value="1" required>
+                    <label for="activoL">Activo:</label>
+                    <input id="activoL" type="radio" name="activoL" value="1" required>
                     Si
-                    <input type="radio" name="activo1" value="2" required>
+                    <input type="radio" name="activoL" value="2" required>
                     No
                     </label>
                 </div>
@@ -201,7 +214,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     echo "<div>" . $errorR . "</div>";
                 }
                 ?>
-                <button type="submit" id="actionButton" name="lineas" class="btn btn-primary">Agregar</button>
+                <button type="submit" id="lineasActionButton" name="lineas" class="btn btn-primary">Agregar</button>
+                <button type="submit" id="lineasModButton" name="lineasMod" class="btn btn-primary" disabled>Modificar</button>
+                <button type="button" id="limpiar" name="limpiar" class="btn btn-primary" onclick=limpiarFormularioLineas()>Limpiar</button>
             </form>
         </section>
 
@@ -209,6 +224,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <table id="lineasCosmeticas" class="table table-bordered table-dark">
                 <thead class="thead-dark">
                     <tr>
+                        <th>ID</th>
                         <th>Nombre</th>
                         <th>Color</th>
                         <th>Música</th>
@@ -223,6 +239,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $lineas = $BBDD->select($sql);
                     foreach ($lineas as $linea) {
                         echo "<tr>";
+                        echo "<td>" . $linea["ID"] . "</td>";
                         echo "<td>" . $linea["Nombre"] . "</td>";
                         echo "<td>" . $linea["Color"] . "</td>";
                         echo "<td>" . $linea["ID_Musica"] . "</td>";
@@ -237,10 +254,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         }
                         echo "<td>
                                 <button onclick=llenarFormularioLineaCosmetica()>
-                                    <i class=fas fa-pencil-alt></i>
-                                </button>
-                                <button onclick=updateProducto>
-                                    <i class=fas fa-trash-alt></i>
+                                    <i class='fas fa-pencil-alt'></i>
                                 </button>
                             </td>";
                         echo "</tr>";
@@ -292,7 +306,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
                 <button type="submit" id="productoActionButton" name="producto" class="btn btn-primary">Agregar</button>
                 <button type="submit" id="productoModButton" name="productoMod" class="btn btn-primary" disabled>Modificar</button>
-                <button type="submit" id="resetProducto" name="resetProducto" class="btn btn-primary" disabled>Resetear</button>
                 <button type="button" id="limpiar" name="limpiar" class="btn btn-primary" onclick=limpiarFormularioProducto()>Limpiar</button>
             </form>
         </section>
