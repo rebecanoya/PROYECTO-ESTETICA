@@ -105,10 +105,8 @@ include '../../src/iniciarPHP.php';
 
 </body>
 
-<?php
-include "../../src/templates/ScriptEnlaceProductos.php";
+<script src="../js/enlaceProductos.js"> </script>
 
-?>
 
 <script>
     const lineas = document.getElementsByClassName("botonLinea");

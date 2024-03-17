@@ -5,36 +5,48 @@ body {
     background-color: rgba(249, 181, 236, 0.626);
 }
 
+main {
+    display: flex;
+    justify-content: center;
+    padding: 2em;
+}
+
 .container {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 3em; /* Ajuste en em */
-    /* Ajustar la altura del contenedor al 100% de la altura visible del viewport */
+}
+
+.container-main {
+    width: 80%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
 
 .product-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    /* Divide el contenedor en dos columnas iguales */
     grid-gap: 1em;
-    /* Espacio entre las dos columnas */
     height: 100%;
-    /* Ocupa todo el alto del contenedor */
 }
 
 .product-image {
     overflow: hidden;
-    gap: 1em; /* Ajuste en em */
+    gap: 1em;
+    /* Ajuste en em */
 }
 
 .product-image img {
-    max-width: calc(100% - 0.2em); /* Ajuste en em */
-    max-height: calc(100% - 0.2em); /* Ajuste en em */
+    max-width: calc(100% - 0.2em);
+    /* Ajuste en em */
+    max-height: calc(100% - 0.2em);
+    /* Ajuste en em */
     object-fit: contain;
-    border: 1px solid #000; /* Ajuste en em */
+    border: 1px solid #000;
+    /* Ajuste en em */
     background-color: white;
-    padding: 0.1em; /* Ajuste en em */
+    padding: 0.1em;
+    /* Ajuste en em */
 }
 
 .descripcion {
@@ -45,6 +57,18 @@ body {
 .product-details {
     display: flex;
     flex-direction: column;
+    gap: 7em;
+}
+
+.product-buttons {
+    gap: 1em;
+    display: grid;
+}
+
+.botonesProd {
+    display: flex;
+    justify-content: center;
+    gap: 1em;
 }
 
 .cantidadNumber {
@@ -65,28 +89,43 @@ form {
 }
 
 label {
-    margin-bottom: 1em; /* Ajuste en em */
+    margin-bottom: 1em;
+    /* Ajuste en em */
 }
+
 input[type="number"] {
-    background-color: transparent; /* Quitar fondo del input */
-    border: none; /* Quitar borde */
-    width: 80px; /* Ancho del input */
-    font-size: 24px; /* Tamaño de fuente */
+    background-color: transparent;
+    /* Quitar fondo del input */
+    border: none;
+    /* Quitar borde */
+    width: 80px;
+    /* Ancho del input */
+    font-size: 24px;
+    /* Tamaño de fuente */
     text-align: center;
-    border-radius: 1em; /* Centrar el texto */
+    border-radius: 1em;
+    /* Centrar el texto */
 }
+
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
+
 button {
-    background-color: whitesmoke; /* Fondo gris */
-    border: none; /* Quitar borde */
-    color: black; /* Color del texto */
-    font-size: 24px; /* Tamaño de fuente */
-    cursor: pointer;  /* Cursor apuntador */
+    background-color: whitesmoke;
+    /* Fondo gris */
+    border: none;
+    /* Quitar borde */
+    color: black;
+    /* Color del texto */
+    font-size: 24px;
+    /* Tamaño de fuente */
+    cursor: pointer;
+    /* Cursor apuntador */
 }
+
 .comprar {
     background-color: #FFC0CB;
 }
@@ -94,6 +133,4 @@ button {
 .muestra {
     background-color: #000;
     color: white;
-    width: 96%;
-    margin-left: 0.4em;
 }

@@ -24,6 +24,7 @@ if (isset($data) && isset($data["id"]) && isset($data["cantidad"]) && isset($dat
         }
         if (isset($cantidadProducto)) {
             $_SESSION["Carrito"][$id] = $cantidadProducto;
+            var_dump($_SESSION["Carrito"]);
             if ($sesion->estaLoggeado()) {
                 $sql = "SELECT * from productos where IDProducto=:producto and Activo = 1;";
                 $params = ["producto" => $id];

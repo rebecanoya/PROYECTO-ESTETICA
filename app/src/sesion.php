@@ -8,19 +8,25 @@ class Sesion
 
 
     public function __construct()
+
     {
         if (session_status() != PHP_SESSION_ACTIVE) {
             session_start();
         }
         $issetSesion = isset($_SESSION["token"]);
         $issetCookie = isset($_COOKIE["token"]);
-        if ($issetSesion && $issetCookie) {
-            if ($issetSesion != $issetCookie) {
+        if ($this->estaLoggeado()) {
+
+            if ($issetSesion && $issetCookie) {
+                if ($issetSesion != $issetCookie) {
+                    $this->logout();
+                }
+            } else {
                 $this->logout();
             }
-        } elseif (($issetSesion && !$issetCookie) || (!$issetSesion && $issetCookie)) {
-            $this->logout();
         }
+
+
         if (!isset($_SESSION["Carrito"])) {
             $_SESSION["Carrito"] = [];
         }
@@ -69,7 +75,7 @@ class Sesion
     {
         unset($_SESSION["usuario"]);
         unset($_SESSION["token"]);
-        setcookie("token", "", time() - 1);
+        setcookie("token", "", 1, "/");
         unset($_SESSION["rol"]);
         unset($_SESSION["Carrito"]);
         unset($_SESSION["id"]);

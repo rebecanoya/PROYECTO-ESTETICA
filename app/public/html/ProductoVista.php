@@ -13,7 +13,7 @@ if (isset($_GET) && isset($_GET["id"])) {
 }
 
 if ($pedirBBDD) {
-    $sql = "SELECT * from productos where id = :id";
+    $sql = "SELECT * from productos where id = :id and Activo=1";
     $param = ["id" =>  $id];
     $producto = $BBDD->select($sql, $param);
 
@@ -35,6 +35,7 @@ if ($pedirBBDD) {
     <link rel="stylesheet" href="../css/general.css">
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/producto.css">
+    <link rel="stylesheet" href="../css/footer.css">
     <script src="https://kit.fontawesome.com/dc2d3ea46f.js" crossorigin="anonymous"></script>
     <link rel="icon" href="../img/favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon">
@@ -50,16 +51,17 @@ if ($pedirBBDD) {
 
 
     ?>
-
-        <div class="container">
-            <div class="product-grid">
+        <main>
+            <div class="container-main">
                 <div class="product-image">
                     <img src="../img/productos/<?php echo $producto["ID"] ?>.png" alt="Producto">
                 </div>
                 <div class="product-details">
-                    <h2><?php echo $producto["Nombre"] ?></h2>
-                    <p class="descripcion"><?php echo $producto["Descripcion"] ?></p>
-                    <form method="post" action="controladorCesta.php">
+                    <div class="product-text">
+                        <h2><?php echo $producto["Nombre"] ?></h2>
+                        <p class="descripcion"><?php echo $producto["Descripcion"] ?></p>
+                    </div>
+                    <div class="product-buttons">
                         <div class="container">
                             <div class="form-container">
                                 <div class="cantidadNumber">
@@ -67,49 +69,56 @@ if ($pedirBBDD) {
                                     <input type="number" id="cantidad" name="cantidad" value="1">
                                     <button class="mas" onclick="incrementar(event)">+</button>
                                 </div>
-                                <div class="comprarBtn">
-                                    <button type="submit" class="comprar">Añadir al carrito</button>
-                                </div>
                             </div>
                         </div>
-                        <button type="submit" class="comprar" name="accion" value="add">Añadir al carrito</button>
-                        <button type="submit" class="muestra" name="accion" value="muestra">Solicitar muestra</button>
-                    </form>
+                        <div class="botonesProd">
+                            <button type="submit" class="comprar" id="comprar">Añadir al carrito</button>
+                            <button type="submit" class="muestra" id="muestra">Solicitar muestra</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
 
-    <?php
+        <?php
     } else {
 
 
-    ?>
-        <div>No se encontró</div>
-    <?php
+        ?>
+            <div>No se encontró</div>
+        <?php
     }
-    ?>
+        ?>
 
+        </main>
 
+        <?php
 
+        include "../../src/templates/footer.php";
+
+        ?>
 </body>
 
 </html>
 
 
-<script>
-    function incrementar(event) {
-        event.preventDefault();
-        var cantidadInput = document.getElementById('cantidad');
-        var cantidad = parseInt(cantidadInput.value, 10);
-        cantidadInput.value = cantidad + 1;
-    }
 
-    function decrementar(event) {
-        event.preventDefault();
-        var cantidadInput = document.getElementById('cantidad');
-        var cantidad = parseInt(cantidadInput.value, 10);
-        if (cantidad > 1) {
-            cantidadInput.value = cantidad - 1;
+<script src="../js/peticionCarrito.js"></script>
+<script src="../js/botonesCantProd.js"></script>
+
+<script>
+    const cantidad = document.getElementById('cantidad');
+    document.getElementById("comprar").addEventListener("click", () => {
+        if (!isNaN(cantidad.value) && cantidad.value > 0) {
+            peticionCarrito(<?php echo $id; ?>, cantidad.value, "add");
+
         }
-    }
+
+
+    });
+    document.getElementById("muestra").addEventListener("click", () => {
+        peticionCarrito(<?php echo $id; ?>, 1, "muestra");
+
+
+
+    });
 </script>
