@@ -170,6 +170,26 @@ a {
     border-radius: 0%;
     border: none;
     display: flex;
+    outline: 1px solid;
+    border-radius: 0.5em;
+
+    & .menos {
+
+        border-right: 1px solid black;
+        border-radius: 0;
+        background-color: transparent;
+
+    }
+
+    & .mas {
+
+        border-left: 1px solid black;
+        border-radius: 0;
+        background-color: transparent;
+
+
+
+    }
 
     & input[type="number"] {
         background-color: transparent;
