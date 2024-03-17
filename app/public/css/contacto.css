@@ -1,9 +1,21 @@
+header {
+
+    outline: 0.05em solid black;
+
+    & a {
+
+        color: black;
+
+    }
+
+}
+
 body {
     margin: 0;
     padding: 0;
     display: flex;
     flex-wrap: wrap;
-    background-color: #b3e0db;
+    background-color: #f4f4f4;
 }
 
 main {
@@ -75,7 +87,7 @@ main {
         border: 0.3em solid #5dc1b9;
     }
 
-    & .datos > div {
+    & .datos>div {
         align-items: center;
         display: flex;
         justify-content: center;
@@ -84,17 +96,17 @@ main {
         width: 20em;
     }
 
-    & .datos > div i {
+    & .datos>div i {
         margin-right: 1em;
         font-size: 2em;
     }
 
-    & .datos > div p,
-    & .datos > div a {
+    & .datos>div p,
+    & .datos>div a {
         font-size: 2em;
     }
 
-    & .datos > div a {
+    & .datos>div a {
         color: black;
     }
 }
