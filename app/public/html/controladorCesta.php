@@ -29,12 +29,15 @@ if (isset($data) && isset($data["id"]) && isset($data["cantidad"]) && isset($dat
                 $sql = "SELECT * from productos where IDProducto=:producto and Activo = 1;";
                 $params = ["producto" => $id];
                 $select = $BBDD->select($sql, $params);
-                if (count($select) == 0) {
+                if (count($select) == 0 || !$select[0] === false) {
                     return;
                 }
                 $sql = "SELECT * from carrito where IDUsuario=:id and IDProducto=:producto";
                 $params = ["id" => $_SESSION["id"], "producto" => $id];
                 $select = $BBDD->select($sql, $params);
+                if ($select[0] === false) {
+                    return;
+                }
                 if (count($select) == 0) {
                     $sql = "INSERT into carrito (IDUsuario, IDProducto, Cantidad) values (:id, :producto, :cantidad)";
                     $params = ["cantidad" => $cantidadProducto, "id" => $_SESSION["id"], "producto" => $id];

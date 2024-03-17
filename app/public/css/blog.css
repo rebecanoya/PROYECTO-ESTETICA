@@ -15,13 +15,13 @@ body {
     padding: 0;
     display: flex;
     flex-wrap: wrap;
+    background-color: #f4f4f4;
 }
 
 main {
     flex: 1;
     padding: 2.5em;
     gap: 1em;
-    background-color: #f4f4f4;
 
 }
 
