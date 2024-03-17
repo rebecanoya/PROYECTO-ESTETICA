@@ -45,33 +45,22 @@ function activarBoton() {
 
 // Función para desactivar los inputs y el botón Agregar
 function desactivarInputs() {
-    var inputs = document.querySelectorAll('#usuarioForm input:not([name="rol"],[name="activoU"],[name="email"], [name="id"])');
+    var inputs = document.querySelectorAll('#usuarioForm input:not([name="rol"],[name="activoU"],[name="email"], [name="idU"])');
     inputs.forEach(function(input) {
         input.disabled = true;
     });
     document.getElementById('usuarioActionButton').disabled = true;
 }
 function activarInputs() {
-    var inputs = document.querySelectorAll('#usuarioForm input:not([name="rol"],[name="activoU"],[name="email"], [name="id"])');
+    var inputs = document.querySelectorAll('#usuarioForm input:not([name="rol"],[name="activoU"],[name="email"], [name="idU"])');
     inputs.forEach(function(input) {
         input.disabled = false;
     });
 }
 
 function limpiarFormularioUsuario() {
-    document.getElementById("email").value = "";
-    document.getElementById("password").value = "";
-    document.getElementById("passwordCheck").value = "";
-    var radiosRol = document.getElementsByName("rol");
-    for (var i = 0; i < radiosRol.length; i++) {
-        radiosRol[i].checked = false;
-    }
-    var radiosActivo = document.getElementsByName("activoU");
-    for (var i = 0; i < radiosActivo.length; i++) {
-        radiosActivo[i].checked = false;
-    }
+    document.getElementById("usuarioForm").reset();
     document.getElementById('usuarioModButton').disabled = true
-    document.getElementById('resetUsuario').disabled = true;
     document.getElementById('usuarioActionButton').removeAttribute('disabled');
     activarInputs();
 }
