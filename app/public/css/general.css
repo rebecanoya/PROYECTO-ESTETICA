@@ -163,3 +163,27 @@ a {
     text-decoration: none;
 
 }
+
+.cantidad {
+    background-color: white;
+    text-align: center;
+    border-radius: 0%;
+    border: none;
+    display: flex;
+
+    & input[type="number"] {
+        background-color: transparent;
+        border: none;
+        width: 4em;
+        text-align: center;
+        border-radius: 1em;
+    }
+
+    & input[type="number"]::-webkit-inner-spin-button,
+    & input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+
+}

@@ -68,26 +68,27 @@ if (count($_SESSION["Carrito"])) {
         <div class="container">
             <div class="products">
                 <h2>Productos</h2>
-                <?php
-                $subtotal = 0;
-                foreach ($productos as $producto) {
+                <div class="product">
+                    <div class="product-titles">
+                        <span class="title">Foto</span>
+                        <span class="title">Producto</span>
+                        <span class="title">Precio</span>
+                        <span class="title">Cantidad</span>
+                        <span class="title">Subtotal</span>
+                    </div>
+                    <?php
+                    $subtotal = 0;
+                    foreach ($productos as $producto) {
 
-                    $idProducto = $producto["ID"];
-                    $nombreProducto = $producto["Nombre"];
-                    $precioProducto = $producto["Precio"];
-                    $cantidadProducto = $_SESSION["Carrito"][$idProducto];
-                    $subtotalProducto = $precioProducto * $cantidadProducto;
-                    $subtotal += $subtotalProducto;
+                        $idProducto = $producto["ID"];
+                        $nombreProducto = $producto["Nombre"];
+                        $precioProducto = $producto["Precio"];
+                        $cantidadProducto = $_SESSION["Carrito"][$idProducto];
+                        $subtotalProducto = $precioProducto * $cantidadProducto;
+                        $subtotal += $subtotalProducto;
 
-                ?>
-                    <div class="product">
-                        <div class="product-titles">
-                            <span class="title">Foto</span>
-                            <span class="title">Producto</span>
-                            <span class="title">Precio</span>
-                            <span class="title">Cantidad</span>
-                            <span class="title">Subtotal</span>
-                        </div>
+                    ?>
+
                         <div class="product-info">
                             <span class="product-img">
                                 <img src="../img/productos/<?php echo $idProducto ?>.png" width="100px" alt="">
@@ -95,25 +96,26 @@ if (count($_SESSION["Carrito"])) {
                             <span class="product-name"><?php echo $nombreProducto ?></span>
                             <span class="product-price"><?php echo $precioProducto ?>€</span>
                             <div class="form-container">
-                                <div class="cantidadNumber">
+                                <div class="cantidad">
                                     <button class="menos" onclick="actualizarCarrito(event,-1,<?php echo $idProducto ?>,'reducir')">-</button>
                                     <input type="number" id="<?php echo $idProducto ?>" name="cantidad" value="<?php echo $cantidadProducto ?>">
                                     <button class="mas" onclick="actualizarCarrito(event,1,<?php echo $idProducto ?>,'add')">+</button>
                                 </div>
                             </div>
                             <span class="product-subtotal" id="precio<?php echo $idProducto ?>" data-precioBase="<?php echo $precioProducto ?>"><?php echo $subtotalProducto ?>€</span>
-                            <button class="eliminar" onclick=" eliminarProducto(<?php echo $idProducto ?>, 'eliminar'); ">Eliminar</button>
+                            <i class="fa-solid fa-trash-can iconButton" onclick=" eliminarProducto(<?php echo $idProducto ?>, 'eliminar'); "></i>
                         </div>
-                    </div>
-                <?php } ?>
-            </div>
-            <div class="summary">
-                <h2>Resumen de Compra</h2>
-                <div class="total">
-                    <p id="subtotal">Subtotal <?php echo $subtotal ?>€</p>
-                    <p id="subtotalImpuestos">Total incluyendo impuestos <?php echo $subtotal ?>€</p>
+                    <?php } ?>
 
                 </div>
+            </div>
+            <div class="summary">
+                <div class="total">
+                    <h2>Resumen de Compra</h2>
+                    <p id="subtotal">Subtotal <?php echo $subtotal ?>€</p>
+                    <p id="subtotalImpuestos">Total incluyendo impuestos <?php echo $subtotal ?>€</p>
+                </div>
+
                 <div class="opciones">
                     <button class="checkout-btn">Realizar pedido</button>
                     <a href="./index.php" class="volverCompra">Seguir Comprando</a>

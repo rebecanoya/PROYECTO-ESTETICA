@@ -64,7 +64,7 @@ if ($pedirBBDD) {
                     <div class="product-buttons">
                         <div class="container">
                             <div class="form-container">
-                                <div class="cantidadNumber">
+                                <div class="cantidad">
                                     <button class="menos" onclick="actualizarCantidad(event,-1,<?php echo $id ?>)">-</button>
                                     <input type="number" id="<?php echo $id ?>" name="cantidad" value="1">
                                     <button class="mas" onclick="actualizarCantidad(event,1,<?php echo $id ?>)">+</button>

@@ -11,25 +11,45 @@ header {
 }
 
 body {
-    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
 }
 
-.container {
+main {
+
     display: flex;
-    justify-content: space-between;
-    margin: 20px auto;
-    width: 80%;
+    align-items: center;
+    justify-content: center;
+    padding: 2em;
+
 }
+
+.container {
+
+    width: 80%;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    border-radius: 1em;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: white;
+
+}
+
 
 .products,
 .summary {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 2em;
+
+
+}
+
+.summary {
+
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    justify-content: space-between;
 
 }
 
@@ -42,12 +62,12 @@ body {
 }
 
 .products {
-    width: 60%;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+
 }
 
-.summary {
-    width: 35%;
-}
 
 .products h2,
 .summary h2 {
@@ -59,13 +79,11 @@ body {
     padding: 0;
 }
 
-.products li {
-    margin-bottom: 10px;
-}
-
 .total {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
     text-align: center;
-    margin-bottom: 20px;
 }
 
 .checkout-btn,
@@ -87,43 +105,10 @@ body {
     background-color: black;
 }
 
-/* Estilos previos */
-
-.product {
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid #ddd;
-    padding: 10px 0;
-}
-
-.product-info {
-    flex-grow: 1;
-}
-
-.product-info span {
-    margin-right: 10px;
-}
-
-.product-actions button {
-    background-color: #dc3545;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.product-actions button:hover {
-    background-color: #c82333;
-}
-
-/* Estilos previos */
-
 .product-titles {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
     font-weight: bold;
-    margin-bottom: 5px;
 }
 
 .title {
@@ -135,17 +120,14 @@ body {
     display: flex;
     flex-direction: column;
     border-bottom: 1px solid #ddd;
-    padding: 10px 0;
+    gap: 1em;
 }
 
 .product-info {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
     align-items: center;
-}
-
-.product-info span {
-    margin-right: 10px;
+    justify-items: center;
 }
 
 
