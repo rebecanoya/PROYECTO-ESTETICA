@@ -1,3 +1,7 @@
+/**
+ * script para enlace de productos a productoVista.php
+ *
+ */
 const productos = document.getElementsByClassName("producto");
 for (const producto of productos) {
     producto.addEventListener("click", () => {

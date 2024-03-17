@@ -1,3 +1,11 @@
+/**
+ * peticion para modificacion del carrito
+ *
+ * @param   {int}  id        id del producto
+ * @param   {int}  cantidad  cantidad del producto
+ * @param   {string}  accion    tipo de accion a realizar
+ *
+ */
 async function peticionCarrito(id, cantidad, accion) {
 
     await fetch("controladorCesta.php", {
