@@ -17,7 +17,6 @@ if ($sesion->estaLoggeado()) {
             $sql = "INSERT into carrito (IDUsuario, IDProducto, Cantidad) values (:id, :producto, :cantidad)";
             $params = ["cantidad" => $value, "id" => $_SESSION["id"], "producto" => $id];
             $BBDD->execute($sql, $params);
-            echo $id;
         } elseif ($IDProductosBBDD[$id] == 0) {
 
             $sql = "UPDATE carrito set Cantidad=:cantidad where IDUsuario=:id and IDProducto=:producto";
