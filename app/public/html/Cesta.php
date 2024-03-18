@@ -117,7 +117,7 @@ if (count($_SESSION["Carrito"])) {
 
                 <div class="opciones">
                     <button class="checkout-btn">Realizar pedido</button>
-                    <a href="./index.php" class="volverCompra">Seguir Comprando</a>
+                    <a href="../html/NuestrosProductos.php" class="volverCompra">Seguir Comprando</a>
                 </div>
             </div>
         </div>
