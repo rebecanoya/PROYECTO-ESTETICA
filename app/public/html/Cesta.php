@@ -1,7 +1,10 @@
 <?php
 include '../../src/iniciarPHP.php';
+/**
+ * Sincronizacion del carrito sesion con el carrito de la base de datos
+ *
+ */
 if ($sesion->estaLoggeado()) {
-
     $sql = "SELECT IDProducto,Cantidad from carrito where IDUsuario=:id and Cantidad>0";
     $params = ["id" => $_SESSION["id"]];
     $productosBBDD = $BBDD->select($sql, $params);
@@ -102,7 +105,7 @@ if (count($_SESSION["Carrito"])) {
                                 </div>
                             </div>
                             <span class="product-subtotal" id="precio<?php echo $idProducto ?>" data-precioBase="<?php echo $precioProducto ?>"><?php echo $subtotalProducto ?>€</span>
-                            <i class="fa-solid fa-trash-can iconButton" onclick=" eliminarProducto(<?php echo $idProducto ?>, 'eliminar'); "></i>
+                            <i class="fa-solid fa-trash-can iconButton" onclick=" eliminarProducto(<?php echo $idProducto ?>); "></i>
                         </div>
                     <?php } ?>
 
@@ -129,6 +132,15 @@ if (count($_SESSION["Carrito"])) {
 <script src="../js/peticionCarrito.js"></script>
 <script src="../js/botonesCantProd.js"></script>
 <script>
+    /**
+     * Funcion general para actualizar el carrito
+     *
+     * @param   {object}    event       objeto evento
+     * @param   {int}       cantidad    cantidad a incrementar
+     * @param   {int}       id          id del producto
+     * @param   {string}    accion      accion a realizar
+     *
+     */
     function actualizarCarrito(event, cantidad, id, accion) {
 
         if (actualizarCantidad(event, cantidad, id)) {
@@ -146,7 +158,12 @@ if (count($_SESSION["Carrito"])) {
     const subtotal = document.getElementById("subtotal");
     const subtotalImpuestos = document.getElementById("subtotalImpuestos");
 
-
+    /**
+     * Actualizar precio de producto
+     *
+     * @param   id    id del producto
+     *
+     */
     function actualizarPrecio(id) {
 
         let elementoPrecio = document.getElementById("precio" + id);
@@ -154,7 +171,10 @@ if (count($_SESSION["Carrito"])) {
         elementoPrecio.innerHTML = (elementoPrecio.dataset.preciobase * elementoCantidad.value) + '€';
     }
 
-
+    /**
+     * Actualizar subtotal
+     *
+     */
     function actualizarSubtotal() {
 
         let elementoPrecioProductos = document.getElementsByClassName("product-subtotal");
@@ -170,9 +190,15 @@ if (count($_SESSION["Carrito"])) {
 
     }
 
-    function eliminarProducto(id, accion) {
+    /**
+     * Peticion para eliminar un producto
+     *
+     * @param   id        id del producto
+     *
+     */
+    function eliminarProducto(id) {
 
-        peticionCarrito(id, 0, accion);
+        peticionCarrito(id, 0, 'eliminar');
         location.reload();
 
     }

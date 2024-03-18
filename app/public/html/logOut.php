@@ -1,4 +1,8 @@
 <?php
+
+/**
+ * Controlador LOGOUT peticion POST
+ */
 include '../../src/sesion.php';
 
 $sesion = new Sesion();

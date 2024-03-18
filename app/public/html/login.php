@@ -26,10 +26,15 @@ include '../../src/iniciarPHP.php';
     <?php
     include "../../src/templates/header.php";
 
+    /**
+     * Registro de usuario con contraseña hasheada
+     *
+     */
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (isset($_POST["register"])) {
             $password = hash("sha512", $_POST["password"]);
             $confirmPassword = hash("sha512", $_POST["confirmpassword"]);
+            // Comprobar que ambas contraseñas son iguales
             if (hash_equals($password, $confirmPassword)) {
                 $sql = "INSERT INTO usuarios(Email, Password, Rol) VALUES (:email, :password, 3)";
                 $param = ["email" =>  $_POST["email"], "password" => $password];

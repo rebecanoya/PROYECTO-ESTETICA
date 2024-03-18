@@ -110,13 +110,16 @@ include '../../src/iniciarPHP.php';
 
 <script>
     const lineas = document.getElementsByClassName("botonLinea");
-
+    /**
+     * Añadir evento para selecciona la linea que se muestra
+     *
+     */
     for (const linea of lineas) {
 
         linea.addEventListener("click", () => {
 
             if (linea.dataset.seleccionado == "true") {
-
+                // Activar todos los productos al deseleccionar la linea
                 linea.dataset.seleccionado = false;
                 for (const producto of productos) {
 
@@ -124,13 +127,14 @@ include '../../src/iniciarPHP.php';
 
                 }
             } else {
-
+                // Desmarcar todas las lineas
                 for (const linea2 of lineas) {
                     linea2.dataset.seleccionado = false;
 
                 }
+                // Marcar linea seleccionada
                 linea.dataset.seleccionado = true;
-
+                // Mostrar productos que están en la linea
                 for (const producto of productos) {
 
                     producto.dataset.activo = false;

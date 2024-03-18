@@ -1,7 +1,8 @@
-/**
-* controlador peticion POST de la cesta
-*/
 <?php
+
+/**
+ * controlador peticion POST de la cesta
+ */
 include '../../src/iniciarPHP.php';
 // obtener datos de POST enviados
 $input = file_get_contents('php://input');

@@ -1,10 +1,13 @@
 <?php
 
+/**
+ * Crea la vista para mostrar un producto
+ */
 include '../../src/iniciarPHP.php';
 $pedirBBDD = false;
 $cargar = false;
 $producto;
-
+// Comprobamos que se envio un id y sea un numero
 if (isset($_GET) && isset($_GET["id"])) {
     $id = $_GET["id"];
     if (is_numeric($id)) {
@@ -12,12 +15,13 @@ if (isset($_GET) && isset($_GET["id"])) {
     }
 }
 
+// Obtener datos del producto
 if ($pedirBBDD) {
     $sql = "SELECT * from productos where id = :id and Activo=1";
     $param = ["id" =>  $id];
     $producto = $BBDD->select($sql, $param);
 
-    if ($producto) {
+    if (!$producto[0]) {
         $cargar = true;
         $producto = $producto[0];
     }
@@ -107,6 +111,9 @@ if ($pedirBBDD) {
 
 <script>
     const cantidad = document.getElementById('<?php echo $id ?>');
+    /**
+     * Creacion evento para el boton de compra
+     */
     document.getElementById("comprar").addEventListener("click", () => {
         if (!isNaN(cantidad.value) && cantidad.value > 0) {
             peticionCarrito(<?php echo $id; ?>, cantidad.value, "add");
@@ -115,6 +122,9 @@ if ($pedirBBDD) {
 
 
     });
+    /**
+     * Creacion evento para el boton de muestra
+     */
     document.getElementById("muestra").addEventListener("click", () => {
         peticionCarrito(<?php echo $id; ?>, 1, "muestra");
 
