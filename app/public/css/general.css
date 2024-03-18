@@ -86,12 +86,14 @@
 }
 
 button,
-.button {
+.button,
+.button:visited {
 
     padding: 1em;
     border: 0;
     border-radius: 0.5em;
     background-color: white;
+    text-decoration: none;
 
 
     &:hover {

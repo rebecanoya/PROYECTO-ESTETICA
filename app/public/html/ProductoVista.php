@@ -21,7 +21,7 @@ if ($pedirBBDD) {
     $param = ["id" =>  $id];
     $producto = $BBDD->select($sql, $param);
 
-    if (!$producto[0]) {
+    if ($producto) {
         $cargar = true;
         $producto = $producto[0];
     }
