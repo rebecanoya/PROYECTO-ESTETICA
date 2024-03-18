@@ -36,17 +36,17 @@ include '../../src/iniciarPHP.php';
             $sameEmail = false;
             $password = hash("sha512", $_POST["password"]);
             $confirmPassword = hash("sha512", $_POST["confirmpassword"]);
-            $sql = "SELECT Email from usuarios";
-            $emails = $BBDD->select($sql);
-            foreach($emails as $email){
-                if ($email["Email"] == $_POST["email"]) {
+            $sql = "SELECT Email, password from usuarios";
+            $infoU = $BBDD->select($sql);
+            foreach($infoU as $info){
+                if ($info["Email"] == $_POST["email"] && $info["password"] !=  hash("sha512", "")) {
                     $sameEmail = true;
                     $errorR = "Ya existe una cuenta con este correo";
                 }
             }
             // Comprobar que ambas contraseñas son iguales
             if (hash_equals($password, $confirmPassword) && !$sameEmail) {
-                $sql = "INSERT INTO usuarios(Email, Password, Rol) VALUES (:email, :password, 3)";
+                $sql = "INSERT INTO usuarios(Email, Password, Rol) VALUES (:email, :password, "3")";
                 $param = ["email" =>  $_POST["email"], "password" => $password];
                 $respuesta = $BBDD->execute($sql, $param);
                 if ($respuesta[0]) {

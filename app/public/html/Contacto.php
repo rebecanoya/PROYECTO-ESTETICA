@@ -1,7 +1,10 @@
 <?php
 
 include '../../src/iniciarPHP.php';
-
+/**
+ * Pagina donde se muestra la informacion de contacto de cada instituto
+ *
+ */
 ?>
 
 <!DOCTYPE html>

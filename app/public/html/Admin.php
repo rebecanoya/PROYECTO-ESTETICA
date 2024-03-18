@@ -1,12 +1,24 @@
 <?php
 include '../../src/iniciarPHP.php';
 
+/**
+ * Comprobamos que el usuario que intenta acceder a la pagina admin posee el rol de admin
+ */
 if (!isset($_SESSION["rol"]) || $_SESSION["rol"] !== 1) {
      header("Location: index.php");
 }
-
+/**
+ * Aqui, segun el tipo de formulario que se envie, realizaremos diferentes acciones 
+ * como insertar o modificar prodcutos, lineas o usuarios
+ */
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    /**
+     * Si nos envian el formulario lineas insertaremos una nueva linea
+     */
     if (isset($_POST["lineas"])) {
+        /**
+         * Aqui hacemos una consulta preparada para insertar una nueva linea cuyos datos serán los obtenidos del formulario
+         */
         try {
             $sql = "INSERT INTO lineas(ID_Musica, Nombre, Color, Descripcion, Activo) VALUES (:musica, :nombre, :color, :descripcion, :activo)";
             $param = [
@@ -20,8 +32,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } catch (PDOException $e) {
             echo "Error en la consulta: " . $e->getMessage();
         }
-    }elseif (isset($_POST["lineasMod"])) {
+        /**
+         * Si nos envian el formulario lineasMod modificaremos la linea, cuyo id sea el selecionado gracias
+         * a la funcion de Js llenarFormularioLineaCosmetica(), con los datos obtenidos del formulario
+         */
+    } elseif (isset($_POST["lineasMod"])) {
         try {
+            /**
+            * Aqui hacemos una consulta preparada para modificar la linea con los datos obtenidos del formulario
+            */
             $sql = "UPDATE lineas SET ID_musica = :musica, Nombre = :nombre, Color = :color,
             Descripcion = :descripcion, Activo = :activo WHERE lineas.ID = :id";
             $param = [
@@ -35,8 +54,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } catch (PDOException $e) {
             echo "Error en la consulta: " . $e->getMessage();
         }
+        /**
+         * Si nos envian el formulario producto insertaremos un nuevo producto
+         */
     } elseif (isset($_POST["producto"])) {
         try {
+            /**
+             * Aqui hacemos una consulta preparada para insertar un nuevo producto cuyos datos serán los obtenidos del formulario
+             */
             $sql = "INSERT INTO productos (Precio, Stock, Descripcion, ID_Linea, Nombre, Activo)
                 VALUES (:precio, :stock, :descripcion, :ID_Linea, :Nombre, :Activo)";
             $param = [
@@ -49,26 +74,49 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($respuesta[0]) {
                 $errorR = $respuesta[1];
             }
+            /**
+             * Como cada producto tiene una imagen asociada, tenemos que comprobar que el archivo
+             * que se nos pasa sea una imagen en formato PNG
+             */
             $file = $_FILES["imagen"]["name"];
 
             $url_temp = $_FILES["imagen"]["tmp_name"];
 
+            /**
+             * Ruta donde vamos a guardar la imagen
+             */
             $url_insert = "../img/productos";
-
+            /**
+             * Cada imagen debe de llevar el ID del producto por nombre, por tanto,
+             * usamos el idProducto obtenido gracias a la funcion lastId para darle nombre
+             */
             $url_target = str_replace('\\', '/', $url_insert) . '/' . $idProducto . ".png";
 
+            /**
+             * Si no existiese la carpeta donde queremos guardar la imagen, lo creamos
+             */
             if (!file_exists($url_insert)) {
                 mkdir($url_insert, 0777, true);
             };
-
+            /**
+             * Por ultimo, si no conseguimos guardar la imagen informamos
+             * actualizando la variable errorP
+             */
             if (!move_uploaded_file($url_temp, $url_target)) {
                 $errorP = "Ha habido un error al cargar tu archivo.";
             }
         } catch (PDOException $e) {
             echo "Error en la consulta: " . $e->getMessage();
         }
+        /**
+         * Si nos envian el formulario prodcutoMod modificaremos el producto, cuyo id sea el selecionado gracias
+         * a la funcion de Js llenarFormularioProducto(), con los datos obtenidos del formulario
+         */
     } elseif (isset($_POST["productoMod"])) {
         try {
+            /**
+             * Aqui hacemos una consulta preparada para modificar un producto con los datos obtenidos del formulario
+             */
             $sql = "UPDATE productos SET Precio = :precio, Stock = :stock, Descripcion = :descripcion,
             ID_Linea = :linea, Nombre = :nombre, Activo = :activo WHERE productos.ID = :id";
             $param = [
@@ -80,16 +128,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($respuesta[0]) {
                 $errorR = $respuesta[1];
             }
+            /**
+             * Como cada producto tiene una imagen asociada, si esta desea ser modificada, tenemos que comprobar que el archivo
+             * que se nos pasa sea una imagen en formato PNG
+             */
             if (isset($_FILES)) {
                 $imagen = $_FILES['imagen'];
                 $file = $imagen["name"];
-
+                /**
+                 * Ruta donde vamos a guardar la imagen
+                 */
                 $url_temp = $imagen["tmp_name"];
-
+                /**
+                 * Ruta donde vamos a guardar la imagen
+                 */                
                 $url_insert = "../img/productos";
-
+                /**
+                 * Cada imagen debe de llevar el ID del producto por nombre, por tanto,
+                 * usamos el idProducto obtenido gracias a la funcion lastId para darle nombre
+                 */
                 $url_target = str_replace('\\', '/', $url_insert) . '/' . $_POST["idP"] . ".png";
-
+                /**
+                 * Si no existiese la carpeta donde queremos guardar la imagen, lo creamos
+                 */
                 if (!file_exists($url_insert)) {
                     mkdir($url_insert, 0777, true);
                 };
@@ -98,8 +159,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } catch (PDOException $e) {
             echo "Error en la consulta: " . $e->getMessage();
         }
+        /**
+         * Si nos envian el formulario usuario insertaremos un nuevo usuario
+         */
     } elseif (isset($_POST["usuario"])) {
         try {
+            /**
+             * Comprobamos que el email introducido no existe ya en la base de datos
+             */
             $sql = "SELECT email FROM usuarios";
             $checkEmail = $BBDD->select($sql);
             foreach ($checkEmail as $email) {
@@ -107,9 +174,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $errorR = "Ya existe una cuenta con ese email";
                 }
             }
+            /**
+             * Si el email no existe, hacemos una consulta preparada 
+             * para insertar una nueva linea cuyos datos serán los obtenidos del formulario
+             */
             if (!isset($errorR)) {
                 $password = hash("sha512", $_POST["password"]);
                 $passwordCheck = hash("sha512", $_POST["passwordCheck"]);
+                /**
+                 * Igual que en el Registro, las contraseñas deben de coincidir para poder
+                 * insertar el usuario
+                 */
                 if ($password == $passwordCheck) {
                     $sql = "INSERT INTO usuarios(Email, Password, Rol, Activo) VALUES (:email, :password, :rol, :activo)";
                     $param = [
@@ -127,8 +202,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } catch (PDOException $e) {
             echo "Error en la consulta: " . $e->getMessage();
         }
+        /**
+         * Si nos envian el formulario usuarioMod modificaremos el usuario, cuyo id sea el selecionado gracias
+         * a la funcion de Js llenarFormularioUsuario(), con los datos obtenidos del formulario
+         */
     } elseif (isset($_POST["usuarioMod"])) {
         try {
+            /**
+             * Aqui hacemos una consulta preparada para modificar el prodcuto con los datos obtenidos del formulario
+             */
             $sql = "UPDATE usuarios SET email = :email, rol = :rol, activo = :activo  WHERE usuarios.id = :id";
             $param = [
                 "email" => $_POST["email"], "rol" => $_POST["rol"],
@@ -141,6 +223,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } catch (PDOException $e) {
             echo "Error en la consulta: " . $e->getMessage();
         }
+        /**
+         * Si nos envian el formulario resetUsuario modificaremos el usuario, poniendo su contraseña
+         * como un String vacio, cuyo id sea el selecionado gracias
+         * a la funcion de Js llenarFormularioUsuario()
+         */
     } elseif (isset($_POST["resetUsuario"])) {
         try {
             $sql = "UPDATE usuarios SET password = :password WHERE usuarios.id = :id";
@@ -237,6 +324,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <?php
                     $sql = "SELECT * from lineas";
                     $lineas = $BBDD->select($sql);
+                    /**
+                     * Rellenamos la tabla de las lineas con la información obtenida en la consulta anterior
+                     */
                     foreach ($lineas as $linea) {
                         echo "<tr>";
                         echo "<td>" . $linea["ID"] . "</td>";
@@ -328,6 +418,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <?php
                     $sql = "SELECT * from productos";
                     $productos = $BBDD->select($sql);
+                    /**
+                     * Rellenamos la tabla de los productos con la información obtenida en la consulta anterior
+                     */
                     foreach ($productos as $producto) {
                         echo "<tr>";
                         echo "<td>" . $producto["ID"] . "</td>";
@@ -379,6 +472,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     Administrador
                     <input type="radio" name="rol" value="2" required>
                     Alumno
+                    <input type="radio" name="rol" value="3" required>
+                    Cliente
                     </label>
                 </div>
                 <div class="form-group">
@@ -387,6 +482,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     Si
                     <input id="activo" type="radio" name="activoU" value="2" required>
                     No
+                    
                     </label>
                 </div>
                 <?php
@@ -416,6 +512,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <?php
                     $sql = "SELECT * from usuarios";
                     $usuarios = $BBDD->select($sql);
+                    /**
+                     * Rellenamos la tabla de los productos con la información obtenida en la consulta anterior
+                     */                    
                     foreach ($usuarios as $usuario) {
                         echo "<tr>";
                         echo "<td>" . $usuario["ID"] . "</td>";
