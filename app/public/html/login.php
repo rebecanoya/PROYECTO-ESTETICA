@@ -32,6 +32,7 @@ include '../../src/iniciarPHP.php';
      */
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (isset($_POST["register"])) {
+            unset($errorR);
             $sameEmail = false;
             $password = hash("sha512", $_POST["password"]);
             $confirmPassword = hash("sha512", $_POST["confirmpassword"]);
@@ -51,9 +52,8 @@ include '../../src/iniciarPHP.php';
                 if ($respuesta[0]) {
                     $errorR = $respuesta[1];
                 }
-                var_dump($errorR);
-                // $sesion->login($_POST["email"], $_POST["password"]);
-                // header("Location: index.php");
+                $sesion->login($_POST["email"], $_POST["password"]);
+                header("Location: index.php");
             }
         } elseif (isset($_POST["login"])) {
             if ($sesion->login($_POST["email"], $_POST["password"])) {
@@ -71,7 +71,13 @@ include '../../src/iniciarPHP.php';
                 <h2>Cliente nuevo</h2>
                 <p>Para continuar con un proceso de compra debes registrarte.</p>
                 <button id="mostrarFormulario">Crear cuenta</button>
+                <?php
+                    if (isset($errorR)) {
+                        echo "<br>" . $errorR;
+                    }
+                ?>
             </div>
+                
 
             <div class="sesion">
                 <h2>Iniciar Sesion</h2>
@@ -103,11 +109,7 @@ include '../../src/iniciarPHP.php';
                 
                 <button type="submit" name="register" class="register">Crear cuenta</button>
             </form>
-            <?php
-                if (isset($errorR)) {
-                    echo $errorR;
-                }
-            ?>
+            
         </div>
     </main>
 
