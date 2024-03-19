@@ -38,7 +38,7 @@ include '../../src/iniciarPHP.php';
             $confirmPassword = hash("sha512", $_POST["confirmpassword"]);
             $sql = "SELECT Email, password from usuarios";
             $infoU = $BBDD->select($sql);
-            foreach($infoU as $info){
+            foreach ($infoU as $info) {
                 if ($info["Email"] == $_POST["email"] && $info["password"] !=  hash("sha512", "")) {
                     $sameEmail = true;
                     $errorR = "Ya existe una cuenta con este correo";
@@ -46,7 +46,7 @@ include '../../src/iniciarPHP.php';
             }
             // Comprobar que ambas contraseñas son iguales
             if (hash_equals($password, $confirmPassword) && !$sameEmail) {
-                $sql = "INSERT INTO usuarios(Email, Password, Rol) VALUES (:email, :password, "3")";
+                $sql = "INSERT INTO usuarios(Email, Password, Rol) VALUES (:email, :password, 3)";
                 $param = ["email" =>  $_POST["email"], "password" => $password];
                 $respuesta = $BBDD->execute($sql, $param);
                 if ($respuesta[0]) {
@@ -72,12 +72,12 @@ include '../../src/iniciarPHP.php';
                 <p>Para continuar con un proceso de compra debes registrarte.</p>
                 <button id="mostrarFormulario">Crear cuenta</button>
                 <?php
-                    if (isset($errorR)) {
-                        echo "<br>" . $errorR;
-                    }
+                if (isset($errorR)) {
+                    echo "<br>" . $errorR;
+                }
                 ?>
             </div>
-                
+
 
             <div class="sesion">
                 <h2>Iniciar Sesion</h2>
@@ -88,7 +88,7 @@ include '../../src/iniciarPHP.php';
                     </div>
                     <button type="submit" name="login" class="login">Iniciar</button>
                 </form>
-                <?php 
+                <?php
                 if (isset($errorL)) {
                     echo $errorL;
                 }
@@ -106,10 +106,10 @@ include '../../src/iniciarPHP.php';
                     <input type="password" name="password" id="password" placeholder="Contraseña">
                     <input type="password" name="confirmpassword" id="password" placeholder="Repetir contraseña">
                 </div>
-                
+
                 <button type="submit" name="register" class="register">Crear cuenta</button>
             </form>
-            
+
         </div>
     </main>
 
