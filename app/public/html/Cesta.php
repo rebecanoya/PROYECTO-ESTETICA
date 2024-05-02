@@ -31,15 +31,26 @@ if ($sesion->estaLoggeado()) {
 
 
 $productos = [];
-
 if (count($_SESSION["Carrito"])) {
-
+    
     $sql = "SELECT Nombre,Precio,ID from productos where ID in (" . implode(',', array_keys($_SESSION["Carrito"])) . ")";
     $productos = $BBDD->select($sql);
 }
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        echo "<h2>GHola";
+        $sql = "INSERT INTO pedidos (IDUsuario, PrecioTotal) values (:usuario, :precio)";
+        $params = ["usuario" => $_SESSION["id"], "precio" => $subtotal];
+        $BBDD->execute($sql, $params);
 
+        $pedidoId = $BBDD->lastId();
 
+        foreach ($_SESSION["Carrito"] as $id => $value) {
+                $sql = "INSERT INTO detalles_pedido (IDPedido, IDProducto, Cantidad) values (:pedidoId, :producto, :cantidad)";
+                $params = ["cantidad" => $value, "pedidoId" => $pedidoId, "producto" => $id];
+                $BBDD->execute($sql, $params);
+            } 
+}
 ?>
 
 <!DOCTYPE html>
@@ -66,7 +77,6 @@ if (count($_SESSION["Carrito"])) {
 
 
     <main>
-
         <div class="container">
             <div class="products">
                 <h2>Productos</h2>
@@ -119,7 +129,7 @@ if (count($_SESSION["Carrito"])) {
                 </div>
 
                 <div class="opciones">
-                    <button class="checkout-btn">Realizar pedido</button>
+                    <button id="pedidoBtn" class="checkout-btn">Realizar pedido</button>
                     <a href="../html/NuestrosProductos.php" class="volverCompra">Seguir Comprando</a>
                 </div>
             </div>
@@ -202,6 +212,27 @@ if (count($_SESSION["Carrito"])) {
         location.reload();
 
     }
+
+    document.getElementById("pedidoBtn").addEventListener("click", function() {
+    // Crear una instancia del objeto XMLHttpRequest
+    var xhr = new XMLHttpRequest();
+    
+    // Configurar la solicitud
+    xhr.open("POST", "Cesta.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    
+    // Definir lo que hacer en caso de éxito
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            // La acción ha sido realizada, hacer algo con la respuesta si es necesario
+            console.log(xhr.responseText);
+        }
+    };
+    
+    // Enviar la solicitud
+    xhr.send("accion=realizar_accion");
+    });
+</script>
 </script>
 
 </html>

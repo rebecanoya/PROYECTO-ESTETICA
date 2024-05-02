@@ -59,6 +59,18 @@ CREATE TABLE `carrito` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `detallesPedido`
+--
+
+CREATE TABLE `detallesPedido` (
+  `IDPedido` int NOT NULL,
+  `IDProducto` int NOT NULL,
+  `Cantidad` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `ies`
 --
 
@@ -90,6 +102,19 @@ CREATE TABLE `lineas` (
   `Descripcion` varchar(300) NOT NULL,
   `Activo` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pedidos`
+--
+
+CREATE TABLE `pedidos` (
+  `ID` int NOT NULL,
+  `ID_Cliente` int NOT NULL,
+  `Precio` double NOT NULL,
+  `Fecha` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
