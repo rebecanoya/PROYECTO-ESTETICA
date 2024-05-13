@@ -1,3 +1,11 @@
+<nav>
+
+    <button>Lineas</button>
+    <button>Productos</button>
+    <button>Usuarios</button>
+
+</nav>
+
 <?php
 include '../../src/iniciarPHP.php';
 
@@ -5,7 +13,7 @@ include '../../src/iniciarPHP.php';
  * Comprobamos que el usuario que intenta acceder a la pagina admin posee el rol de admin
  */
 if (!isset($_SESSION["rol"]) || $_SESSION["rol"] !== 1) {
-     header("Location: index.php");
+    header("Location: index.php");
 }
 /**
  * Aqui, segun el tipo de formulario que se envie, realizaremos diferentes acciones 
@@ -39,8 +47,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif (isset($_POST["lineasMod"])) {
         try {
             /**
-            * Aqui hacemos una consulta preparada para modificar la linea con los datos obtenidos del formulario
-            */
+             * Aqui hacemos una consulta preparada para modificar la linea con los datos obtenidos del formulario
+             */
             $sql = "UPDATE lineas SET ID_musica = :musica, Nombre = :nombre, Color = :color,
             Descripcion = :descripcion, Activo = :activo WHERE lineas.ID = :id";
             $param = [
@@ -141,7 +149,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $url_temp = $imagen["tmp_name"];
                 /**
                  * Ruta donde vamos a guardar la imagen
-                 */                
+                 */
                 $url_insert = "../img/productos";
                 /**
                  * Cada imagen debe de llevar el ID del producto por nombre, por tanto,
@@ -214,7 +222,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $sql = "UPDATE usuarios SET email = :email, rol = :rol, activo = :activo  WHERE usuarios.id = :id";
             $param = [
                 "email" => $_POST["email"], "rol" => $_POST["rol"],
-                "activo" => $_POST["activoU"], "id" => $_POST["idU"] 
+                "activo" => $_POST["activoU"], "id" => $_POST["idU"]
             ];
             $respuesta = $BBDD->execute($sql, $param);
             if ($respuesta[0]) {
@@ -305,9 +313,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <button type="submit" id="lineasModButton" name="lineasMod" class="btn btn-primary" disabled>Modificar</button>
                 <button type="button" id="limpiar" name="limpiar" class="btn btn-primary" onclick=limpiarFormularioLineas()>Limpiar</button>
             </form>
-        </section>
-
-        <section>
             <table id="lineasCosmeticas" class="table table-bordered table-dark">
                 <thead class="thead-dark">
                     <tr>
@@ -398,9 +403,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <button type="submit" id="productoModButton" name="productoMod" class="btn btn-primary" disabled>Modificar</button>
                 <button type="button" id="limpiar" name="limpiar" class="btn btn-primary" onclick=limpiarFormularioProducto()>Limpiar</button>
             </form>
-        </section>
-
-        <section class="table-container">
             <table id="tablaProductos" class="table table-bordered table-dark">
                 <thead class="thead-dark">
                     <tr>
@@ -482,7 +484,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     Si
                     <input id="activo" type="radio" name="activoU" value="2" required>
                     No
-                    
+
                     </label>
                 </div>
                 <?php
@@ -495,9 +497,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <button type="submit" id="resetUsuario" name="resetUsuario" class="btn btn-primary" disabled>Resetear</button>
                 <button type="button" id="limpiar" name="limpiar" class="btn btn-primary" onclick=limpiarFormularioUsuario()>Limpiar</button>
             </form>
-        </section>
 
-        <section>
             <table id="usuarios" class="table table-bordered table-dark">
                 <thead class="thead-dark">
                     <tr>
@@ -514,7 +514,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $usuarios = $BBDD->select($sql);
                     /**
                      * Rellenamos la tabla de los productos con la información obtenida en la consulta anterior
-                     */                    
+                     */
                     foreach ($usuarios as $usuario) {
                         echo "<tr>";
                         echo "<td>" . $usuario["ID"] . "</td>";
@@ -556,5 +556,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script src="../js/usuarios.js"></script>
     <script src="../js/productos.js"></script>
 </body>
+
+<script>
+    const secciones = document.getElementsByTagName("section");
+    const nav = document.getElementsByTagName("nav")[0].children;
+    console.log(nav);
+    for (let i = 0; i < nav.length; i++) {
+        const element = nav[i];
+        console.log(element);
+        element.dataset.tituloSeleccionado = "false";
+        element.addEventListener("click", () => {
+            if (element.dataset.tituloSeleccionado == "true") {
+                for (let j = 0; j < nav.length; j++) {
+
+
+                    nav[j].dataset.tituloSeleccionado = "true";
+                    secciones[j].dataset.seleccionado = "true";
+
+                }
+
+            } else {
+                for (let j = 0; j < nav.length; j++) {
+                    if (i == j) {
+                        element.dataset.tituloSeleccionado = "true";
+                        secciones[i].dataset.seleccionado = "true";
+                    } else {
+
+                        nav[j].dataset.tituloSeleccionado = "false";
+                        secciones[j].dataset.seleccionado = "false";
+
+                    }
+                }
+
+
+            }
+
+        });
+    }
+</script>
 
 </html>

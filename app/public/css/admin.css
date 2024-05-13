@@ -1,0 +1,11 @@
+*[ data-seleccionado="false"] {
+
+    display: none;
+
+}
+
+button [data-tituloSeleccionado="false"] {
+
+    color: gray;
+
+}
