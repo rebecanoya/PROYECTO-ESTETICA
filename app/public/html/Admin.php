@@ -313,7 +313,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <button type="submit" id="lineasModButton" name="lineasMod" class="btn btn-primary" disabled>Modificar</button>
                 <button type="button" id="limpiar" name="limpiar" class="btn btn-primary" onclick=limpiarFormularioLineas()>Limpiar</button>
             </form>
-            <table id="lineasCosmeticas" class="table table-bordered table-dark">
+            <table id="lineasCosmeticas" class="table table-bordered">
                 <thead class="thead-dark">
                     <tr>
                         <th>ID</th>
@@ -403,7 +403,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <button type="submit" id="productoModButton" name="productoMod" class="btn btn-primary" disabled>Modificar</button>
                 <button type="button" id="limpiar" name="limpiar" class="btn btn-primary" onclick=limpiarFormularioProducto()>Limpiar</button>
             </form>
-            <table id="tablaProductos" class="table table-bordered table-dark">
+            <table id="tablaProductos" class="table table-bordered">
                 <thead class="thead-dark">
                     <tr>
                         <th>ID</th>
@@ -498,7 +498,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <button type="button" id="limpiar" name="limpiar" class="btn btn-primary" onclick=limpiarFormularioUsuario()>Limpiar</button>
             </form>
 
-            <table id="usuarios" class="table table-bordered table-dark">
+            <table id="usuarios" class="table table-bordered">
                 <thead class="thead-dark">
                     <tr>
                         <th>ID</th>
