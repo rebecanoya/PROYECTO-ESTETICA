@@ -1,10 +1,10 @@
-*[ data-seleccionado="false"] {
+section[ data-seleccionado="false"] {
 
     display: none;
 
 }
 
-button [data-tituloSeleccionado="false"] {
+button[data-titulo-seleccionado="false"] {
 
     color: gray;
 

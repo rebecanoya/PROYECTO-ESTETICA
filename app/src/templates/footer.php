@@ -28,4 +28,25 @@
         </div>
     </div>
 
+
+
 </footer>
+
+<script>
+    function setCookie(cname, cvalue, exdays) {
+        const d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        let expires = "expires=" + d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+    let cookies = document.cookie;
+    const mensajeAparecido = cookies.match("aceptarCookies=true");
+    const estaLoggeado = cookies.match("token=");
+
+    if (!estaLoggeado && !mensajeAparecido) {
+        alert("Es necesario el uso de cookies para el funcionamiento de esta página");
+        setCookie("aceptarCookies", "true", 7);
+
+
+    }
+</script>

@@ -1,11 +1,3 @@
-<nav>
-
-    <button>Lineas</button>
-    <button>Productos</button>
-    <button>Usuarios</button>
-
-</nav>
-
 <?php
 include '../../src/iniciarPHP.php';
 
@@ -268,13 +260,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon">
 </head>
 
+
 <body>
 
     <header>
         <a href="../html/index.php" class="fa-solid fa-arrow-left iconButton"></a>
     </header>
 
+
+
     <main class="container">
+
+        <h2 class="container text-center">Panel de administración</h2>
+
+        <nav class="container text-center">
+
+            <button>Lineas</button>
+            <button>Productos</button>
+            <button>Usuarios</button>
+
+        </nav>
+
         <section>
             <h2>Líneas Cosméticas</h2>
             <div id="lineaCosmeticaMessage"></div>
@@ -309,9 +315,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     echo "<div>" . $errorR . "</div>";
                 }
                 ?>
-                <button type="submit" id="lineasActionButton" name="lineas" class="btn btn-primary">Agregar</button>
-                <button type="submit" id="lineasModButton" name="lineasMod" class="btn btn-primary" disabled>Modificar</button>
-                <button type="button" id="limpiar" name="limpiar" class="btn btn-primary" onclick=limpiarFormularioLineas()>Limpiar</button>
+                <button type="submit" id="lineasActionButton" name="lineas" class="btn btn-dark mb-3">Agregar</button>
+                <button type="submit" id="lineasModButton" name="lineasMod" class="btn btn-dark mb-3" disabled>Modificar</button>
+                <button type="button" id="limpiar" name="limpiar" class="btn btn-dark mb-3" onclick=limpiarFormularioLineas()>Limpiar</button>
             </form>
             <table id="lineasCosmeticas" class="table table-bordered">
                 <thead class="thead-dark">
@@ -399,9 +405,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <label for="imagen">Imagen:</label>
                     <input type="file" id="imagen" name="imagen" accept="image/png" class="form-control-file">
                 </div>
-                <button type="submit" id="productoActionButton" name="producto" class="btn btn-primary">Agregar</button>
-                <button type="submit" id="productoModButton" name="productoMod" class="btn btn-primary" disabled>Modificar</button>
-                <button type="button" id="limpiar" name="limpiar" class="btn btn-primary" onclick=limpiarFormularioProducto()>Limpiar</button>
+                <button type="submit" id="productoActionButton" name="producto" class="btn btn-dark mb-3">Agregar</button>
+                <button type="submit" id="productoModButton" name="productoMod" class="btn btn-dark mb-3" disabled>Modificar</button>
+                <button type="button" id="limpiar" name="limpiar" class="btn btn-dark mb-3" onclick=limpiarFormularioProducto()>Limpiar</button>
             </form>
             <table id="tablaProductos" class="table table-bordered">
                 <thead class="thead-dark">
@@ -492,10 +498,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     echo "<div>" . $errorR . "</div>";
                 }
                 ?>
-                <button type="submit" id="usuarioActionButton" name="usuario" class="btn btn-primary">Agregar</button>
-                <button type="submit" id="usuarioModButton" name="usuarioMod" class="btn btn-primary" disabled>Modificar</button>
-                <button type="submit" id="resetUsuario" name="resetUsuario" class="btn btn-primary" disabled>Resetear</button>
-                <button type="button" id="limpiar" name="limpiar" class="btn btn-primary" onclick=limpiarFormularioUsuario()>Limpiar</button>
+                <button type="submit" id="usuarioActionButton" name="usuario" class="btn btn-dark mb-3">Agregar</button>
+                <button type="submit" id="usuarioModButton" name="usuarioMod" class="btn btn-dark mb-3" disabled>Modificar</button>
+                <button type="submit" id="resetUsuario" name="resetUsuario" class="btn btn-dark mb-3" disabled>Resetear</button>
+                <button type="button" id="limpiar" name="limpiar" class="btn btn-dark mb-3" onclick=limpiarFormularioUsuario()>Limpiar</button>
             </form>
 
             <table id="usuarios" class="table table-bordered">
@@ -564,18 +570,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     for (let i = 0; i < nav.length; i++) {
         const element = nav[i];
         console.log(element);
-        element.dataset.tituloSeleccionado = "false";
+        if (i == 0) {
+            element.dataset.tituloSeleccionado = "true";
+            secciones[i].dataset.seleccionado = "true";
+        } else {
+
+            element.dataset.tituloSeleccionado = "false";
+            secciones[i].dataset.seleccionado = "false";
+
+        }
         element.addEventListener("click", () => {
-            if (element.dataset.tituloSeleccionado == "true") {
-                for (let j = 0; j < nav.length; j++) {
-
-
-                    nav[j].dataset.tituloSeleccionado = "true";
-                    secciones[j].dataset.seleccionado = "true";
-
-                }
-
-            } else {
+            if (element.dataset.tituloSeleccionado == "false") {
                 for (let j = 0; j < nav.length; j++) {
                     if (i == j) {
                         element.dataset.tituloSeleccionado = "true";
@@ -587,6 +592,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                     }
                 }
+
+
 
 
             }
