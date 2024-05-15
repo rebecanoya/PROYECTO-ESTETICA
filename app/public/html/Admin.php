@@ -403,7 +403,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
                 <div class="form-group">
                     <label for="imagen">Imagen:</label>
-                    <input type="file" id="imagen" name="imagen" accept="image/png" class="form-control-file">
+                    <input type="file" id="imagen" name="imagen" accept="image/png" class="form-control-file" required>
                 </div>
                 <button type="submit" id="productoActionButton" name="producto" class="btn btn-dark mb-3">Agregar</button>
                 <button type="submit" id="productoModButton" name="productoMod" class="btn btn-dark mb-3" disabled>Modificar</button>
