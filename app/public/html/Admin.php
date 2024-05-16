@@ -59,6 +59,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
          */
     } elseif (isset($_POST["producto"])) {
         try {
+            if (!isset($_POST["imagen"])) {
+                throw new Exception("Es necesario adjuntar una imagen");
+            }
             /**
              * Aqui hacemos una consulta preparada para insertar un nuevo producto cuyos datos serán los obtenidos del formulario
              */
@@ -107,6 +110,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         } catch (PDOException $e) {
             echo "Error en la consulta: " . $e->getMessage();
+        } catch (Exception $e) {
+            echo "Error " . $e->getMessage();
         }
         /**
          * Si nos envian el formulario prodcutoMod modificaremos el producto, cuyo id sea el selecionado gracias
@@ -403,7 +408,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
                 <div class="form-group">
                     <label for="imagen">Imagen:</label>
-                    <input type="file" id="imagen" name="imagen" accept="image/png" class="form-control-file" required>
+                    <input type="file" id="imagen" name="imagen" accept="image/png" class="form-control-file">
                 </div>
                 <button type="submit" id="productoActionButton" name="producto" class="btn btn-dark mb-3">Agregar</button>
                 <button type="submit" id="productoModButton" name="productoMod" class="btn btn-dark mb-3" disabled>Modificar</button>

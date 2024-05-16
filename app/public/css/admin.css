@@ -9,3 +9,14 @@ button[data-titulo-seleccionado="false"] {
     color: gray;
 
 }
+
+body {
+    color: red;
+
+
+    & * {
+
+        color: black;
+
+    }
+}
