@@ -32,7 +32,7 @@
     </div>
 
     <div class="icons">
-        <a class="fa-solid fa-magnifying-glass iconButton"></a>
+        <a id="audio" class="fa-solid fa-volume-xmark iconButton"></a>
         <a href="../../html/login.php" class="fa-regular fa-user iconButton"></a>
         <a href="../../html/Cesta.php" class=" fa-solid fa-cart-shopping iconButton"></a>
         <?php
@@ -60,4 +60,9 @@
     </nav>
 
 
+
+    <script src="../js/audio.js">
+
+
+    </script>
 </header>
