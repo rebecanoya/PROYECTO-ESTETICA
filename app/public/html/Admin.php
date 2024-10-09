@@ -16,6 +16,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
      * Si nos envian el formulario lineas insertaremos una nueva linea
      */
     if (isset($_POST["lineas"])) {
+        if (!isset($_FILES["imagenFondo"])) {
+            throw new Exception("Es necesario adjuntar una imagen");
+        }
+        if (!isset($_FILES["imagenLote"])) {
+            throw new Exception("Es necesario adjuntar una imagen");
+        }
         /**
          * Aqui hacemos una consulta preparada para insertar una nueva linea cuyos datos serán los obtenidos del formulario
          */
@@ -26,16 +32,60 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 "color" => substr($_POST["color"], 1), "descripcion" => $_POST["descripcion"], "activo" => $_POST["activoL"]
             ];
             $respuesta = $BBDD->execute($sql, $param);
+            $idLinea = $BBDD->lastId();
             if ($respuesta[0]) {
                 $errorR = $respuesta[1];
             }
-        } catch (PDOException $e) {
-            echo "Error en la consulta: " . $e->getMessage();
-        }
+/**
+             * Como cada producto tiene una imagen asociada, tenemos que comprobar que el archivo
+             * que se nos pasa sea una imagen en formato PNG
+             */
+            $fileFondo = $_FILES["imagenFondo"]["name"];
+
+            $url_tempFondo = $_FILES["imagenFondo"]["tmp_name"];
+
+            $fileLote = $_FILES["imagenLote"]["name"];
+
+            $url_tempLote = $_FILES["imagenLote"]["tmp_name"];
+
+            /**
+             * Ruta donde vamos a guardar la imagen
+             */
+            $url_insertFondo = "../img/lineas";
+            $url_insertLote = "../img/lote";
+            /**
+             * Cada imagen debe de llevar el ID del producto por nombre, por tanto,
+             * usamos el idProducto obtenido gracias a la funcion lastId para darle nombre
+             */
+            $url_targetFondo = str_replace('\\', '/', $url_insertFondo) . '/' . $idLinea . ".png";
+            $url_targetLote = str_replace('\\', '/', $url_insertLote) . '/' . $idLinea . ".png";
+            /**
+             * Si no existiese la carpeta donde queremos guardar la imagen, lo creamos
+             */
+            if (!file_exists($url_insertFondo)) {
+                mkdir($url_insertFondo, 0777, true);
+            };
+            if (!file_exists($url_insertLote)) {
+                mkdir($url_insertLote, 0777, true);
+            };
+            /**
+             * Por ultimo, si no conseguimos guardar la imagen informamos
+             * actualizando la variable errorP
+             */
+            if (!move_uploaded_file($url_tempFondo, $url_targetFondo)) {
+                $errorP = "Ha habido un error al cargar tu archivo.";
+            }
+            if (!move_uploaded_file($url_tempLote, $url_targetLote)) {
+                $errorP = "Ha habido un error al cargar tu archivo.";
+            }
         /**
          * Si nos envian el formulario lineasMod modificaremos la linea, cuyo id sea el selecionado gracias
          * a la funcion de Js llenarFormularioLineaCosmetica(), con los datos obtenidos del formulario
          */
+        } catch (PDOException $e) {
+            echo "Error en la consulta: " . $e->getMessage();
+        }
+        
     } elseif (isset($_POST["lineasMod"])) {
         try {
             /**
@@ -51,6 +101,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($respuesta[0]) {
                 $errorR = $respuesta[1];
             }
+            if (isset($_FILES)) {
+                var_dump($_POST["idL"]);
+                $imagenFondo = $_FILES['imagenFondo'];
+                $imagenLote = $_FILES['imagenLote'];
+                $fileFondo = $imagenFondo["name"];
+                $fileLote = $imagenLote["name"];
+                /**
+                 * Ruta donde vamos a guardar la imagen
+                 */
+                $url_tempFondo = $imagenFondo["tmp_name"];
+                $url_tempLote = $imagenLote["tmp_name"];
+                /**
+                 * Ruta donde vamos a guardar la imagen
+                 */
+                $url_insertFondo = "../img/lineas";
+                $url_insertLote = "../img/lote";
+                /**
+                 * Cada imagen debe de llevar el ID del producto por nombre, por tanto,
+                 * usamos el idProducto obtenido gracias a la funcion lastId para darle nombre
+                 */
+                $url_targetFondo = str_replace('\\', '/', $url_insertFondo) . '/' . $_POST["idL"] . ".png";
+                $url_targetLote = str_replace('\\', '/', $url_insertLote) . '/' . $_POST["idL"] . ".png";
+                /**
+                 * Si no existiese la carpeta donde queremos guardar la imagen, lo creamos
+                 */
+                if (!file_exists($url_insertFondo)) {
+                    mkdir($url_insertFondo, 0777, true);
+                };
+                if (!file_exists($url_insertLote)) {
+                    mkdir($url_insertLote, 0777, true);
+                };
+                    move_uploaded_file($url_tempFondo, $url_targetFondo);
+                    move_uploaded_file($url_tempLote, $url_targetLote);
+                }
         } catch (PDOException $e) {
             echo "Error en la consulta: " . $e->getMessage();
         }
@@ -59,7 +143,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
          */
     } elseif (isset($_POST["producto"])) {
         try {
-            if (!isset($_POST["imagen"])) {
+            if (!isset($_FILES["imagen"])) {
                 throw new Exception("Es necesario adjuntar una imagen");
             }
             /**
@@ -74,6 +158,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ];
             $respuesta = $BBDD->execute($sql, $param);
             $idProducto = $BBDD->lastId();
+            var_dump($respuesta);
             if ($respuesta[0]) {
                 $errorR = $respuesta[1];
             }
@@ -289,7 +374,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <section>
             <h2>Líneas Cosméticas</h2>
             <div id="lineaCosmeticaMessage"></div>
-            <form id="lineaCosmeticaForm" method="post">
+            <form id="lineaCosmeticaForm" method="post"  enctype="multipart/form-data">
                 <input type="hidden" id="idL" name="idL" value=0 class="form-control">
                 <div class="form-group">
                     <label for="nombre">Nombre:</label>
@@ -314,6 +399,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <input type="radio" name="activoL" value="2" required>
                     No
                     </label>
+                </div>
+                <div class="form-group">
+                    <label for="imagen">Imagen Fondo:</label>
+                    <input type="file" id="imagenFondo" name="imagenFondo" accept="image/png" class="form-control-file">
+                </div>
+                <div class="form-group">
+                    <label for="imagen">Imagen Lote:</label>
+                    <input type="file" id="imagenLote" name="imagenLote" accept="image/png" class="form-control-file">
                 </div>
                 <?php
                 if (isset($errorR)) {
@@ -390,8 +483,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="form-group">
                     <label for="linea">Línea:</label>
                     <select id="linea" name="linea" class="form-control" required>
-                        <option value="1">Línea 1</option>
-                        <option value="2">Línea 2</option>
+                    <?php
+                        // Conexión a la base de datos
+                        try {
+                            $sql = "SELECT ID, Nombre from lineas";
+                            $lineas = $BBDD->select($sql);
+                            // Consulta para obtener los datos que se mostrarán en el select
+                            // Iteramos sobre los resultados para crear los option del select
+                            foreach ($lineas as $linea) {
+                                echo "<option value='" . $linea["ID"] . "'>" . $linea["Nombre"] . "</option>";
+                            }
+                        } catch (PDOException $e) {
+                            echo "Error en la conexión o consulta: " . $e->getMessage();
+                        }
+                        ?>
                     </select>
                 </div>
                 <div class="form-group">
