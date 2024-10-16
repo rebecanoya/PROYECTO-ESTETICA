@@ -66,6 +66,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="icon" href="../img/favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon">
     <title>Cesta | Aromusicoterapia</title>
+    <style>
+        .datospedido {
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -77,71 +82,98 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
     <main>
-        <div class="container">
-            <div class="products">
-                <h2>Productos</h2>
-                <div class="product">
-                    <div class="product-titles">
-                        <span class="title">Foto</span>
-                        <span class="title">Producto</span>
-                        <span class="title">Precio</span>
-                        <span class="title">Cantidad</span>
-                        <span class="title">Subtotal</span>
-                    </div>
-                    <?php
-                    $subtotal = 0;
-                    foreach ($productos as $producto) {
-
-                        $idProducto = $producto["ID"];
-                        $nombreProducto = $producto["Nombre"];
-                        $precioProducto = $producto["Precio"];
-                        $cantidadProducto = $_SESSION["Carrito"][$idProducto];
-                        $subtotalProducto = $precioProducto * $cantidadProducto;
-                        $subtotal += $subtotalProducto;
-
-                    ?>
-
-                        <div class="product-info">
-                            <span class="product-img">
-                                <img src="../img/productos/<?php echo $idProducto ?>.png" width="100px" alt="">
-                            </span>
-                            <span class="product-name"><?php echo $nombreProducto ?></span>
-                            <span class="product-price"><?php echo $precioProducto ?>€</span>
-                            <div class="form-container">
-                                <div class="cantidad">
-                                    <button class="menos" onclick="actualizarCarrito(event,-1,<?php echo $idProducto ?>,'reducir')">-</button>
-                                    <input type="number" id="<?php echo $idProducto ?>" name="cantidad" value="<?php echo $cantidadProducto ?>">
-                                    <button class="mas" onclick="actualizarCarrito(event,1,<?php echo $idProducto ?>,'add')">+</button>
-                                </div>
-                            </div>
-                            <span class="product-subtotal" id="precio<?php echo $idProducto ?>" data-precioBase="<?php echo $precioProducto ?>"><?php echo $subtotalProducto ?>€</span>
-                            <i class="fa-solid fa-trash-can iconButton" onclick=" eliminarProducto(<?php echo $idProducto ?>); "></i>
+    <form action="" method="post">
+            <div class="container">
+                <div class="products">
+                    <h2>Productos</h2>
+                    <div class="product">
+                        <div class="product-titles">
+                            <span class="title">Foto</span>
+                            <span class="title">Producto</span>
+                            <span class="title">Precio</span>
+                            <span class="title">Cantidad</span>
+                            <span class="title">Subtotal</span>
                         </div>
-                    <?php } ?>
+                        <?php
+                        $subtotal = 0;
+                        foreach ($productos as $producto) {
 
-                </div>
-            </div>
-            <div class="summary">
-                <div class="total">
-                    <h2>Resumen de Compra</h2>
-                    <p id="subtotal">Subtotal <?php echo $subtotal ?>€</p>
-                    <p id="subtotalImpuestos">Total incluyendo impuestos <?php echo $subtotal ?>€</p>
-                </div>
+                            $idProducto = $producto["ID"];
+                            $nombreProducto = $producto["Nombre"];
+                            $precioProducto = $producto["Precio"];
+                            $cantidadProducto = $_SESSION["Carrito"][$idProducto];
+                            $subtotalProducto = $precioProducto * $cantidadProducto;
+                            $subtotal += $subtotalProducto;
 
-                <div class="opciones">
-                    <button id="pedidoBtn" class="checkout-btn">Realizar pedido</button>
-                    <a href="../html/NuestrosProductos.php" class="volverCompra">Seguir Comprando</a>
+                        ?>
+
+                            <div class="product-info">
+                                <span class="product-img">
+                                    <img src="../img/productos/<?php echo $idProducto ?>.png" width="100px" alt="">
+                                </span>
+                                <span class="product-name"><?php echo $nombreProducto ?></span>
+                                <span class="product-price"><?php echo $precioProducto ?>€</span>
+                                <div class="form-container">
+                                    <div class="cantidad">
+                                        <button class="menos" onclick="actualizarCarrito(event,-1,<?php echo $idProducto ?>,'reducir')">-</button>
+                                        <input type="number" id="<?php echo $idProducto ?>" name="cantidad" value="<?php echo $cantidadProducto ?>">
+                                        <button class="mas" onclick="actualizarCarrito(event,1,<?php echo $idProducto ?>,'add')">+</button>
+                                    </div>
+                                </div>
+                                <span class="product-subtotal" id="precio<?php echo $idProducto ?>" data-precioBase="<?php echo $precioProducto ?>"><?php echo $subtotalProducto ?>€</span>
+                                <i class="fa-solid fa-trash-can iconButton" onclick=" eliminarProducto(<?php echo $idProducto ?>); "></i>
+                            </div>
+                        <?php } ?>
+
+                    </div>
                 </div>
-            </div>
+                <div class="summary">
+    <div class="total">
+        <h2>Resumen de Compra</h2>
+        <p id="subtotal">Subtotal <?php echo $subtotal ?>€</p>
+        <p id="subtotalImpuestos">Total incluyendo impuestos <?php echo $subtotal ?>€</p>
+    </div>
+
+    <div class="opciones">
+        <!-- Se evita el comportamiento por defecto de submit con type="button" -->
+        <button id="pedidoBtn" class="checkout-btn" type="button">Realizar pedido</button>
+        <a href="../html/NuestrosProductos.php" class="volverCompra">Seguir Comprando</a>
+    </div>
+</div>
+
+<!-- Formulario para los datos del pedido -->
+<div class="datospedido">
+    <h2>Introduzca sus datos para completar el pedido</h2>
+    <form id="datosPedidoForm" action="" method="post">
+        <div class="grupo-form">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre" required>
+            <label for="apellidos">Apellidos:</label>
+            <input type="text" id="apellidos" name="apellidos" class="form-control" placeholder="Apellido" required>
+            <label for="dni">DNI:</label>
+            <input type="text" id="dni" name="dni" class="form-control" placeholder="DNI" required>
         </div>
+        <!-- El botón de tramitar sí envía el formulario POST al servidor -->
+        <button type="submit" name="register" class="register">Tramitar pedido</button>
+    </form>
+</div>
 
+<script>
+    // Mostrar el div al hacer clic en "Realizar pedido"
+    document.getElementById('pedidoBtn').addEventListener('click', function(event) {
+        event.preventDefault(); // Evitar el envío del formulario
+        document.querySelector('.datospedido').style.display = 'block'; // Mostrar los datos del pedido
+    });
+</script>
 
-    </main>
 
 </body>
 <script src="../js/peticionCarrito.js"></script>
 <script src="../js/botonesCantProd.js"></script>
 <script>
+    document.getElementById('pedidoBtn').addEventListener('click', function() {
+        document.querySelector('.datospedido').style.display = 'block';
+    });
     /**
      * Funcion general para actualizar el carrito
      *

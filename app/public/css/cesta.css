@@ -24,6 +24,17 @@ main {
 
 }
 
+form {
+    width: 100%; /* Ajustar el ancho del formulario */
+    align-self: center;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 2em;
+    margin: 0 auto; /* Centrar el formulario horizontalmente */
+}
+
 .container {
 
     width: 80%;
@@ -90,12 +101,18 @@ main {
     width: 75%;
     padding: 1em;
     background-color: black;
-    color: #fff;
+    color: #fff !important; /* Forzar color blanco en el texto del botón */
     border: none;
     border-radius: 5px;
     cursor: pointer;
     margin-bottom: 10px;
     transition: background-color 0.3s;
+    text-decoration: none;
+}
+.checkout-btn a,
+.continue-shopping-btn a {
+    color: #fff !important; /* Asegura que el texto del enlace sea blanco */
+    text-decoration: none;  /* Elimina el subrayado del enlace */
 }
 
 .checkout-btn:hover,
