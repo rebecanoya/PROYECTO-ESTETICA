@@ -1,13 +1,8 @@
 header {
-
     outline: 0.05em solid black;
-
     & a {
-
         color: black;
-
     }
-
 }
 
 body {
@@ -151,4 +146,49 @@ form {
     text-align: center;
     color: black;
     text-decoration: underline;
+}
+
+.datospedido {
+
+    display: flex;
+    flex-direction: column;
+    gap: 2.5em;
+    padding: 1em;
+    border-radius: 0.75em;
+    text-align: center;
+
+
+    & .grupo-form {
+
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+        padding: 1em;
+
+    }
+
+    & .genero {
+
+        text-align: start;
+        padding: 1em;
+
+    }
+
+    & button {
+
+        background-color: black;
+        color: white;
+        padding: 0.75em;
+        border-radius: 0.5em;
+        border: 0;
+
+        &:hover {
+
+            background-color: #f3d1a4;
+            transform: scale(1.025);
+        }
+
+    }
+
+
 }

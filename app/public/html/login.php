@@ -46,8 +46,8 @@ include '../../src/iniciarPHP.php';
             }
             // Comprobar que ambas contraseñas son iguales
             if (hash_equals($password, $confirmPassword) && !$sameEmail) {
-                $sql = "INSERT INTO usuarios(Email, Password, Rol) VALUES (:email, :password, 3)";
-                $param = ["email" =>  $_POST["email"], "password" => $password];
+                $sql = "INSERT INTO usuarios(Email, Password, Rol, Activo, Nombre, Apellidos) VALUES (:email, :password, 3, 1, :nombre, :apellidos)";
+                $param = ["email" =>  $_POST["email"], "password" => $password,"nombre" => $_POST["nombre"], "apellidos" => $_POST["apellidos"]];
                 $respuesta = $BBDD->execute($sql, $param);
                 if ($respuesta[0]) {
                     $errorR = $respuesta[1];
@@ -102,6 +102,8 @@ include '../../src/iniciarPHP.php';
             <h2>Regístrate</h2>
             <form action="" method="post">
                 <div class="grupo-form">
+                    <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre" required>
+                    <input type="text" id="apellidos" name="apellidos" class="form-control" placeholder="Apellido" required>
                     <input type="email" name="email" id="email" placeholder="Email">
                     <input type="password" name="password" id="password" placeholder="Contraseña">
                     <input type="password" name="confirmpassword" id="password" placeholder="Repetir contraseña">

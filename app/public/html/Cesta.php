@@ -37,10 +37,10 @@ if (count($_SESSION["Carrito"])) {
     $productos = $BBDD->select($sql);
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION["Carrito"])) {
         echo "<h2>GHola";
-        $sql = "INSERT INTO pedidos (IDUsuario, PrecioTotal) values (:usuario, :precio)";
-        $params = ["usuario" => $_SESSION["id"], "precio" => $subtotal];
+        $sql = "INSERT INTO pedidos (IDCliente, Precio, DNI_Cliente) values (:usuario, :precio, :dni)";
+        $params = ["usuario" => $_SESSION["id"], "precio" => $subtotal, "dni" => $_POST["DNI"]];
         $BBDD->execute($sql, $params);
 
         $pedidoId = $BBDD->lastId();
