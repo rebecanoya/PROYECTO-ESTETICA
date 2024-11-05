@@ -27,11 +27,9 @@ class BBDD
                 $password = $value["password"];
                 try {
                     $this->pdo =  new PDO("mysql:host=$host;dbname=$name", $user, $password);
-                } catch (\Throwable $th) {
-                    //throw $th;
+                    break;
+                } catch (Exception $th) {
                 }
-
-                break;
             }
         } catch (Exception $th) {
             echo "Error: " . $th->getMessage();
@@ -57,7 +55,6 @@ class BBDD
      */
     public function select($sql, $params = [])
     {
-
         try {
 
             $consulta = $this->pdo->prepare($sql);
