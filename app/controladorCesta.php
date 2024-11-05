@@ -3,7 +3,7 @@
 /**
  * controlador peticion POST de la cesta
  */
-include '../../src/iniciarPHP.php';
+include 'src/iniciarPHP.php';
 // obtener datos de POST enviados
 $input = file_get_contents('php://input');
 $data = json_decode($input, true);

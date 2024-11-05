@@ -43,7 +43,6 @@ foreach ($productos as $producto) {
     $precioProducto = $producto["Precio"];
     $cantidadProducto = $_SESSION["Carrito"][$idProducto];
     $subtotalProducto = $precioProducto * $cantidadProducto;
-
 }
 
 // Verificar envío del formulario "Tramitar Pedido"
@@ -53,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tramitarPedido']) && 
     // Insertar el pedido en la tabla `pedidos`
     $sql = "INSERT INTO pedidos (ID_Cliente, Precio) VALUES (:usuario, :precio)";
     $params = ["usuario" => $_SESSION["id"], "precio" => $subtotal];
-    var_dump($subtotal);    
+    var_dump($subtotal);
     // Ejecutar y verificar la inserción    
     if ($BBDD->execute($sql, $params)) {
         $pedidoId = $BBDD->lastId();
@@ -77,6 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tramitarPedido']) && 
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -87,65 +87,67 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tramitarPedido']) && 
     <link rel="icon" href="../img/favicon.ico" type="image/x-icon">
     <title>Cesta | Aromusicoterapia</title>
 </head>
+
 <body>
 
-<?php include "../../src/templates/header.php"; ?>
+    <?php include "../../src/templates/header.php"; ?>
 
-<main>
-    <form id="pedidoForm" action="" method="post">
-        <div class="container">
-            <div class="products">
-                <h2>Productos</h2>
-                <div class="product">
-                    <div class="product-titles">
-                        <span class="title">Foto</span>
-                        <span class="title">Producto</span>
-                        <span class="title">Precio</span>
-                        <span class="title">Cantidad</span>
-                        <span class="title">Subtotal</span>
-                    </div>
-                    <?php foreach ($productos as $producto): 
-                        $idProducto = $producto["ID"];
-                        $nombreProducto = $producto["Nombre"];
-                        $precioProducto = $producto["Precio"];
-                        $cantidadProducto = $_SESSION["Carrito"][$idProducto];
-                        $subtotalProducto = $precioProducto * $cantidadProducto;
-                        $subtotal += $subtotalProducto;
-                    ?>
-                        <div class="product-info">
-                            <span class="product-img"><img src="../img/productos/<?php echo $idProducto ?>.png" width="100px" alt=""></span>
-                            <span class="product-name"><?php echo $nombreProducto ?></span>
-                            <span class="product-price"><?php echo $precioProducto ?>€</span>
-                            <div class="form-container">
-                                <div class="cantidad">
-                                    <button type="button" class="menos" onclick="actualizarCarrito(event,-1,<?php echo $idProducto ?>,'reducir')">-</button>
-                                    <input type="number" id="<?php echo $idProducto ?>" name="cantidad[<?php echo $idProducto ?>]" value="<?php echo $cantidadProducto ?>">
-                                    <button type="button" class="mas" onclick="actualizarCarrito(event,1,<?php echo $idProducto ?>,'add')">+</button>
-                                </div>
-                            </div>
-                            <span class="product-subtotal" id="precio<?php echo $idProducto ?>" data-precioBase="<?php echo $precioProducto ?>"><?php echo $subtotalProducto ?>€</span>
-                            <i class="fa-solid fa-trash-can iconButton" onclick="eliminarProducto(<?php echo $idProducto ?>);"></i>
+    <main>
+        <form id="pedidoForm" action="" method="post">
+            <div class="container">
+                <div class="products">
+                    <h2>Productos</h2>
+                    <div class="product">
+                        <div class="product-titles">
+                            <span class="title">Foto</span>
+                            <span class="title">Producto</span>
+                            <span class="title">Precio</span>
+                            <span class="title">Cantidad</span>
+                            <span class="title">Subtotal</span>
                         </div>
-                    <?php endforeach; ?>
+                        <?php foreach ($productos as $producto):
+                            $idProducto = $producto["ID"];
+                            $nombreProducto = $producto["Nombre"];
+                            $precioProducto = $producto["Precio"];
+                            $cantidadProducto = $_SESSION["Carrito"][$idProducto];
+                            $subtotalProducto = $precioProducto * $cantidadProducto;
+                            $subtotal += $subtotalProducto;
+                        ?>
+                            <div class="product-info">
+                                <span class="product-img"><img src="../img/productos/<?php echo $idProducto ?>.png" width="100px" alt=""></span>
+                                <span class="product-name"><?php echo $nombreProducto ?></span>
+                                <span class="product-price"><?php echo $precioProducto ?>€</span>
+                                <div class="form-container">
+                                    <div class="cantidad">
+                                        <button type="button" class="menos" onclick="actualizarCarrito(event,-1,<?php echo $idProducto ?>,'reducir')">-</button>
+                                        <input type="number" id="<?php echo $idProducto ?>" name="cantidad[<?php echo $idProducto ?>]" value="<?php echo $cantidadProducto ?>">
+                                        <button type="button" class="mas" onclick="actualizarCarrito(event,1,<?php echo $idProducto ?>,'add')">+</button>
+                                    </div>
+                                </div>
+                                <span class="product-subtotal" id="precio<?php echo $idProducto ?>" data-precioBase="<?php echo $precioProducto ?>"><?php echo $subtotalProducto ?>€</span>
+                                <i class="fa-solid fa-trash-can iconButton" onclick="eliminarProducto(<?php echo $idProducto ?>);"></i>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+                <div class="summary">
+                    <div class="total">
+                        <h2>Resumen de Compra</h2>
+                        <p id="subtotal">Subtotal <?php echo $subtotal ?>€</p>
+                        <p id="subtotalImpuestos">Total incluyendo impuestos <?php echo $subtotal ?>€</p>
+                    </div>
+                    <div class="opciones">
+                        <!-- Botón específico para "Tramitar Pedido" -->
+                        <button type="submit" name="tramitarPedido" class="button-tramitar-pedido">Tramitar Pedido</button>
+                        <a href="../html/NuestrosProductos.php" class="volverCompra">Seguir Comprando</a>
+                    </div>
                 </div>
             </div>
-            <div class="summary">
-                <div class="total">
-                    <h2>Resumen de Compra</h2>
-                    <p id="subtotal">Subtotal <?php echo $subtotal ?>€</p>
-                    <p id="subtotalImpuestos">Total incluyendo impuestos <?php echo $subtotal ?>€</p>
-                </div>
-                <div class="opciones">
-                    <!-- Botón específico para "Tramitar Pedido" -->
-                    <button type="submit" name="tramitarPedido" class="button-tramitar-pedido">Tramitar Pedido</button>
-                    <a href="../html/NuestrosProductos.php" class="volverCompra">Seguir Comprando</a>
-                </div>
-            </div>
-        </div>
-    </form>
-</main>
+        </form>
+    </main>
 
 </body>
+
 </html>
 
 
@@ -240,23 +242,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tramitarPedido']) && 
     }
 
     document.getElementById("pedidoBtn").addEventListener("click", function() {
-    // Crear una instancia del objeto XMLHttpRequest
-    var xhr = new XMLHttpRequest();
-    
-    // Configurar la solicitud
-    xhr.open("POST", "Cesta.php", true);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    
-    // Definir lo que hacer en caso de éxito
-    xhr.onload = function() {
-        if (xhr.status === 200) {
-            // La acción ha sido realizada, hacer algo con la respuesta si es necesario
-            console.log(xhr.responseText);
-        }
-    };
-    
-    // Enviar la solicitud
-    xhr.send("accion=realizar_accion");
+        // Crear una instancia del objeto XMLHttpRequest
+        var xhr = new XMLHttpRequest();
+
+        // Configurar la solicitud
+        xhr.open("POST", "Cesta.php", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+        // Definir lo que hacer en caso de éxito
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                // La acción ha sido realizada, hacer algo con la respuesta si es necesario
+                console.log(xhr.responseText);
+            }
+        };
+
+        // Enviar la solicitud
+        xhr.send("accion=realizar_accion");
     });
 </script>
 </script>

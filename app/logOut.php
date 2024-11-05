@@ -3,7 +3,7 @@
 /**
  * Controlador LOGOUT peticion POST
  */
-include '../../src/sesion.php';
+include 'src/sesion.php';
 
 $sesion = new Sesion();
 

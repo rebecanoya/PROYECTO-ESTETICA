@@ -1,6 +1,6 @@
 <?php
 
-include '../../src/iniciarPHP.php';
+include 'src/iniciarPHP.php';
 
 ?>
 <!DOCTYPE html>
@@ -22,7 +22,7 @@ include '../../src/iniciarPHP.php';
 <body>
     <?php
 
-    include "../../src/templates/header.php"
+    include "src/templates/header.php"
 
     ?>
 
@@ -66,7 +66,7 @@ include '../../src/iniciarPHP.php';
 
     <?php
 
-    include "../../src/templates/footer.php"
+    include "src/templates/footer.php"
 
     ?>
 

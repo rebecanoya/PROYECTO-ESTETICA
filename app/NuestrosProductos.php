@@ -1,5 +1,5 @@
 <?php
-include '../../src/iniciarPHP.php';
+include 'src/iniciarPHP.php';
 
 ?>
 
@@ -23,7 +23,7 @@ include '../../src/iniciarPHP.php';
 
     <?php
 
-    include "../../src/templates/header.php"
+    include "src/templates/header.php"
 
     ?>
 
@@ -87,7 +87,7 @@ include '../../src/iniciarPHP.php';
                 $descripcionProducto = $producto["Descripcion"];
                 $precioProducto = $producto["Precio"];
                 $IDLinea = $producto["ID_Linea"];
-                include("../../src/templates/producto.php");
+                include("src/templates/producto.php");
             }
             ?>
 
@@ -100,7 +100,7 @@ include '../../src/iniciarPHP.php';
     </main>
 
     <?php
-    include "../../src/templates/footer.php"
+    include "src/templates/footer.php"
     ?>
 
 </body>

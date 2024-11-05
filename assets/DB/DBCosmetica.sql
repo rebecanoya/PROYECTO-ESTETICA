@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `cosmetica`
+-- Base de datos: `aromu`
 --
 
 -- --------------------------------------------------------
@@ -32,7 +32,7 @@ CREATE TABLE `blog` (
   `Titulo` varchar(32) NOT NULL,
   `Entrada` varchar(1504) NOT NULL,
   `Fecha` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT charset=latin1  COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 --
@@ -54,7 +54,7 @@ CREATE TABLE `carrito` (
   `IDUsuario` int(11) NOT NULL,
   `IDProducto` int(11) NOT NULL,
   `Cantidad` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT charset=latin1  COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
@@ -66,7 +66,7 @@ CREATE TABLE `detallesPedido` (
   `IDPedido` int NOT NULL,
   `IDProducto` int NOT NULL,
   `Cantidad` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT charset=latin1  COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
@@ -80,7 +80,7 @@ CREATE TABLE `ies` (
   `nombre` varchar(50) NOT NULL,
   `email` varchar(100) NOT NULL,
   `ID` smallint(6) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+) ENGINE=InnoDB DEFAULT charset=latin1  COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 --
@@ -101,7 +101,7 @@ CREATE TABLE `lineas` (
   `Color` varchar(6) NOT NULL,
   `Descripcion` varchar(300) NOT NULL,
   `Activo` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+) ENGINE=InnoDB DEFAULT charset=latin1  COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
@@ -114,7 +114,7 @@ CREATE TABLE `pedidos` (
   `ID_Cliente` int NOT NULL,
   `Precio` double NOT NULL,
   `Fecha` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT charset=latin1  COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
@@ -129,7 +129,7 @@ CREATE TABLE `productos` (
   `ID_Linea` smallint(6) NOT NULL,
   `Nombre` varchar(16) NOT NULL,
   `Activo` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+) ENGINE=InnoDB DEFAULT charset=latin1  COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
@@ -140,7 +140,7 @@ CREATE TABLE `productos` (
 CREATE TABLE `roles` (
   `id_rol` int(11) NOT NULL,
   `rol` varchar(25) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+) ENGINE=InnoDB DEFAULT charset=latin1  COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
@@ -154,7 +154,7 @@ CREATE TABLE `usuarios` (
   `Password` varchar(128) NOT NULL,
   `rol` int(11) NOT NULL,
   `Activo` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+) ENGINE=InnoDB DEFAULT charset=latin1  COLLATE=latin1_swedish_ci;
 
 --
 -- Índices para tablas volcadas

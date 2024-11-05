@@ -1,6 +1,6 @@
 <?php
 
-include '../../src/iniciarPHP.php';
+include 'src/iniciarPHP.php';
 
 ?>
 
@@ -23,7 +23,7 @@ include '../../src/iniciarPHP.php';
 
     <?php
 
-    include "../../src/templates/header.php"
+    include "src/templates/header.php"
 
     ?>
 

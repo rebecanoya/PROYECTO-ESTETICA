@@ -1,6 +1,6 @@
 <?php
 
-include '../../src/iniciarPHP.php';
+include 'src/iniciarPHP.php';
 
 ?>
 
@@ -24,7 +24,7 @@ include '../../src/iniciarPHP.php';
 
     <?php
 
-    include "../../src/templates/header.php"
+    include "src/templates/header.php"
 
     ?>
 
@@ -66,7 +66,7 @@ include '../../src/iniciarPHP.php';
                 $colorLinea = $linea["Color"];
                 $IDLinea = $linea["ID"];
                 $descripcionLinea = $linea["Descripcion"];
-                include("../../src/templates/linea.php");
+                include("src/templates/linea.php");
             }
 
             ?>
@@ -76,7 +76,7 @@ include '../../src/iniciarPHP.php';
 
     <?php
 
-    include "../../src/templates/footer.php";
+    include "src/templates/footer.php";
 
     ?>
 </body>

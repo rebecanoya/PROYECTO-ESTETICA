@@ -1,11 +1,12 @@
 <?php
+
 /**
-*
-* @brief Clase que contiene todo lo relacionado con la conexion a la Base de Datos, asi como
-* diferentes metodos con los que insertar o consultar en la misma
-*
-* @author Rebeca Noya Fernández
-*/
+ *
+ * @brief Clase que contiene todo lo relacionado con la conexion a la Base de Datos, asi como
+ * diferentes metodos con los que insertar o consultar en la misma
+ *
+ * @author Rebeca Noya Fernández
+ */
 
 class BBDD
 {
@@ -20,7 +21,11 @@ class BBDD
         $name = 'cosmetica';
         $user = 'root';
         $password = 'root';
-        $this->pdo =  new PDO("mysql:host=$host;dbname=$name", $user, $password);
+        try {
+            $this->pdo =  new PDO("mysql:host=$host;dbname=$name", $user, $password);
+        } catch (Exception $th) {
+            echo "Error: " . $th->getMessage();
+        }
     }
 
     /**
@@ -58,7 +63,7 @@ class BBDD
                     $type = PDO::PARAM_BOOL;
                 } elseif (is_string($value)) {
                     $type = PDO::PARAM_STR;
-                } elseif (is_float($value)){
+                } elseif (is_float($value)) {
                     $type = PDO::PARAM_STR;
                 }
                 $value = trim($value);
@@ -102,7 +107,7 @@ class BBDD
                     $type = PDO::PARAM_BOOL;
                 } elseif (is_string($value)) {
                     $type = PDO::PARAM_STR;
-                } elseif (is_float($value)){
+                } elseif (is_float($value)) {
                     $type = PDO::PARAM_STR;
                 }
                 $value = trim($value);
@@ -132,7 +137,8 @@ class BBDD
      *
      * @return  int  Devuelve el último Id insertado en la BD
      */
-    public function lastId(){
+    public function lastId()
+    {
         $lastId = $this->pdo->lastInsertId();
         return $lastId;
     }

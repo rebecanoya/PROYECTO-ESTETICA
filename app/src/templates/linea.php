@@ -27,7 +27,7 @@
                 $nombreProducto = $producto["Nombre"];
                 $descripcionProducto = $producto["Descripcion"];
                 $precioProducto = $producto["Precio"];
-                include("../../src/templates/producto.php");
+                include("src/templates/producto.php");
             }
 
             ?>

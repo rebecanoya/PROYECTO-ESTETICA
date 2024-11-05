@@ -1,5 +1,5 @@
 <?php
-include '../../src/iniciarPHP.php';
+include 'src/iniciarPHP.php';
 
 
 ?>
@@ -24,7 +24,7 @@ include '../../src/iniciarPHP.php';
 <body>
 
     <?php
-    include "../../src/templates/header.php";
+    include "src/templates/header.php";
 
     /**
      * Registro de usuario con contraseña hasheada
@@ -47,7 +47,7 @@ include '../../src/iniciarPHP.php';
             // Comprobar que ambas contraseñas son iguales
             if (hash_equals($password, $confirmPassword) && !$sameEmail) {
                 $sql = "INSERT INTO usuarios(Email, Password, Rol, Activo, Nombre, Apellidos) VALUES (:email, :password, 3, 1, :nombre, :apellidos)";
-                $param = ["email" =>  $_POST["email"], "password" => $password,"nombre" => $_POST["nombre"], "apellidos" => $_POST["apellidos"]];
+                $param = ["email" =>  $_POST["email"], "password" => $password, "nombre" => $_POST["nombre"], "apellidos" => $_POST["apellidos"]];
                 $respuesta = $BBDD->execute($sql, $param);
                 if ($respuesta[0]) {
                     $errorR = $respuesta[1];

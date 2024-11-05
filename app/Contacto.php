@@ -1,6 +1,6 @@
 <?php
 
-include '../../src/iniciarPHP.php';
+include 'src/iniciarPHP.php';
 /**
  * Pagina donde se muestra la informacion de contacto de cada instituto
  *
@@ -25,7 +25,7 @@ include '../../src/iniciarPHP.php';
 <body>
     <?php
 
-    include "../../src/templates/header.php"
+    include "src/templates/header.php"
 
     ?>
     <main>

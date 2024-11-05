@@ -3,7 +3,7 @@
 /**
  * Crea la vista para mostrar un producto
  */
-include '../../src/iniciarPHP.php';
+include 'src/iniciarPHP.php';
 $pedirBBDD = false;
 $cargar = false;
 $producto;
@@ -49,7 +49,7 @@ if ($pedirBBDD) {
 <body>
     <?php
 
-    include "../../src/templates/header.php";
+    include "src/templates/header.php";
     if ($cargar) {
 
 
@@ -63,8 +63,8 @@ if ($pedirBBDD) {
                 <div class="product-details">
                     <div class="product-text">
                         <h2><?php echo $producto["Nombre"] ?></h2>
-                        <p class="descripcion"><?php echo $producto["Descripcion"]?></p>
-                        <p class="precio">Precio: <?php echo $producto["Precio"]?>€ Unidad</p>
+                        <p class="descripcion"><?php echo $producto["Descripcion"] ?></p>
+                        <p class="precio">Precio: <?php echo $producto["Precio"] ?>€ Unidad</p>
                     </div>
                     <div class="product-buttons">
                         <div class="container">
@@ -98,7 +98,7 @@ if ($pedirBBDD) {
 
         <?php
 
-        include "../../src/templates/footer.php";
+        include "src/templates/footer.php";
 
         ?>
 </body>

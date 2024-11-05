@@ -1,5 +1,5 @@
 <?php
-include '../../src/iniciarPHP.php';
+include 'src/iniciarPHP.php';
 
 /**
  * Comprobamos que el usuario que intenta acceder a la pagina admin posee el rol de admin
@@ -28,15 +28,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         try {
             $sql = "INSERT INTO lineas(ID_Musica, Nombre, Color, Descripcion, Activo) VALUES (:musica, :nombre, :color, :descripcion, :activo)";
             $param = [
-                "musica" =>  $_POST["musica"], "nombre" => $_POST["nombre"],
-                "color" => substr($_POST["color"], 1), "descripcion" => $_POST["descripcion"], "activo" => $_POST["activoL"]
+                "musica" =>  $_POST["musica"],
+                "nombre" => $_POST["nombre"],
+                "color" => substr($_POST["color"], 1),
+                "descripcion" => $_POST["descripcion"],
+                "activo" => $_POST["activoL"]
             ];
             $respuesta = $BBDD->execute($sql, $param);
             $idLinea = $BBDD->lastId();
             if ($respuesta[0]) {
                 $errorR = $respuesta[1];
             }
-/**
+            /**
              * Como cada producto tiene una imagen asociada, tenemos que comprobar que el archivo
              * que se nos pasa sea una imagen en formato PNG
              */
@@ -78,14 +81,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (!move_uploaded_file($url_tempLote, $url_targetLote)) {
                 $errorP = "Ha habido un error al cargar tu archivo.";
             }
-        /**
-         * Si nos envian el formulario lineasMod modificaremos la linea, cuyo id sea el selecionado gracias
-         * a la funcion de Js llenarFormularioLineaCosmetica(), con los datos obtenidos del formulario
-         */
+            /**
+             * Si nos envian el formulario lineasMod modificaremos la linea, cuyo id sea el selecionado gracias
+             * a la funcion de Js llenarFormularioLineaCosmetica(), con los datos obtenidos del formulario
+             */
         } catch (PDOException $e) {
             echo "Error en la consulta: " . $e->getMessage();
         }
-        
     } elseif (isset($_POST["lineasMod"])) {
         try {
             /**
@@ -94,8 +96,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $sql = "UPDATE lineas SET ID_musica = :musica, Nombre = :nombre, Color = :color,
             Descripcion = :descripcion, Activo = :activo WHERE lineas.ID = :id";
             $param = [
-                "musica" =>  $_POST["musica"], "nombre" => $_POST["nombre"],
-                "color" => substr($_POST["color"], 1), "descripcion" => $_POST["descripcion"], "activo" => $_POST["activoL"], "id" => $_POST["idL"]
+                "musica" =>  $_POST["musica"],
+                "nombre" => $_POST["nombre"],
+                "color" => substr($_POST["color"], 1),
+                "descripcion" => $_POST["descripcion"],
+                "activo" => $_POST["activoL"],
+                "id" => $_POST["idL"]
             ];
             $respuesta = $BBDD->execute($sql, $param);
             if ($respuesta[0]) {
@@ -132,9 +138,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if (!file_exists($url_insertLote)) {
                     mkdir($url_insertLote, 0777, true);
                 };
-                    move_uploaded_file($url_tempFondo, $url_targetFondo);
-                    move_uploaded_file($url_tempLote, $url_targetLote);
-                }
+                move_uploaded_file($url_tempFondo, $url_targetFondo);
+                move_uploaded_file($url_tempLote, $url_targetLote);
+            }
         } catch (PDOException $e) {
             echo "Error en la consulta: " . $e->getMessage();
         }
@@ -152,9 +158,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $sql = "INSERT INTO productos (Precio, Stock, Descripcion, ID_Linea, Nombre, Activo)
                 VALUES (:precio, :stock, :descripcion, :ID_Linea, :Nombre, :Activo)";
             $param = [
-                "precio" =>  $_POST["precio"], "stock" => $_POST["stock"],
-                "descripcion" => $_POST["descripcion"], "ID_Linea" => $_POST["linea"],
-                "Nombre" => $_POST["nombreProducto"], "Activo" => $_POST["activoP"]
+                "precio" =>  $_POST["precio"],
+                "stock" => $_POST["stock"],
+                "descripcion" => $_POST["descripcion"],
+                "ID_Linea" => $_POST["linea"],
+                "Nombre" => $_POST["nombreProducto"],
+                "Activo" => $_POST["activoP"]
             ];
             $respuesta = $BBDD->execute($sql, $param);
             $idProducto = $BBDD->lastId();
@@ -210,9 +219,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $sql = "UPDATE productos SET Precio = :precio, Stock = :stock, Descripcion = :descripcion,
             ID_Linea = :linea, Nombre = :nombre, Activo = :activo WHERE productos.ID = :id";
             $param = [
-                "precio" => $_POST["precio"], "stock" => $_POST["stock"],
-                "descripcion" => $_POST["descripcion"], "linea" => $_POST["linea"], "nombre" => $_POST["nombreProducto"],
-                "activo" => $_POST["activoP"], "id" => $_POST["idP"]
+                "precio" => $_POST["precio"],
+                "stock" => $_POST["stock"],
+                "descripcion" => $_POST["descripcion"],
+                "linea" => $_POST["linea"],
+                "nombre" => $_POST["nombreProducto"],
+                "activo" => $_POST["activoP"],
+                "id" => $_POST["idP"]
             ];
             $respuesta = $BBDD->execute($sql, $param);
             if ($respuesta[0]) {
@@ -278,8 +291,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if ($password == $passwordCheck) {
                     $sql = "INSERT INTO usuarios(Email, Password, Rol, Activo) VALUES (:email, :password, :rol, :activo)";
                     $param = [
-                        "email" =>  $_POST["email"], "password" => $password,
-                        "rol" => $_POST["rol"], "activo" => $_POST["activoU"]
+                        "email" =>  $_POST["email"],
+                        "password" => $password,
+                        "rol" => $_POST["rol"],
+                        "activo" => $_POST["activoU"]
                     ];
                     $respuesta = $BBDD->execute($sql, $param);
                     if ($respuesta[0]) {
@@ -303,8 +318,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
              */
             $sql = "UPDATE usuarios SET email = :email, rol = :rol, activo = :activo  WHERE usuarios.id = :id";
             $param = [
-                "email" => $_POST["email"], "rol" => $_POST["rol"],
-                "activo" => $_POST["activoU"], "id" => $_POST["idU"]
+                "email" => $_POST["email"],
+                "rol" => $_POST["rol"],
+                "activo" => $_POST["activoU"],
+                "id" => $_POST["idU"]
             ];
             $respuesta = $BBDD->execute($sql, $param);
             if ($respuesta[0]) {
@@ -354,7 +371,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
 
     <header>
-        <a href="../html/index.php" class="fa-solid fa-arrow-left iconButton"></a>
+        <a href="../index.php" class="fa-solid fa-arrow-left iconButton"></a>
     </header>
 
 
@@ -374,7 +391,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <section>
             <h2>Líneas Cosméticas</h2>
             <div id="lineaCosmeticaMessage"></div>
-            <form id="lineaCosmeticaForm" method="post"  enctype="multipart/form-data">
+            <form id="lineaCosmeticaForm" method="post" enctype="multipart/form-data">
                 <input type="hidden" id="idL" name="idL" value=0 class="form-control">
                 <div class="form-group">
                     <label for="nombre">Nombre:</label>
@@ -483,7 +500,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="form-group">
                     <label for="linea">Línea:</label>
                     <select id="linea" name="linea" class="form-control" required>
-                    <?php
+                        <?php
                         // Conexión a la base de datos
                         try {
                             $sql = "SELECT ID, Nombre from lineas";
