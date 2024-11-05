@@ -58,6 +58,8 @@ class BBDD
                     $type = PDO::PARAM_BOOL;
                 } elseif (is_string($value)) {
                     $type = PDO::PARAM_STR;
+                } elseif (is_float($value)){
+                    $type = PDO::PARAM_STR;
                 }
                 $value = trim($value);
                 $value = stripcslashes($value);
@@ -91,6 +93,7 @@ class BBDD
              * Bucle foreach en el que se comprueba los tipos de los datos que
              * contiene el Array $param, siendo validos solos INT, BOOLEAN y STRING
              */
+            // var_dump($params);
             foreach ($params as $key => $value) {
                 $type = PDO::PARAM_NULL;
                 if (is_int($value)) {
@@ -98,6 +101,8 @@ class BBDD
                 } elseif (is_bool($value)) {
                     $type = PDO::PARAM_BOOL;
                 } elseif (is_string($value)) {
+                    $type = PDO::PARAM_STR;
+                } elseif (is_float($value)){
                     $type = PDO::PARAM_STR;
                 }
                 $value = trim($value);
@@ -107,6 +112,7 @@ class BBDD
             }
 
             $consulta->execute();
+            var_dump($consulta);
             if (!$consulta) {
                 return [false, "No se pudo crear el usuario"];
             }
