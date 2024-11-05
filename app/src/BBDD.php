@@ -17,12 +17,22 @@ class BBDD
      */
     public function __construct()
     {
-        $host = 'mysql';
-        $name = 'cosmetica';
-        $user = 'root';
-        $password = 'root';
         try {
-            $this->pdo =  new PDO("mysql:host=$host;dbname=$name", $user, $password);
+            $ini = parse_ini_file("DB.ini", true);
+            foreach ($ini as $key => $value) {
+
+                $host = $value["host"];
+                $name = $value["name"];
+                $user = $value["user"];
+                $password = $value["password"];
+                try {
+                    $this->pdo =  new PDO("mysql:host=$host;dbname=$name", $user, $password);
+                } catch (\Throwable $th) {
+                    //throw $th;
+                }
+
+                break;
+            }
         } catch (Exception $th) {
             echo "Error: " . $th->getMessage();
         }
