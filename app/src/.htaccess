@@ -1,6 +1,14 @@
-<Files "DB.ini">
+<!-- <Files "DB.ini">
     Order Allow,Deny
     Denied from all
     Allow from localhost
     ErrorDocument 404 default
-</Files>
+</Files> -->
+
+<!-- <RequireAll>
+    Require ip 127.0.0.1
+</RequireAll> -->
+
+RewriteEngine On
+RewriteCond %{REMOTE_ADDR} !^127.0.0.1$
+RewriteRule ^ - [R=404,L]
