@@ -54,8 +54,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             /**
              * Ruta donde vamos a guardar la imagen
              */
-            $url_insertFondo = "../img/lineas";
-            $url_insertLote = "../img/lote";
+            $url_insertFondo = "img/lineas";
+            $url_insertLote = "img/lote";
             /**
              * Cada imagen debe de llevar el ID del producto por nombre, por tanto,
              * usamos el idProducto obtenido gracias a la funcion lastId para darle nombre
@@ -121,8 +121,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 /**
                  * Ruta donde vamos a guardar la imagen
                  */
-                $url_insertFondo = "../img/lineas";
-                $url_insertLote = "../img/lote";
+                $url_insertFondo = "img/lineas";
+                $url_insertLote = "img/lote";
                 /**
                  * Cada imagen debe de llevar el ID del producto por nombre, por tanto,
                  * usamos el idProducto obtenido gracias a la funcion lastId para darle nombre
@@ -182,7 +182,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             /**
              * Ruta donde vamos a guardar la imagen
              */
-            $url_insert = "../img/productos";
+            $url_insert = "img/productos";
             /**
              * Cada imagen debe de llevar el ID del producto por nombre, por tanto,
              * usamos el idProducto obtenido gracias a la funcion lastId para darle nombre
@@ -245,7 +245,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 /**
                  * Ruta donde vamos a guardar la imagen
                  */
-                $url_insert = "../img/productos";
+                $url_insert = "img/productos";
                 /**
                  * Cada imagen debe de llevar el ID del producto por nombre, por tanto,
                  * usamos el idProducto obtenido gracias a la funcion lastId para darle nombre
@@ -361,10 +361,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Aromusicoterapia - Administración</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/dc2d3ea46f.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../css/general.css">
-    <link rel="stylesheet" href="../css/admin.css">
-    <link rel="icon" href="../img/favicon.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
 </head>
 
 
@@ -684,10 +684,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </section>
 
     </main>
-    <script src="../js/admin.js"></script>
-    <script src="../js/lineas.js"></script>
-    <script src="../js/usuarios.js"></script>
-    <script src="../js/productos.js"></script>
+    <script src="js/admin.js"></script>
+    <script src="js/lineas.js"></script>
+    <script src="js/usuarios.js"></script>
+    <script src="js/productos.js"></script>
 </body>
 
 <script>

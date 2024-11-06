@@ -1,5 +1,5 @@
 let estado = false;
-const reproductor = new Audio("../audio/softpianomezcla.mp3");
+const reproductor = new Audio("audio/softpianomezcla.mp3");
 const audioButton = document.getElementById("audio");
 reproductor.muted = true;
 reproductor.loop = true;

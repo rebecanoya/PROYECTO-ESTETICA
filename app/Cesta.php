@@ -84,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tramitarPedido']) && 
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/cesta.css">
     <script src="https://kit.fontawesome.com/dc2d3ea46f.js" crossorigin="anonymous"></script>
-    <link rel="icon" href="../img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
     <title>Cesta | Aromusicoterapia</title>
 </head>
 
@@ -114,7 +114,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tramitarPedido']) && 
                             $subtotal += $subtotalProducto;
                         ?>
                             <div class="product-info">
-                                <span class="product-img"><img src="../img/productos/<?php echo $idProducto ?>.png" width="100px" alt=""></span>
+                                <span class="product-img"><img src="img/productos/<?php echo $idProducto ?>.png" width="100px" alt=""></span>
                                 <span class="product-name"><?php echo $nombreProducto ?></span>
                                 <span class="product-price"><?php echo $precioProducto ?>€</span>
                                 <div class="form-container">
@@ -164,8 +164,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tramitarPedido']) && 
 
 </body>
 
-<script src="../js/peticionCarrito.js"></script>
-<script src="../js/botonesCantProd.js"></script>
+<script src="js/peticionCarrito.js"></script>
+<script src="js/botonesCantProd.js"></script>
 <script>
     document.getElementById('pedidoBtn').addEventListener('click', function() {
         document.querySelector('.datospedido').style.display = 'block';

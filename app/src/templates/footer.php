@@ -1,8 +1,8 @@
 <footer>
-    <script type="text/javascript" src="../js/chat.js"></script>
+    <script type="text/javascript" src="js/chat.js"></script>
 
     <div class="logo">
-        <img src="../img/favicon.svg" alt="Logo">
+        <img src="img/favicon.svg" alt="Logo">
     </div>
     <div class="footer-columns">
         <div class="footer-column">

@@ -61,7 +61,7 @@
 
 
 
-    <script src="../js/audio.js">
+    <script src="js/audio.js">
 
 
     </script>

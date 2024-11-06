@@ -1,6 +1,6 @@
 <article>
 
-    <img src="../img/lineas/<?php echo $IDLinea ?>.png" class="banner">
+    <img src="img/lineas/<?php echo $IDLinea ?>.png" class="banner">
     <div class="contenido">
         <div class="informacion">
             <h2>Linea <?php echo $nombreLinea ?></h2>

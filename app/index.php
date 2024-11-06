@@ -10,13 +10,13 @@ include 'src/iniciarPHP.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/general.css">
-    <link rel="stylesheet" href="../css/header.css">
-    <link rel="stylesheet" href="../css/index.css">
-    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/footer.css">
     <script src="https://kit.fontawesome.com/dc2d3ea46f.js" crossorigin="anonymous"></script>
-    <link rel="icon" href="../img/favicon.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
     <title>Aromusicoterapia | Productos cosméticos en Vigo</title>
 </head>
 
@@ -38,7 +38,7 @@ include 'src/iniciarPHP.php';
                 <a class="button" href="#lineas">¡DESCUBRELO!</a>
             </div>
 
-            <img src="../img/banner.jpg" class="banner">
+            <img src="img/banner.jpg" class="banner">
         </div>
         <section class="bannerNegro">
             <div class="container">
@@ -50,7 +50,7 @@ include 'src/iniciarPHP.php';
                 </div>
                 <a class="button" href="Contacto.php">Contáctanos</a>
             </div>
-            <div class="imgContacto"><img src="../img/llamada.jpg"></div>
+            <div class="imgContacto"><img src="img/llamada.jpg"></div>
 
 
         </section>
@@ -81,6 +81,6 @@ include 'src/iniciarPHP.php';
     ?>
 </body>
 
-<script src="../js/enlaceProductos.js"> </script>
+<script src="js/enlaceProductos.js"> </script>
 
 </html>

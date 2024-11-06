@@ -36,13 +36,13 @@ if ($pedirBBDD) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/general.css">
-    <link rel="stylesheet" href="../css/header.css">
-    <link rel="stylesheet" href="../css/producto.css">
-    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/producto.css">
+    <link rel="stylesheet" href="css/footer.css">
     <script src="https://kit.fontawesome.com/dc2d3ea46f.js" crossorigin="anonymous"></script>
-    <link rel="icon" href="../img/favicon.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
     <title><?php echo $producto["Nombre"] ?> | Aromusicoterapia</title>
 </head>
 
@@ -58,7 +58,7 @@ if ($pedirBBDD) {
         <main>
             <div class="container-main">
                 <div class="product-image">
-                    <img src="../img/productos/<?php echo $producto["ID"] ?>.png" alt="Producto">
+                    <img src="img/productos/<?php echo $producto["ID"] ?>.png" alt="Producto">
                 </div>
                 <div class="product-details">
                     <div class="product-text">
@@ -107,8 +107,8 @@ if ($pedirBBDD) {
 
 
 
-<script src="../js/peticionCarrito.js"></script>
-<script src="../js/botonesCantProd.js"></script>
+<script src="js/peticionCarrito.js"></script>
+<script src="js/botonesCantProd.js"></script>
 
 <script>
     const cantidad = document.getElementById('<?php echo $id ?>');

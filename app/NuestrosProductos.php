@@ -9,13 +9,13 @@ include 'src/iniciarPHP.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/general.css">
-    <link rel="stylesheet" href="../css/header.css">
-    <link rel="stylesheet" href="../css/footer.css">
-    <link rel="stylesheet" href="../css/np.css">
+    <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/np.css">
     <script src="https://kit.fontawesome.com/dc2d3ea46f.js" crossorigin="anonymous"></script>
-    <link rel="icon" href="../img/favicon.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
     <title>Nuestros Productos | Aromusicoterapia</title>
 </head>
 
@@ -49,10 +49,10 @@ include 'src/iniciarPHP.php';
 
             ?>
 
-                <button class="botonLinea" data-seleccionado="false" data-idLinea="<?php echo $IDLinea ?>" style="background: url(../img/lineas/<?php echo $IDLinea ?>.png);">
+                <button class="botonLinea" data-seleccionado="false" data-idLinea="<?php echo $IDLinea ?>" style="background: url(img/lineas/<?php echo $IDLinea ?>.png);">
 
                     <h2>Linea <?php echo $nombreLinea ?></h2>
-                    <img src="../img/lote/<?php echo $IDLinea ?>.png" alt="">
+                    <img src="img/lote/<?php echo $IDLinea ?>.png" alt="">
 
 
 
@@ -105,7 +105,7 @@ include 'src/iniciarPHP.php';
 
 </body>
 
-<script src="../js/enlaceProductos.js"> </script>
+<script src="js/enlaceProductos.js"> </script>
 
 
 <script>

@@ -111,7 +111,7 @@ button,
 
 @font-face {
     font-family: 'Lumina';
-    src: url('../fuentes/LUMINA.otf');
+    src: url('fuentes/LUMINA.otf');
     font-style: normal;
     font-weight: normal;
 }
