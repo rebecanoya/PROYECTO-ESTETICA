@@ -37,27 +37,15 @@ if (isset($_SESSION["Carrito"]) && count($_SESSION["Carrito"]) > 0) {
     $productos = $BBDD->select($sql);
 }
 
-foreach ($productos as $producto) {
-    $idProducto = $producto["ID"];
-    $nombreProducto = $producto["Nombre"];
-    $precioProducto = $producto["Precio"];
-    $cantidadProducto = $_SESSION["Carrito"][$idProducto];
-    $subtotalProducto = $precioProducto * $cantidadProducto;
-}
-
 // Verificar envío del formulario "Tramitar Pedido"
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tramitarPedido']) && isset($_SESSION["Carrito"]) && !empty($_SESSION["Carrito"])) {
-    echo "Procesando pedido...";
-
     // Insertar el pedido en la tabla `pedidos`
+    $subtotal = isset($_POST['subtotal']) ? floatval($_POST['subtotal']) : 0.0;
     $sql = "INSERT INTO pedidos (ID_Cliente, Precio) VALUES (:usuario, :precio)";
     $params = ["usuario" => $_SESSION["id"], "precio" => $subtotal];
-    var_dump($subtotal);
     // Ejecutar y verificar la inserción    
     if ($BBDD->execute($sql, $params)) {
         $pedidoId = $BBDD->lastId();
-        echo "Pedido creado con ID: " . $pedidoId;
-
         // Insertar los detalles del pedido en `detalles_pedido`
         foreach ($_SESSION["Carrito"] as $id => $value) {
             $sql = "INSERT INTO detalles_pedido (IDPedido, IDProducto, Cantidad) VALUES (:pedidoId, :producto, :cantidad)";
@@ -65,9 +53,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tramitarPedido']) && 
             $BBDD->execute($sql, $params);
         }
 
-        // Limpieza del carrito y confirmación
-        unset($_SESSION["Carrito"]);
-        echo "<script>alert('Pedido tramitado correctamente');</script>";
+        unset($_SESSION["Carrito"]); // Limpieza del carrito
+        header("Location: NuestrosProductos.php"); // Redirección
+        exit(); // Termina la ejecución después de la redirección
     } else {
         echo "Error al procesar el pedido";
     }
@@ -105,7 +93,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tramitarPedido']) && 
                             <span class="title">Cantidad</span>
                             <span class="title">Subtotal</span>
                         </div>
-                        <?php foreach ($productos as $producto):
+                        <?php 
+                            $subtotal = 0;
+                            foreach ($productos as $producto):
                             $idProducto = $producto["ID"];
                             $nombreProducto = $producto["Nombre"];
                             $precioProducto = $producto["Precio"];
@@ -133,6 +123,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tramitarPedido']) && 
                 <div class="summary">
                     <div class="total">
                         <h2>Resumen de Compra</h2>
+                        <input type="hidden" name="subtotal" id="subtotalInput" value="<?php echo $subtotal; ?>">
                         <p id="subtotal">Subtotal <?php echo $subtotal ?>€</p>
                         <p id="subtotalImpuestos">Total incluyendo impuestos <?php echo $subtotal ?>€</p>
                     </div>
@@ -144,7 +135,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tramitarPedido']) && 
                 </div>
             </div>
         </form>
-    </main>
+    </main>+
 
 </body>
 
@@ -180,53 +171,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tramitarPedido']) && 
      *
      */
     function actualizarCarrito(event, cantidad, id, accion) {
+    if (actualizarCantidad(event, cantidad, id)) {
+        peticionCarrito(id, Math.abs(cantidad), accion);
+        actualizarPrecio(id);
+        actualizarSubtotal();
+    }
+}
 
-        if (actualizarCantidad(event, cantidad, id)) {
+function actualizarPrecio(id) {
+    let elementoPrecio = document.getElementById("precio" + id);
+    let elementoCantidad = document.getElementById(id);
+    let precioBase = parseFloat(elementoPrecio.dataset.preciobase);
+    elementoPrecio.innerHTML = (precioBase * elementoCantidad.value).toFixed(2) + '€';
+}
 
-            peticionCarrito(id, Math.abs(cantidad), accion);
-            actualizarPrecio(id);
-            actualizarSubtotal();
-
-        }
-
-
-
+function actualizarSubtotal() {
+    let elementosPreciosProductos = document.getElementsByClassName("product-subtotal");
+    let suma = 0;
+    for (const elementoPrecioProducto of elementosPreciosProductos) {
+        let precioTexto = elementoPrecioProducto.innerHTML.replace('€', '').trim();
+        suma += parseFloat(precioTexto);
     }
 
-    const subtotal = document.getElementById("subtotal");
-    const subtotalImpuestos = document.getElementById("subtotalImpuestos");
-
-    /**
-     * Actualizar precio de producto
-     *
-     * @param   id    id del producto
-     *
-     */
-    function actualizarPrecio(id) {
-
-        let elementoPrecio = document.getElementById("precio" + id);
-        let elementoCantidad = document.getElementById(id);
-        elementoPrecio.innerHTML = (elementoPrecio.dataset.preciobase * elementoCantidad.value) + '€';
-    }
-
-    /**
-     * Actualizar subtotal
-     *
-     */
-    function actualizarSubtotal() {
-
-        let elementoPrecioProductos = document.getElementsByClassName("total");
-        let suma = 0;
-        for (const elementoPrecioProducto of elementoPrecioProductos) {
-            let innerHTML = elementoPrecioProducto.innerHTML;
-            suma += parseInt(innerHTML.substring(0, innerHTML.length));
-
-        }
-
-        subtotal.innerHTML = `Subtotal ${suma}€`;
-        subtotalImpuestos.innerHTML = `Subtotal ${suma}€`;
-
-    }
+    subtotal.innerHTML = `Subtotal ${suma.toFixed(2)}€`;
+    subtotalImpuestos.innerHTML = `Total incluyendo impuestos ${(suma * 1.21).toFixed(2)}€`; // 21% de IVA
+    document.getElementById('subtotalInput').value = suma.toFixed(2); // Actualiza el campo oculto
+}
 
     /**
      * Peticion para eliminar un producto
