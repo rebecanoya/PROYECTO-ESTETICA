@@ -28,6 +28,7 @@ main {
 
             width: 100%;
             animation: zoom-in 1s ease-out;
+            vertical-align: bottom;
 
 
         }
