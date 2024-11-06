@@ -1,5 +1,5 @@
 <?php
-include '../../src/iniciarPHP.php';
+include 'src/iniciarPHP.php';
 /**
  * Sincronizacion del carrito sesion con el carrito de la base de datos
  *
@@ -80,9 +80,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tramitarPedido']) && 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/general.css">
-    <link rel="stylesheet" href="../css/header.css">
-    <link rel="stylesheet" href="../css/cesta.css">
+    <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/cesta.css">
     <script src="https://kit.fontawesome.com/dc2d3ea46f.js" crossorigin="anonymous"></script>
     <link rel="icon" href="../img/favicon.ico" type="image/x-icon">
     <title>Cesta | Aromusicoterapia</title>
@@ -90,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tramitarPedido']) && 
 
 <body>
 
-    <?php include "../../src/templates/header.php"; ?>
+    <?php include "src/templates/header.php"; ?>
 
     <main>
         <form id="pedidoForm" action="" method="post">
@@ -139,7 +139,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tramitarPedido']) && 
                     <div class="opciones">
                         <!-- Botón específico para "Tramitar Pedido" -->
                         <button type="submit" name="tramitarPedido" class="button-tramitar-pedido">Tramitar Pedido</button>
-                        <a href="../html/NuestrosProductos.php" class="volverCompra">Seguir Comprando</a>
+                        <a href="NuestrosProductos.php" class="volverCompra">Seguir Comprando</a>
                     </div>
                 </div>
             </div>

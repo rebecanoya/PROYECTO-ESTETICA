@@ -1,0 +1,6 @@
+<Files "DB.ini">
+    Order Allow,Deny
+    Denied from all
+    Allow from localhost
+    ErrorDocument 404 default
+</Files>
