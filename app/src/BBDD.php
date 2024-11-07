@@ -26,7 +26,7 @@ class BBDD
                 $user = $value["user"];
                 $password = $value["password"];
                 try {
-                    $this->pdo =  new PDO("mysql:host=$host;dbname=$name", $user, $password);
+                    $this->pdo =  new PDO("mysql:host=$host;dbname=$name;charset=utf8", $user, $password);
                     break;
                 } catch (Exception $th) {
                 }
