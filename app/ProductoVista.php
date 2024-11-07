@@ -24,6 +24,9 @@ if ($pedirBBDD) {
     if ($producto) {
         $cargar = true;
         $producto = $producto[0];
+        $sql = "SELECT Color from lineas where id = :id and Activo=1";
+        $param = ["id" =>  $producto["ID_Linea"]];
+        $color = $BBDD->select($sql, $param)[0]["Color"];
     }
 }
 
@@ -77,7 +80,7 @@ if ($pedirBBDD) {
                             </div>
                         </div>
                         <div class="botonesProd">
-                            <button type="submit" class="comprar" id="comprar">Añadir al carrito</button>
+                            <button type="submit" style="background-color:<?php echo $color; ?>" class="comprar" id="comprar">Añadir al carrito</button>
                             <button type="submit" class="muestra" id="muestra">Solicitar muestra</button>
                         </div>
                     </div>
