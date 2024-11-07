@@ -80,7 +80,7 @@ if ($pedirBBDD) {
                             </div>
                         </div>
                         <div class="botonesProd">
-                            <button type="submit" style="background-color:<?php echo $color; ?>" class="comprar" id="comprar">Añadir al carrito</button>
+                            <button type="submit" style="background-color:<?php echo "#" . $color; ?>" class="comprar" id="comprar">Añadir al carrito</button>
                             <button type="submit" class="muestra" id="muestra">Solicitar muestra</button>
                         </div>
                     </div>

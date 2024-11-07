@@ -48,14 +48,13 @@
                 $cantidad += $value;
             }
 
-            if ($cantidad > 0) {
             ?>
-                <div class="cartCount" id="cartCount">
-                    <?php echo $cantidad ?>
-                </div>
-            <?php
-            }
-            ?>
+            <div class="cartCount" id="cartCount">
+                <?php if ($cantidad > 0) {
+                    echo $cantidad;
+                }
+                ?>
+            </div>
 
         </a>
         <?php
