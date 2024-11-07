@@ -118,7 +118,6 @@ if ($pedirBBDD) {
     document.getElementById("comprar").addEventListener("click", () => {
         if (!isNaN(cantidad.value) && cantidad.value > 0) {
             peticionCarrito(<?php echo $id; ?>, cantidad.value, "add");
-
         }
 
 

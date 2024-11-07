@@ -10,8 +10,7 @@
     ?>
             <div class="iconAdmin">
 
-                <a href="../Admin.php" class="fa-solid fa-screwdriver-wrench iconButton"></a>
-
+                <a href="Admin.php" class="fa-solid fa-screwdriver-wrench iconButton"></a>
 
             </div>
 
@@ -27,14 +26,38 @@
             <a href="index.php">Aromusicoterapia</a>
         </h1>
 
-
-
     </div>
 
     <div class="icons">
         <a id="audio" class="fa-solid fa-volume-xmark iconButton"></a>
-        <a href="../login.php" class="fa-regular fa-user iconButton"></a>
-        <a href="../Cesta.php" class=" fa-solid fa-cart-shopping iconButton"></a>
+
+        <?php
+        if (!$sesion->estaLoggeado()) {
+        ?>
+            <a href="login.php" class="fa-regular fa-user iconButton"></a>
+        <?php
+        }
+        ?>
+
+        <a href="Cesta.php" class=" fa-solid fa-cart-shopping iconButton">
+            <?php
+            $cantidad = 0;
+            $carrito = $_SESSION["Carrito"];
+
+            foreach ($carrito as $key => $value) {
+                $cantidad += $value;
+            }
+
+            if ($cantidad > 0) {
+            ?>
+                <div class="cartCount" id="cartCount">
+                    <?php echo $cantidad ?>
+                </div>
+            <?php
+            }
+            ?>
+
+        </a>
         <?php
         /**
          * Si esta el usuario logueado, mostramos el icono que permite cerrar la sesion
@@ -43,7 +66,7 @@
 
         ?>
 
-            <a href="../logOut.php" class="fa-solid fa-right-to-bracket iconButton"> </a>
+            <a href="logOut.php" class="fa-solid fa-right-to-bracket iconButton"> </a>
         <?php } ?>
 
 
@@ -52,10 +75,10 @@
 
     <nav>
 
-        <a href="../QuienesSomos.php">¿QUIÉNES SOMOS?</a>
-        <a href="../NuestrosProductos.php">NUESTROS PRODUCTOS</a>
-        <a href="../Blog.php">BLOG</a>
-        <a href="../Contacto.php">CONTACTO</a>
+        <a href="QuienesSomos.php">¿QUIÉNES SOMOS?</a>
+        <a href="NuestrosProductos.php">NUESTROS PRODUCTOS</a>
+        <a href="Blog.php">BLOG</a>
+        <a href="Contacto.php">CONTACTO</a>
 
     </nav>
 

@@ -14,6 +14,11 @@ header {
     }
 
 
+    & * .animar {
+        animation: productAdded 0.25s ease;
+    }
+
+
     &:hover {
 
         background-color: white;
@@ -22,6 +27,10 @@ header {
 
             color: black;
 
+        }
+
+        & .cartCount {
+            color: black;
         }
 
 
@@ -49,6 +58,26 @@ header {
         padding: 0.5em;
         overflow: hidden;
         gap: 0.25em;
+        overflow: visible;
+
+        & .fa-cart-shopping {
+            position: relative;
+
+            &:hover .cartCount {
+                bottom: -50%;
+            }
+
+            & .cartCount {
+                position: absolute;
+                width: 100%;
+                right: 0;
+                bottom: -25%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                letter-spacing: 0.05em;
+            }
+        }
 
     }
 
@@ -90,4 +119,18 @@ nav {
 
 
 
+}
+
+@keyframes productAdded {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }

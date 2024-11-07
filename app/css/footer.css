@@ -7,6 +7,10 @@ footer {
     display: flex;
     align-items: flex-start;
     flex-wrap: wrap;
+
+    & a {
+        color: white;
+    }
 }
 
 .footer-columns {

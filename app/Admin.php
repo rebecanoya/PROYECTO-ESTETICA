@@ -26,9 +26,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
          * Aqui hacemos una consulta preparada para insertar una nueva linea cuyos datos serán los obtenidos del formulario
          */
         try {
-            $sql = "INSERT INTO lineas(ID_Musica, Nombre, Color, Descripcion, Activo) VALUES (:musica, :nombre, :color, :descripcion, :activo)";
+            $sql = "INSERT INTO lineas(Nombre, Color, Descripcion, Activo) VALUES (:nombre, :color, :descripcion, :activo)";
             $param = [
-                "musica" =>  $_POST["musica"],
                 "nombre" => $_POST["nombre"],
                 "color" => substr($_POST["color"], 1),
                 "descripcion" => $_POST["descripcion"],
@@ -93,10 +92,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             /**
              * Aqui hacemos una consulta preparada para modificar la linea con los datos obtenidos del formulario
              */
-            $sql = "UPDATE lineas SET ID_musica = :musica, Nombre = :nombre, Color = :color,
+            $sql = "UPDATE lineas SET Nombre = :nombre, Color = :color,
             Descripcion = :descripcion, Activo = :activo WHERE lineas.ID = :id";
             $param = [
-                "musica" =>  $_POST["musica"],
                 "nombre" => $_POST["nombre"],
                 "color" => substr($_POST["color"], 1),
                 "descripcion" => $_POST["descripcion"],
@@ -402,10 +400,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <input type="color" id="color" name="color" class="form-control" required>
                 </div>
                 <div class="form-group">
-                    <label for="musica">Música:</label>
-                    <input type="number" id="musica" name="musica" class="form-control" required>
-                </div>
-                <div class="form-group">
                     <label for="descripcion">Descripción:</label>
                     <textarea id="descripcion" name="descripcion" class="form-control" required></textarea>
                 </div>
@@ -440,7 +434,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <th>ID</th>
                         <th>Nombre</th>
                         <th>Color</th>
-                        <th>Música</th>
                         <th>Descripcion</th>
                         <th>Activo</th>
                         <th>Acciones</th>
@@ -458,7 +451,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         echo "<td>" . $linea["ID"] . "</td>";
                         echo "<td>" . $linea["Nombre"] . "</td>";
                         echo "<td>" . $linea["Color"] . "</td>";
-                        echo "<td>" . $linea["ID_Musica"] . "</td>";
                         echo "<td>" . $linea["Descripcion"] . "</td>";
                         switch ($linea["Activo"]) {
                             case 1:

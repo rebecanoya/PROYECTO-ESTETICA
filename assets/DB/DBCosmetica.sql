@@ -96,7 +96,6 @@ INSERT INTO `ies` (`telf`, `web`, `nombre`, `email`, `ID`) VALUES
 
 CREATE TABLE `lineas` (
   `ID` smallint(6) NOT NULL,
-  `ID_Musica` smallint(6) NOT NULL,
   `Nombre` varchar(16) NOT NULL,
   `Color` varchar(6) NOT NULL,
   `Descripcion` varchar(300) NOT NULL,
