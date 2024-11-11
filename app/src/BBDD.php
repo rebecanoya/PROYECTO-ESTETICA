@@ -130,7 +130,7 @@ class BBDD
             return [true, $this->pdo->lastInsertId()];
         } catch (\PDOException $e) {
             if ($e->getCode() == 23000) {
-                return [false, "Ya existe una cuenta con este Email"];
+                return [false, "Ya existe un ID igual"];
             }
         } catch (Exception $th) {
             return [false, "Mecachis, ccurrio un error", $th->getMessage()];

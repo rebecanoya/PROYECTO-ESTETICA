@@ -1,7 +1,12 @@
 <?php
 include 'src/iniciarPHP.php';
+include 'verificacion.php';
 
-
+if (mail("anderfdez0207@gmail.com", "Prueba de mail()", "Este es un correo de prueba.")) {
+    echo "Correo enviado correctamente.";
+} else {
+    echo "Error al enviar el correo.";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,45 +30,48 @@ include 'src/iniciarPHP.php';
 
     <?php
     include "src/templates/header.php";
-
-    /**
-     * Registro de usuario con contraseña hasheada
-     *
-     */
+    
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (isset($_POST["register"])) {
             unset($errorR);
             $sameEmail = false;
             $password = hash("sha512", $_POST["password"]);
             $confirmPassword = hash("sha512", $_POST["confirmpassword"]);
-            $sql = "SELECT Email, password from usuarios";
+            $sql = "SELECT Email, password FROM usuarios";
             $infoU = $BBDD->select($sql);
+            
             foreach ($infoU as $info) {
                 if ($info["Email"] == $_POST["email"] && $info["password"] !=  hash("sha512", "")) {
                     $sameEmail = true;
                     $errorR = "Ya existe una cuenta con este correo";
                 }
             }
-            // Comprobar que ambas contraseñas son iguales
+    
             if (hash_equals($password, $confirmPassword) && !$sameEmail) {
-                $sql = "INSERT INTO usuarios(Email, Password, Rol, Activo, Nombre, Apellidos) VALUES (:email, :password, 3, 1, :nombre, :apellidos)";
-                $param = ["email" =>  $_POST["email"], "password" => $password, "nombre" => $_POST["nombre"], "apellidos" => $_POST["apellidos"]];
+                // Generar el token de confirmación
+                $confirmationToken = bin2hex(random_bytes(16));
+    
+                $sql = "INSERT INTO usuarios (Email, Password, Rol, Activo, token) 
+                        VALUES (:email, :password, 3, 1, :confirmation_token)";
+                $param = [
+                    "email" => $_POST["email"], 
+                    "password" => $password, 
+                    "confirmation_token" => $confirmationToken
+                ];
                 $respuesta = $BBDD->execute($sql, $param);
-                if ($respuesta[0]) {
+                if (!$respuesta[0]) {
                     $errorR = $respuesta[1];
                 }
-                $sesion->login($_POST["email"], $_POST["password"]);
-                header("Location: index.php");
-            }
-        } elseif (isset($_POST["login"])) {
-            if ($sesion->login($_POST["email"], $_POST["password"])) {
-                header("Location: index.php");
-            } else {
-                $errorL = "No se pudo iniciar sesion";
+                if (sendConfirmationEmail($_POST["email"], $confirmationToken)) {
+                    echo "Te hemos enviado un correo de confirmación. Por favor, revisa tu bandeja de entrada.";
+                } else {
+                    echo "Error al enviar el correo de confirmación.";
+                }
+                }
             }
         }
-    }
     ?>
+    
     <main>
         <div class="container">
 
@@ -95,23 +103,17 @@ include 'src/iniciarPHP.php';
                 ?>
                 <!-- <a href="">¿Olvidaste tu contraseña?</a> -->
             </div>
-
         </div>
-
         <div class="registrarse">
             <h2>Regístrate</h2>
             <form action="" method="post">
                 <div class="grupo-form">
-                    <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre" required>
-                    <input type="text" id="apellidos" name="apellidos" class="form-control" placeholder="Apellido" required>
                     <input type="email" name="email" id="email" placeholder="Email">
                     <input type="password" name="password" id="password" placeholder="Contraseña">
                     <input type="password" name="confirmpassword" id="password" placeholder="Repetir contraseña">
                 </div>
-
                 <button type="submit" name="register" class="register">Crear cuenta</button>
             </form>
-
         </div>
     </main>
 
