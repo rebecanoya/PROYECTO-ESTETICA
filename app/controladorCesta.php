@@ -7,6 +7,7 @@ include 'src/iniciarPHP.php';
 // obtener datos de POST enviados
 $input = file_get_contents('php://input');
 $data = json_decode($input, true);
+$return = [false];
 // comprobar que estan los datos necesarios
 if (isset($data) && isset($data["id"]) && isset($data["cantidad"]) && isset($data["accion"])) {
     $id = $data["id"];
@@ -20,13 +21,40 @@ if (isset($data) && isset($data["id"]) && isset($data["cantidad"]) && isset($dat
             $cantidadCarrito = $_SESSION["Carrito"][$id];
         }
         // ejecutar accion segun el valor enviado 
+
+        $factor = 1;
+
         if ($accion == "add") {
             $cantidadProducto = $cantidadCarrito + $cantidad;
         } elseif ($accion == "muestra") {
             $cantidadProducto = $cantidadCarrito + 1;
         } elseif ($accion == "reducir") {
             $cantidadProducto = $cantidadCarrito - $cantidad;
+            $factor = -1;
         }
+
+        // comprobar que el producto exista y este activo
+        $sql = "SELECT * from productos where ID=:producto and Activo = 1;";
+        $params = ["producto" => $id];
+        $select = $BBDD->select($sql, $params);
+
+        // limitar al stock
+        $stock = $select[0]["Stock"];
+        $nuevaCantidadProducto = min($cantidadProducto, $stock);
+        //devolver diferencia añadida
+        $msg = "";
+        if ($nuevaCantidadProducto != $cantidadProducto) {
+            $msg = "No hay suficiente stock para la cantidad solicitada";
+        }
+
+        $return = [true, ($cantidad + $nuevaCantidadProducto - $cantidadProducto) * $factor, $msg];
+
+        $cantidadProducto = $nuevaCantidadProducto;
+
+        if (count($select) == 0 || (isset($select[0][0]) && $select[0] === false)) {
+            return;
+        }
+
         // si la accion es eliminar o no hay productos, eliminamos el producto del carrito sesion
         if ($accion == "eliminar" || $cantidadProducto < 0) {
             $cantidadProducto = 0;
@@ -40,13 +68,7 @@ if (isset($data) && isset($data["id"]) && isset($data["cantidad"]) && isset($dat
             }
             // si esta iniciada la sesion, guardar en la base de datos
             if ($sesion->estaLoggeado()) {
-                // comprobar que el producto exista y este activo
-                $sql = "SELECT * from productos where IDProducto=:producto and Activo = 1;";
-                $params = ["producto" => $id];
-                $select = $BBDD->select($sql, $params);
-                if (count($select) == 0 || !$select[0] === false) {
-                    return;
-                }
+
                 // comprobar si el producto esta en el carrito de la bbdd 
                 $sql = "SELECT * from carrito where IDUsuario=:id and IDProducto=:producto";
                 $params = ["id" => $_SESSION["id"], "producto" => $id];
@@ -68,3 +90,5 @@ if (isset($data) && isset($data["id"]) && isset($data["cantidad"]) && isset($dat
         }
     }
 }
+
+echo json_encode($return);

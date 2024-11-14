@@ -8,7 +8,7 @@
         <div class="footer-column">
             <h3>Aromusicoterapia</h3>
             <ul>
-                <li>Productos cosméticos en Vigo (Por ahora)</li>
+                <li>Productos cosméticos en Vigo</li>
             </ul>
         </div>
         <div class="footer-column">

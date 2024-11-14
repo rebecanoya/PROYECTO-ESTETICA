@@ -4,7 +4,7 @@ include 'src/iniciarPHP.php';
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -20,83 +20,75 @@ include 'src/iniciarPHP.php';
 </head>
 
 <body>
-
     <?php
 
     include "src/templates/header.php"
 
     ?>
-
-
-
     <main>
+        <div class="main-container">
 
-        <h2>Lineas</h2>
+            <article>
+                <h2>Lineas</h2>
 
-        <article class="lineas">
+                <div class="lineas-cont">
 
+                    <?php
 
-            <?php
+                    $sql = "SELECT * from lineas Where Activo = 1";
+                    $lineas = $BBDD->select($sql);
+                    foreach ($lineas as $linea) {
 
-            $sql = "SELECT * from lineas Where Activo = 1";
-            $lineas = $BBDD->select($sql);
-            foreach ($lineas as $linea) {
+                        $nombreLinea = $linea["Nombre"];
+                        $colorLinea = $linea["Color"];
+                        $IDLinea = $linea["ID"];
 
-                $nombreLinea = $linea["Nombre"];
-                $colorLinea = $linea["Color"];
-                $IDLinea = $linea["ID"];
-                $descripcionLinea = $linea["Descripcion"];
+                    ?>
 
-            ?>
-
-                <button class="botonLinea" data-seleccionado="false" data-idLinea="<?php echo $IDLinea ?>" style="background: url(img/lineas/<?php echo $IDLinea ?>.png);">
-
-                    <h2>Linea <?php echo $nombreLinea ?></h2>
-                    <img src="img/lote/<?php echo $IDLinea ?>.png" alt="">
-
-
-
-
-                </button>
-            <?php
+                        <button class="botonLinea" data-seleccionado="false" data-idLinea="<?php echo $IDLinea ?>"
+                            style="background: url(img/lineas/<?php echo $IDLinea ?>.png);--color: #<?php echo $colorLinea ?>;">
+                            <h2>Linea <?php echo $nombreLinea ?></h2>
+                            <img src="img/lote/<?php echo $IDLinea ?>.png" alt="">
+                        </button>
+                    <?php
 
 
 
-            }
+                    }
 
-            ?>
+                    ?>
+                </div>
 
-        </article>
+            </article>
+
+            <article>
+                <h2>Todos los productos</h2>
+
+                <div class="productos-cont">
 
 
+                    <?php
+                    $sql = "SELECT ID,Nombre,Descripcion,Precio,ID_Linea,(select Color from lineas as l where l.ID=ID_Linea) as Color from productos where Activo = 1 order by Nombre";
+                    $productos = $BBDD->select($sql);
 
-        <h2>Todos los productos</h2>
-
-
-        <article class="productos">
-
-
-            <?php
-            $sql = "SELECT ID,Nombre,Descripcion,Precio,ID_Linea,(select Color from lineas as l where l.ID=ID_Linea) as Color from productos where Activo = 1 order by Nombre";
-            $productos = $BBDD->select($sql);
-
-            foreach ($productos as $producto) {
-                $colorLinea = $producto["Color"];
-                $IDProducto = $producto["ID"];
-                $nombreProducto = $producto["Nombre"];
-                $descripcionProducto = $producto["Descripcion"];
-                $precioProducto = $producto["Precio"];
-                $IDLinea = $producto["ID_Linea"];
-                include("src/templates/producto.php");
-            }
-            ?>
+                    foreach ($productos as $producto) {
+                        $colorLinea = $producto["Color"];
+                        $IDProducto = $producto["ID"];
+                        $nombreProducto = $producto["Nombre"];
+                        $descripcionProducto = $producto["Descripcion"];
+                        $precioProducto = $producto["Precio"];
+                        $IDLinea = $producto["ID_Linea"];
+                        include("src/templates/producto.php");
+                    }
+                    ?>
 
 
 
 
 
-        </article>
-
+                </div>
+            </article>
+        </div>
     </main>
 
     <?php

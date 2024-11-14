@@ -1,22 +1,8 @@
-header {
-
-    outline: 0.05em solid black;
-
-    & a {
-
-        color: black;
-
-    }
-
-}
-
 main {
-    padding: 2.5em;
-    padding-top: 2.5em;
-    display: grid;
-    grid-template-rows: auto 1fr;
-    gap: 2em;
-
+    padding: 2em;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 
     & h2 {
 
@@ -24,16 +10,43 @@ main {
 
     }
 
+    & .main-container {
+        width: 60%;
+        display: flex;
+        flex-direction: column;
+        gap: 3em;
+
+    }
+}
+
+.banner {
+    position: fixed;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+}
+
+body>header {
+
+    outline: 0.15em solid black;
+
+    & a {
+        color: black !important;
+    }
+}
+
+article {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
 }
 
 
-.lineas {
+.lineas-cont {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 7em;
-    margin-right: 3em;
-    margin-left: 3em;
-    margin-bottom: 3em;
+    gap: 4em;
+
 
 
     & .botonLinea {
@@ -46,10 +59,11 @@ main {
         border-radius: 1em;
         overflow: hidden;
         gap: 1em;
+        outline: 0 solid var(--color);
 
         &:hover,
         &[data-seleccionado="true"] {
-            transform: scale(1.05);
+            transform: scale(1.02);
             box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, .1);
             filter: grayscale(0);
 
@@ -60,22 +74,17 @@ main {
             }
         }
 
+        &[data-seleccionado="true"] {
+            outline: 0.2em solid var(--color);
+        }
 
         & img {
             width: 500px;
-
         }
-
-
     }
-
-
-
-
-
 }
 
-.productos {
+.productos-cont {
 
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -84,9 +93,28 @@ main {
 }
 
 .producto {
+    border: 0.05em solid var(--color, black);
 
-    border: 0.05em solid black;
-    box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, .1);
-    filter: grayscale(0);
+    &:hover {
+        box-shadow: 0 0.25rem 0.5rem 0 rgba(0, 0, 0, .25);
+    }
 
+    &[data-activo="false"] {
+        animation: esconder 500ms forwards;
+    }
+}
+
+@keyframes esconder {
+    0% {
+        opacity: 1;
+    }
+
+    99% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0;
+        display: none;
+    }
 }

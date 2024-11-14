@@ -34,7 +34,7 @@ if ($pedirBBDD) {
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -46,64 +46,59 @@ if ($pedirBBDD) {
     <script src="https://kit.fontawesome.com/dc2d3ea46f.js" crossorigin="anonymous"></script>
     <link rel="icon" href="img/favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-    <title><?php echo $producto["Nombre"] ?> | Aromusicoterapia</title>
+    <title><?php
+            if ($cargar) {
+                echo $producto["Nombre"];
+            } else {
+                echo "No se encontró";
+            }
+            ?> | Aromusicoterapia</title>
 </head>
 
 <body>
-    <?php
-
-    include "src/templates/header.php";
-    if ($cargar) {
-
-
-
-    ?>
-        <main>
-            <div class="container-main">
-                <div class="product-image">
-                    <img src="img/productos/<?php echo $producto["ID"] ?>.png" alt="Producto">
-                </div>
-                <div class="product-details">
-                    <div class="product-text">
-                        <h2><?php echo $producto["Nombre"] ?></h2>
-                        <p class="descripcion"><?php echo $producto["Descripcion"] ?></p>
-                        <p class="precio">Precio: <?php echo $producto["Precio"] ?>€ Unidad</p>
+    <?php include "src/templates/header.php"; ?>
+    <main>
+        <?php if ($cargar) { ?>
+            <div class="main-container">
+                <div class="container-main">
+                    <div class="product-image">
+                        <img src="img/productos/<?php echo $producto["ID"] ?>.png" alt="Producto">
                     </div>
-                    <div class="product-buttons">
-                        <div class="container">
-                            <div class="form-container">
-                                <div class="cantidad">
-                                    <button class="menos" onclick="actualizarCantidad(event,-1,<?php echo $id ?>)">-</button>
-                                    <input type="number" id="<?php echo $id ?>" name="cantidad" value="1">
-                                    <button class="mas" onclick="actualizarCantidad(event,1,<?php echo $id ?>)">+</button>
+                    <div class="product-details">
+                        <div class="product-text">
+                            <h2><?php echo $producto["Nombre"] ?></h2>
+                            <p class="descripcion"><?php echo $producto["Descripcion"] ?></p>
+                            <p class="precio"><?php echo $producto["Precio"] ?>€ / Unidad</p>
+                        </div>
+                        <div class="product-buttons">
+                            <div class="container">
+                                <div class="form-container">
+                                    <div class="cantidad">
+                                        <button class="menos" onclick="actualizarCantidad(event,-1,<?php echo $id ?>)">-</button>
+                                        <input type="number" id="<?php echo $id ?>" name="cantidad" value="1">
+                                        <button class="mas" onclick="actualizarCantidad(event,1,<?php echo $id ?>)">+</button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="botonesProd">
-                            <button type="submit" style="background-color:<?php echo "#" . $color; ?>" class="comprar" id="comprar">Añadir al carrito</button>
-                            <button type="submit" class="muestra" id="muestra">Solicitar muestra</button>
+                            <div class="botonesProd">
+                                <button type="submit" style="background-color:<?php echo "#" . $color; ?>" class="comprar" id="comprar">Añadir al carrito</button>
+                                <button type="submit" class="muestra" id="muestra">Solicitar muestra</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
         <?php
-    } else {
+        } else { ?> No se encontró. <?php } ?>
 
+    </main>
 
-        ?>
-            <div>No se encontró</div>
-        <?php
-    }
-        ?>
+    <?php
 
-        </main>
+    include "src/templates/footer.php";
 
-        <?php
-
-        include "src/templates/footer.php";
-
-        ?>
+    ?>
 </body>
 
 </html>

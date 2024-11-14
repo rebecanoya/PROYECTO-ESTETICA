@@ -10,88 +10,28 @@ header {
 
 }
 
+
+body>header {
+
+    outline: 0.15em solid black;
+
+    & a {
+        color: black !important;
+    }
+}
+
 main {
     padding: 2.5em;
     padding-top: 5em;
     display: flex;
-    flex-direction: column;
     gap: 1em;
-    align-items: center;
+    justify-content: center;
 
 }
 
 .container {
-
-    display: flex;
-    gap: 2.5em;
-
-    & .sesion {
-        padding: 1em;
-        border: black solid 1px;
-        border-radius: 0.75em;
-        text-align: center;
-
-
-
-
-        & .datos {
-
-            display: flex;
-            flex-direction: column;
-            gap: 1em;
-            padding: 1em;
-
-
-            & input {
-
-                padding: 0.25em;
-                border-radius: 0.5em;
-                border: grey solid 1.5px;
-
-            }
-
-        }
-
-
-        & p {
-
-            display: flex;
-            flex-direction: column;
-            gap: 1em;
-            padding: 1em;
-
-        }
-
-        & button {
-
-            background-color: black;
-            color: white;
-            padding: 0.75em;
-            border-radius: 0.5em;
-            border: 0;
-
-            &:hover {
-
-                background-color: #f3d1a4;
-                transform: scale(1.025);
-            }
-
-        }
-
-        & a {
-            text-decoration: underline;
-            color: red;
-
-        }
-
-    }
-}
-
-.registrarse {
-
     display: flex;
     flex-direction: column;
-    gap: 2.5em;
     padding: 1em;
     border: black solid 1px;
     border-radius: 0.75em;
@@ -105,12 +45,14 @@ main {
         gap: 1em;
         padding: 1em;
 
-    }
 
-    & .genero {
+        & input {
 
-        text-align: start;
-        padding: 1em;
+            padding: 0.25em;
+            border-radius: 0.5em;
+            border: grey solid 1.5px;
+
+        }
 
     }
 
@@ -130,5 +72,10 @@ main {
 
     }
 
+    & a {
+        text-decoration: underline;
+        color: red;
+
+    }
 
 }

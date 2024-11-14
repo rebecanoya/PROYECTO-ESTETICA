@@ -3,13 +3,16 @@
     transition: 250ms ease;
     scroll-behavior: smooth;
     font-family: 'Lumina';
-    letter-spacing: 0.1em
+    letter-spacing: 0.1em;
 }
 
 :root {
-
     --base: rgb(226, 110, 130);
+    --general: #5dc1b9;
+}
 
+.cantidad>button:hover {
+    transform: scale(1) !important;
 }
 
 
@@ -23,17 +26,17 @@
     overflow: hidden;
     cursor: pointer;
 
-    &[data-activo="false"] {
-
-        display: none;
-
-    }
-
     &:hover {
 
         transform: scale(1.05);
         box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, .1);
+        background-color: rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(20px);
 
+    }
+
+    &:active {
+        transform: scale(1.1);
     }
 
     & .opciones {
@@ -42,7 +45,6 @@
         grid-template-columns: 1fr 1fr;
         width: 100%;
 
-
     }
 
 
@@ -50,12 +52,12 @@
 
         width: 200px;
         aspect-ratio: 1;
+        padding-top: 1em;
     }
 
 
 
     & button {
-
 
         display: flex;
         justify-content: center;
@@ -65,13 +67,17 @@
         cursor: pointer;
         border-radius: 0;
 
-
+        &:hover {
+            background-color: white;
+            color: black;
+            transform: scale(1) !important;
+        }
 
     }
 
     & .compra {
 
-        background-color: var(--colorFondo, --base);
+        background-color: var(--color, --base);
         border: 0;
 
     }
@@ -83,6 +89,13 @@
         border: 0;
 
     }
+}
+
+
+
+button:active,
+.button:active {
+    transform: scale(1.1) !important;
 }
 
 button,
@@ -99,13 +112,13 @@ button,
     &:hover {
 
         cursor: pointer;
+        transform: scale(1.05);
 
     }
 
     &:visited {
         color: #000000;
     }
-
 }
 
 @font-face {
@@ -151,7 +164,7 @@ footer {
 
         scale: 1.1;
         background: black;
-        color: white;
+        color: white !important;
         text-decoration: none;
 
 

@@ -4,7 +4,7 @@ include 'src/iniciarPHP.php';
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -20,6 +20,7 @@ include 'src/iniciarPHP.php';
 </head>
 
 <body>
+    <img src="img/banner.jpg" class="banner">
     <?php
 
     include "src/templates/header.php"
@@ -27,7 +28,6 @@ include 'src/iniciarPHP.php';
     ?>
 
     <main>
-
 
         <article class="info">
             <section class="descripcion">
@@ -50,15 +50,13 @@ include 'src/iniciarPHP.php';
                 </div>
             </section>
             <section class="datos">
-                <div class="container">
-                    <div class="button-container">
-                        <button class="button" onclick="cambiarTexto(Mision)">Mision</button>
-                        <button class="button" onclick="cambiarTexto(Vision)">Vision</button>
-                        <button class="button" onclick="cambiarTexto(Valores)">Valores</button>
-                    </div>
-                    <div id="textoCambiante" class="text-container">
-                        Texto ejemplo Inicial
-                    </div>
+                <div class="button-container">
+                    <button class="button" onclick="cambiarTexto(Mision)">Mision</button>
+                    <button class="button" onclick="cambiarTexto(Vision)">Vision</button>
+                    <button class="button" onclick="cambiarTexto(Valores)">Valores</button>
+                </div>
+                <div id="textoCambiante" class="text-container">
+                    Texto ejemplo Inicial
                 </div>
             </section>
         </article>

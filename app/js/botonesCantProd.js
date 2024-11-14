@@ -16,6 +16,5 @@ function actualizarCantidad(event, cantidad, id) {
         elementoInput.value = cantidadInput + cantidad;
         return true;
 
-
     } return false;
 }

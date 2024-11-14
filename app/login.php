@@ -2,6 +2,10 @@
 include 'src/iniciarPHP.php';
 include 'verificacion.php';
 
+if ($sesion->estaLoggeado()) {
+    header("Location: index.php");
+}
+
 if (mail("anderfdez0207@gmail.com", "Prueba de mail()", "Este es un correo de prueba.")) {
     echo "Correo enviado correctamente.";
 } else {
@@ -9,7 +13,7 @@ if (mail("anderfdez0207@gmail.com", "Prueba de mail()", "Este es un correo de pr
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -19,18 +23,13 @@ if (mail("anderfdez0207@gmail.com", "Prueba de mail()", "Este es un correo de pr
     <link rel="stylesheet" href="css/login.css">
     <script src="https://kit.fontawesome.com/dc2d3ea46f.js" crossorigin="anonymous"></script>
     <title>Pagina inicial</title>
-    <style>
-        .registrarse {
-            display: none;
-        }
-    </style>
 </head>
 
 <body>
 
     <?php
     include "src/templates/header.php";
-    
+
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (isset($_POST["register"])) {
             unset($errorR);
@@ -39,23 +38,23 @@ if (mail("anderfdez0207@gmail.com", "Prueba de mail()", "Este es un correo de pr
             $confirmPassword = hash("sha512", $_POST["confirmpassword"]);
             $sql = "SELECT Email, password FROM usuarios";
             $infoU = $BBDD->select($sql);
-            
+
             foreach ($infoU as $info) {
                 if ($info["Email"] == $_POST["email"] && $info["password"] !=  hash("sha512", "")) {
                     $sameEmail = true;
                     $errorR = "Ya existe una cuenta con este correo";
                 }
             }
-    
+
             if (hash_equals($password, $confirmPassword) && !$sameEmail) {
                 // Generar el token de confirmación
                 $confirmationToken = bin2hex(random_bytes(16));
-    
+
                 $sql = "INSERT INTO usuarios (Email, Password, Rol, Activo, token) 
                         VALUES (:email, :password, 3, 1, :confirmation_token)";
                 $param = [
-                    "email" => $_POST["email"], 
-                    "password" => $password, 
+                    "email" => $_POST["email"],
+                    "password" => $password,
                     "confirmation_token" => $confirmationToken
                 ];
                 $respuesta = $BBDD->execute($sql, $param);
@@ -67,44 +66,29 @@ if (mail("anderfdez0207@gmail.com", "Prueba de mail()", "Este es un correo de pr
                 } else {
                     echo "Error al enviar el correo de confirmación.";
                 }
-                }
             }
         }
+    }
     ?>
-    
+
     <main>
         <div class="container">
-
-            <div class="sesion">
-                <h2>Cliente nuevo</h2>
-                <p>Para continuar con un proceso de compra debes registrarte.</p>
-                <button id="mostrarFormulario">Crear cuenta</button>
-                <?php
-                if (isset($errorR)) {
-                    echo "<br>" . $errorR;
-                }
-                ?>
-            </div>
-
-
-            <div class="sesion">
-                <h2>Iniciar Sesion</h2>
-                <form action="" method="post">
-                    <div class="datos">
-                        <input type="email" name="email" id="email" placeholder="correo electronico o usuario">
-                        <input type="password" name="password" id="password" placeholder="contraseña">
-                    </div>
-                    <button type="submit" name="login" class="login">Iniciar</button>
-                </form>
-                <?php
-                if (isset($errorL)) {
-                    echo $errorL;
-                }
-                ?>
-                <!-- <a href="">¿Olvidaste tu contraseña?</a> -->
-            </div>
+            <h2>Iniciar Sesion</h2>
+            <form action="" method="post">
+                <div class="grupo-form">
+                    <input type="email" name="email" id="email" placeholder="correo electronico">
+                    <input type="password" name="password" id="password" placeholder="contraseña">
+                </div>
+                <button type="submit" name="login" class="login">Iniciar</button>
+            </form>
+            <?php
+            if (isset($errorL)) {
+                echo $errorL;
+            }
+            ?>
+            <!-- <a href="">¿Olvidaste tu contraseña?</a> -->
         </div>
-        <div class="registrarse">
+        <div class="container">
             <h2>Regístrate</h2>
             <form action="" method="post">
                 <div class="grupo-form">
@@ -116,12 +100,6 @@ if (mail("anderfdez0207@gmail.com", "Prueba de mail()", "Este es un correo de pr
             </form>
         </div>
     </main>
-
-    <script>
-        document.getElementById('mostrarFormulario').addEventListener('click', function() {
-            document.querySelector('.registrarse').style.display = 'block';
-        });
-    </script>
 
 
 

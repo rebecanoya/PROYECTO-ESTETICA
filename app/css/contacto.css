@@ -1,111 +1,82 @@
-header {
-
-    outline: 0.05em solid black;
-
-    & a {
-
-        color: black;
-
-    }
-
+main {
+    padding: 2em;
+    gap: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 body {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-}
-
-main {
-    flex: 1;
-    padding: 2.5em;
-    gap: 1em;
-    flex-direction: column;
-}
-
-.nombreIes {
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    margin: auto;
-    background-color: rgb(245, 245, 245);
-    width: 20em;
-    height: 2em;
-    max-height: 2em;
-    margin-bottom: 2em;
-    position: relative;
-    border-radius: 5px;
-    font-size: 2em;
-    outline: 0.1em solid black;
-    border: 0.15em solid #5dc1b9;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    height: 100vh;
 }
 
 .general {
-    padding-top: 3em;
+    width: 60%;
+    display: flex;
+    gap: 2em;
+    flex-direction: column;
+    background-color: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(20px);
+    border-radius: 2em;
+    padding: 1em;
 }
 
-.info {
-    display: flex;
-    gap: 5%;
-    justify-content: center;
-    margin-right: 5%;
+
+.banner {
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+}
+
+.nombreIes {
+    margin: auto;
+    background-color: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(20px);
+    white-space: nowrap;
+    border-radius: 0.5em;
+    font-size: 2em;
+    padding: 0.5em;
+    width: calc(100% - 1em);
+    text-align: center;
+}
+
+article {
+    gap: 2em;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
 
     & .mapa {
-        display: grid;
-        place-items: center;
-        background-color: rgb(245, 245, 245);
-        position: relative;
-        border-radius: 5px;
-        height: 28em;
-        width: 37.5em;
-        max-width: 40em;
-        margin-left: 5%;
-        margin-top: 1em;
-        outline: 0.15em solid black;
-        border: 0.3em solid #5dc1b9;
-    }
+        border-radius: 1em;
+        overflow: hidden;
+        display: flex;
 
-    & .mapa .direccion img {
-        height: 100%;
-        width: 100%;
-        object-fit: contain;
-        margin: 2em;
+        & iframe {
+            height: 100%;
+            width: 100%;
+        }
     }
 
     & .datos {
+        padding: 1em;
+        border-radius: 1em;
+        background-color: rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(20px);
         display: grid;
-        place-items: center;
-        background-color: rgb(245, 245, 245);
-        position: relative;
-        border-radius: 5px;
-        height: 28.3em;
-        width: 30em;
-        margin-top: 1em;
-        outline: 0.15em solid black;
-        border: 0.3em solid #5dc1b9;
-    }
-
-    & .datos>div {
+        grid-template-rows: repeat(3, 1fr);
         align-items: center;
-        display: flex;
         justify-content: center;
-        margin: auto;
-        height: 5em;
-        width: 20em;
-    }
 
-    & .datos>div i {
-        margin-right: 1em;
-        font-size: 2em;
-    }
-
-    & .datos>div p,
-    & .datos>div a {
-        font-size: 2em;
-    }
-
-    & .datos>div a {
-        color: black;
+        &>* {
+            display: flex;
+            gap: 0.5em;
+            justify-content: center;
+            align-items: center;
+            color: black;
+        }
     }
 }

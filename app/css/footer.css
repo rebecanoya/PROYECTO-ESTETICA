@@ -2,7 +2,7 @@
 footer {
     background-color: #343a40;
     color: #f8f9fa;
-    padding: 30px 20px;
+    padding: 2em 2em;
     text-align: center;
     display: flex;
     align-items: flex-start;
@@ -51,17 +51,9 @@ footer {
     transition: color 0.3s;
 }
 
-.footer-column ul li a:hover {
-    color: #a6386d;
-}
-
-.logo {
-    padding-right: 20px;
-    padding-bottom: 20px;
-}
 
 .logo img {
-    max-width: 200px;
+    max-width: 150px;
     height: auto;
     width: 100%;
 }

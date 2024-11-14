@@ -40,9 +40,12 @@ if (isset($_SESSION["Carrito"]) && count($_SESSION["Carrito"]) > 0) {
 // Verificar envío del formulario "Tramitar Pedido"
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tramitarPedido']) && isset($_SESSION["Carrito"]) && !empty($_SESSION["Carrito"])) {
     // Insertar el pedido en la tabla `pedidos`
+
     $subtotal = isset($_POST['subtotal']) ? floatval($_POST['subtotal']) : 0.0;
     $sql = "INSERT INTO pedidos (ID_Cliente, Precio) VALUES (:usuario, :precio)";
     $params = ["usuario" => $_SESSION["id"], "precio" => $subtotal];
+
+    $BBDD->pdo->beginTransaction();
     // Ejecutar y verificar la inserción    
     if ($BBDD->execute($sql, $params)) {
         $pedidoId = $BBDD->lastId();
@@ -53,17 +56,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tramitarPedido']) && 
             $BBDD->execute($sql, $params);
         }
 
+        $BBDD->pdo->commit();
         unset($_SESSION["Carrito"]); // Limpieza del carrito
         header("Location: NuestrosProductos.php"); // Redirección
         exit(); // Termina la ejecución después de la redirección
     } else {
+        $BBDD->pdo->rollBack();
         echo "Error al procesar el pedido";
     }
 }
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -93,9 +98,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tramitarPedido']) && 
                             <span class="title">Cantidad</span>
                             <span class="title">Subtotal</span>
                         </div>
-                        <?php 
-                            $subtotal = 0;
-                            foreach ($productos as $producto):
+                        <?php
+                        $subtotal = 0;
+                        foreach ($productos as $producto):
                             $idProducto = $producto["ID"];
                             $nombreProducto = $producto["Nombre"];
                             $precioProducto = $producto["Precio"];
@@ -121,14 +126,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tramitarPedido']) && 
                     </div>
                 </div>
                 <div class="summary">
+                    <h2>Resumen de Compra</h2>
                     <div class="total">
-                        <h2>Resumen de Compra</h2>
                         <input type="hidden" name="subtotal" id="subtotalInput" value="<?php echo $subtotal; ?>">
                         <p id="subtotal">Subtotal <?php echo $subtotal ?>€</p>
                         <p id="subtotalImpuestos">Total incluyendo impuestos <?php echo $subtotal ?>€</p>
                     </div>
                     <div class="opciones">
-                        <!-- Botón específico para "Tramitar Pedido" -->
                         <button type="submit" name="tramitarPedido" class="button-tramitar-pedido">Tramitar Pedido</button>
                         <a href="NuestrosProductos.php" class="volverCompra">Seguir Comprando</a>
                     </div>
@@ -170,33 +174,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tramitarPedido']) && 
      * @param   {string}    accion      accion a realizar
      *
      */
-    function actualizarCarrito(event, cantidad, id, accion) {
-    if (actualizarCantidad(event, cantidad, id)) {
-        peticionCarrito(id, Math.abs(cantidad), accion);
-        actualizarPrecio(id);
-        actualizarSubtotal();
-    }
-}
+    async function actualizarCarrito(event, cantidad, id, accion) {
+        var response = await peticionCarrito(id, Math.abs(cantidad), accion);
 
-function actualizarPrecio(id) {
-    let elementoPrecio = document.getElementById("precio" + id);
-    let elementoCantidad = document.getElementById(id);
-    let precioBase = parseFloat(elementoPrecio.dataset.preciobase);
-    elementoPrecio.innerHTML = (precioBase * elementoCantidad.value).toFixed(2) + '€';
-}
+        if (!response[0]) {
+            return;
+        }
 
-function actualizarSubtotal() {
-    let elementosPreciosProductos = document.getElementsByClassName("product-subtotal");
-    let suma = 0;
-    for (const elementoPrecioProducto of elementosPreciosProductos) {
-        let precioTexto = elementoPrecioProducto.innerHTML.replace('€', '').trim();
-        suma += parseFloat(precioTexto);
+        if (actualizarCantidad(event, response[1], id)) {
+            actualizarPrecio(id);
+            actualizarSubtotal();
+        }
     }
 
-    subtotal.innerHTML = `Subtotal ${suma.toFixed(2)}€`;
-    subtotalImpuestos.innerHTML = `Total incluyendo impuestos ${(suma * 1.21).toFixed(2)}€`; // 21% de IVA
-    document.getElementById('subtotalInput').value = suma.toFixed(2); // Actualiza el campo oculto
-}
+    function actualizarPrecio(id) {
+        let elementoPrecio = document.getElementById("precio" + id);
+        let elementoCantidad = document.getElementById(id);
+        let precioBase = parseFloat(elementoPrecio.dataset.preciobase);
+        elementoPrecio.innerHTML = (precioBase * elementoCantidad.value).toFixed(2) + '€';
+    }
+
+    function actualizarSubtotal() {
+        let elementosPreciosProductos = document.getElementsByClassName("product-subtotal");
+        let suma = 0;
+        for (const elementoPrecioProducto of elementosPreciosProductos) {
+            let precioTexto = elementoPrecioProducto.innerHTML.replace('€', '').trim();
+            suma += parseFloat(precioTexto);
+        }
+
+        subtotal.innerHTML = `Subtotal ${suma.toFixed(2)}€`;
+        subtotalImpuestos.innerHTML = `Total incluyendo impuestos ${(suma * 1.21).toFixed(2)}€`; // 21% de IVA
+        document.getElementById('subtotalInput').value = suma.toFixed(2); // Actualiza el campo oculto
+    }
 
     /**
      * Peticion para eliminar un producto

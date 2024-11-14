@@ -5,7 +5,7 @@ include 'src/iniciarPHP.php';
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -45,12 +45,14 @@ include 'src/iniciarPHP.php';
                 <div class="textos">
 
                     <h2>¿Necesitas que te asesoremos?</h2>
-                    <p>Nuestro equipo de expertos en belleza está aquí para asesorarte y ayudarte a encontrar los productos adecuados para tus necesidades específicas</p>
+                    <p>Nuestro equipo de expertos en belleza está aquí para asesorarte y ayudarte a encontrar los productos adecuados para tus necesidades específicas.</p>
 
                 </div>
                 <a class="button" href="Contacto.php">Contáctanos</a>
             </div>
-            <div class="imgContacto"><img src="img/llamada.jpg"></div>
+            <div class="imgContacto">
+                <img src="img/llamada.jpg">
+            </div>
 
 
         </section>

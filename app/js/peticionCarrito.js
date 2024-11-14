@@ -10,7 +10,7 @@ const cartCount = document.getElementById("cartCount");
  */
 async function peticionCarrito(id, cantidad, accion) {
 
-    await fetch("controladorCesta.php", {
+    return await fetch("controladorCesta.php", {
 
         method: "POST",
         mode: "cors",
@@ -25,17 +25,22 @@ async function peticionCarrito(id, cantidad, accion) {
             "accion": accion
         })
 
-    }
+    }).then(res => res.json()).then(res => {
 
-    ).then(res => res.text()).then(res => {
+        if (!res[0]) {
+            return res;
+        }
         var actual = cartCount.innerText;
         if (actual == "") {
             actual = 0;
         }
-        cartCount.innerText = parseInt(actual) + parseInt(cantidad);
+        var amount = parseInt(res[1]);
+        cartCount.innerText = parseInt(actual) + amount;
 
-        animacion();
-        return console.log(res)
+        if (amount > 0) {
+            animacion();
+        }
+        return res;
     });
 
 

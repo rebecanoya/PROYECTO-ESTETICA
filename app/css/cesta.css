@@ -1,7 +1,9 @@
-header {
-    outline: 0.05em solid black;
+body>header {
+
+    outline: 0.15em solid black;
+
     & a {
-        color: black;
+        color: black !important;
     }
 }
 
@@ -20,14 +22,16 @@ main {
 }
 
 form {
-    width: 100%; /* Ajustar el ancho del formulario */
+    width: 100%;
+    /* Ajustar el ancho del formulario */
     align-self: center;
     display: flex;
     align-items: flex-end;
     justify-content: center;
     flex-wrap: wrap;
     padding: 2em;
-    margin: 0 auto; /* Centrar el formulario horizontalmente */
+    margin: 0 auto;
+    /* Centrar el formulario horizontalmente */
 }
 
 .container {
@@ -45,15 +49,13 @@ form {
 .products,
 .summary {
     padding: 2em;
-
-
 }
 
 .summary {
 
     display: flex;
     flex-direction: column;
-    gap: 1em;
+    gap: 2em;
 
 }
 
@@ -62,13 +64,22 @@ form {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 1em;
 
+    &>button {
+        outline: 0.05em solid black;
+        font-size: 1em;
+    }
+
+    & a {
+        font-size: 0.75em;
+    }
 }
 
 .products {
     display: flex;
     flex-direction: column;
-    gap: 1em;
+    gap: 2em;
 
 }
 
@@ -90,35 +101,13 @@ form {
     text-align: center;
 }
 
-.checkout-btn,
-.continue-shopping-btn {
-    display: block;
-    width: 75%;
-    padding: 1em;
-    background-color: black;
-    color: #fff !important; /* Forzar color blanco en el texto del botón */
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-bottom: 10px;
-    transition: background-color 0.3s;
-    text-decoration: none;
-}
-.checkout-btn a,
-.continue-shopping-btn a {
-    color: #fff !important; /* Asegura que el texto del enlace sea blanco */
-    text-decoration: none;  /* Elimina el subrayado del enlace */
-}
-
-.checkout-btn:hover,
-.continue-shopping-btn:hover {
-    background-color: black;
-}
 
 .product-titles {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     font-weight: bold;
+    padding-bottom: 0.5em;
+    border-bottom: 1px solid #ddd;
 }
 
 .title {
@@ -129,15 +118,14 @@ form {
 .product {
     display: flex;
     flex-direction: column;
-    border-bottom: 1px solid #ddd;
     gap: 1em;
 }
 
 .product-info {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
     align-items: center;
     justify-items: center;
+    grid-template-columns: repeat(6, 1fr);
 }
 
 
