@@ -1,3 +1,13 @@
+body {
+    padding: 1em;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
 section[ data-seleccionado="false"] {
 
     display: none;
@@ -7,6 +17,7 @@ section[ data-seleccionado="false"] {
 button[data-titulo-seleccionado="false"] {
 
     color: gray;
+    border-bottom: none;
 
 }
 
@@ -15,8 +26,37 @@ body {
 
 
     & * {
-
         color: black;
-
     }
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 2em;
+}
+
+.buttons button {
+    border-bottom: 1px solid black;
+    border-radius: 0;
+    padding: 0.5em;
+
+
+    &:active {
+        transform: scale(1.05)
+    }
+
+    &:hover {
+        transform: scale(1) !important;
+        color: black;
+    }
+
+    &:focus {
+        outline: none
+    }
+}
+
+td:last-child {
+    vertical-align: middle;
+    text-align: center;
 }

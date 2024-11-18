@@ -6,11 +6,11 @@ if ($sesion->estaLoggeado()) {
     header("Location: index.php");
 }
 
-if (mail("anderfdez0207@gmail.com", "Prueba de mail()", "Este es un correo de prueba.")) {
-    echo "Correo enviado correctamente.";
-} else {
-    echo "Error al enviar el correo.";
-}
+// if (mail("anderfdez0207@gmail.com", "Prueba de mail()", "Este es un correo de prueba.")) {
+//     echo "Correo enviado correctamente.";
+// } else {
+//     echo "Error al enviar el correo.";
+// }
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -61,33 +61,23 @@ if (mail("anderfdez0207@gmail.com", "Prueba de mail()", "Este es un correo de pr
                 if (!$respuesta[0]) {
                     $errorR = $respuesta[1];
                 }
-                if (sendConfirmationEmail($_POST["email"], $confirmationToken)) {
-                    echo "Te hemos enviado un correo de confirmación. Por favor, revisa tu bandeja de entrada.";
-                } else {
-                    echo "Error al enviar el correo de confirmación.";
-                }
+                // if (sendConfirmationEmail($_POST["email"], $confirmationToken)) {
+                //     echo "Te hemos enviado un correo de confirmación. Por favor, revisa tu bandeja de entrada.";
+                // } else {
+                //     echo "Error al enviar el correo de confirmación.";
+                // }
+            }
+        } elseif (isset($_POST["login"])) {
+            if ($sesion->login($_POST["email"], $_POST["password"])) {
+                header("Location: index.php");
+            } else {
+                $errorL = "No se pudo iniciar sesion";
             }
         }
     }
     ?>
 
     <main>
-        <div class="container">
-            <h2>Iniciar Sesion</h2>
-            <form action="" method="post">
-                <div class="grupo-form">
-                    <input type="email" name="email" id="email" placeholder="correo electronico">
-                    <input type="password" name="password" id="password" placeholder="contraseña">
-                </div>
-                <button type="submit" name="login" class="login">Iniciar</button>
-            </form>
-            <?php
-            if (isset($errorL)) {
-                echo $errorL;
-            }
-            ?>
-            <!-- <a href="">¿Olvidaste tu contraseña?</a> -->
-        </div>
         <div class="container">
             <h2>Regístrate</h2>
             <form action="" method="post">
@@ -98,6 +88,21 @@ if (mail("anderfdez0207@gmail.com", "Prueba de mail()", "Este es un correo de pr
                 </div>
                 <button type="submit" name="register" class="register">Crear cuenta</button>
             </form>
+        </div>
+        <div class="container">
+            <h2>Iniciar Sesion</h2>
+            <form action="" method="post">
+                <div class="grupo-form">
+                    <input type="email" name="email" id="email" placeholder="Correo electronico">
+                    <input type="password" name="password" id="password" placeholder="Contraseña">
+                </div>
+                <button type="submit" name="login" class="login">Iniciar</button>
+            </form>
+            <?php
+            if (isset($errorL)) {
+                echo $errorL;
+            }
+            ?>
         </div>
     </main>
 

@@ -365,20 +365,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
 </head>
 
-
 <body>
 
     <header>
-        <a href="../index.php" class="fa-solid fa-arrow-left iconButton"></a>
+        <a href="index.php" class="fa-solid fa-arrow-left iconButton"></a>
     </header>
-
-
 
     <main class="container">
 
         <h2 class="container text-center">Panel de administración</h2>
 
-        <nav class="container text-center">
+        <nav class="container text-center buttons">
 
             <button>Lineas</button>
             <button>Productos</button>
