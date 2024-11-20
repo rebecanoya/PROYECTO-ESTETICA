@@ -31,38 +31,65 @@ if ($sesion->estaLoggeado()) {
 $productos = [];
 $subtotal = 0;
 
+$allAvaliable = true;
+
 // Cargar productos en la sesión si existen en el carrito
 if (isset($_SESSION["Carrito"]) && count($_SESSION["Carrito"]) > 0) {
-    $sql = "SELECT Nombre, Precio, ID FROM productos WHERE ID IN (" . implode(',', array_keys($_SESSION["Carrito"])) . ")";
+    $sql = "SELECT Nombre, Precio, ID, Stock FROM productos WHERE ID IN (" . implode(',', array_keys($_SESSION["Carrito"])) . ")";
     $productos = $BBDD->select($sql);
 }
 
 // Verificar envío del formulario "Tramitar Pedido"
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tramitarPedido']) && isset($_SESSION["Carrito"]) && !empty($_SESSION["Carrito"])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tramitarPedido']) && isset($_SESSION["Carrito"]) && !empty($_SESSION["Carrito"]) && $sesion->estaLoggeado()) {
     // Insertar el pedido en la tabla `pedidos`
 
     $subtotal = isset($_POST['subtotal']) ? floatval($_POST['subtotal']) : 0.0;
     $sql = "INSERT INTO pedidos (ID_Cliente, Precio) VALUES (:usuario, :precio)";
+
     $params = ["usuario" => $_SESSION["id"], "precio" => $subtotal];
 
     $BBDD->pdo->beginTransaction();
-    // Ejecutar y verificar la inserción    
-    if ($BBDD->execute($sql, $params)) {
-        $pedidoId = $BBDD->lastId();
-        // Insertar los detalles del pedido en `detalles_pedido`
-        foreach ($_SESSION["Carrito"] as $id => $value) {
-            $sql = "INSERT INTO detalles_pedido (IDPedido, IDProducto, Cantidad) VALUES (:pedidoId, :producto, :cantidad)";
-            $params = ["cantidad" => $value, "pedidoId" => $pedidoId, "producto" => $id];
-            $BBDD->execute($sql, $params);
-        }
 
-        $BBDD->pdo->commit();
-        unset($_SESSION["Carrito"]); // Limpieza del carrito
-        header("Location: NuestrosProductos.php"); // Redirección
-        exit(); // Termina la ejecución después de la redirección
-    } else {
+    $carrito = $_SESSION["Carrito"];
+
+    try {
+        // Ejecutar y verificar la inserción    
+        if ($BBDD->execute($sql, $params)) {
+            $pedidoId = $BBDD->lastId();
+            // Insertar los detalles del pedido en `detalles_pedido`
+            foreach ($_SESSION["Carrito"] as $id => $value) {
+                $sql = "SELECT stock from productos where id = :id";
+                $params = ["id" => $id];
+                $stock = $BBDD->select($sql, $params)[0]["stock"];
+
+                if ($stock === 0) {
+                    throw new Exception("No hay stock disponible");
+                }
+
+                $sql = "UPDATE productos set stock = stock - :cantidad where id = :id";
+                $params = ["id" => $id, "cantidad" => $value];
+                $BBDD->execute($sql, $params);
+
+
+                $sql = "INSERT INTO detalles_pedido (IDPedido, IDProducto, Cantidad) VALUES (:pedidoId, :producto, :cantidad)";
+                $params = ["cantidad" => $value, "pedidoId" => $pedidoId, "producto" => $id];
+                $BBDD->execute($sql, $params);
+
+                unset($carrito[$id]); // Limpieza del carrito
+            }
+
+            $BBDD->pdo->commit();
+
+            $_SESSION["Carrito"] = $carrito;
+
+            header("Location: NuestrosProductos.php"); // Redirección
+            exit(); // Termina la ejecución después de la redirección
+        } else {
+            $BBDD->pdo->rollBack();
+            echo "Error al procesar el pedido";
+        }
+    } catch (\Throwable $th) {
         $BBDD->pdo->rollBack();
-        echo "Error al procesar el pedido";
     }
 }
 ?>
@@ -104,20 +131,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tramitarPedido']) && 
                             $idProducto = $producto["ID"];
                             $nombreProducto = $producto["Nombre"];
                             $precioProducto = $producto["Precio"];
+                            $stock = $producto["Stock"];
                             $cantidadProducto = $_SESSION["Carrito"][$idProducto];
                             $subtotalProducto = $precioProducto * $cantidadProducto;
-                            $subtotal += $subtotalProducto;
+                            if ($stock > 0) {
+                                $subtotal += $subtotalProducto;
+                            } else {
+                                $allAvaliable = false;
+                                $cantidadProducto = 0;
+                                $subtotalProducto = 0;
+                            }
                         ?>
                             <div class="product-info">
                                 <span class="product-img"><img src="img/productos/<?php echo $idProducto ?>.png" width="100px" alt=""></span>
                                 <span class="product-name"><?php echo $nombreProducto ?></span>
                                 <span class="product-price"><?php echo $precioProducto ?>€</span>
                                 <div class="form-container">
-                                    <div class="cantidad">
-                                        <button type="button" class="menos" onclick="actualizarCarrito(event,-1,<?php echo $idProducto ?>,'reducir')">-</button>
-                                        <input type="number" id="<?php echo $idProducto ?>" name="cantidad[<?php echo $idProducto ?>]" value="<?php echo $cantidadProducto ?>">
-                                        <button type="button" class="mas" onclick="actualizarCarrito(event,1,<?php echo $idProducto ?>,'add')">+</button>
-                                    </div>
+                                    <?php
+                                    if ($stock > 0) {
+                                    ?>
+                                        <div class="cantidad">
+                                            <button type="button" class="menos" onclick="actualizarCarrito(event,-1,<?php echo $idProducto ?>,'reducir')">-</button>
+                                            <input type="number" id="<?php echo $idProducto ?>" name="cantidad[<?php echo $idProducto ?>]" value="<?php echo $cantidadProducto ?>">
+                                            <button type="button" class="mas" onclick="actualizarCarrito(event,1,<?php echo $idProducto ?>,'add')">+</button>
+                                        </div>
+                                    <?php
+                                    } else {
+                                    ?>
+                                        Sin stock
+                                    <?php
+                                    }
+                                    ?>
                                 </div>
                                 <span class="product-subtotal" id="precio<?php echo $idProducto ?>" data-precioBase="<?php echo $precioProducto ?>"><?php echo $subtotalProducto ?>€</span>
                                 <i class="fa-solid fa-trash-can iconButton" onclick="eliminarProducto(<?php echo $idProducto ?>);"></i>
@@ -133,7 +177,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tramitarPedido']) && 
                         <p id="subtotalImpuestos">Total incluyendo impuestos <?php echo $subtotal ?>€</p>
                     </div>
                     <div class="opciones">
-                        <button type="submit" name="tramitarPedido" class="button-tramitar-pedido">Tramitar Pedido</button>
+                        <?php
+                        if ($allAvaliable) {
+                        ?>
+                            <button type="submit" name="tramitarPedido" class="button-tramitar-pedido">Tramitar Pedido</button>
+                        <?php
+                        } else {
+                        ?>
+                            Hay un producto no disponible. Eliminelo para continuar.
+                        <?php
+                        }
+                        ?>
                         <a href="NuestrosProductos.php" class="volverCompra">Seguir Comprando</a>
                     </div>
                 </div>

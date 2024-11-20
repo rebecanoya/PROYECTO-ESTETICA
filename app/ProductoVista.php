@@ -70,21 +70,32 @@ if ($pedirBBDD) {
                             <p class="descripcion"><?php echo $producto["Descripcion"] ?></p>
                             <p class="precio"><?php echo $producto["Precio"] ?>€ / Unidad</p>
                         </div>
-                        <div class="product-buttons">
-                            <div class="container">
-                                <div class="form-container">
-                                    <div class="cantidad">
-                                        <button class="menos" onclick="actualizarCantidad(event,-1,<?php echo $id ?>)">-</button>
-                                        <input type="number" id="<?php echo $id ?>" name="cantidad" value="1">
-                                        <button class="mas" onclick="actualizarCantidad(event,1,<?php echo $id ?>)">+</button>
+                        <?php
+                        if ($producto["Stock"] > 0) {
+                        ?>
+                            <div class="product-buttons">
+                                <div class="container">
+                                    <div class="form-container">
+                                        <div class="cantidad">
+                                            <button class="menos" onclick="actualizarCantidad(event,-1,<?php echo $id ?>)">-</button>
+                                            <input type="number" id="<?php echo $id ?>" name="cantidad" value="1">
+                                            <button class="mas" onclick="actualizarCantidad(event,1,<?php echo $id ?>)">+</button>
+                                        </div>
                                     </div>
                                 </div>
+                                <div class="botonesProd">
+                                    <button type="submit" style="background-color:<?php echo "#" . $color; ?>" class="comprar" id="comprar">Añadir al carrito</button>
+                                    <button type="submit" class="muestra" id="muestra">Solicitar muestra</button>
+
+                                </div> <?php
+                                    } else {
+
+                                        ?>
+                                <p>Sin stock</p>
+                            <?php
+                                    }
+                            ?>
                             </div>
-                            <div class="botonesProd">
-                                <button type="submit" style="background-color:<?php echo "#" . $color; ?>" class="comprar" id="comprar">Añadir al carrito</button>
-                                <button type="submit" class="muestra" id="muestra">Solicitar muestra</button>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

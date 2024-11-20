@@ -42,12 +42,16 @@ if (isset($data) && isset($data["id"]) && isset($data["cantidad"]) && isset($dat
         $stock = $select[0]["Stock"];
         $nuevaCantidadProducto = min($cantidadProducto, $stock);
         //devolver diferencia añadida
+
         $msg = "";
-        if ($nuevaCantidadProducto != $cantidadProducto) {
+        $valid = true;
+
+        if ($nuevaCantidadProducto != $cantidadProducto || $stock == 0 || $nuevaCantidadProducto <= 0) {
+            $valid = false;
             $msg = "No hay suficiente stock para la cantidad solicitada";
         }
 
-        $return = [true, ($cantidad + $nuevaCantidadProducto - $cantidadProducto) * $factor, $msg];
+        $return = [$valid, ($cantidad + $nuevaCantidadProducto - $cantidadProducto) * $factor, $msg];
 
         $cantidadProducto = $nuevaCantidadProducto;
 
