@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tramitarPedido']) && 
                 $params = ["id" => $id];
                 $stock = $BBDD->select($sql, $params)[0]["stock"];
 
-                if ($stock === 0) {
+                if ($stock === 0 || $stock < $value) {
                     throw new Exception("No hay stock disponible");
                 }
 
