@@ -11,7 +11,6 @@ const cartCount = document.getElementById("cartCount");
 async function peticionCarrito(id, cantidad, accion) {
 
     return await fetch("controladorCesta.php", {
-
         method: "POST",
         mode: "cors",
         credentials: "same-origin",

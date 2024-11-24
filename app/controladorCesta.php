@@ -13,6 +13,20 @@ if (isset($data) && isset($data["id"]) && isset($data["cantidad"]) && isset($dat
     $id = $data["id"];
     $accion = $data["accion"];
     $cantidad = $data["cantidad"];
+
+    // comprobar que el producto exista y este activo
+    $sql = "SELECT * from productos where ID=:producto and Activo = 1;";
+    $params = ["producto" => $id];
+    $select = $BBDD->select($sql, $params);
+
+    // limitar al stock
+    $stock = $select[0]["Stock"];
+
+    if ($accion == "stock") {
+        echo json_encode([true, $stock, ""]);
+        exit();
+    }
+
     // comprobar que los valores sean numericos
     if (is_numeric($id) && is_numeric($cantidad)) {
         $cantidadCarrito = 0;
@@ -23,7 +37,7 @@ if (isset($data) && isset($data["id"]) && isset($data["cantidad"]) && isset($dat
         // ejecutar accion segun el valor enviado 
 
         $factor = 1;
-
+        $cantidadProducto = 0;
         if ($accion == "add") {
             $cantidadProducto = $cantidadCarrito + $cantidad;
         } elseif ($accion == "muestra") {
@@ -33,20 +47,13 @@ if (isset($data) && isset($data["id"]) && isset($data["cantidad"]) && isset($dat
             $factor = -1;
         }
 
-        // comprobar que el producto exista y este activo
-        $sql = "SELECT * from productos where ID=:producto and Activo = 1;";
-        $params = ["producto" => $id];
-        $select = $BBDD->select($sql, $params);
-
-        // limitar al stock
-        $stock = $select[0]["Stock"];
         $nuevaCantidadProducto = min($cantidadProducto, $stock);
         //devolver diferencia añadida
 
         $msg = "";
         $valid = true;
 
-        if ($nuevaCantidadProducto != $cantidadProducto || $stock == 0 || $nuevaCantidadProducto <= 0) {
+        if ($stock == 0 || $nuevaCantidadProducto <= 0) {
             $valid = false;
             $msg = "No hay suficiente stock para la cantidad solicitada";
         }

@@ -1,5 +1,11 @@
 <?php
 include 'src/iniciarPHP.php';
+
+$allAvaliable = true;
+$errorMsg;
+
+$IVA = 1.21;
+
 /**
  * Sincronizacion del carrito sesion con el carrito de la base de datos
  *
@@ -27,20 +33,38 @@ if ($sesion->estaLoggeado()) {
             $BBDD->execute($sql, $params);
         }
     }
+} else {
+    $errorMsg = "Es necesario iniciar la sesion.";
 }
 $productos = [];
 $subtotal = 0;
 
-$allAvaliable = true;
 
 // Cargar productos en la sesión si existen en el carrito
 if (isset($_SESSION["Carrito"]) && count($_SESSION["Carrito"]) > 0) {
     $sql = "SELECT Nombre, Precio, ID, Stock FROM productos WHERE ID IN (" . implode(',', array_keys($_SESSION["Carrito"])) . ")";
     $productos = $BBDD->select($sql);
+
+    foreach ($productos as $producto) {
+
+        $idProducto = $producto["ID"];
+        $stock = $producto["Stock"];
+        $cantidadProducto = $_SESSION["Carrito"][$idProducto];
+
+        if ($stock == 0 || $stock < $cantidadProducto) {
+            $allAvaliable = false;
+            $errorMsg = "Hay un error en la cesta.";
+        }
+    }
 }
 
 // Verificar envío del formulario "Tramitar Pedido"
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tramitarPedido']) && isset($_SESSION["Carrito"]) && !empty($_SESSION["Carrito"]) && $sesion->estaLoggeado()) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tramitarPedido']) && isset($_SESSION["Carrito"]) && !empty($_SESSION["Carrito"])) {
+    if (!$sesion->estaLoggeado()) {
+        header("Location: login.php");
+        exit(); // Termina la ejecución después de la redirección
+    }
+
     // Insertar el pedido en la tabla `pedidos`
 
     $subtotal = isset($_POST['subtotal']) ? floatval($_POST['subtotal']) : 0.0;
@@ -118,16 +142,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tramitarPedido']) && 
                 <div class="products">
                     <h2>Productos</h2>
                     <div class="product">
-                        <div class="product-titles">
+                        <div class="product-titles"
+                            <?php if (!$allAvaliable) {
+                                echo 'style = "--columns: 7;"';
+                            } ?>>
                             <span class="title">Foto</span>
                             <span class="title">Producto</span>
                             <span class="title">Precio</span>
                             <span class="title">Cantidad</span>
                             <span class="title">Subtotal</span>
+                            <span class="title"></span>
+                            <?php
+                            if (!$allAvaliable) {
+                            ?>
+                                <span class="title"></span>
+                            <?php
+                            }
+                            ?>
                         </div>
                         <?php
                         $subtotal = 0;
-                        foreach ($productos as $producto):
+                        foreach ($productos as $producto) {
                             $idProducto = $producto["ID"];
                             $nombreProducto = $producto["Nombre"];
                             $precioProducto = $producto["Precio"];
@@ -137,12 +172,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tramitarPedido']) && 
                             if ($stock > 0) {
                                 $subtotal += $subtotalProducto;
                             } else {
-                                $allAvaliable = false;
                                 $cantidadProducto = 0;
                                 $subtotalProducto = 0;
                             }
+
                         ?>
-                            <div class="product-info">
+                            <div class="product-info"
+                                <?php if (!$allAvaliable) {
+                                    echo 'style = "--columns: 7;"';
+                                } ?>>
                                 <span class="product-img"><img src="img/productos/<?php echo $idProducto ?>.png" width="100px" alt=""></span>
                                 <span class="product-name"><?php echo $nombreProducto ?></span>
                                 <span class="product-price"><?php echo $precioProducto ?>€</span>
@@ -151,41 +189,51 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tramitarPedido']) && 
                                     if ($stock > 0) {
                                     ?>
                                         <div class="cantidad">
-                                            <button type="button" class="menos" onclick="actualizarCarrito(event,-1,<?php echo $idProducto ?>,'reducir')">-</button>
+                                            <button type="button" class="menos" onclick="actualizarCarrito(event,-1,<?php echo $idProducto ?>,'reducir',true)">-</button>
                                             <input type="number" id="<?php echo $idProducto ?>" name="cantidad[<?php echo $idProducto ?>]" value="<?php echo $cantidadProducto ?>">
-                                            <button type="button" class="mas" onclick="actualizarCarrito(event,1,<?php echo $idProducto ?>,'add')">+</button>
+                                            <button type="button" class="mas" onclick="actualizarCarrito(event,1,<?php echo $idProducto ?>,'add',true)">+</button>
                                         </div>
                                     <?php
                                     } else {
                                     ?>
-                                        Sin stock
+                                        <div></div>
                                     <?php
                                     }
                                     ?>
                                 </div>
-                                <span class="product-subtotal" id="precio<?php echo $idProducto ?>" data-precioBase="<?php echo $precioProducto ?>"><?php echo $subtotalProducto ?>€</span>
+                                <span class="product-subtotal" id="precio<?php echo $idProducto ?>" data-precioBase="<?php echo $precioProducto ?>"><?php echo number_format($subtotalProducto, 2) ?>€</span>
                                 <i class="fa-solid fa-trash-can iconButton" onclick="eliminarProducto(<?php echo $idProducto ?>);"></i>
+                                <?php
+                                if ($stock == 0) {
+                                ?>
+                                    Sin stock
+                                <?php
+                                } elseif ($stock < $cantidadProducto) {
+
+                                ?>
+                                    No hay suficiente stock.
+                                <?php
+                                }
+                                ?>
                             </div>
-                        <?php endforeach; ?>
+                        <?php } ?>
                     </div>
                 </div>
                 <div class="summary">
                     <h2>Resumen de Compra</h2>
                     <div class="total">
-                        <input type="hidden" name="subtotal" id="subtotalInput" value="<?php echo $subtotal; ?>">
-                        <p id="subtotal">Subtotal <?php echo $subtotal ?>€</p>
-                        <p id="subtotalImpuestos">Total incluyendo impuestos <?php echo $subtotal ?>€</p>
+                        <input type="hidden" name="subtotal" id="subtotalInput" value="<?php echo number_format($subtotal, 2); ?>">
+                        <p id="subtotal">Subtotal <?php echo number_format($subtotal, 2); ?>€</p>
+                        <p id="subtotalImpuestos">Total incluyendo impuestos <?php echo number_format($subtotal * $IVA, 2)  ?>€</p>
                     </div>
                     <div class="opciones">
                         <?php
-                        if ($allAvaliable) {
+                        if ($allAvaliable && !isset($errorMsg)) {
                         ?>
                             <button type="submit" name="tramitarPedido" class="button-tramitar-pedido">Tramitar Pedido</button>
                         <?php
                         } else {
-                        ?>
-                            Hay un producto no disponible. Eliminelo para continuar.
-                        <?php
+                            echo $errorMsg;
                         }
                         ?>
                         <a href="NuestrosProductos.php" class="volverCompra">Seguir Comprando</a>
@@ -228,7 +276,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tramitarPedido']) && 
      * @param   {string}    accion      accion a realizar
      *
      */
-    async function actualizarCarrito(event, cantidad, id, accion) {
+    async function actualizarCarrito(event, cantidad, id, accion, reload = false) {
         var response = await peticionCarrito(id, Math.abs(cantidad), accion);
 
         if (!response[0]) {
@@ -238,6 +286,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tramitarPedido']) && 
         if (actualizarCantidad(event, response[1], id)) {
             actualizarPrecio(id);
             actualizarSubtotal();
+        }
+
+        if (reload) {
+            location.reload();
         }
     }
 
@@ -257,7 +309,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tramitarPedido']) && 
         }
 
         subtotal.innerHTML = `Subtotal ${suma.toFixed(2)}€`;
-        subtotalImpuestos.innerHTML = `Total incluyendo impuestos ${(suma * 1.21).toFixed(2)}€`; // 21% de IVA
+        subtotalImpuestos.innerHTML = `Total incluyendo impuestos ${(suma * <?php echo $IVA ?>).toFixed(2)}€`; // 21% de IVA
         document.getElementById('subtotalInput').value = suma.toFixed(2); // Actualiza el campo oculto
     }
 
@@ -267,12 +319,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tramitarPedido']) && 
      * @param   id        id del producto
      *
      */
-    function eliminarProducto(id) {
-
-        peticionCarrito(id, 0, 'eliminar');
+    async function eliminarProducto(id) {
+        await peticionCarrito(id, 0, 'eliminar');
         location.reload();
-
     }
+
+    document.getElementsByClassName("product-subtotal").forEach(precio => {
+
+    });
 
     document.getElementById("pedidoBtn").addEventListener("click", function() {
         // Crear una instancia del objeto XMLHttpRequest

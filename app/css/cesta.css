@@ -105,7 +105,7 @@ form {
 
 .product-titles {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(var(--columns, 6), 1fr);
     font-weight: bold;
     padding-bottom: 0.5em;
     border-bottom: 1px solid #ddd;
@@ -126,7 +126,8 @@ form {
     display: grid;
     align-items: center;
     justify-items: center;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(var(--columns, 6), 1fr);
+    text-align: center;
 }
 
 
