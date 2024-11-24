@@ -17,14 +17,16 @@ main {
 
         overflow: hidden;
         position: relative;
+        min-height: 400px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
 
         & .banner {
-
             width: 100%;
             animation: zoom-in 1s ease-out;
             vertical-align: bottom;
-
-
         }
 
         & .linea {
@@ -40,6 +42,7 @@ main {
             background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.44));
             gap: 1em;
             color: white;
+            text-align: center;
 
             & .button {
 
@@ -54,13 +57,12 @@ main {
 
         display: grid;
         grid-template-columns: 3fr 2fr;
-        justify-items: center;
         gap: 1em;
         background-color: black;
 
         & .imgContacto {
             width: 100%;
-            height: 350px;
+            max-height: 350px;
         }
 
         & .imgContacto img {
@@ -90,7 +92,7 @@ main {
                 flex-direction: column;
                 gap: 1em;
                 justify-content: center;
-                width: 75%;
+                max-width: 800px;
 
                 & h2 {
                     color: white;
@@ -115,13 +117,16 @@ main {
         padding-bottom: 1em;
 
         & article {
+            position: relative;
 
             & .banner {
 
                 width: 100%;
                 object-fit: cover;
                 height: 500px;
+                height: -webkit-fill-available;
                 object-position: center bottom;
+                vertical-align: bottom;
             }
 
             & .contenido {
@@ -155,23 +160,83 @@ main {
         }
 
     }
+}
 
 
+@media (max-width: 1400px) {
+    main {
+
+        & .containerBanner .banner {
+            width: auto;
+        }
+
+        & .lineas {
+            gap: 0;
+            padding-bottom: 0;
+
+            & article {
+                height: max-content;
+
+                & .banner {
+                    position: absolute;
+                    z-index: -1;
+                }
+
+                & .contenido {
+                    display: flex;
+                    flex-direction: column;
+
+                    & .productos {
+                        margin-top: 0;
+
+                        & .producto {
+
+                            background-color: rgba(255, 255, 255, 0.3);
+                            backdrop-filter: blur(20px);
+
+                            & .opciones {
+                                grid-template-columns: 1fr;
+
+                                & button {
+                                    padding: 1em 0em;
+                                }
+                            }
+
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 
 
+@media (max-width: 768px) {
+    main {
+        & .lineas article .contenido .productos {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        &.bannerNegro .imgContacto {
+            max-height: max-content;
+            min-height: 350px;
+        }
+    }
+}
+
+@media (max-width:480px) {
+    main .lineas article .contenido .productos {
+        grid-template-columns: 1fr;
+    }
 }
 
 @keyframes zoom-in {
 
     0% {
-
         transform: scale(1.1);
     }
 
     100% {
-
         transform: scale(1);
-
-
     }
 }

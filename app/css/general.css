@@ -47,15 +47,12 @@
 
     }
 
-
     & img {
 
         width: 200px;
         aspect-ratio: 1;
         padding-top: 1em;
     }
-
-
 
     & button {
 
@@ -72,7 +69,6 @@
             color: black;
             transform: scale(1) !important;
         }
-
     }
 
     & .compra {

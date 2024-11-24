@@ -107,10 +107,7 @@ nav {
     text-underline-offset: 0.25em;
 
     & * {
-
         padding: 1em;
-
-
     }
 
     & a:hover,
@@ -121,6 +118,19 @@ nav {
 
 
 
+}
+
+@media (max-width: 768px) {
+    body>header .icons {
+        position: relative;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    nav {
+        grid-template-columns: 1fr 1fr;
+    }
 }
 
 @keyframes productAdded {

@@ -2,11 +2,12 @@
 footer {
     background-color: #343a40;
     color: #f8f9fa;
-    padding: 2em 2em;
+    padding: 2em;
     text-align: center;
     display: flex;
     align-items: flex-start;
-    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1em;
 
     & a {
         color: white;
@@ -15,9 +16,10 @@ footer {
 
 .footer-columns {
     display: flex;
-    flex: 1;
+    width: 100%;
     justify-content: space-around;
-    flex-wrap: wrap;
+    gap: 1em;
+    padding: 1em;
 }
 
 .footer-column h3 a:visited {
@@ -26,7 +28,6 @@ footer {
 }
 
 .footer-column {
-    margin: 0 20px;
     text-align: left;
 }
 
@@ -51,20 +52,29 @@ footer {
     transition: color 0.3s;
 }
 
-
 .logo img {
     max-width: 150px;
     height: auto;
     width: 100%;
 }
 
-@media only screen and (max-width: 768px) {
-    .footer-columns {
-        flex-direction: column;
+@media (max-width: 900px) {
+    footer {
+        flex-direction: column-reverse;
         align-items: center;
     }
+}
 
-    .logo {
-        margin-bottom: 10px;
+@media (max-width: 768px) {
+    footer .footer-columns {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 480px) {
+    footer .footer-columns {
+        align-items: left;
+        flex-wrap: nowrap;
+        flex-direction: column;
     }
 }
