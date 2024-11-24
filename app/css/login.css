@@ -79,3 +79,72 @@ main {
     }
 
 }
+
+/* Media Queries para dispositivos móviles */
+@media (max-width: 600px) {
+    body>header {
+        padding: 1em;
+    }
+
+    main {
+        padding: 1em;
+        flex-direction: column;
+        /* Cambia a columna para móviles */
+        align-items: center;
+        /* Centra el contenido */
+    }
+
+    .container {
+        width: 90%;
+        /* Ajusta el ancho de la contenedor */
+        margin: 0 auto;
+        /* Centra el contenedor */
+    }
+
+    .grupo-form {
+        padding: 0.5em;
+        /* Reduce el padding en formularios */
+    }
+
+    .grupo-form input {
+        width: 100%;
+        /* Asegura que los inputs ocupen todo el ancho */
+    }
+
+    .container a {
+        font-size: 0.9em;
+        /* Ajusta el tamaño de la fuente de los enlaces */
+    }
+}
+
+/* Media Queries para tabletas */
+@media (min-width: 601px) and (max-width: 1024px) {
+    main {
+        padding: 2em;
+        /* Ajusta el padding para tabletas */
+        flex-direction: row;
+        /* Mantiene el diseño en fila */
+        justify-content: center;
+        /* Centra el contenido */
+    }
+
+    .container {
+        width: 80%;
+        /* Ajusta el ancho del contenedor */
+    }
+
+    .grupo-form {
+        padding: 1em;
+        /* Mantiene el padding */
+    }
+
+    .grupo-form input {
+        width: 90%;
+        /* Asegura que los inputs ocupen casi todo el ancho */
+    }
+
+    .container a {
+        font-size: 1em;
+        /* Ajusta el tamaño de la fuente de los enlaces */
+    }
+}

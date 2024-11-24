@@ -21,7 +21,7 @@ if ($sesion->estaLoggeado()) {
     <link rel="stylesheet" href="css/general.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/login.css">
-    <script src="https://kit.fontawesome.com/dc2d3ea46f.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/fontawesome.css">
     <title>Pagina inicial</title>
 </head>
 

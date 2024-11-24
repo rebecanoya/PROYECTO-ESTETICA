@@ -358,7 +358,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aromusicoterapia - Administración</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/dc2d3ea46f.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/fontawesome.css">
     <link rel="stylesheet" href="css/general.css">
     <link rel="stylesheet" href="css/admin.css">
     <link rel="icon" href="img/favicon.ico" type="image/x-icon">
