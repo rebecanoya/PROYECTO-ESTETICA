@@ -153,8 +153,8 @@ CREATE TABLE `usuarios` (
   `Password` varchar(128) NOT NULL,
   `rol` int(11) NOT NULL,
   `Activo` tinyint(1) NOT NULL DEFAULT 1
-  `Token` VARCHAR(255) NULL, 
-  `Confirmado` tinyint(1) NOT NULL DEFAULT 0
+  -- `Token` VARCHAR(255) NULL, 
+  -- `Confirmado` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT charset=latin1  COLLATE=latin1_swedish_ci;
 
 --

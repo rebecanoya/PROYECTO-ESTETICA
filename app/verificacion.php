@@ -15,11 +15,9 @@ function sendConfirmationEmail($userEmail, $confirmationToken) {
         </body>
         </html>
     ";
-    $headers = "MIME-Version: 1.0" . "\r\n";
+    $headers = "MIME-Version: 1.0" . "\r\n"; 
     $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-    $headers .= "From: no-reply@aromusicoterapia.iesteis.gal.com" . "\r\n";
-
-    // Usar la función mail() para enviar el correo
+    $headers .= "From: no-reply@aromusicoterapia.iesteis.gal" . "\r\n";
     return mail($to, $subject, $message, $headers);
 }
 ?>

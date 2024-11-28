@@ -1,5 +1,6 @@
 <?php
 include 'src/iniciarPHP.php';
+include 'correo_modelo.php';
 include 'verificacion.php';
 
 if ($sesion->estaLoggeado()) {
@@ -32,6 +33,7 @@ if ($sesion->estaLoggeado()) {
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (isset($_POST["register"])) {
+            $email = $_POST['email'];
             unset($errorR);
             $sameEmail = false;
             $password = hash("sha512", $_POST["password"]);
@@ -40,7 +42,7 @@ if ($sesion->estaLoggeado()) {
             $infoU = $BBDD->select($sql);
 
             foreach ($infoU as $info) {
-                if ($info["Email"] == $_POST["email"] && $info["password"] !=  hash("sha512", "")) {
+                if ($info["Email"] == $email && $info["password"] !=  hash("sha512", "")) {
                     $sameEmail = true;
                     $errorR = "Ya existe una cuenta con este correo";
                 }
@@ -50,22 +52,17 @@ if ($sesion->estaLoggeado()) {
                 // Generar el token de confirmación
                 $confirmationToken = bin2hex(random_bytes(16));
 
-                $sql = "INSERT INTO usuarios (Email, Password, Rol, Activo, token) 
-                        VALUES (:email, :password, 3, 1, :confirmation_token)";
+                $sql = "INSERT INTO usuarios (Email, Password, Rol, Activo) 
+                        VALUES (:email, :password, 3, 1)";
                 $param = [
-                    "email" => $_POST["email"],
+                    "email" => $email,
                     "password" => $password,
-                    "confirmation_token" => $confirmationToken
                 ];
                 $respuesta = $BBDD->execute($sql, $param);
                 if (!$respuesta[0]) {
                     $errorR = $respuesta[1];
                 }
-                // if (sendConfirmationEmail($_POST["email"], $confirmationToken)) {
-                //     echo "Te hemos enviado un correo de confirmación. Por favor, revisa tu bandeja de entrada.";
-                // } else {
-                //     echo "Error al enviar el correo de confirmación.";
-                // }
+                // Correo_modelo::enviar_correo($email, "Registro AroMusicoTerapia", "Gracias por registrarte en Aromusicoterapia");
             }
         } elseif (isset($_POST["login"])) {
             if ($sesion->login($_POST["email"], $_POST["password"])) {
