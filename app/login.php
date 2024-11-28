@@ -1,6 +1,6 @@
 <?php
 include 'src/iniciarPHP.php';
-include 'correo_modelo.php';
+// include 'correo_modelo.php';
 include 'verificacion.php';
 
 if ($sesion->estaLoggeado()) {
