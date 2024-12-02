@@ -49,6 +49,7 @@ article {
     gap: 2em;
     display: grid;
     grid-template-columns: 2fr 1fr;
+    justify-content: center;
 
     & .mapa {
         border-radius: 1em;
@@ -70,6 +71,7 @@ article {
         grid-template-rows: repeat(3, 1fr);
         align-items: center;
         justify-content: center;
+        gap: 1em;
 
         &>* {
             display: flex;
@@ -78,5 +80,23 @@ article {
             align-items: center;
             color: black;
         }
+    }
+}
+
+
+@media (max-width: 1024px) {
+    article {
+        grid-template-columns: 1fr;
+        gap: 1em;
+    }
+
+    .general {
+        gap: 1em;
+    }
+}
+
+@media (max-width: 480px) {
+    .general {
+        width: 90%;
     }
 }

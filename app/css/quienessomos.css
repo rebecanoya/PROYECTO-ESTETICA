@@ -111,84 +111,47 @@ body {
         backdrop-filter: blur(20px);
         border-radius: 0.5em 0.5em 1em 0.5em;
     }
-
 }
 
-/* Modo Móvil */
 @media (max-width: 480px) {
-    body {
-        height: auto;
-        /* Permitir que el cuerpo se ajuste automáticamente */
-    }
-
-    .info {
-        width: 95%;
-        /* Aumentar el ancho en móviles */
-    }
-
-    .info .descripcion h2 {
-        font-size: 1.5em;
-        /* Ajustar el tamaño de la fuente en móviles */
-    }
-
-    .info .quienes .quien {
-        font-size: 0.9em;
-        /* Ajustar el tamaño de la fuente de los textos */
-    }
-
-    .datos .text-container {
-        padding: 0.5em;
-        /* Reducir el padding */
-    }
 
     .datos .button-container {
         grid-template-columns: 1fr;
-        /* Un botón por fila */
     }
 }
 
-/* Modo Tablet */
-@media (min-width: 480px) and (max-width: 1024px) {
-    body {
-        padding: 0;
-        /* Asegúrate de que no haya padding en el body */
-    }
+@media (max-width: 1024px) {
 
     .info {
         width: 90%;
-        /* Aumentar el ancho en tabletas */
         grid-template-columns: 1fr;
-        /* Cambiar a una sola columna */
-        padding: 1em;
-        /* Agregar padding para evitar que el contenido toque los bordes */
-    }
-
-    .info .descripcion {
-        padding: 1em;
-        /* Ajustar el padding */
-    }
-
-    .info .quienes {
-        padding: 1em;
-        /* Ajustar el padding */
-    }
-
-    .info .imagenes {
-        max-height: 200px;
-        /* Ajustar la altura máxima de las imágenes */
-        margin: 0 auto;
-        /* Centrar las imágenes */
-    }
-
-    .datos {
         gap: 1em;
-        /* Aumentar el espacio entre elementos para mejor separación */
+
+        & .descripcion {
+            gap: 1em;
+
+        }
     }
 
     .datos .button-container {
         grid-template-columns: repeat(2, 1fr);
-        /* Dos botones por fila */
-        gap: 1em;
-        /* Aumentar el espacio entre botones */
+    }
+
+    & .datos {
+
+        & .button-container {
+
+            & button {
+
+                &:last-child {
+                    border-radius: 0.5em 0.5em 0.5em 0.5em;
+                }
+            }
+
+        }
+
+        & .text-container {
+            border-radius: 0.5em 0.5em 1em 1em;
+        }
     }
 }

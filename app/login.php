@@ -93,13 +93,13 @@ if ($sesion->estaLoggeado()) {
                     <input type="email" name="email" id="email" placeholder="Correo electronico">
                     <input type="password" name="password" id="password" placeholder="Contraseña">
                 </div>
+                <?php
+                if (isset($errorL)) {
+                    echo $errorL;
+                }
+                ?>
                 <button type="submit" name="login" class="login">Iniciar</button>
             </form>
-            <?php
-            if (isset($errorL)) {
-                echo $errorL;
-            }
-            ?>
         </div>
     </main>
 

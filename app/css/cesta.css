@@ -120,6 +120,11 @@ form {
     display: flex;
     flex-direction: column;
     gap: 1em;
+    overflow: auto;
+
+    &>div {
+        min-width: 625px;
+    }
 }
 
 .product-info {
@@ -181,4 +186,28 @@ form {
     }
 
 
+}
+
+@media (max-width: 1400px) {
+    .container {
+        width: 100%;
+        display: block;
+    }
+
+}
+
+@media (max-width: 1024px) {
+
+    main {
+        padding: 0;
+    }
+
+    form {
+        padding: 0;
+    }
+
+    .container {
+        width: 100%;
+        box-shadow: 0;
+    }
 }

@@ -92,8 +92,6 @@ aside {
     }
 }
 
-
-
 button {
     background-color: rgba(255, 255, 255, 0.3);
     backdrop-filter: blur(20px);
@@ -104,5 +102,50 @@ button {
 
     &:last-child {
         border-radius: 0.5em 0.5em 1em 0.5em;
+    }
+}
+
+@media (max-width: 1400px) {
+    .content {
+        &>div {
+            width: 90%;
+        }
+    }
+}
+
+@media (max-width: 1024px) {
+    .content {
+
+        &>div {
+            display: flex;
+            flex-direction: column-reverse;
+            gap: 1em;
+        }
+    }
+
+    button {
+
+        &:first-child {
+            border-radius: 1em 1em 0.5em 0.5em;
+        }
+
+        &:last-child {
+            border-radius: 0.5em;
+        }
+    }
+
+    article {
+
+        section {
+
+            .entradaCompleta {
+                grid-template-columns: 1fr;
+
+                & img {
+                    max-width: auto;
+                    justify-self: end;
+                }
+            }
+        }
     }
 }

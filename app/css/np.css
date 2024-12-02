@@ -45,7 +45,7 @@ article {
 .lineas-cont {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 4em;
+    gap: 2em;
 
 
 
@@ -116,5 +116,54 @@ article {
     100% {
         opacity: 0;
         display: none;
+    }
+}
+
+@media (max-width: 1400px) {
+    main {
+        & .main-container {
+            width: 90%;
+        }
+    }
+}
+
+
+@media (max-width: 1124px) {
+
+    .productos-cont {
+
+        grid-template-columns: repeat(4, 1fr);
+
+    }
+}
+
+@media (max-width: 900px) {
+
+    .productos-cont {
+
+        grid-template-columns: repeat(3, 1fr);
+
+    }
+}
+
+@media (max-width: 725px) {
+
+    .productos-cont {
+
+        grid-template-columns: repeat(2, 1fr);
+
+    }
+
+    .lineas-cont {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 505px) {
+
+    .productos-cont {
+
+        grid-template-columns: 1fr;
+
     }
 }
