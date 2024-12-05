@@ -1,5 +1,8 @@
 <?php
 include 'src/iniciarPHP.php';
+// include 'correo_modelo.php';
+
+// $correo = new Correo_modelo();
 
 $allAvaliable = true;
 $errorMsg;
@@ -98,6 +101,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tramitarPedido']) && 
                 $sql = "INSERT INTO detalles_pedido (IDPedido, IDProducto, Cantidad) VALUES (:pedidoId, :producto, :cantidad)";
                 $params = ["cantidad" => $value, "pedidoId" => $pedidoId, "producto" => $id];
                 $BBDD->execute($sql, $params);
+
+                // $correo->enviar_correo($email, "Registro AroMusicoTerapia", "Gracias por registrarte en Aromusicoterapia");
 
                 unset($carrito[$id]); // Limpieza del carrito
             }
