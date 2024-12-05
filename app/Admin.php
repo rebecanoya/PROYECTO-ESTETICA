@@ -380,6 +380,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <button>Lineas</button>
             <button>Productos</button>
             <button>Usuarios</button>
+            <button>Pedidos</button>
 
         </nav>
 
@@ -666,6 +667,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 </button>
                             </td>";
                         echo "</tr>";
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </section>
+        <section>
+            <h2>Pedidos</h2>
+            <table id="usuarios" class="table table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>ID Cliente</th>
+                        <th>Precio</th>
+                        <th>Fecha</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $sql = "SELECT * from pedidos";
+                    $pedidos = $BBDD->select($sql);
+                    /**
+                     * Rellenamos la tabla de los pedidos con la información obtenida en la consulta anterior
+                     */
+                    foreach ($pedidos as $pedido) {
+                        echo "<tr>";
+                        echo "<td>" . $pedido["ID"] . "</td>";
+                        echo "<td>" . $pedido["ID_Cliente"] . "</td>";
+                        echo "<td>" . $pedido["Precio"] . "</td>";
+                        echo "<td>" . $pedido["Fecha"] . "</td>";
                     }
                     ?>
                 </tbody>
