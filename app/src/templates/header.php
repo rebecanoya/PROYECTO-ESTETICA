@@ -5,7 +5,7 @@
      * mostramos el icono que permite acceder a la pagina de administracion   
      */
     if ($sesion->estaLoggeado()) {
-        if ($_SESSION["rol"] == 1) {
+        if ($_SESSION["rol"] == 1 || $_SESSION["rol"] == 2) {
 
     ?>
             <div class="iconAdmin">
@@ -38,7 +38,7 @@
         <?php
         }
         ?>
-        
+
 
         <a href="Cesta.php" class=" fa-solid fa-cart-shopping iconButton">
             <?php

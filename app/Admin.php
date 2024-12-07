@@ -4,7 +4,7 @@ include 'src/iniciarPHP.php';
 /**
  * Comprobamos que el usuario que intenta acceder a la pagina admin posee el rol de admin
  */
-if (!isset($_SESSION["rol"]) || $_SESSION["rol"] !== 1) {
+if (!isset($_SESSION["rol"]) || ($_SESSION["rol"] !== 1 && $_SESSION["rol"] !== 2)) {
     header("Location: index.php");
 }
 /**
@@ -379,7 +379,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <button>Lineas</button>
             <button>Productos</button>
-            <button>Usuarios</button>
+            <?php
+            if ($_SESSION["rol"] == 1) {
+            ?>
+                <button>Usuarios</button>
+            <?php
+            }
+            ?>
             <button>Pedidos</button>
 
         </nav>
@@ -574,104 +580,111 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </table>
         </section>
 
-        <section>
-            <h2>Usuarios</h2>
-            <div id="usuarioMessage"></div>
-            <form id="usuarioForm" method="post">
-                <input type="hidden" id="idU" name="idU" value=0 class="form-control">
-                <div class="form-group">
-                    <label for="correo">Correo:</label>
-                    <input type="email" id="email" name="email" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="contrasena">Contraseña:</label>
-                    <input type="password" id="password" name="password" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="contrasena">Repite la contraseña:</label>
-                    <input type="password" id="passwordCheck" name="passwordCheck" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="rol">Rol:</label>
-                    <input id="rol" type="radio" name="rol" value="1" required>
-                    Administrador
-                    <input type="radio" name="rol" value="2" required>
-                    Alumno
-                    <input type="radio" name="rol" value="3" required>
-                    Cliente
-                    </label>
-                </div>
-                <div class="form-group">
-                    <label for="activo">Activo:</label>
-                    <input id="activo" type="radio" name="activoU" value="1" required>
-                    Si
-                    <input id="activo" type="radio" name="activoU" value="2" required>
-                    No
+        <?php
+        if ($_SESSION["rol"] == 1) {
+        ?>
+            <section>
+                <h2>Usuarios</h2>
+                <div id="usuarioMessage"></div>
+                <form id="usuarioForm" method="post">
+                    <input type="hidden" id="idU" name="idU" value=0 class="form-control">
+                    <div class="form-group">
+                        <label for="correo">Correo:</label>
+                        <input type="email" id="email" name="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contrasena">Contraseña:</label>
+                        <input type="password" id="password" name="password" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contrasena">Repite la contraseña:</label>
+                        <input type="password" id="passwordCheck" name="passwordCheck" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="rol">Rol:</label>
+                        <input id="rol" type="radio" name="rol" value="1" required>
+                        Administrador
+                        <input type="radio" name="rol" value="2" required>
+                        Alumno
+                        <input type="radio" name="rol" value="3" required>
+                        Cliente
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="activo">Activo:</label>
+                        <input id="activo" type="radio" name="activoU" value="1" required>
+                        Si
+                        <input id="activo" type="radio" name="activoU" value="2" required>
+                        No
 
-                    </label>
-                </div>
-                <?php
-                if (isset($errorR)) {
-                    echo "<div>" . $errorR . "</div>";
-                }
-                ?>
-                <button type="submit" id="usuarioActionButton" name="usuario" class="btn btn-dark mb-3">Agregar</button>
-                <button type="submit" id="usuarioModButton" name="usuarioMod" class="btn btn-dark mb-3" disabled>Modificar</button>
-                <button type="submit" id="resetUsuario" name="resetUsuario" class="btn btn-dark mb-3" disabled>Resetear</button>
-                <button type="button" id="limpiar" name="limpiar" class="btn btn-dark mb-3" onclick=limpiarFormularioUsuario()>Limpiar</button>
-            </form>
-
-            <table id="usuarios" class="table table-bordered">
-                <thead class="thead-dark">
-                    <tr>
-                        <th>ID</th>
-                        <th>Correo</th>
-                        <th>Rol</th>
-                        <th>Activo</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
+                        </label>
+                    </div>
                     <?php
-                    $sql = "SELECT * from usuarios";
-                    $usuarios = $BBDD->select($sql);
-                    /**
-                     * Rellenamos la tabla de los productos con la información obtenida en la consulta anterior
-                     */
-                    foreach ($usuarios as $usuario) {
-                        echo "<tr>";
-                        echo "<td>" . $usuario["ID"] . "</td>";
-                        echo "<td>" . $usuario["Email"] . "</td>";
-                        switch ($usuario["rol"]) {
-                            case 1:
-                                echo "<td>Admin</td>";
-                                break;
-                            case 2:
-                                echo "<td>Alumno</td>";
-                                break;
-                            case 3:
-                                echo "<td>Cliente</td>";
-                                break;
-                        }
-                        switch ($usuario["Activo"]) {
-                            case 1:
-                                echo "<td>Si</td>";
-                                break;
-                            case 2:
-                                echo "<td>No</td>";
-                                break;
-                        }
-                        echo "<td>
+                    if (isset($errorR)) {
+                        echo "<div>" . $errorR . "</div>";
+                    }
+                    ?>
+                    <button type="submit" id="usuarioActionButton" name="usuario" class="btn btn-dark mb-3">Agregar</button>
+                    <button type="submit" id="usuarioModButton" name="usuarioMod" class="btn btn-dark mb-3" disabled>Modificar</button>
+                    <button type="submit" id="resetUsuario" name="resetUsuario" class="btn btn-dark mb-3" disabled>Resetear</button>
+                    <button type="button" id="limpiar" name="limpiar" class="btn btn-dark mb-3" onclick=limpiarFormularioUsuario()>Limpiar</button>
+                </form>
+
+                <table id="usuarios" class="table table-bordered">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Correo</th>
+                            <th>Rol</th>
+                            <th>Activo</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $sql = "SELECT * from usuarios";
+                        $usuarios = $BBDD->select($sql);
+                        /**
+                         * Rellenamos la tabla de los productos con la información obtenida en la consulta anterior
+                         */
+                        foreach ($usuarios as $usuario) {
+                            echo "<tr>";
+                            echo "<td>" . $usuario["ID"] . "</td>";
+                            echo "<td>" . $usuario["Email"] . "</td>";
+                            switch ($usuario["rol"]) {
+                                case 1:
+                                    echo "<td>Admin</td>";
+                                    break;
+                                case 2:
+                                    echo "<td>Alumno</td>";
+                                    break;
+                                case 3:
+                                    echo "<td>Cliente</td>";
+                                    break;
+                            }
+                            switch ($usuario["Activo"]) {
+                                case 1:
+                                    echo "<td>Si</td>";
+                                    break;
+                                case 2:
+                                    echo "<td>No</td>";
+                                    break;
+                            }
+                            echo "<td>
                                 <button onclick=llenarFormularioProducto()>
                                     <i class='fas fa-pencil-alt'></i>
                                 </button>
                             </td>";
-                        echo "</tr>";
-                    }
-                    ?>
-                </tbody>
-            </table>
-        </section>
+                            echo "</tr>";
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </section>
+
+        <?php
+        }
+        ?>
         <section>
             <h2>Pedidos</h2>
             <table id="usuarios" class="table table-bordered">
