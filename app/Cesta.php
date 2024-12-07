@@ -97,6 +97,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tramitarPedido']) && 
                 $params = ["id" => $id, "cantidad" => $value];
                 $BBDD->execute($sql, $params);
 
+                $sql = "UPDATE carrito set Cantidad = 0 where idusuario = :id";
+                $params = ["id" => $_SESSION["id"]];
+                $BBDD->execute($sql, $params);
 
                 $sql = "INSERT INTO detalles_pedido (IDPedido, IDProducto, Cantidad) VALUES (:pedidoId, :producto, :cantidad)";
                 $params = ["cantidad" => $value, "pedidoId" => $pedidoId, "producto" => $id];

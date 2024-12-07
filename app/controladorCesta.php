@@ -84,7 +84,8 @@ if (isset($data) && isset($data["id"]) && isset($data["cantidad"]) && isset($dat
                 $sql = "SELECT * from carrito where IDUsuario=:id and IDProducto=:producto";
                 $params = ["id" => $_SESSION["id"], "producto" => $id];
                 $select = $BBDD->select($sql, $params);
-                if ($select[0] === false) {
+
+                if (isset($select[0]) && $select[0] === false) {
                     return;
                 }
                 // insertar el producto si no existe o actualizar si existe
