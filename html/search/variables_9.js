@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['tawk_5fapi_0',['Tawk_API',['../chat_8js.html#acb501f19cd589469c9e827f3777ad013',1,'chat.js']]],
-  ['tawk_5floadstart_1',['Tawk_LoadStart',['../chat_8js.html#ae3ee124d16ceaf773fa8946b5cdfcc4a',1,'chat.js']]],
-  ['try_2',['try',['../bd_8php.html#abe4cc9788f52e49485473dc699537388',1,'bd.php']]]
+  ['nombre_0',['Nombre',['../linea_8php.html#a79257de28e0d25f2937e04fec0c154fe',1,'linea.php']]],
+  ['nulla_1',['nulla',['../_quienes_somos_8php.html#a49ad2f42c71ccf510280112aafaf8481',1,'QuienesSomos.php']]],
+  ['numquam_2',['numquam',['../_quienes_somos_8php.html#aec70abc81f3309e53a85a38b2e7bfaa8',1,'QuienesSomos.php']]]
 ];

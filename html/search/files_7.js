@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['linea_2ephp_0',['linea.php',['../linea_8php.html',1,'']]],
-  ['lineas_2ejs_1',['lineas.js',['../lineas_8js.html',1,'']]],
-  ['login_2ephp_2',['login.php',['../login_8php.html',1,'']]],
-  ['logout_2ephp_3',['logOut.php',['../log_out_8php.html',1,'']]]
+  ['index_2ephp_0',['index.php',['../index_8php.html',1,'']]],
+  ['iniciarphp_2ephp_1',['iniciarPHP.php',['../iniciar_p_h_p_8php.html',1,'']]],
+  ['installed_2ephp_2',['installed.php',['../installed_8php.html',1,'']]],
+  ['installedversions_2ephp_3',['InstalledVersions.php',['../_installed_versions_8php.html',1,'']]]
 ];

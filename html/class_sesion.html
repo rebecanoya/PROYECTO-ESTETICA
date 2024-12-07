@@ -75,19 +75,25 @@ $(function() {
   <div class="headertitle"><div class="title">Referencia de la Clase Sesion</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Clase que controla la sesion de usuarios.  
+ <a href="class_sesion.html#details">Más...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Métodos públicos</h2></td></tr>
 <tr class="memitem:a9a41889711d2814f9cc212f47b0d7ca3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sesion.html#a9a41889711d2814f9cc212f47b0d7ca3">__construct</a> ()</td></tr>
 <tr class="separator:a9a41889711d2814f9cc212f47b0d7ca3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2f1ba7c49a515d3a7e860da4d399840e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sesion.html#a2f1ba7c49a515d3a7e860da4d399840e">login</a> ($email, $password)</td></tr>
-<tr class="separator:a2f1ba7c49a515d3a7e860da4d399840e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abef200ffa7ef1650ed2f7e6367deef9c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sesion.html#abef200ffa7ef1650ed2f7e6367deef9c">login</a> (string $email, string $password)</td></tr>
+<tr class="separator:abef200ffa7ef1650ed2f7e6367deef9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af76d6a0fcaa2b8766af94f39f05e1f57"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sesion.html#af76d6a0fcaa2b8766af94f39f05e1f57">logout</a> ()</td></tr>
 <tr class="separator:af76d6a0fcaa2b8766af94f39f05e1f57"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2bd225d36cd743a8c7cc16cdebeefd3c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sesion.html#a2bd225d36cd743a8c7cc16cdebeefd3c">estaLoggeado</a> ()</td></tr>
 <tr class="separator:a2bd225d36cd743a8c7cc16cdebeefd3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Documentación del constructor y destructor</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Descripción detallada</h2>
+<div class="textblock"><p>Clase que controla la sesion de usuarios. </p>
+<dl class="section author"><dt>Autor</dt><dd>Rebeca Noya Fernández </dd></dl>
+</div><h2 class="groupheader">Documentación del constructor y destructor</h2>
 <a id="a9a41889711d2814f9cc212f47b0d7ca3" name="a9a41889711d2814f9cc212f47b0d7ca3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9a41889711d2814f9cc212f47b0d7ca3">&#9670;&#160;</a></span>__construct()</h2>
 
@@ -102,30 +108,33 @@ Métodos públicos</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<div class="fragment"><div class="line"><span class="lineno">   12</span>    {</div>
-<div class="line"><span class="lineno">   13</span>        <span class="keywordflow">if</span> (session_status() != PHP_SESSION_ACTIVE) {</div>
-<div class="line"><span class="lineno">   14</span>            session_start();</div>
-<div class="line"><span class="lineno">   15</span>        }</div>
-<div class="line"><span class="lineno">   16</span>        $issetSesion = isset($_SESSION[<span class="stringliteral">&quot;token&quot;</span>]);</div>
-<div class="line"><span class="lineno">   17</span>        $issetCookie = isset($_COOKIE[<span class="stringliteral">&quot;token&quot;</span>]);</div>
-<div class="line"><span class="lineno">   18</span>        <span class="keywordflow">if</span> ($this-&gt;<a class="code hl_function" href="class_sesion.html#a2bd225d36cd743a8c7cc16cdebeefd3c">estaLoggeado</a>()) {</div>
-<div class="line"><span class="lineno">   19</span> </div>
-<div class="line"><span class="lineno">   20</span>            <span class="keywordflow">if</span> ($issetSesion &amp;&amp; $issetCookie) {</div>
-<div class="line"><span class="lineno">   21</span>                <span class="keywordflow">if</span> ($issetSesion != $issetCookie) {</div>
-<div class="line"><span class="lineno">   22</span>                    $this-&gt;<a class="code hl_function" href="class_sesion.html#af76d6a0fcaa2b8766af94f39f05e1f57">logout</a>();</div>
-<div class="line"><span class="lineno">   23</span>                }</div>
-<div class="line"><span class="lineno">   24</span>            } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">   25</span>                $this-&gt;<a class="code hl_function" href="class_sesion.html#af76d6a0fcaa2b8766af94f39f05e1f57">logout</a>();</div>
-<div class="line"><span class="lineno">   26</span>            }</div>
-<div class="line"><span class="lineno">   27</span>        }</div>
-<div class="line"><span class="lineno">   28</span> </div>
-<div class="line"><span class="lineno">   29</span> </div>
-<div class="line"><span class="lineno">   30</span>        <span class="keywordflow">if</span> (!isset($_SESSION[<span class="stringliteral">&quot;Carrito&quot;</span>])) {</div>
-<div class="line"><span class="lineno">   31</span>            $_SESSION[<span class="stringliteral">&quot;Carrito&quot;</span>] = [];</div>
-<div class="line"><span class="lineno">   32</span>        }</div>
-<div class="line"><span class="lineno">   33</span>    }</div>
-<div class="ttc" id="aclass_sesion_html_a2bd225d36cd743a8c7cc16cdebeefd3c"><div class="ttname"><a href="class_sesion.html#a2bd225d36cd743a8c7cc16cdebeefd3c">Sesion\estaLoggeado</a></div><div class="ttdeci">estaLoggeado()</div><div class="ttdef"><b>Definition:</b> sesion.php:83</div></div>
-<div class="ttc" id="aclass_sesion_html_af76d6a0fcaa2b8766af94f39f05e1f57"><div class="ttname"><a href="class_sesion.html#af76d6a0fcaa2b8766af94f39f05e1f57">Sesion\logout</a></div><div class="ttdeci">logout()</div><div class="ttdef"><b>Definition:</b> sesion.php:73</div></div>
+<p>constructor de la sesion </p>
+<div class="fragment"><div class="line"><span class="lineno">   17</span>    {</div>
+<div class="line"><span class="lineno">   18</span>        <span class="comment">// iniciar sesion si no hay sesion iniciada</span></div>
+<div class="line"><span class="lineno">   19</span>        <span class="keywordflow">if</span> (session_status() != PHP_SESSION_ACTIVE) {</div>
+<div class="line"><span class="lineno">   20</span>            session_start();</div>
+<div class="line"><span class="lineno">   21</span>        }</div>
+<div class="line"><span class="lineno">   22</span>        <span class="comment">// verificacion hijack </span></div>
+<div class="line"><span class="lineno">   23</span>        $issetSesion = isset($_SESSION[<span class="stringliteral">&quot;token&quot;</span>]);</div>
+<div class="line"><span class="lineno">   24</span>        $issetCookie = isset($_COOKIE[<span class="stringliteral">&quot;token&quot;</span>]);</div>
+<div class="line"><span class="lineno">   25</span>        <span class="keywordflow">if</span> ($this-&gt;<a class="code hl_function" href="class_sesion.html#a2bd225d36cd743a8c7cc16cdebeefd3c">estaLoggeado</a>()) {</div>
+<div class="line"><span class="lineno">   26</span> </div>
+<div class="line"><span class="lineno">   27</span>            <span class="keywordflow">if</span> ($issetSesion &amp;&amp; $issetCookie) {</div>
+<div class="line"><span class="lineno">   28</span>                <span class="keywordflow">if</span> ($issetSesion != $issetCookie) {</div>
+<div class="line"><span class="lineno">   29</span>                    $this-&gt;<a class="code hl_function" href="class_sesion.html#af76d6a0fcaa2b8766af94f39f05e1f57">logout</a>();</div>
+<div class="line"><span class="lineno">   30</span>                }</div>
+<div class="line"><span class="lineno">   31</span>            } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">   32</span>                $this-&gt;<a class="code hl_function" href="class_sesion.html#af76d6a0fcaa2b8766af94f39f05e1f57">logout</a>();</div>
+<div class="line"><span class="lineno">   33</span>            }</div>
+<div class="line"><span class="lineno">   34</span>        }</div>
+<div class="line"><span class="lineno">   35</span> </div>
+<div class="line"><span class="lineno">   36</span>        <span class="comment">// crear carrito</span></div>
+<div class="line"><span class="lineno">   37</span>        <span class="keywordflow">if</span> (!isset($_SESSION[<span class="stringliteral">&quot;Carrito&quot;</span>])) {</div>
+<div class="line"><span class="lineno">   38</span>            $_SESSION[<span class="stringliteral">&quot;Carrito&quot;</span>] = [];</div>
+<div class="line"><span class="lineno">   39</span>        }</div>
+<div class="line"><span class="lineno">   40</span>    }</div>
+<div class="ttc" id="aclass_sesion_html_a2bd225d36cd743a8c7cc16cdebeefd3c"><div class="ttname"><a href="class_sesion.html#a2bd225d36cd743a8c7cc16cdebeefd3c">Sesion\estaLoggeado</a></div><div class="ttdeci">estaLoggeado()</div><div class="ttdef"><b>Definition:</b> sesion.php:109</div></div>
+<div class="ttc" id="aclass_sesion_html_af76d6a0fcaa2b8766af94f39f05e1f57"><div class="ttname"><a href="class_sesion.html#af76d6a0fcaa2b8766af94f39f05e1f57">Sesion\logout</a></div><div class="ttdeci">logout()</div><div class="ttdef"><b>Definition:</b> sesion.php:94</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -144,15 +153,18 @@ Métodos públicos</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<div class="fragment"><div class="line"><span class="lineno">   84</span>    {</div>
-<div class="line"><span class="lineno">   85</span> </div>
-<div class="line"><span class="lineno">   86</span>        <span class="keywordflow">return</span> isset($_SESSION[<span class="stringliteral">&quot;usuario&quot;</span>]);</div>
-<div class="line"><span class="lineno">   87</span>    }</div>
+<p>comprobar si esta loggeado</p>
+<dl class="section return"><dt>Devuelve</dt><dd>bool verdadero si el usuario esta loggeado </dd></dl>
+<div class="fragment"><div class="line"><span class="lineno">  109</span>                                  : <span class="keywordtype">bool</span></div>
+<div class="line"><span class="lineno">  110</span>    {</div>
+<div class="line"><span class="lineno">  111</span> </div>
+<div class="line"><span class="lineno">  112</span>        <span class="keywordflow">return</span> isset($_SESSION[<span class="stringliteral">&quot;usuario&quot;</span>]);</div>
+<div class="line"><span class="lineno">  113</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="a2f1ba7c49a515d3a7e860da4d399840e" name="a2f1ba7c49a515d3a7e860da4d399840e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2f1ba7c49a515d3a7e860da4d399840e">&#9670;&#160;</a></span>login()</h2>
+<a id="abef200ffa7ef1650ed2f7e6367deef9c" name="abef200ffa7ef1650ed2f7e6367deef9c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abef200ffa7ef1650ed2f7e6367deef9c">&#9670;&#160;</a></span>login()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -160,13 +172,13 @@ Métodos públicos</h2></td></tr>
         <tr>
           <td class="memname">Sesion::login </td>
           <td>(</td>
-          <td class="paramtype">&#160;</td>
+          <td class="paramtype">string&#160;</td>
           <td class="paramname"><em>$email</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">&#160;</td>
+          <td class="paramtype">string&#160;</td>
           <td class="paramname"><em>$password</em>&#160;</td>
         </tr>
         <tr>
@@ -176,47 +188,60 @@ Métodos públicos</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<div class="fragment"><div class="line"><span class="lineno">   36</span>    {</div>
-<div class="line"><span class="lineno">   37</span> </div>
-<div class="line"><span class="lineno">   38</span>        <span class="keywordflow">try</span> {</div>
-<div class="line"><span class="lineno">   39</span>            <a class="code hl_variable" href="_blog_8php.html#a71cb48c88bb00708d24f9941e5d1882d">$BBDD</a> = <span class="keyword">new</span> <a class="code hl_class" href="class_b_b_d_d.html">BBDD</a>();</div>
-<div class="line"><span class="lineno">   40</span>            <a class="code hl_variable" href="_admin_8php.html#ad19941ba41a177bfdde57d7919190163">$sql</a> = <span class="stringliteral">&quot;SELECT * from usuarios where Email=:email and Password=:password and Activo = 1&quot;</span>;</div>
-<div class="line"><span class="lineno">   41</span>            $param = [<span class="stringliteral">&quot;email&quot;</span> =&gt;  $email, <span class="stringliteral">&quot;password&quot;</span> =&gt; hash(<span class="stringliteral">&quot;sha512&quot;</span>, <a class="code hl_variable" href="bd_8php.html#a607686ef9f99ea7c42f4f3dd3dbb2b0d">$password</a>)];</div>
-<div class="line"><span class="lineno">   42</span>            $usuarioLogin = <a class="code hl_variable" href="_blog_8php.html#a71cb48c88bb00708d24f9941e5d1882d">$BBDD</a>-&gt;select(<a class="code hl_variable" href="_admin_8php.html#ad19941ba41a177bfdde57d7919190163">$sql</a>, $param);</div>
-<div class="line"><span class="lineno">   43</span>            var_dump($usuarioLogin);</div>
-<div class="line"><span class="lineno">   44</span>            <span class="keywordflow">if</span> (count($usuarioLogin) == 0 || !$usuarioLogin[0]) {</div>
-<div class="line"><span class="lineno">   45</span>                <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">   46</span>            }</div>
-<div class="line"><span class="lineno">   47</span>            <a class="code hl_variable" href="_admin_8php.html#ad19941ba41a177bfdde57d7919190163">$sql</a> = <span class="stringliteral">&quot;SELECT IDProducto,Cantidad from carrito where IDUsuario=:id and Cantidad&gt;0&quot;</span>;</div>
-<div class="line"><span class="lineno">   48</span>            $param = [<span class="stringliteral">&quot;id&quot;</span> =&gt; $usuarioLogin[0][<span class="stringliteral">&quot;ID&quot;</span>]];</div>
-<div class="line"><span class="lineno">   49</span>            $carrito = <a class="code hl_variable" href="_blog_8php.html#a71cb48c88bb00708d24f9941e5d1882d">$BBDD</a>-&gt;select(<a class="code hl_variable" href="_admin_8php.html#ad19941ba41a177bfdde57d7919190163">$sql</a>, $param);</div>
-<div class="line"><span class="lineno">   50</span>            <span class="keywordflow">if</span> (!isset($_SESSION[<span class="stringliteral">&quot;usuario&quot;</span>])) {</div>
+<p>login de sesion</p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">string</td><td class="paramname">$email</td><td>email usuario </td></tr>
+    <tr><td class="paramtype">string</td><td class="paramname">$password</td><td>contraseña usuario</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>bool verdadero si te loggeas </dd></dl>
+<div class="fragment"><div class="line"><span class="lineno">   49</span>                                                          : <span class="keywordtype">bool</span></div>
+<div class="line"><span class="lineno">   50</span>    {</div>
 <div class="line"><span class="lineno">   51</span> </div>
-<div class="line"><span class="lineno">   52</span>                <span class="keywordflow">foreach</span> ($carrito as <a class="code hl_variable" href="_producto_vista_8php.html#a4c4aa6206e982b2f5eb7bad73e41a8e2">$producto</a>) {</div>
-<div class="line"><span class="lineno">   53</span>                    <span class="keywordflow">if</span> (!isset($_SESSION[<span class="stringliteral">&quot;Carrito&quot;</span>][<a class="code hl_variable" href="_producto_vista_8php.html#a4c4aa6206e982b2f5eb7bad73e41a8e2">$producto</a>[<span class="stringliteral">&quot;IDProducto&quot;</span>]])) {</div>
-<div class="line"><span class="lineno">   54</span>                        $_SESSION[<span class="stringliteral">&quot;Carrito&quot;</span>][<a class="code hl_variable" href="_producto_vista_8php.html#a4c4aa6206e982b2f5eb7bad73e41a8e2">$producto</a>[<span class="stringliteral">&quot;IDProducto&quot;</span>]] = 0;</div>
-<div class="line"><span class="lineno">   55</span>                    }</div>
-<div class="line"><span class="lineno">   56</span>                    $_SESSION[<span class="stringliteral">&quot;Carrito&quot;</span>][<a class="code hl_variable" href="_producto_vista_8php.html#a4c4aa6206e982b2f5eb7bad73e41a8e2">$producto</a>[<span class="stringliteral">&quot;IDProducto&quot;</span>]] += <a class="code hl_variable" href="_producto_vista_8php.html#a4c4aa6206e982b2f5eb7bad73e41a8e2">$producto</a>[<span class="stringliteral">&quot;Cantidad&quot;</span>];</div>
-<div class="line"><span class="lineno">   57</span>                }</div>
-<div class="line"><span class="lineno">   58</span>            }</div>
-<div class="line"><span class="lineno">   59</span> </div>
-<div class="line"><span class="lineno">   60</span>            $_SESSION[<span class="stringliteral">&quot;usuario&quot;</span>] = $usuarioLogin[0][<span class="stringliteral">&quot;Email&quot;</span>];</div>
-<div class="line"><span class="lineno">   61</span>            $_SESSION[<span class="stringliteral">&quot;rol&quot;</span>] = $usuarioLogin[0][<span class="stringliteral">&quot;rol&quot;</span>];</div>
-<div class="line"><span class="lineno">   62</span>            $_SESSION[<span class="stringliteral">&quot;id&quot;</span>] = $usuarioLogin[0][<span class="stringliteral">&quot;ID&quot;</span>];</div>
-<div class="line"><span class="lineno">   63</span> </div>
-<div class="line"><span class="lineno">   64</span> </div>
-<div class="line"><span class="lineno">   65</span>            $_SESSION[<span class="stringliteral">&quot;token&quot;</span>] = bin2hex(random_bytes(32));</div>
-<div class="line"><span class="lineno">   66</span>            setcookie(<span class="stringliteral">&quot;token&quot;</span>, $_SESSION[<span class="stringliteral">&quot;token&quot;</span>], time() + 900, <span class="stringliteral">&quot;/&quot;</span>);</div>
-<div class="line"><span class="lineno">   67</span>            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">   68</span>        } <span class="keywordflow">catch</span> (\Throwable $th) {</div>
-<div class="line"><span class="lineno">   69</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">   70</span>        }</div>
-<div class="line"><span class="lineno">   71</span>    }</div>
-<div class="ttc" id="a_admin_8php_html_ad19941ba41a177bfdde57d7919190163"><div class="ttname"><a href="_admin_8php.html#ad19941ba41a177bfdde57d7919190163">$sql</a></div><div class="ttdeci">if(isset($errorR)) $sql</div><div class="ttdef"><b>Definition:</b> Admin.php:238</div></div>
-<div class="ttc" id="a_blog_8php_html_a71cb48c88bb00708d24f9941e5d1882d"><div class="ttname"><a href="_blog_8php.html#a71cb48c88bb00708d24f9941e5d1882d">$BBDD</a></div><div class="ttdeci">$BBDD</div><div class="ttdef"><b>Definition:</b> Blog.php:59</div></div>
-<div class="ttc" id="a_producto_vista_8php_html_a4c4aa6206e982b2f5eb7bad73e41a8e2"><div class="ttname"><a href="_producto_vista_8php.html#a4c4aa6206e982b2f5eb7bad73e41a8e2">$producto</a></div><div class="ttdeci">$producto</div><div class="ttdef"><b>Definition:</b> ProductoVista.php:6</div></div>
-<div class="ttc" id="abd_8php_html_a607686ef9f99ea7c42f4f3dd3dbb2b0d"><div class="ttname"><a href="bd_8php.html#a607686ef9f99ea7c42f4f3dd3dbb2b0d">$password</a></div><div class="ttdeci">$password</div><div class="ttdef"><b>Definition:</b> bd.php:6</div></div>
-<div class="ttc" id="aclass_b_b_d_d_html"><div class="ttname"><a href="class_b_b_d_d.html">BBDD</a></div><div class="ttdoc">Clase que contiene todo lo relacionado con la conexion a la Base de Datos, asi como diferentes metodo...</div><div class="ttdef"><b>Definition:</b> BBDD.php:11</div></div>
+<div class="line"><span class="lineno">   52</span>        <span class="keywordflow">try</span> {</div>
+<div class="line"><span class="lineno">   53</span>            <span class="comment">// seleccionamos usuario con email y contraseña</span></div>
+<div class="line"><span class="lineno">   54</span>            <a class="code hl_variable" href="_blog_8php.html#a71cb48c88bb00708d24f9941e5d1882d">$BBDD</a> = <span class="keyword">new</span> <a class="code hl_class" href="class_b_b_d_d.html">BBDD</a>();</div>
+<div class="line"><span class="lineno">   55</span>            <a class="code hl_variable" href="_admin_8php.html#a0bdec829a685c8d2431adeb54b95dfda">$sql</a> = <span class="stringliteral">&quot;SELECT * from usuarios where Email=:email and Password=:password and Activo = 1&quot;</span>;</div>
+<div class="line"><span class="lineno">   56</span>            $param = [<span class="stringliteral">&quot;email&quot;</span> =&gt;  $email, <span class="stringliteral">&quot;password&quot;</span> =&gt; hash(<span class="stringliteral">&quot;sha512&quot;</span>, $password)];</div>
+<div class="line"><span class="lineno">   57</span>            $usuarioLogin = <a class="code hl_variable" href="_blog_8php.html#a71cb48c88bb00708d24f9941e5d1882d">$BBDD</a>-&gt;select(<a class="code hl_variable" href="_admin_8php.html#a0bdec829a685c8d2431adeb54b95dfda">$sql</a>, $param);</div>
+<div class="line"><span class="lineno">   58</span>            <span class="comment">// si hay un error o no se encuentra el usuario salimos</span></div>
+<div class="line"><span class="lineno">   59</span>            <span class="keywordflow">if</span> (count($usuarioLogin) == 0 || !$usuarioLogin[0]) {</div>
+<div class="line"><span class="lineno">   60</span>                <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">   61</span>            }</div>
+<div class="line"><span class="lineno">   62</span>            <span class="comment">// seleccionamos el carrito del usuario </span></div>
+<div class="line"><span class="lineno">   63</span>            <a class="code hl_variable" href="_admin_8php.html#a0bdec829a685c8d2431adeb54b95dfda">$sql</a> = <span class="stringliteral">&quot;SELECT IDProducto,Cantidad from carrito where IDUsuario=:id and Cantidad&gt;0&quot;</span>;</div>
+<div class="line"><span class="lineno">   64</span>            $param = [<span class="stringliteral">&quot;id&quot;</span> =&gt; $usuarioLogin[0][<span class="stringliteral">&quot;ID&quot;</span>]];</div>
+<div class="line"><span class="lineno">   65</span>            <a class="code hl_variable" href="header_8php.html#a1d63dc4cf5a005ae8ae08cd6e8ed9c77">$carrito</a> = <a class="code hl_variable" href="_blog_8php.html#a71cb48c88bb00708d24f9941e5d1882d">$BBDD</a>-&gt;select(<a class="code hl_variable" href="_admin_8php.html#a0bdec829a685c8d2431adeb54b95dfda">$sql</a>, $param);</div>
+<div class="line"><span class="lineno">   66</span>            <span class="comment">// fusionar carrito de sesion y de bbdd</span></div>
+<div class="line"><span class="lineno">   67</span>            <span class="keywordflow">if</span> (!isset($_SESSION[<span class="stringliteral">&quot;usuario&quot;</span>])) {</div>
+<div class="line"><span class="lineno">   68</span> </div>
+<div class="line"><span class="lineno">   69</span>                <span class="keywordflow">foreach</span> (<a class="code hl_variable" href="header_8php.html#a1d63dc4cf5a005ae8ae08cd6e8ed9c77">$carrito</a> as <a class="code hl_variable" href="_producto_vista_8php.html#a4c4aa6206e982b2f5eb7bad73e41a8e2">$producto</a>) {</div>
+<div class="line"><span class="lineno">   70</span>                    <span class="keywordflow">if</span> (!isset($_SESSION[<span class="stringliteral">&quot;Carrito&quot;</span>][<a class="code hl_variable" href="_producto_vista_8php.html#a4c4aa6206e982b2f5eb7bad73e41a8e2">$producto</a>[<span class="stringliteral">&quot;IDProducto&quot;</span>]])) {</div>
+<div class="line"><span class="lineno">   71</span>                        $_SESSION[<span class="stringliteral">&quot;Carrito&quot;</span>][<a class="code hl_variable" href="_producto_vista_8php.html#a4c4aa6206e982b2f5eb7bad73e41a8e2">$producto</a>[<span class="stringliteral">&quot;IDProducto&quot;</span>]] = 0;</div>
+<div class="line"><span class="lineno">   72</span>                    }</div>
+<div class="line"><span class="lineno">   73</span>                    $_SESSION[<span class="stringliteral">&quot;Carrito&quot;</span>][<a class="code hl_variable" href="_producto_vista_8php.html#a4c4aa6206e982b2f5eb7bad73e41a8e2">$producto</a>[<span class="stringliteral">&quot;IDProducto&quot;</span>]] += <a class="code hl_variable" href="_producto_vista_8php.html#a4c4aa6206e982b2f5eb7bad73e41a8e2">$producto</a>[<span class="stringliteral">&quot;Cantidad&quot;</span>];</div>
+<div class="line"><span class="lineno">   74</span>                }</div>
+<div class="line"><span class="lineno">   75</span>            }</div>
+<div class="line"><span class="lineno">   76</span>            <span class="comment">// iniciar variables de sesion</span></div>
+<div class="line"><span class="lineno">   77</span>            $_SESSION[<span class="stringliteral">&quot;usuario&quot;</span>] = $usuarioLogin[0][<span class="stringliteral">&quot;Email&quot;</span>];</div>
+<div class="line"><span class="lineno">   78</span>            $_SESSION[<span class="stringliteral">&quot;rol&quot;</span>] = $usuarioLogin[0][<span class="stringliteral">&quot;rol&quot;</span>];</div>
+<div class="line"><span class="lineno">   79</span>            $_SESSION[<span class="stringliteral">&quot;id&quot;</span>] = $usuarioLogin[0][<span class="stringliteral">&quot;ID&quot;</span>];</div>
+<div class="line"><span class="lineno">   80</span> </div>
+<div class="line"><span class="lineno">   81</span>            <span class="comment">// iniciar token de sesion</span></div>
+<div class="line"><span class="lineno">   82</span>            $_SESSION[<span class="stringliteral">&quot;token&quot;</span>] = bin2hex(random_bytes(32));</div>
+<div class="line"><span class="lineno">   83</span>            setcookie(<span class="stringliteral">&quot;token&quot;</span>, $_SESSION[<span class="stringliteral">&quot;token&quot;</span>], time() + 900, <span class="stringliteral">&quot;/&quot;</span>);</div>
+<div class="line"><span class="lineno">   84</span>            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">   85</span>        } <span class="keywordflow">catch</span> (Exception $th) {</div>
+<div class="line"><span class="lineno">   86</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">   87</span>        }</div>
+<div class="line"><span class="lineno">   88</span>    }</div>
+<div class="ttc" id="a_admin_8php_html_a0bdec829a685c8d2431adeb54b95dfda"><div class="ttname"><a href="_admin_8php.html#a0bdec829a685c8d2431adeb54b95dfda">$sql</a></div><div class="ttdeci">if(isset($errorR)) $sql</div><div class="ttdef"><b>Definition:</b> Admin.php:442</div></div>
+<div class="ttc" id="a_blog_8php_html_a71cb48c88bb00708d24f9941e5d1882d"><div class="ttname"><a href="_blog_8php.html#a71cb48c88bb00708d24f9941e5d1882d">$BBDD</a></div><div class="ttdeci">$BBDD</div><div class="ttdef"><b>Definition:</b> Blog.php:62</div></div>
+<div class="ttc" id="a_producto_vista_8php_html_a4c4aa6206e982b2f5eb7bad73e41a8e2"><div class="ttname"><a href="_producto_vista_8php.html#a4c4aa6206e982b2f5eb7bad73e41a8e2">$producto</a></div><div class="ttdeci">$producto</div><div class="ttdef"><b>Definition:</b> ProductoVista.php:9</div></div>
+<div class="ttc" id="aclass_b_b_d_d_html"><div class="ttname"><a href="class_b_b_d_d.html">BBDD</a></div><div class="ttdoc">Clase que contiene todo lo relacionado con la conexion a la Base de Datos, asi como diferentes metodo...</div><div class="ttdef"><b>Definition:</b> BBDD.php:12</div></div>
+<div class="ttc" id="aheader_8php_html_a1d63dc4cf5a005ae8ae08cd6e8ed9c77"><div class="ttname"><a href="header_8php.html#a1d63dc4cf5a005ae8ae08cd6e8ed9c77">$carrito</a></div><div class="ttdeci">$carrito</div><div class="ttdef"><b>Definition:</b> header.php:46</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -234,14 +259,16 @@ Métodos públicos</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<div class="fragment"><div class="line"><span class="lineno">   74</span>    {</div>
-<div class="line"><span class="lineno">   75</span>        unset($_SESSION[<span class="stringliteral">&quot;usuario&quot;</span>]);</div>
-<div class="line"><span class="lineno">   76</span>        unset($_SESSION[<span class="stringliteral">&quot;token&quot;</span>]);</div>
-<div class="line"><span class="lineno">   77</span>        setcookie(<span class="stringliteral">&quot;token&quot;</span>, <span class="stringliteral">&quot;&quot;</span>, 1, <span class="stringliteral">&quot;/&quot;</span>);</div>
-<div class="line"><span class="lineno">   78</span>        unset($_SESSION[<span class="stringliteral">&quot;rol&quot;</span>]);</div>
-<div class="line"><span class="lineno">   79</span>        unset($_SESSION[<span class="stringliteral">&quot;Carrito&quot;</span>]);</div>
-<div class="line"><span class="lineno">   80</span>        unset($_SESSION[<span class="stringliteral">&quot;id&quot;</span>]);</div>
-<div class="line"><span class="lineno">   81</span>    }</div>
+<p>cerrar sesion eliminando las variables de sesion </p>
+<div class="fragment"><div class="line"><span class="lineno">   94</span>                            : <span class="keywordtype">void</span></div>
+<div class="line"><span class="lineno">   95</span>    {</div>
+<div class="line"><span class="lineno">   96</span>        unset($_SESSION[<span class="stringliteral">&quot;usuario&quot;</span>]);</div>
+<div class="line"><span class="lineno">   97</span>        unset($_SESSION[<span class="stringliteral">&quot;token&quot;</span>]);</div>
+<div class="line"><span class="lineno">   98</span>        setcookie(<span class="stringliteral">&quot;token&quot;</span>, <span class="stringliteral">&quot;&quot;</span>, 1, <span class="stringliteral">&quot;/&quot;</span>);</div>
+<div class="line"><span class="lineno">   99</span>        unset($_SESSION[<span class="stringliteral">&quot;rol&quot;</span>]);</div>
+<div class="line"><span class="lineno">  100</span>        unset($_SESSION[<span class="stringliteral">&quot;Carrito&quot;</span>]);</div>
+<div class="line"><span class="lineno">  101</span>        unset($_SESSION[<span class="stringliteral">&quot;id&quot;</span>]);</div>
+<div class="line"><span class="lineno">  102</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -251,7 +278,7 @@ Métodos públicos</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generado el Domingo, 17 de Marzo de 2024 20:03:19 para My Project por&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6
+Generado el Sábado, 7 de Diciembre de 2024 18:01:32 para My Project por&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6
 </small></address>
 </body>
 </html>

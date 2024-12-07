@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['usuarios_2ejs_0',['usuarios.js',['../usuarios_8js.html',1,'']]]
+  ['quienessomos_2ephp_0',['QuienesSomos.php',['../_quienes_somos_8php.html',1,'']]]
 ];

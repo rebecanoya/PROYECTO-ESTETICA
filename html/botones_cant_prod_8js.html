@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: Referencia del Archivo app/public/js/botonesCantProd.js</title>
+<title>My Project: Referencia del Archivo app/js/botonesCantProd.js</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,7 +69,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d422163b96683743ed3963d4aac17747.html">app</a></li><li class="navelem"><a class="el" href="dir_3e5d735e5b93935be71e7b570011ad62.html">public</a></li><li class="navelem"><a class="el" href="dir_6513011cec977eef5a2796d3402625b4.html">js</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d422163b96683743ed3963d4aac17747.html">app</a></li><li class="navelem"><a class="el" href="dir_2b493f73f60745dd5b2b8215e6fa237e.html">js</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -81,18 +81,18 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Funciones</h2></td></tr>
-<tr class="memitem:a405a3d6125e1b4b2e94572479ab4a24d"><td class="memItemLeft" align="right" valign="top">function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="botones_cant_prod_8js.html#a405a3d6125e1b4b2e94572479ab4a24d">actualizarCantidad</a> (<a class="el" href="lineas_8js.html#a44496511cf798ffcd9ca0740253067c3">event</a>, cantidad, id)</td></tr>
-<tr class="separator:a405a3d6125e1b4b2e94572479ab4a24d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afea18d8393f79b296c2a6ca934d9734a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_cesta_8php.html#a870bb31d807f18ec18492e0a1f8da74e">function</a> <a class="el" href="chat_8js.html#a2b003b5838550bbcc11104a8d3c396d9">async</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="botones_cant_prod_8js.html#afea18d8393f79b296c2a6ca934d9734a">actualizarCantidad</a> (<a class="el" href="lineas_8js.html#a44496511cf798ffcd9ca0740253067c3">event</a>, cantidad, id)</td></tr>
+<tr class="separator:afea18d8393f79b296c2a6ca934d9734a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Documentación de las funciones</h2>
-<a id="a405a3d6125e1b4b2e94572479ab4a24d" name="a405a3d6125e1b4b2e94572479ab4a24d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a405a3d6125e1b4b2e94572479ab4a24d">&#9670;&#160;</a></span>actualizarCantidad()</h2>
+<a id="afea18d8393f79b296c2a6ca934d9734a" name="afea18d8393f79b296c2a6ca934d9734a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afea18d8393f79b296c2a6ca934d9734a">&#9670;&#160;</a></span>actualizarCantidad()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">function actualizarCantidad </td>
+          <td class="memname"><a class="el" href="_cesta_8php.html#a870bb31d807f18ec18492e0a1f8da74e">function</a> <a class="el" href="chat_8js.html#a2b003b5838550bbcc11104a8d3c396d9">async</a> actualizarCantidad </td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname"><em>event</em>, </td>
@@ -116,25 +116,57 @@ Funciones</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<div class="fragment"><div class="line"><span class="lineno">    2</span>                                                 {</div>
-<div class="line"><span class="lineno">    3</span>    <span class="keyword">event</span>.preventDefault();</div>
-<div class="line"><span class="lineno">    4</span>    let elementoInput = document.getElementById(<span class="keywordtype">id</span>);</div>
-<div class="line"><span class="lineno">    5</span>    let cantidadInput = parseInt(elementoInput.value);</div>
-<div class="line"><span class="lineno">    6</span> </div>
-<div class="line"><span class="lineno">    7</span>    <span class="keywordflow">if</span> (cantidadInput + cantidad &gt;= 1) {</div>
-<div class="line"><span class="lineno">    8</span>        elementoInput.value = cantidadInput + cantidad;</div>
-<div class="line"><span class="lineno">    9</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">   10</span> </div>
-<div class="line"><span class="lineno">   11</span> </div>
-<div class="line"><span class="lineno">   12</span>    } <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">   13</span>}</div>
+<p>funcion que actualiza la cantidad de productos</p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">{object}</td><td>event objeto evento </td></tr>
+    <tr><td class="paramname">{int}</td><td>cantidad cantidad a incrementar </td></tr>
+    <tr><td class="paramname">{int}</td><td>id id del producto</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>{boolean} verdadero si se actualizó la cantidad </dd></dl>
+<div class="fragment"><div class="line"><span class="lineno">   10</span>                                                       {</div>
+<div class="line"><span class="lineno">   11</span>    <span class="keyword">event</span>.preventDefault();</div>
+<div class="line"><span class="lineno">   12</span> </div>
+<div class="line"><span class="lineno">   13</span>    await fetch(<span class="stringliteral">&quot;controladorCesta.php&quot;</span>, {</div>
+<div class="line"><span class="lineno">   14</span>        method: <span class="stringliteral">&quot;POST&quot;</span>,</div>
+<div class="line"><span class="lineno">   15</span>        mode: <span class="stringliteral">&quot;cors&quot;</span>,</div>
+<div class="line"><span class="lineno">   16</span>        credentials: <span class="stringliteral">&quot;same-origin&quot;</span>,</div>
+<div class="line"><span class="lineno">   17</span>        headers: {</div>
+<div class="line"><span class="lineno">   18</span>            <span class="stringliteral">&quot;Content-Type&quot;</span>: <span class="stringliteral">&quot;application/json&quot;</span>,</div>
+<div class="line"><span class="lineno">   19</span>            <span class="stringliteral">&quot;Accept&quot;</span>: <span class="stringliteral">&quot;application/json&quot;</span>,</div>
+<div class="line"><span class="lineno">   20</span>        },</div>
+<div class="line"><span class="lineno">   21</span>        body: JSON.stringify({</div>
+<div class="line"><span class="lineno">   22</span>            <span class="stringliteral">&quot;id&quot;</span>: id,</div>
+<div class="line"><span class="lineno">   23</span>            <span class="stringliteral">&quot;cantidad&quot;</span>: 0,</div>
+<div class="line"><span class="lineno">   24</span>            <span class="stringliteral">&quot;accion&quot;</span>: <span class="stringliteral">&quot;stock&quot;</span></div>
+<div class="line"><span class="lineno">   25</span>        })</div>
+<div class="line"><span class="lineno">   26</span> </div>
+<div class="line"><span class="lineno">   27</span>    }).then(res =&gt; res.json()).then(res =&gt; {</div>
+<div class="line"><span class="lineno">   28</span> </div>
+<div class="line"><span class="lineno">   29</span>        <span class="keywordflow">if</span> (!res[0]) {</div>
+<div class="line"><span class="lineno">   30</span>            <span class="keywordflow">return</span> res;</div>
+<div class="line"><span class="lineno">   31</span>        }</div>
+<div class="line"><span class="lineno">   32</span> </div>
+<div class="line"><span class="lineno">   33</span>        let elementoInput = document.getElementById(<span class="keywordtype">id</span>);</div>
+<div class="line"><span class="lineno">   34</span>        let cantidadInput = parseInt(elementoInput.value);</div>
+<div class="line"><span class="lineno">   35</span> </div>
+<div class="line"><span class="lineno">   36</span>        <span class="keywordflow">if</span> (cantidadInput + cantidad &gt;= 1) {</div>
+<div class="line"><span class="lineno">   37</span>            elementoInput.value = Math.min(cantidadInput + cantidad, res[1]);</div>
+<div class="line"><span class="lineno">   38</span>            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">   39</span> </div>
+<div class="line"><span class="lineno">   40</span>        } <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">   41</span>    });</div>
+<div class="line"><span class="lineno">   42</span> </div>
+<div class="line"><span class="lineno">   43</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generado el Domingo, 17 de Marzo de 2024 20:03:19 para My Project por&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6
+Generado el Sábado, 7 de Diciembre de 2024 18:01:31 para My Project por&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6
 </small></address>
 </body>
 </html>
