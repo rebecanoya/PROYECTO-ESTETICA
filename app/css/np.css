@@ -119,7 +119,7 @@ article {
     }
 }
 
-@media (max-width: 1400px) {
+@media (max-width: 1600px) {
     main {
         & .main-container {
             width: 90%;
