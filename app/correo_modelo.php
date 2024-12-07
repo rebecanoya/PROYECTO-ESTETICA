@@ -1,4 +1,5 @@
 <?php
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -31,13 +32,13 @@ class Correo_modelo
             $mail->Host = 'aromusicoterapia-iesteis-gal.correoseguro.dinaserver.com'; //Set the SMTP server to send through
             $mail->SMTPAuth = true; //Enable SMTP authentication
             $mail->Username = 'no-reply@aromusicoterapia.iesteis.gal'; //SMTP username
-            $mail->Password = 'AroTeis.1234'; //SMTP password
+            $mail->Password = ''; //SMTP password
             $mail->SMTPSecure = 'tls'; //Enable implicit TLS encryption
             $mail->Port = 587; //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-//Recipients
+            //Recipients
             $mail->setFrom('no-reply@aromusicoterapia.iesteis.gal', 'AroMusicoTerapia Teis');
             $mail->addAddress($email); //Add a recipient
-//Content
+            //Content
             $mail->isHTML(true); //Set email format to HTML
             $mail->Subject = $subjet;
             $mail->Body = $cuerpo;
@@ -48,4 +49,3 @@ class Correo_modelo
         }
     }
 }
-?>
